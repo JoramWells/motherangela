@@ -1,0 +1,18 @@
+{
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "editor.formatOnSave": "explicit"
+    },
+    "eslint.validate": [
+        "javascript"
+    ],
+    "cSpell.words": [
+        "Admissions",
+        "allocatoin",
+        "camelcase",
+        "coporate",
+        "haemorrhage",
+        "partum",
+        "upgar"
+    ],
+}
