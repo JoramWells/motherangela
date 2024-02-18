@@ -15,7 +15,7 @@ import { diseaseApi } from './api/disease.api';
 import { diseaseMinistryApi } from './api/diseaseMinistry.api copy';
 import { creditPaymentApi } from './api/creditPayment.api';
 import { companyApi } from './api/company.api';
-import { consultationTypeApi } from './api/consultationType.api';
+import { consultationTypeApi } from './api/consultation/consultationType.api';
 import { medicationApi } from './_Medication/api/medication.api';
 import { medicationCategoryApi } from './_Medication/api/medicationCategory.api';
 import { medicationPurchasesApi } from './_Medication/api/medicationPurchases.api';
@@ -51,6 +51,9 @@ import { specimenTypeApi } from './_Lab/api/specimenType.api';
 import { accountingDepartmentApi } from './api/accounts/accountingDepartment.api';
 import { accountingJournalApi } from './api/accounts/accountingJournal.api';
 import { accountingAccountDetailsApi } from './api/accounts/accountingAccountDetails.api';
+import {
+  consultationTypesWitCreditAccountsApi,
+} from './api/consultation/consultationTypesWitCreditAccounts';
 
 export const store = configureStore({
   reducer: {
@@ -105,6 +108,8 @@ export const store = configureStore({
     [accountingDepartmentApi.reducerPath]: accountingDepartmentApi.reducer,
     [accountingJournalApi.reducerPath]: accountingJournalApi.reducer,
     [accountingAccountDetailsApi.reducerPath]: accountingAccountDetailsApi.reducer,
+    [consultationTypesWitCreditAccountsApi.reducerPath
+    ]: consultationTypesWitCreditAccountsApi.reducer,
     [specimenTypeApi.reducerPath]: specimenTypeApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
@@ -159,6 +164,7 @@ export const store = configureStore({
     .concat(accountingDepartmentApi.middleware)
     .concat(accountingJournalApi.middleware)
     .concat(accountingAccountDetailsApi.middleware)
+    .concat(consultationTypesWitCreditAccountsApi.middleware)
     .concat(specimenTypeApi.middleware)
   ,
 });

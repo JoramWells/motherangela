@@ -118,6 +118,7 @@ import AddJournal from './_Journal/layouts/AddJournal';
 import Journal from './_Journal/layouts/Journal';
 import ChartOfAccounts from './_ChartOfAccounts/layouts/ChartOfAccounts';
 import ServiceTypes from './_ChartOfAccounts/layouts/ServiceTypes';
+import ConsultationCreditAccounts from './_ChartOfAccounts/layouts/ConsultationCreditAccounts';
 
 // Medication
 const MedicationCategory = lazy(() => import('./_Medication/layouts/MedicationCategory'));
@@ -242,6 +243,7 @@ function App() {
             <Route path="/register-cost-centre" element={<AddCostCentre />} />
             <Route path="/charts-of-account" element={<ChartOfAccounts />} />
             <Route path="/service-types" element={<ServiceTypes />} />
+            <Route path="/consultation-credit-accounts" element={<ConsultationCreditAccounts />} />
 
             <Route path="/bed-allocation" element={<DoctorAdmissionBedAllocation />} />
 

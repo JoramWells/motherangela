@@ -14,7 +14,7 @@ import moment from 'moment/moment';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { useGetPatientsQuery } from '../api/patients.api';
-import { useGetAllConsultationTypesQuery } from '../api/consultationType.api';
+import { useGetAllConsultationTypesQuery } from '../api/consultation/consultationType.api';
 
 const ConsultationTypes = () => {
   const navigate = useNavigate();

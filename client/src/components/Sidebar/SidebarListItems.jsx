@@ -134,6 +134,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'View Charts', link: '/charts-of-account' },
           { id: nanoid(), title: 'Chart Reports', link: '/view-cost-centre' },
           { id: nanoid(), title: 'Service Types', link: '/service-types' },
+          { id: nanoid(), title: 'Consultation Categories Credit Accounts', link: '/consultation-credit-accounts' },
         ]}
         icon={<FaCar size={15} />}
       />
