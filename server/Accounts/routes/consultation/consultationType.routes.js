@@ -3,7 +3,7 @@ const express = require('express');
 const {
   addConsultationType, getAllConsultationTypes, getConsultationType,
   editConsultationTYpe, deleteConsultationType,
-} = require('../controllers/consultationType.controller');
+} = require('../../controllers/consultation/consultationType.controller');
 
 const router = express.Router();
 

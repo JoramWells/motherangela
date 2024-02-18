@@ -14,6 +14,8 @@ const accountingDepartment = require('./routes/accountingDepartment.routes')
 const accountingJournal = require('./routes/accountingJournal.routes')
 const accountingAccountDetails = require('./routes/accountingAccountDetails.routes')
 const serviceTypeRoutes = require('./routes/serviceType.routes')
+const consultationTypeRoutes = require('./routes/consultation/consultationType.routes');
+
 
 const app = express();
 
@@ -39,6 +41,7 @@ app.use('/account-details', accountingAccountDetails);
 app.use('/cost-centre', accountingCostCentre);
 app.use('/stores', accountingStore);
 app.use('/service-types', serviceTypeRoutes);
+app.use('/consultation-type', consultationTypeRoutes);
 
 // app.use((err, req, res, next) => {
 //   const errStatus = err.status || 500;

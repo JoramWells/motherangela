@@ -2,11 +2,11 @@
 /* eslint-disable consistent-return */
 /* eslint-disable camelcase */
 
-const Consultation_type = require('../models/consultationType.model');
+const ConsultationType = require('../../models/consultation/consultationType.model');
 
 const addConsultationType = async (req, res, next) => {
   try {
-    const results = Consultation_type.create(req.body);
+    const results = ConsultationType.create(req.body);
     res.status(201).json(results);
     next();
   } catch (error) {
@@ -16,7 +16,7 @@ const addConsultationType = async (req, res, next) => {
 
 const getAllConsultationTypes = async (req, res, next) => {
   try {
-    const results = await Consultation_type.findAll({});
+    const results = await ConsultationType.findAll({});
     res.json(results);
     next();
   } catch (error) {
@@ -29,7 +29,7 @@ const getAllConsultationTypes = async (req, res, next) => {
 const getConsultationType = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const results = await Consultation_type.findOne({
+    const results = await ConsultationType.findOne({
       where: {
         admission_id: id,
       },
@@ -44,7 +44,7 @@ const getConsultationType = async (req, res, next) => {
 const editConsultationTYpe = async (req, res, next) => {
   const { id, firstName } = req.body;
   try {
-    const results = await Consultation_type.findOne({
+    const results = await ConsultationType.findOne({
       where: {
         id,
       },
@@ -59,7 +59,7 @@ const editConsultationTYpe = async (req, res, next) => {
 const deleteConsultationType = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const results = await Consultation_type.destroy({
+    const results = await ConsultationType.destroy({
       where: {
         admission_id: id,
       },

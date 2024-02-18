@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 const { DataTypes } = require('sequelize');
-const sequelize = require('../../../root/db/connect');
+const sequelize = require('../../db/connect');
 
 const ConsultationType = sequelize.define('consultation_types', {
   consultation_type_id: {
