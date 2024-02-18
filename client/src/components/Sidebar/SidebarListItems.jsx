@@ -125,7 +125,7 @@ const SidebarListItems = () => {
 
       {/*  */}
       <SidebarItemLink
-        selected={pathname === '/charts-of-account'
+        selected={pathname === '/charts-of-account' || pathname.includes('/service-types')
           || pathname.includes('/view-cost-centre')}
         onClick={onToggle}
         text="Charts of Account"

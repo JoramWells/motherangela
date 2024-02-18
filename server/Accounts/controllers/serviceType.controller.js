@@ -2,6 +2,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 
+const AccountingAccountDetails = require('../models/_accounts/accountingAccountDetails.model');
 const Service_type = require('../models/_accounts/serviceTypes.model');
 
 const addServiceType = async (req, res, next) => {
@@ -16,7 +17,14 @@ const addServiceType = async (req, res, next) => {
 
 const getAllServiceType = async (req, res, next) => {
   try {
-    const results = await Service_type.findAll({});
+    const results = await Service_type.findAll({
+      include:[
+        {       
+          model:AccountingAccountDetails,
+          attributes:['account_name']
+        }
+      ]
+    });
     res.json(results);
     next();
   } catch (error) {

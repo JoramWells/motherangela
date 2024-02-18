@@ -60,8 +60,8 @@ const ServiceTypes = () => {
       },
       {
         header: 'Credit Account',
-        accessorKey: 'accounting_group',
-        cell: (props) => (<Text>{props.getValue()?.account_group_description}</Text>),
+        accessorKey: 'accounting_account_detail',
+        cell: (props) => (<Text>{props.getValue()?.account_name}</Text>),
 
       },
       {

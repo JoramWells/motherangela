@@ -1,8 +1,9 @@
 /* eslint-disable camelcase */
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../db/connect');
+const AccountingAccountDetails = require('./accountingAccountDetails.model');
 
-const Service_type = sequelize.define('service_types', {
+const ServiceType = sequelize.define('service_types', {
   service_type_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -32,4 +33,6 @@ const Service_type = sequelize.define('service_types', {
 //     console.error('Unable to create table :', error)
 // })
 
-module.exports = Service_type;
+ServiceType.belongsTo(AccountingAccountDetails, {foreignKey:'credit_account_id', targetKey:'account_id'})
+
+module.exports = ServiceType;
