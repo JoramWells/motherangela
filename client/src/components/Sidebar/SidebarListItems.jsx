@@ -128,6 +128,20 @@ const SidebarListItems = () => {
         selected={pathname === '/register-cost-centre'
           || pathname.includes('/view-cost-centre')}
         onClick={onToggle}
+        text="Charts of Account"
+        // link="/ccc"
+        itemList={[
+          { id: nanoid(), title: 'View Charts', link: '/view-charts-of-account' },
+          { id: nanoid(), title: 'Report', link: '/view-cost-centre' },
+        ]}
+        icon={<FaCar size={15} />}
+      />
+
+      {/*  */}
+      <SidebarItemLink
+        selected={pathname === '/register-cost-centre'
+          || pathname.includes('/view-cost-centre')}
+        onClick={onToggle}
         text="Cost Centre"
         // link="/ccc"
         itemList={[
