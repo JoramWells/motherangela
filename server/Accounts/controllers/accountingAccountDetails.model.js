@@ -19,14 +19,7 @@ try {
 
 const getAllAccountingAccountDetails = async (req, res, next) => {
   try {
-    const results = await AccountingAccountDetails.findAll({
-      include:[
-        {
-          model:AccountingDepartment,
-          attributes:['department_name']
-        }
-      ]
-    });
+    const results = await AccountingAccountDetails.findAll({});
     res.status(200).json(results);
     next();
   } catch (error) {

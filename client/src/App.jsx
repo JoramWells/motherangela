@@ -116,6 +116,7 @@ import AddCostCentre from './_CostCentre/layouts/AddCostCentre';
 import IssueItemsCostCenter from './_Stores/layouts/IssueItemsCostCenter';
 import AddJournal from './_Journal/layouts/AddJournal';
 import Journal from './_Journal/layouts/Journal';
+import ChartOfAccounts from './_ChartOfAccounts/layouts/ChartOfAccounts';
 
 // Medication
 const MedicationCategory = lazy(() => import('./_Medication/layouts/MedicationCategory'));
@@ -238,6 +239,7 @@ function App() {
             <Route path="/accounting-suppliers" element={<AccountingSuppliers />} />
             <Route path="/accounting-items" element={<AccountingItem />} />
             <Route path="/register-cost-centre" element={<AddCostCentre />} />
+            <Route path="/view-charts-of-account" element={<ChartOfAccounts />} />
 
             <Route path="/bed-allocation" element={<DoctorAdmissionBedAllocation />} />
 
