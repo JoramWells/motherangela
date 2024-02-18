@@ -8,7 +8,6 @@ COPY package.json ./
 
 RUN yarn install
 
-RUN npx eslint --init
 
 COPY . .
 

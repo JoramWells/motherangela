@@ -31,7 +31,7 @@ const ConsultationCreditAccounts = () => {
     () => [
       {
         header: 'Service Type',
-        accessorKey: 'service_type_description',
+        accessorKey: 'consultation_group_description',
         cell: (props) => (
           <Text>
             {props.getValue()}

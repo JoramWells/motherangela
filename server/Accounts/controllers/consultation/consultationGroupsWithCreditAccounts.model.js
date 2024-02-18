@@ -2,6 +2,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable camelcase */
 
+const AccountingAccountDetails = require("../../models/_accounts/accountingAccountDetails.model");
 const ConsultationGroupsWithCreditAccount = require("../../models/consultation/consultationGroupWithCreditAccount.model");
 
 
@@ -17,7 +18,14 @@ const addConsultationGroupWithCreditAccounts = async (req, res, next) => {
 
 const getAllConsultationGroupWithCreditAccounts = async (req, res, next) => {
   try {
-    const results = await ConsultationGroupsWithCreditAccount.findAll({});
+    const results = await ConsultationGroupsWithCreditAccount.findAll({
+      include:[
+        {
+          model:AccountingAccountDetails,
+          attributes:['account_name']
+        }
+      ]
+    });
     res.json(results);
     next();
   } catch (error) {

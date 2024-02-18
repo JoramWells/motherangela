@@ -155,36 +155,6 @@ const Patients = () => {
           ))}
         </HStack>
 
-        <HStack
-          w="100%"
-          justifyContent="space-between"
-          bgColor="white"
-          p={3}
-          rounded="lg"
-          mt={2}
-        >
-          <Text fontSize="14px" fontWeight="bold">
-            Patients
-            <span style={{
-              // fontSize: '14px',
-              // fontWeight: 'normal',
-              color: 'gray',
-            }}
-            >
-              {' '}
-              (
-              {filteredData?.length}
-              )
-
-            </span>
-          </Text>
-          <HStack>
-            <Button leftIcon={<FaPrint />}>Print Report</Button>
-
-            <Button leftIcon={<FaFileDownload />}>Download</Button>
-
-          </HStack>
-        </HStack>
         {filteredData?.length === 0 ? (
           <VStack p={5}>
 

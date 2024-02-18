@@ -283,6 +283,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Admitted Patients', link: '/admission' },
           { id: nanoid(), title: 'Out-Patient', link: '/out-patient' || pathname.includes('/add-patient') },
           { id: nanoid(), title: 'Patient Reports', link: '/patient-reports' },
+          { id: nanoid(), title: 'View Patients', link: '/patients' },
         ]}
         icon={<FaHospitalAlt size={15} />}
       />
