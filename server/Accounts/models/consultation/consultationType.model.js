@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 const { DataTypes } = require('sequelize');
-const sequelize = require('../db/connect');
+const sequelize = require('../../../root/db/connect');
 
-const Consultation_type = sequelize.define('consultation_types', {
+const ConsultationType = sequelize.define('consultation_types', {
   consultation_type_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -18,6 +18,6 @@ const Consultation_type = sequelize.define('consultation_types', {
     type: DataTypes.INTEGER,
   },
 });
-module.exports = Consultation_type;
+module.exports = ConsultationType;
 
 // has no classification and status

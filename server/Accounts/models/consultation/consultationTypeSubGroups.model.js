@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 const { DataTypes } = require('sequelize');
-const sequelize = require('../db/connect');
+const sequelize = require('../../db/connect');
 
-const Consultation_types_sub_group = sequelize.define('consultation_types_sub_groups', {
+const ConsultationTypesSubGroups = sequelize.define('consultation_types_sub_groups', {
   consultation_type_sub_group_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -18,6 +18,6 @@ const Consultation_types_sub_group = sequelize.define('consultation_types_sub_gr
     type: DataTypes.STRING,
   },
 });
-module.exports = Consultation_types_sub_group;
+module.exports = ConsultationTypesSubGroups;
 
 // has no classification and status
