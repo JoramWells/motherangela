@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const serviceTypeApi = createApi({
   reducerPath: 'serviceTypeApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/service-type',
+    baseUrl: 'http://localhost:5010/service-types',
   }),
   endpoints: (builder) => ({
     getAllServiceType: builder.query({

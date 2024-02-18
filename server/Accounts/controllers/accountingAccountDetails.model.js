@@ -3,6 +3,7 @@
 const { Sequelize } = require('sequelize');
 const sequelize = require('../db/connect');
 const AccountingAccountDetails = require('../models/_accounts/accountingAccountDetails.model');
+const AccountingGroups = require('../models/_accounts/accountingGroup.model');
 
 
 const addAccountingAccountDetail = async (req, res, next) => {
@@ -19,7 +20,14 @@ try {
 
 const getAllAccountingAccountDetails = async (req, res, next) => {
   try {
-    const results = await AccountingAccountDetails.findAll({});
+    const results = await AccountingAccountDetails.findAll({
+      include:[
+        {
+          model:AccountingGroups,
+          attributes: ['account_group_description']
+        }
+      ]
+    });
     res.status(200).json(results);
     next();
   } catch (error) {

@@ -22,7 +22,7 @@ app.use(express.urlencoded({
 // enable cors
 app.use(cors());
 
-app.use('/internal-lab-requests', serviceTypeRoutes);
+app.use('/service-types', serviceTypeRoutes);
 
 // app.use((err, req, res, next) => {
 //   const errStatus = err.status || 500;

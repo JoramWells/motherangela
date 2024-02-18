@@ -16,6 +16,7 @@ import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
 import { useGetAllAccountingCostCentresQuery } from '../../api/accounts/accountingCostCentre.api';
 import { useGetAllAccountingAccountDetailsQuery } from '../../api/accounts/accountingAccountDetails.api';
+import { useGetAllServiceTypeQuery } from '../../api/serviceType.api';
 
 const UserNameAvatar = ({ fullName }) => (
   <HStack>
@@ -36,20 +37,20 @@ const UserNameAvatar = ({ fullName }) => (
   </HStack>
 );
 
-const ChartOfAccounts = () => {
+const ServiceTypes = () => {
   const navigate = useNavigate();
 
   const {
     data, error, isLoading, isFetching, isSuccess,
-  } = useGetAllAccountingAccountDetailsQuery();
+  } = useGetAllServiceTypeQuery();
 
   console.log(data);
 
   const columnsx = useMemo(
     () => [
       {
-        header: 'Account Name',
-        accessorKey: 'account_name',
+        header: 'Service Type',
+        accessorKey: 'service_type_description',
         cell: (props) => (
           <Text>
             {props.getValue()}
@@ -58,7 +59,7 @@ const ChartOfAccounts = () => {
 
       },
       {
-        header: 'Account Group',
+        header: 'Credit Account',
         accessorKey: 'accounting_group',
         cell: (props) => (<Text>{props.getValue()?.account_group_description}</Text>),
 
@@ -159,4 +160,4 @@ const ChartOfAccounts = () => {
   );
 };
 
-export default ChartOfAccounts;
+export default ServiceTypes;

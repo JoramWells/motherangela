@@ -125,14 +125,15 @@ const SidebarListItems = () => {
 
       {/*  */}
       <SidebarItemLink
-        selected={pathname === '/register-cost-centre'
+        selected={pathname === '/charts-of-account'
           || pathname.includes('/view-cost-centre')}
         onClick={onToggle}
         text="Charts of Account"
         // link="/ccc"
         itemList={[
-          { id: nanoid(), title: 'View Charts', link: '/view-charts-of-account' },
-          { id: nanoid(), title: 'Report', link: '/view-cost-centre' },
+          { id: nanoid(), title: 'View Charts', link: '/charts-of-account' },
+          { id: nanoid(), title: 'Chart Reports', link: '/view-cost-centre' },
+          { id: nanoid(), title: 'Service Types', link: '/service-types' },
         ]}
         icon={<FaCar size={15} />}
       />
