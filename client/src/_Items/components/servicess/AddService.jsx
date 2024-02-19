@@ -6,7 +6,7 @@ import ServiceTypeTab from './tabs/ServiceTypeTab';
 
 const AddService = () => (
   <VStack
-    w="45%"
+    w="50%"
     bgColor="white"
   >
     <Tabs

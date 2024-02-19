@@ -7,6 +7,8 @@ import BreadCrumbNav from '../../components/BreadCrumbNav';
 import AddMedications from '../components/medication/AddMedications';
 import AddWard from '../components/ward/AddWard';
 import AddService from '../components/servicess/AddService';
+import AddDiseases from '../components/diseases/AddDiseases';
+import AddInsurance from '../components/insurance/AddInsurance';
 
 const PatientCard = ({
   text, icon, onClick, selected,
@@ -18,7 +20,7 @@ const PatientCard = ({
       onClick={onClick}
       w="full"
       justifyContent="flex-start"
-      bgColor={selected ? 'blue.50' : 'whitesmoke'}
+      bgColor={selected ? 'blue.50' : 'white'}
       // border={selected && '1px'}
       // borderColor="blue.100"
       p={2}
@@ -31,10 +33,13 @@ const PatientCard = ({
         color: 'blue.500',
         bgColor: 'blue.50',
       }}
-      color={selected ? 'blue.500' : 'blue.700'}
+      color={selected ? 'blue.500' : 'gray.400'}
     >
       {icon}
-      <Text>
+      <Text
+        fontSize="14px"
+        // fontWeight="bold"
+      >
         {text}
       </Text>
     </HStack>
@@ -74,18 +79,14 @@ const profileData = [
   },
   {
     id: '4',
-    text: 'Prescription Type',
-  },
-  {
-    id: '5',
     text: 'Service',
   },
   {
-    id: '6',
+    id: '5',
     text: 'Supplier',
   },
   {
-    id: '7',
+    id: '6',
     text: 'Ward',
   },
 ];
@@ -116,15 +117,17 @@ const RegisterItems = () => {
       <HStack
         w="full"
         alignItems="flex-start"
+        spacing={4}
       >
         <VStack
           bgColor="white"
-          w="250px"
+          w="20%"
           rounded="lg"
           border="1px"
           borderColor="gray.200"
           p={2}
           alignItems="flex-start"
+          spacing={0}
         >
           {profileData.map((item) => (
             <PatientCard
@@ -136,9 +139,11 @@ const RegisterItems = () => {
           ))}
         </VStack>
 
+        {sideItem === 0 && <AddDiseases />}
+        {sideItem === 2 && <AddInsurance />}
         {sideItem === 3 && <AddMedications />}
-        {sideItem === 5 && <AddService />}
-        {sideItem === 7 && <AddWard />}
+        {sideItem === 4 && <AddService />}
+        {sideItem === 6 && <AddWard />}
       </HStack>
     </VStack>
   );

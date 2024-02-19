@@ -6,12 +6,11 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import {  useParams, useSearchParams } from 'react-router-dom';
+import CustomInput from '../../../components/Forms/CustomInput';
 
-import CustomInput from '../../../../components/Forms/CustomInput';
-import CustomSelect from '../../../../components/Forms/CustomSelect';
 // import { useAddVitalSignsMutation } from '../api/vitalSigns.api';
 
-const ServiceTypeTab = () => {
+const AddDiseases = () => {
   const [searchParams] = useSearchParams();
   const appointment_id = searchParams.get('appointment_id');
 
@@ -27,24 +26,18 @@ const ServiceTypeTab = () => {
   return (
 
     <VStack
-      w="full"
+      w="50%"
             // boxShadow="lg"
-      // p={5}
+      p={5}
       spacing="1.3rem"
+      bgColor="white"
+      rounded="lg"
+      border="1px"
+      borderColor="gray.200"
     >
 
       <CustomInput
-        label="Description"
-        color="gray.500"
-      />
-
-      <CustomSelect
-        label="Service Type"
-        color="gray.500"
-      />
-
-      <CustomSelect
-        label="Credit Account"
+        label="Disease Name"
         color="gray.500"
       />
 
@@ -61,4 +54,4 @@ const ServiceTypeTab = () => {
   );
 };
 
-export default ServiceTypeTab;
+export default AddDiseases;

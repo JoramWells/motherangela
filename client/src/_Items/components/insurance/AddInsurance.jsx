@@ -9,11 +9,11 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
-import CustomInput from '../../../../components/Forms/CustomInput';
-import CustomSelect from '../../../../components/Forms/CustomSelect';
+import CustomSelect from '../../../components/Forms/CustomSelect';
+import CustomInput from '../../../components/Forms/CustomInput';
 // import { useAddVitalSignsMutation } from '../api/vitalSigns.api';
 
-const MedicationPurchaseTab = () => {
+const AddInsurance = () => {
   const [searchParams] = useSearchParams();
   const appointment_id = searchParams.get('appointment_id');
 
@@ -31,60 +31,86 @@ const MedicationPurchaseTab = () => {
   return (
 
     <VStack
-      w="full"
+      w="45%"
             // boxShadow="lg"
-      spacing="1.5rem"
-      // p={5}
+      p={5}
+      spacing="1.3rem"
+      bgColor="white"
+      rounded="lg"
+      border="1px"
+      borderColor="gray.200"
     >
       {/* sub item */}
 
-      <CustomSelect
-        label="Medicine Name"
-        color="gray.500"
-      />
-      <CustomSelect
-        label="Supplier"
-        color="gray.500"
-      />
-
-      <CustomInput
-        label="Receipt Invoice No."
-        color="gray.500"
-      />
-      <CustomInput
-        label="Batch No."
-        color="gray.500"
-      />
-      {/*  */}
       <HStack
         w="full"
       >
         <CustomInput
-          label="Purchase Date"
+          label="Insurance Name"
           color="gray.500"
-          type="date"
         />
-        <CustomInput
-          label="Expiry Date"
+        <CustomSelect
+          label="Insurance Type"
           color="gray.500"
-          type="date"
         />
       </HStack>
 
-      <HStack>
+      <CustomInput
+        label="Box Address"
+        color="gray.500"
+      />
+      <CustomInput
+        label="Phone No."
+        color="gray.500"
+      />
+
+      <CustomInput
+        label="Email Address"
+        color="gray.500"
+      />
+      <HStack
+        w="full"
+      >
+
         <CustomInput
-          label="Unit Buying Price"
+          label="Payment Percentage(Out-Patient)"
+          color="gray.500"
+        />
+        <CustomInput
+          label="Payment Percentage(In-Patient)"
+          color="gray.500"
+        />
+      </HStack>
+
+      <HStack
+        w="full"
+      >
+        <CustomInput
+          label="NHIF Rebate"
+          color="gray.500"
+        />
+        <CustomInput
+          label="Withholding Tax"
+          color="gray.500"
+        />
+      </HStack>
+
+      <Divider />
+
+      <HStack
+        alignItems="flex-start"
+        w="full"
+      >
+
+        <CustomInput
+          label="Discount Percentage"
+          color="gray.500"
+        />
+        <CustomSelect
+          label="Full Discount on All Services"
           color="gray.500"
         />
 
-        <CustomInput
-          label="Quantity"
-          color="gray.500"
-        />
-        <CustomInput
-          label="Sub Total"
-          color="gray.500"
-        />
       </HStack>
 
       {/* save btn */}
@@ -100,4 +126,4 @@ const MedicationPurchaseTab = () => {
   );
 };
 
-export default MedicationPurchaseTab;
+export default AddInsurance;

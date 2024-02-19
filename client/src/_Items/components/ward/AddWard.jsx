@@ -27,7 +27,7 @@ const AddWard = () => (
         </Tab>
         <Tab>Bed</Tab>
         <Tab>Category</Tab>
-        <Tab>Package Type</Tab>
+        <Tab>Type</Tab>
       </TabList>
 
       <TabPanels>

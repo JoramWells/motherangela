@@ -11,7 +11,7 @@ import CustomInput from '../../../../components/Forms/CustomInput';
 import CustomSelect from '../../../../components/Forms/CustomSelect';
 // import { useAddVitalSignsMutation } from '../api/vitalSigns.api';
 
-const ServiceTypeTab = () => {
+const PrescriptionTab = () => {
   const [searchParams] = useSearchParams();
   const appointment_id = searchParams.get('appointment_id');
 
@@ -37,14 +37,8 @@ const ServiceTypeTab = () => {
         label="Description"
         color="gray.500"
       />
-
       <CustomSelect
-        label="Service Type"
-        color="gray.500"
-      />
-
-      <CustomSelect
-        label="Credit Account"
+        label="Total Doses per Day"
         color="gray.500"
       />
 
@@ -61,4 +55,4 @@ const ServiceTypeTab = () => {
   );
 };
 
-export default ServiceTypeTab;
+export default PrescriptionTab;
