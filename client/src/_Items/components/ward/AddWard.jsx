@@ -1,12 +1,12 @@
 import {
   Tabs, TabList, TabPanels, Tab, TabPanel, VStack,
 } from '@chakra-ui/react';
-import MedicationTab from './tabs/MedicationTab';
-import MedicineCategoryTab from './tabs/MedicineCategoryTab';
-import MedicationPackageType from './tabs/MedicationPackageType';
-import MedicationPurchaseTab from './tabs/MedicationPurchaseTab';
+import WardTypeTab from './tabs/WardTypeTab';
+import WardCategoryTab from './tabs/WardCategoryTab';
+import WardTab from './tabs/WardTab';
+import WardBedTab from './tabs/WardBedTab';
 
-const AddMedications = () => (
+const AddWard = () => (
   <VStack
     w="45%"
     bgColor="white"
@@ -23,29 +23,29 @@ const AddMedications = () => (
         <Tab
           p={3}
         >
-          Medication
+          Ward
         </Tab>
+        <Tab>Bed</Tab>
         <Tab>Category</Tab>
         <Tab>Package Type</Tab>
-        <Tab>Purchase</Tab>
       </TabList>
 
       <TabPanels>
         <TabPanel>
-          <MedicationTab />
+          <WardTab />
         </TabPanel>
         <TabPanel>
-          <MedicineCategoryTab />
+          <WardBedTab />
         </TabPanel>
         <TabPanel>
-          <MedicationPackageType />
+          <WardCategoryTab />
         </TabPanel>
         <TabPanel>
-          <MedicationPurchaseTab />
+          <WardTypeTab />
         </TabPanel>
       </TabPanels>
     </Tabs>
   </VStack>
 );
 
-export default AddMedications;
+export default AddWard;

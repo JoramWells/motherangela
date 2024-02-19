@@ -21,13 +21,14 @@ const selectStyles = {
 };
 
 const CustomSelect = ({
-  onChange, value, label, options,
+  onChange, value, label, options, color,
 }) => (
   <FormControl>
 
     <FormLabel
       fontSize="14px"
       textTransform="capitalize"
+      color={color}
     >
       {label}
 
@@ -45,12 +46,14 @@ const CustomSelect = ({
 CustomSelect.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.string,
+  color: PropTypes.string,
   label: PropTypes.string,
   options: PropTypes.array,
 };
 
 CustomSelect.defaultProps = {
   onChange: () => { },
+  color: 'black',
   value: '',
   label: '',
   options: [],

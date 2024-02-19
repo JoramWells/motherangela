@@ -13,7 +13,7 @@ import CustomInput from '../../../../components/Forms/CustomInput';
 import CustomSelect from '../../../../components/Forms/CustomSelect';
 // import { useAddVitalSignsMutation } from '../api/vitalSigns.api';
 
-const MedicationTab = () => {
+const WardTab = () => {
   const [searchParams] = useSearchParams();
   const appointment_id = searchParams.get('appointment_id');
 
@@ -48,10 +48,10 @@ const MedicationTab = () => {
           fontWeight="bold"
           fontSize="16px"
         >
-          Medicine Details
+          Ward Details
         </Text>
         <CustomInput
-          label="Name"
+          label="Description"
           color="gray.500"
         />
 
@@ -63,7 +63,7 @@ const MedicationTab = () => {
             color="gray.500"
           />
           <CustomSelect
-            label="Package Type"
+            label="Type"
             color="gray.500"
           />
         </HStack>
@@ -78,17 +78,17 @@ const MedicationTab = () => {
           fontSize="16px"
           fontWeight="bold"
         >
-          Medicine Account Prices
+          Admission Charges
         </Text>
         <HStack
           w="full"
         >
           <CustomInput
-            label="Personal"
+            label="Corporate"
             color="gray.500"
           />
           <CustomInput
-            label="Corporate"
+            label="Non-Corporate"
             color="gray.500"
           />
           <CustomInput
@@ -109,21 +109,53 @@ const MedicationTab = () => {
           fontSize="16px"
           fontWeight="bold"
         >
-          Medicine Pricing
+          Daily Rate
         </Text>
-        <CustomInput
-          label="Buying Price"
-          color="gray.500"
-        />
         <HStack
           w="full"
         >
           <CustomInput
-            label="Maximum Selling Price"
+            label="Corporate"
             color="gray.500"
           />
           <CustomInput
-            label="Maximum Selling Price"
+            label="Non-Corporate"
+            color="gray.500"
+          />
+          <CustomInput
+            label="Foreigner"
+            color="gray.500"
+          />
+        </HStack>
+      </VStack>
+
+      <Divider />
+
+      {/*  */}
+      <VStack
+        alignItems="flex-start"
+        w="full"
+        spacing="1rem"
+      >
+        <Text
+          fontSize="16px"
+          fontWeight="bold"
+        >
+          Nursing Charges per Day
+        </Text>
+        <HStack
+          w="full"
+        >
+          <CustomInput
+            label="Corporate"
+            color="gray.500"
+          />
+          <CustomInput
+            label="Non-Corporate"
+            color="gray.500"
+          />
+          <CustomInput
+            label="Foreigner"
             color="gray.500"
           />
         </HStack>
@@ -137,21 +169,27 @@ const MedicationTab = () => {
         spacing="1rem"
       >
         <Text
-          fontWeight="bold"
           fontSize="16px"
+          fontWeight="bold"
         >
-          Others
+          Doctor Charges per Day
         </Text>
-
-        <CustomInput
-          label="Re-order level"
-          color="gray.500"
-        />
-        <CustomSelect
-          label="For Sale In"
-          color="gray.500"
-        />
-
+        <HStack
+          w="full"
+        >
+          <CustomInput
+            label="Corporate"
+            color="gray.500"
+          />
+          <CustomInput
+            label="Non-Corporate"
+            color="gray.500"
+          />
+          <CustomInput
+            label="Foreigner"
+            color="gray.500"
+          />
+        </HStack>
       </VStack>
 
       {/* save btn */}
@@ -167,4 +205,4 @@ const MedicationTab = () => {
   );
 };
 
-export default MedicationTab;
+export default WardTab;

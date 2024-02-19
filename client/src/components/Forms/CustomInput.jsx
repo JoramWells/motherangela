@@ -2,7 +2,7 @@ import { FormControl, FormLabel, Input } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 
 const CustomInput = ({
-  onChange, value, name, label, color,
+  onChange, value, name, label, color, type,
 }) => (
   <FormControl>
 
@@ -20,6 +20,7 @@ const CustomInput = ({
       size={['md', 'md', 'md', 'md', 'sm', 'md']}
       value={value}
       onChange={onChange}
+      type={type}
     />
 
   </FormControl>
@@ -29,6 +30,7 @@ CustomInput.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.string,
   color: PropTypes.string,
+  type: PropTypes.string,
   name: PropTypes.string,
   label: PropTypes.string,
 };
@@ -38,6 +40,7 @@ CustomInput.defaultProps = {
   value: '',
   name: '',
   color: 'black',
+  type: 'text',
   label: '',
 };
 

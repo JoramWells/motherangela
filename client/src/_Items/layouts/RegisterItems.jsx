@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import AddMedications from '../components/medication/AddMedications';
+import AddWard from '../components/ward/AddWard';
+import AddService from '../components/servicess/AddService';
 
 const PatientCard = ({
   text, icon, onClick, selected,
@@ -72,47 +74,19 @@ const profileData = [
   },
   {
     id: '4',
-    text: 'Medication Category',
-  },
-  {
-    id: '5',
-    text: 'Medication Package Type',
-  },
-  {
-    id: '6',
-    text: 'Medication Purchase',
-  },
-  {
-    id: '7',
     text: 'Prescription Type',
   },
   {
-    id: '8',
+    id: '5',
     text: 'Service',
   },
   {
-    id: '9',
-    text: 'Service Type',
-  },
-  {
-    id: '10',
+    id: '6',
     text: 'Supplier',
   },
   {
-    id: '11',
+    id: '7',
     text: 'Ward',
-  },
-  {
-    id: '12',
-    text: 'Ward Bed',
-  },
-  {
-    id: '13',
-    text: 'Ward Category',
-  },
-  {
-    id: '14',
-    text: 'Ward Type',
   },
 ];
 
@@ -163,6 +137,8 @@ const RegisterItems = () => {
         </VStack>
 
         {sideItem === 3 && <AddMedications />}
+        {sideItem === 5 && <AddService />}
+        {sideItem === 7 && <AddWard />}
       </HStack>
     </VStack>
   );
