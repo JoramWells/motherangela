@@ -62,12 +62,14 @@ const SidebarListItems = () => {
           || pathname.includes('admin')
           || pathname.includes('user-detail')
           || pathname.includes('insurance')
+          || pathname.includes('register-items')
         || pathname.includes('add-service')}
         onClick={onToggle}
         text="Administration"
         link="/administration"
         itemList={[
-          { id: nanoid(), title: 'Consultation Types', link: 'consultation-types' },
+          { id: nanoid(), title: 'View Items', link: 'view-items' },
+          { id: nanoid(), title: 'Register Items', link: 'register-items' },
           { id: nanoid(), title: 'Departments', link: '/admin-departments' },
           { id: nanoid(), title: 'Diseases', link: '/diseases' },
           { id: nanoid(), title: 'Drugs', link: '/admin-drugs' },

@@ -119,6 +119,7 @@ import Journal from './_Journal/layouts/Journal';
 import ChartOfAccounts from './_ChartOfAccounts/layouts/ChartOfAccounts';
 import ServiceTypes from './_ChartOfAccounts/layouts/ServiceTypes';
 import ConsultationCreditAccounts from './_ChartOfAccounts/layouts/ConsultationCreditAccounts';
+import ItemsRoutes from './routes/admin/Items.routes';
 
 // Medication
 const MedicationCategory = lazy(() => import('./_Medication/layouts/MedicationCategory'));
@@ -230,6 +231,9 @@ function App() {
           </VStack>
 )}
         >
+
+          <ItemsRoutes />
+
           <Routes>
             <Route path="/" element={<Homepage />} />
 
