@@ -46,12 +46,12 @@ const editAdmissionDetailCategory = async (req, res, next) => {
         id,
       },
     })
-      .then((response) => {
-        response.service_name = serviceName;
-        response.service_category = serviceCategory;
-        return response.save();
-      })
-      .catch((error) => console.error(error));
+        .then((response) => {
+          response.service_name = serviceName;
+          response.service_category = serviceCategory;
+          return response.save();
+        })
+        .catch((error) => console.error(error));
   });
 };
 

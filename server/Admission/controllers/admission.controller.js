@@ -3,22 +3,22 @@
 /* eslint-disable no-unused-vars */
 const { Sequelize } = require('sequelize');
 const sequelize = require('../db/connect');
-const Inpatient_case_types = require('../models/inpatient/inpatientCaseTypes.model');
+const Inpatient_case_types = require(
+    '../models/inpatient/inpatientCaseTypes.model',
+);
 const Admissions2 = require('../models/_admission/admission2.model');
-const WardBed = require('../models/ward/wardBed.model')
+const WardBed = require('../models/ward/wardBed.model');
 const Patient = require('../models/patient/patients.model');
 const Admission_category = require('../models/_admission/admissionCategory');
 const Wards = require('../models/ward/ward.model');
 
-// Admissions.belongsTo(Patient_details, { foreignKey: 'patient_id', as: 'patient_details' });
-// Admissions.hasMany(Patient_details, { as: 'patients', foreignKey: 'patient_id' });
 
 const addAdmission = async (req, res, next) => {
-  console.log(req.body);
   try {
-    const admission = Admissions2.create(req.body);
-    res.status(201).json(admission);
+    const admission = await Admissions2.create(req.body);
+    res.json(admission);
     next();
+    console.log('saving admission..');
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -42,8 +42,8 @@ const getAllAdmission = async (req, res, next) => {
         },
         {
           model: Wards,
-          attributes: ['ward_description']
-        }
+          attributes: ['ward_description'],
+        },
       ],
     });
     res.json(admissions);

@@ -4,7 +4,7 @@ module.exports = {
     commonjs: true,
     es2021: true,
   },
-  extends: 'airbnb-base',
+  extends: ['airbnb-base', 'google'],
   overrides: [
     {
       env: {
@@ -22,7 +22,7 @@ module.exports = {
     ecmaVersion: 'latest',
   },
   rules: {
+    // 'max-len': [{'code:':60, 'tabWidth':4}],
     'linebreak-style': 0,
-    indent: 0,
   },
 };

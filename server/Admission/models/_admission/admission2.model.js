@@ -6,7 +6,7 @@ const AdmissionCategory = require('./admissionCategory');
 const Patient = require('../patient/patients.model');
 const Inpatient_case_types = require('../inpatient/inpatientCaseTypes.model');
 const Appointments2 = require('../appointment/appointments2.models');
-const WardBed = require('../ward/wardBed.model')
+const WardBed = require('../ward/wardBed.model');
 const Wards = require('../ward/ward.model');
 
 const Admissions2 = sequelize.define('admissions2', {
@@ -131,9 +131,15 @@ const Admissions2 = sequelize.define('admissions2', {
 Admissions2.belongsTo(Wards, { foreignKey: 'ward_id' });
 Admissions2.belongsTo(WardBed, { foreignKey: 'bed_id' });
 Admissions2.belongsTo(Patient, { foreignKey: 'patient_id' });
-Admissions2.belongsTo(AdmissionCategory, { foreignKey: 'admission_category_id' });
+Admissions2.belongsTo(
+    AdmissionCategory,
+    { foreignKey: 'admission_category_id' },
+);
 Admissions2.belongsTo(Appointments2, { foreignKey: 'appointment_id' });
-Admissions2.belongsTo(Inpatient_case_types, { foreignKey: 'inpatient_case_type_id' });
+Admissions2.belongsTo(
+    Inpatient_case_types,
+    { foreignKey: 'inpatient_case_type_id' },
+);
 
 sequelize.sync().then(() => {
   console.log('Adm table created');

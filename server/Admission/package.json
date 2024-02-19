@@ -28,8 +28,9 @@
     "sequelize": "^6.35.1"
   },
   "devDependencies": {
-    "eslint": "^8.55.0",
+    "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.29.0"
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.25.2"
   }
 }

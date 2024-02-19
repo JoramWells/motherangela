@@ -3,18 +3,14 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../db/connect');
 
-const Inpatient_case_types = sequelize
-  .define('inpatient_case_type', {
-    inpatient_case_type_id:
-     {
-       type: DataTypes.INTEGER,
-       primaryKey: true,
-     },
-    inpatient_case_type_description:
-     { type: DataTypes.INTEGER },
+const InpatientCaseType = sequelize
+    .define('inpatient_case_typeS', {
+      inpatient_case_type_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+      },
+      inpatient_case_type_description: { type: DataTypes.STRING },
 
-    // end
+    });
 
-  });
-
-module.exports = Inpatient_case_types;
+module.exports = InpatientCaseType;

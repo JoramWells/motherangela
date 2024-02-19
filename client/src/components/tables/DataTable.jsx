@@ -44,6 +44,7 @@ const DataTable2 = ({
         mt={0}
         bgColor="white"
         p={2}
+        w="full"
       >
         <Table>
           {table.getHeaderGroups()

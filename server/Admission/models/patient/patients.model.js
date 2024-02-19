@@ -107,7 +107,8 @@ const Patient = sequelize.define('patient', {
   },
 });
 
-// sequelize.query('ALTER TABLE Patient ALTER COLUMN patient_id TYPE VARCHAR(255);')
+// sequelize.query('ALTER TABLE Patient ALTER
+// COLUMN patient_id TYPE VARCHAR(255);')
 //   .then(() => {
 //     console.log('Column data type modified successfully.');
 //   })
@@ -116,7 +117,8 @@ const Patient = sequelize.define('patient', {
 //   });
 // create the pricelists model
 
-// Patient.hasMany(Appointments2, { foreignKey: 'patient_id', onDelete: 'CASCADE' });
+// Patient.hasMany(Appointments2,
+// { foreignKey: 'patient_id', onDelete: 'CASCADE' });
 
 // sequelize.sync().then(() => {
 //   console.log('Book table created');

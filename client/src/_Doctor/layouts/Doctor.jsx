@@ -112,6 +112,7 @@ const Doctor = () => {
                 borderColor: 'gray.200',
                 borderBottom: '0',
                 color: 'blue.500',
+                fontWeight: 'bold',
               }}
             >
               {item.text}
@@ -128,7 +129,6 @@ const Doctor = () => {
 
           {/* appointments panel */}
           <TabPanel>
-            <Text>Appointments</Text>
             <AppointmentsTab />
           </TabPanel>
 

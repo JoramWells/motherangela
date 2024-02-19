@@ -3,34 +3,38 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../db/connect');
 
-const Admissions_bed_allocation = sequelize.define('admissions_bed_allocation', {
-  bed_allocation_id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-  },
-  appointment_id: {
-    type: DataTypes.INTEGER,
-  },
-  patient_id: {
-    type: DataTypes.INTEGER,
-  },
-  ward_id: {
-    type: DataTypes.INTEGER,
-  },
-  bed_id: {
-    type: DataTypes.INTEGER,
-  },
-  admission_date: {
-    type: DataTypes.STRING,
-  },
-  discharge_date: {
-    type: DataTypes.STRING,
-  },
-  ward_charges: {
-    type: DataTypes.INTEGER,
-  },
+const Admissions_bed_allocation = sequelize
+    .define('admissions_bed_allocation', {
+      bed_allocation_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+      },
+      admission_id: {
+        type: DataTypes.INTEGER,
+      },
+      appointment_id: {
+        type: DataTypes.INTEGER,
+      },
+      patient_id: {
+        type: DataTypes.INTEGER,
+      },
+      ward_id: {
+        type: DataTypes.INTEGER,
+      },
+      bed_id: {
+        type: DataTypes.INTEGER,
+      },
+      admission_date: {
+        type: DataTypes.STRING,
+      },
+      discharge_date: {
+        type: DataTypes.STRING,
+      },
+      ward_charges: {
+        type: DataTypes.INTEGER,
+      },
 
-});
+    });
 
 // sequelize.sync().then(() => {
 //   console.log('Book table created');

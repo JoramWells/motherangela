@@ -54,12 +54,14 @@ import { accountingAccountDetailsApi } from './api/accounts/accountingAccountDet
 import {
   consultationTypesWitCreditAccountsApi,
 } from './api/consultation/consultationTypesWitCreditAccounts';
+import { admissionBedAllocationApi } from './api/admission/admissionBedAllocation.api';
 
 export const store = configureStore({
   reducer: {
     [patientsApi.reducerPath]: patientsApi.reducer,
     [wardApi.reducerPath]: wardApi.reducer,
     [admissionApi.reducerPath]: admissionApi.reducer,
+    [admissionBedAllocationApi.reducerPath]: admissionBedAllocationApi.reducer,
     [appointmentApi.reducerPath]: appointmentApi.reducer,
     [hospitalApi.reducerPath]: hospitalApi.reducer,
     [maternityProfileApi.reducerPath]: maternityProfileApi.reducer,
@@ -116,6 +118,7 @@ export const store = configureStore({
     .concat(patientsApi.middleware)
     .concat(wardApi.middleware)
     .concat(admissionApi.middleware)
+    .concat(admissionBedAllocationApi.middleware)
     .concat(appointmentApi.middleware)
     .concat(hospitalApi.middleware)
     .concat(maternityProfileApi.middleware)

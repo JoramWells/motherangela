@@ -93,6 +93,7 @@ const SidebarListItems = () => {
           || pathname.includes('/add-prescription')
           || pathname.includes('/patient-departmental-status')
           || pathname.includes('/patient-reports')
+          || pathname.includes('/doctor')
           || pathname.includes('/appointment-detail')}
         onClick={onToggle}
         text="Appointments"

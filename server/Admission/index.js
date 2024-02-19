@@ -5,10 +5,16 @@ const express = require('express');
 const cors = require('cors');
 
 const sequelize = require('./db/connect');
-const doctorAdmissionBedRoutes = require('./routes/admissionBedAllocation.routes');
+const admissionBedRoutes = require(
+    './routes/admissionBedAllocation.routes',
+);
 const admissionRoutes = require('./routes/admission.routes');
-const admissionMaternityServices = require('./routes/admissionMaternityServices.routes');
-const admissionMiscellaneousChargesRoutes = require('./routes/admissionMiscellaneousCharge.routes');
+const admissionMaternityServices = require(
+    './routes/admissionMaternityServices.routes',
+);
+const admissionMiscellaneousChargesRoutes = require(
+    './routes/admissionMiscellaneousCharge.routes',
+);
 const admissionCategoryRoutes = require('./routes/admissionCategory.routes');
 const admissionTypeRoutes = require('./routes/admissionType.routes');
 
@@ -27,7 +33,7 @@ app.use(express.urlencoded({
 // enable cors
 app.use(cors());
 
-app.use('/bed-allocation', doctorAdmissionBedRoutes);
+app.use('/bed-allocation', admissionBedRoutes);
 app.use('/admission', admissionRoutes);
 app.use('/admission-category', admissionCategoryRoutes);
 app.use('/admission-type', admissionTypeRoutes);

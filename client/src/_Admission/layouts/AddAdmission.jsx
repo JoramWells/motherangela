@@ -14,7 +14,9 @@ import {
 } from '@chakra-ui/react';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { useCallback, useState } from 'react';
+import {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import Select from 'react-select';
 import moment from 'moment';
@@ -24,6 +26,7 @@ import { useGetAllBedsQuery } from '../../api/wardBed.api';
 import { useGetAllAdmissionCategoriesQuery } from '../../api/admissionCategory.api';
 import { useGetUsersQuery } from '../../api/users.api';
 import { useAddAdmissionMutation } from '../../api/admissions.api';
+import { useAddAdmissionBedAllocationMutation } from '../../api/admission/admissionBedAllocation.api';
 // import { useAddVitalSignsMutation } from '../api/vitalSigns.api';
 
 const AddAdmission = () => {
@@ -34,6 +37,7 @@ const AddAdmission = () => {
   const [bed_id, setWard_bed_id] = useState('');
   const [admission_category_id, setAdmission_category_id] = useState('');
   const [referralType, setReferralType] = useState('');
+  const [admissionID, setAdmissionID] = useState(null);
 
   const { id: patient_id } = useParams();
 
@@ -47,19 +51,6 @@ const AddAdmission = () => {
   const navigate = useNavigate();
 
   // const [addVitalSigns, { isLoading, error }] = useAddVitalSignsMutation();
-
-  const inputValues = {
-    patient_id,
-    appointment_id,
-    doctor_id: doctor_id.value,
-    ward_id: ward_id.value,
-    bed_id: bed_id.value,
-    admission_type_id: admission_category_id.value,
-    referralType,
-    hospital_id: 18,
-    admission_date: moment(new Date(), 'YYYY-MM-DD'),
-    admission_time: moment(new Date()).format('HH:mm:ss'),
-  };
 
   const breadCrumbData = [
     {
@@ -87,10 +78,18 @@ const AddAdmission = () => {
   const { data: wardBedData } = useGetAllBedsQuery();
 
   const { data: admissionCategoryData } = useGetAllAdmissionCategoriesQuery();
+  const [addAdmissionBedAllocation, {
+    isLoading: admissionBedAllocationLoading,
+  }] = useAddAdmissionBedAllocationMutation();
 
   const { data: userData } = useGetUsersQuery();
 
-  const [addAdmission, { isLoading: admissionLoading }] = useAddAdmissionMutation();
+  const [addAdmission, {
+    isLoading: admissionLoading,
+    data: admissionSaveData,
+  }] = useAddAdmissionMutation();
+
+  console.log(admissionSaveData);
 
   const wardsOptions = useCallback(() => data?.map((item) => ({
     value: item.ward_id, label: item.ward_description,
@@ -115,6 +114,47 @@ const AddAdmission = () => {
       value: item.user_id, label: item.full_name,
     }));
   }, [userData]);
+
+  const inputValues = {
+    patient_id,
+    appointment_id,
+    doctor_id: doctor_id.value,
+    ward_id: ward_id.value,
+    bed_id: bed_id.value,
+    admission_type_id: admission_category_id.value,
+    referralType,
+    hospital_id: 18,
+    admission_date: moment(new Date(), 'YYYY-MM-DD'),
+    admission_time: moment(new Date()).format('HH:mm:ss'),
+  };
+
+  const bedAllocationInputValue = useMemo(() => [
+    {
+      admission_id: admissionID,
+      patient_id,
+      appointment_id,
+      ward_id: ward_id.value,
+      bed_id: bed_id.value,
+    },
+  ], [admissionID, patient_id, appointment_id, ward_id, bed_id]);
+
+  useEffect(() => {
+    // check if admissions has been created successfully
+    if (admissionSaveData) {
+      setAdmissionID(admissionSaveData?.admission_id);
+    }
+
+    if (admissionID) {
+      addAdmissionBedAllocation(bedAllocationInputValue[0]);
+      if (!admissionBedAllocationLoading) {
+        navigate(-1);
+      }
+    }
+  }, [admissionSaveData, addAdmissionBedAllocation,
+    admissionID, admissionID?.patientID,
+    bedAllocationInputValue, admissionBedAllocationLoading,
+    navigate,
+  ]);
 
   return (
     <VStack
@@ -191,7 +231,7 @@ const AddAdmission = () => {
           </FormLabel>
           <Select
             options={wardsOptions()}
-            onChange={(e) => setWard_id(e)}
+            onChange={setWard_id}
             value={ward_id}
           />
         </FormControl>
@@ -269,10 +309,16 @@ const AddAdmission = () => {
         <Button
           size="md"
           width="full"
-          colorScheme="blue"
+          // colorScheme="blue"
+          bgColor="blue.700"
+          color="white"
+          // bgGradient={'linear'}
           onClick={() => addAdmission(inputValues)}
+          _hover={{
+            bgColor: 'blue.600',
+          }}
         >
-          {admissionLoading ? 'loading' : 'Save'}
+          {admissionLoading || admissionBedAllocationLoading ? 'loading' : 'Save'}
         </Button>
       </VStack>
     </VStack>
