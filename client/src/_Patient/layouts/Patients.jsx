@@ -63,7 +63,12 @@ const UserNameAvatar = ({ fullName }) => (
       name={fullName}
       color="white"
     />
-    <Text>{fullName}</Text>
+    <Text
+      fontWeight="bold"
+      textTransform="uppercase"
+    >
+      {fullName}
+    </Text>
   </HStack>
 );
 
@@ -83,11 +88,14 @@ const Patients = () => {
         header: 'Patient Name',
         accessorKey: 'last_name',
         cell: (props) => (
-          <Box onClick={() => navigate(`/patient-detail/${props.row.original.patient_id}`)}>
+          <VStack
+            onClick={() => navigate(`/patient-detail/${props.row.original.patient_id}`)}
+            alignItems="flex-start"
+          >
             <UserNameAvatar
               fullName={`${props.row.original?.first_name} ${props.row.original?.last_name}`}
             />
-          </Box>
+          </VStack>
         ),
         size: 200,
 
@@ -113,7 +121,7 @@ const Patients = () => {
       },
       {
         header: 'Action',
-        cell: () => <Button>more</Button>,
+        cell: () => <Button size="sm">more</Button>,
       },
     ],
 
@@ -158,20 +166,14 @@ const Patients = () => {
         {filteredData?.length === 0 ? (
           <VStack p={5}>
 
-            <FaBoxOpen size="120" color="gray" />
-            <Text fontSize="xl" fontWeight="semibold" color="gray.500">No Patients Today</Text>
+            <FaBoxOpen size="60" color="gray" />
+            <Text fontSize="lg" fontWeight="semibold" color="gray.500">No Patients Today</Text>
 
           </VStack>
         )
           : (
-            <Box
-              w="100%"
-              bgColor="white"
-              p={3}
-              h="89%"
-            >
-              <DataTable2 data={filteredData} columns={columns} />
-            </Box>
+
+            <DataTable2 data={filteredData} columns={columns} />
           )}
       </Box>
     </VStack>

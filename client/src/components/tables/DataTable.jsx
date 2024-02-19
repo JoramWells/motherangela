@@ -41,9 +41,9 @@ const DataTable2 = ({
       <TableContainer
         h={isTableHeight && '700px'}
         overflowY="auto"
-        w="98%"
         mt={0}
         bgColor="white"
+        p={2}
       >
         <Table>
           {table.getHeaderGroups()
@@ -58,6 +58,7 @@ const DataTable2 = ({
                     position="relative"
                     whiteSpace="break-spaces"
                     bgColor="gray.50"
+
                   >
                     <HStack>
                       <Text fontSize="12px">
