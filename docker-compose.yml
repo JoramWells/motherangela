@@ -48,7 +48,7 @@ services:
   #     - huruma
 
   database:
-    image: postgres
+    image: postgres:alpine
     environment:
       POSTGRES_DB: "huruma2"
       POSTGRES_USER: "postgres"
@@ -245,7 +245,24 @@ services:
       # - kafka-2
 
     networks:
-      - huruma            
+      - huruma    
+
+  diseases-service:
+    build:
+      context: ./server/Diseases
+      dockerfile: Dockerfile
+    image: diseases-image
+    volumes:
+      - ./server/Diseases/:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 5013:5013
+    depends_on:
+      - database
+      # - kafka-2
+
+    networks:
+      - huruma               
   
       
   root-server:
@@ -297,6 +314,7 @@ services:
       - admission-service
       - appointment-service
       - charges-service
+      - diseases-service
       - patient-service
       - vitals-service
       - eligibility-service

@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 const { DataTypes } = require('sequelize');
-const sequelize = require('../db/connect');
+const sequelize = require('../../db/connect');
 
 const Diseases_ministry = sequelize.define('diseases_ministry', {
   ministry_disease_id: {

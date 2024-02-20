@@ -98,6 +98,7 @@ const getAllAppointments = async (req, res, next) => {
     console.log('fetching data..');
     next();
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };

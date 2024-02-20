@@ -2,14 +2,14 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 
-const Diseases_ministry = require('../models/diseaseMinistry.model');
+const Disease = require('../models/diseases/disease.model');
 
 // diseases.belongsTo(Patient_details, { foreignKey: 'patient_id', as: 'patient_details' });
 // diseases.hasMany(Patient_details, { as: 'patients', foreignKey: 'patient_id' });
 
-const addDiseaseMinistry = async (req, res, next) => {
+const addDisease = async (req, res, next) => {
   try {
-    const disease = await Diseases_ministry.create(req.body);
+    const disease = Disease.create(req.body);
     res.status(201).json(disease);
     next();
   } catch (error) {
@@ -17,23 +17,21 @@ const addDiseaseMinistry = async (req, res, next) => {
   }
 };
 
-const getAllDiseasesMinistry = async (req, res, next) => {
+const getAllDiseases = async (req, res, next) => {
   try {
-    const diseases = await Diseases_ministry.findAll();
+    const diseases = await Disease.findAll();
     res.json(diseases);
     next();
   } catch (error) {
-    console.log(error);
-
     res.status(500).json({ error: 'Internal Server Error' });
     next(error);
   }
 };
 
-const getDiseaseMinistryDetail = async (req, res, next) => {
+const getDiseaseDetail = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const disease = await Diseases_ministry.findOne({ });
+    const disease = await Disease.findOne({ });
     res.json(disease);
     next();
   } catch (error) {
@@ -41,10 +39,10 @@ const getDiseaseMinistryDetail = async (req, res, next) => {
   }
 };
 
-const editDiseaseMinistry = async (req, res, next) => {
+const editDisease = async (req, res, next) => {
   const { id, firstName } = req.body;
   try {
-    const user = await Diseases_ministry.findOne({
+    const user = await Disease.findOne({
       where: {
         id,
       },
@@ -56,10 +54,10 @@ const editDiseaseMinistry = async (req, res, next) => {
   }
 };
 
-const deleteDiseaseMinistry = async (req, res, next) => {
+const deleteDisease = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const results = await Diseases_ministry.destroy({
+    const results = await Disease.destroy({
       where: {
         disease_id: id,
       },
@@ -74,9 +72,9 @@ const deleteDiseaseMinistry = async (req, res, next) => {
 };
 
 module.exports = {
-  addDiseaseMinistry,
-  getAllDiseasesMinistry,
-  getDiseaseMinistryDetail,
-  editDiseaseMinistry,
-  deleteDiseaseMinistry,
+  addDisease,
+  getAllDiseases,
+  getDiseaseDetail,
+  editDisease,
+  deleteDisease,
 };

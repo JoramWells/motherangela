@@ -34,8 +34,6 @@ const maternityAntenatalProfileRoutes = require('./routes/maternityAntenatalProf
 const maternityProfileRoutes = require('./routes/maternityProfile.routes');
 const wardTypeRoutes = require('./routes/ward/wardType.routes');
 
-const diseaseRoutes = require('./routes/disease.routes');
-const diseaseMinistryRoutes = require('./routes/diseaseMinistry.routes');
 const creditPaymentRoutes = require('./routes/creditPayment.routes');
 const companyRoutes = require('./routes/companyDetails.routes');
 const medicationRoutes = require('./routes/medication/medication.routes');
@@ -101,8 +99,6 @@ app.use('/hospital-store', hospitalStoreRoutes);
 app.use('/maternity-antenatal-profile', maternityAntenatalProfileRoutes);
 app.use('/maternity-profile', maternityProfileRoutes);
 app.use('/ward-types', wardTypeRoutes);
-app.use('/disease', diseaseRoutes);
-app.use('/disease-ministry', diseaseMinistryRoutes);
 app.use('/credit-payment', creditPaymentRoutes);
 app.use('/company', companyRoutes);
 app.use('/medication', medicationRoutes);

@@ -1,18 +1,14 @@
-FROM node:18-alpine
+FROM node:16-alpine
 
 RUN mkdir -p /usr/src/app
-
 WORKDIR /usr/src/app
 
 COPY package.json ./
 
 RUN yarn install
 
-
 COPY . .
 
-EXPOSE 3000
+EXPOSE 5013
 
-ENV CHOKIDAR_USEPOLLING=true
-
-CMD ["yarn","start"]
+CMD [ "yarn", "start"]
