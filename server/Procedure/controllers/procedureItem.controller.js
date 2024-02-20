@@ -18,7 +18,7 @@ const addProcedureItem = async (req, res, next) => {
 const getAllProcedureItem = async (req, res, next) => {
   try {
     const procedures = await Procedure_item.findAll({
-      order: [['updated_at', 'DESC']],
+      // order: [['updated_at', 'DESC']],
       include: [
         {
           model: Procedure_detail,

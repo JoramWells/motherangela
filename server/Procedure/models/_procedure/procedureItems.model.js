@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-const { DataTypes, Sequelize } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../../db/connect');
 const Procedure_detail = require('./procedureDetails.model');
 
@@ -50,16 +50,16 @@ const ProcedureItem = sequelize.define('procedure_items', {
   allow_numerical_input_only: {
     type: DataTypes.STRING,
   },
-  created_at: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-  },
-  updated_at: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-  },
+  // created_at: {
+  //   type: DataTypes.DATE,
+  //   allowNull: false,
+  //   defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+  // },
+  // updated_at: {
+  //   type: DataTypes.DATE,
+  //   allowNull: false,
+  //   defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+  // },
 });
 
 ProcedureItem.belongsTo(Procedure_detail, { foreignKey: 'procedure_id' });

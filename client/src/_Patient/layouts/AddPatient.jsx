@@ -171,9 +171,9 @@ const AddPatient = () => {
       }
     }
 
-    if (!isLoading && !isLoadingCharges) {
-      navigate(-1);
-    }
+    // if (!isLoading && !isLoadingCharges) {
+    //   navigate(-1);
+    // }
   }, [data, addPersonalAccountCharge, cashInputValues,
     insuranceAccount, chargesInputValues2, patientID,
     chargesInputValues, searchParams, isLoading,
