@@ -1,10 +1,8 @@
 import {
   Box, HStack, VStack,
 } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import DepartmentTable from '../components/tables/DepartmentTable';
-import { getAllDepartments } from '../_reducers/departmentSlice';
+// import { getAllDepartments } from '../_reducers/departmentSlice';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import HeaderAction from '../components/HeaderAction';
 
@@ -16,18 +14,14 @@ const columns = [
 ];
 
 const Requisitions = () => {
-  const dispatch = useDispatch();
-
-  const { data } = useSelector((state) => state.departments);
+  // const { data } = useSelector((state) => state.departments);
+  const data = [];
   const subrowData = data
         && data.map((item) => ({
           ...item,
           subRows: [],
         }));
 
-  useEffect(() => {
-    dispatch(getAllDepartments());
-  }, [dispatch]);
   return (
     <VStack mt={10} w="full">
 

@@ -12,14 +12,13 @@ import { useNavigate } from 'react-router-dom';
 import moment from 'moment/moment';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
-import { getAllMaternityServices } from '../../_reducers/admMartenityServicesSlice';
+// import { getAllMaternityServices } from '../../_reducers/admMartenityServicesSlice';
 
 const MaternityServices = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.maternityServices);
-  console.log(data);
+  const data = [];
 
   const columns = useMemo(
     () => [
@@ -93,10 +92,6 @@ const MaternityServices = () => {
     // const fetchData = useCallback(()=>{
     //   dispatch(getAllPriceLists())
     // },[dispatch])
-
-  useEffect(() => {
-    dispatch(getAllMaternityServices());
-  }, [dispatch]);
 
   return (
     <VStack

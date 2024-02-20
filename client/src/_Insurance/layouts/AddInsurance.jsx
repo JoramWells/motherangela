@@ -14,7 +14,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { addInsurance } from '../../_reducers/insuranceSlice';
+// import { addInsurance } from '../../_reducers/insuranceSlice';
 
 const AddInsurance = () => {
   const [insuranceName, setInsuranceName] = useState('');
@@ -96,7 +96,7 @@ const AddInsurance = () => {
             size="lg"
             colorScheme="blue"
             w="full"
-            onClick={() => dispatch(addInsurance(inputValues))}
+            // onClick={() => dispatch(addInsurance(inputValues))}
           >
             {loading ? 'loading...' : 'Save'}
           </Button>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   Button,
   FormControl,
@@ -12,7 +13,6 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { addDepartment } from '../../_reducers/departmentSlice';
 
 const AddMaternityDewormingDetail = () => {
   const [departmentName, setDepartmentName] = useState('');
@@ -103,7 +103,7 @@ const AddMaternityDewormingDetail = () => {
           <Button
             size="md"
             colorScheme="blue"
-            onClick={() => dispatch(addDepartment(inputValues))}
+            // onClick={() => dispatch(addDepartment(inputValues))}
           >
             Save
           </Button>

@@ -13,63 +13,25 @@ import {
 } from 'react-router-dom';
 
 import Dashboard from './components/Dashboard';
-import PriceLists from './layouts/PriceLists';
 import Services from './layouts/Services';
-import AddService from './layouts/AddService';
-import AddSubItem from './layouts/AddSubItem';
-import PriceListDetail from './layouts/PriceListDetail';
-import Items from './layouts/Items';
-import AddItem from './layouts/AddItem';
-// import AddItemType from './layouts/AddItemType';
-import PriceListItems from './layouts/PriceListItems';
 import ItemType from './layouts/ItemType';
 import Stores from './_Stores/layouts/Stores';
-import Departments from './layouts/Departments';
-import AddDepartment from './layouts/AddDepartment';
-import DepartmentDetail from './layouts/DepartmentDetail';
-import Pharmaceuticals from './layouts/Pharmaceuticals';
-import AddPharmaceuticals from './layouts/AddPharceuticals';
-import WardPrice from './layouts/WardPrices';
 import Users from './_User/layout/Users';
 import Privileges from './layouts/Privileges';
-import GroupPrivileges from './layouts/GroupPrivileges';
-import GroupPrivilegesDetails from './layouts/GroupPrivilegesDetail';
 import Administration from './layouts/Administration';
-import Drugs from './layouts/Drugs';
-import Physiotherapy from './layouts/Physiotherapy';
-import AddPhysiotherapyItems from './layouts/AddPhysiotherapy';
 import DispensesPhysioTherapy from './layouts/DispensesPhysioTherapy';
-import AddDispensePhysioItem from './layouts/AddDispensePhysioItem';
 import Insurance from './_Insurance/layouts/Insurances';
 import AddInsurance from './_Insurance/layouts/AddInsurance';
 import UserTypes from './_User/layout/UserTypes';
-import AddUserType from './layouts/AddUserType';
-import DispenseDrugs from './layouts/DispenseDrugs';
-import AddDispenseDrugs from './layouts/AddDispenseDrugs';
-import Requisitions from './layouts/Requisitions';
-import AddRequisitions from './layouts/AddRequisitions';
-import MeasuringUnit from './layouts/MeasuringUnit';
-import AddMeasuringUnit from './layouts/AddMeasuringUnit';
-import ItemCategory from './layouts/ItemCategory';
-import AddItemCategory from './layouts/AddItemCategory';
 import Radiology from './_Radiology/layouts/Radiology';
 import NursingStation from './layouts/NursingStation';
-import Suppliers from './_Supplier/layouts/Suppliers';
-import AddSuppliers from './layouts/AddSuppliers';
-import SupplierClassification from './_Supplier/layouts/SupplierClassification';
-import AddSupplierClassification from './layouts/AddSupplierClassification';
-import SupplierClassificationDetail from './_Supplier/layouts/SupplierClassificationDetail';
 
-import SupplierDetail from './_Supplier/layouts/SupplierDetail';
-// import DoctorAdmission from './layouts/DoctorAdmission';
-import DoctorAdmissionBedAllocation from './layouts/DoctorAdmissionBedAllocation';
 import AddAdmissionCategory from './_Admission/layouts/AddAdmissionCategory';
 import AdmissionType from './_Admission/layouts/AdmissionType';
 import AdmissionBedAllocation from './_Admission/layouts/AdmissionBedAllocation';
 import HospitalStores from './layouts/HospitalStores';
 import WardType from './layouts/WardType';
-import AddWardType from './layouts/AddWardType';
-import ProceduresItems from './_Procedure/layouts/ProceduresItems';
+// import ProceduresItems from './_Procedure/layouts/ProceduresItems';
 // import DiseaseMinistry from './layouts/DiseaseMinistry';
 import Charges from './layouts/Charges';
 import ChargesDetail from './layouts/ChargesDetail';
@@ -78,7 +40,6 @@ import InsuranceServiceCostMapping from './_Insurance/layouts/InsuranceServiceCo
 import ConsultationTypes from './layouts/ConsultationTypes';
 import AccountingSuppliers from './layouts/AccountingSuppliers';
 import AccountingItem from './layouts/AccountingItem';
-import AddAllergies from './layouts/AddAllergies';
 import AddMaternityDeliveryDetails from './_Maternity/layouts/AddMaternityDeliveryDetails';
 import AddMaternityDewormingDetail from './_Maternity/layouts/AddMaternityDewormingDetail';
 import PayrollDeductions from './_Payroll/layouts/PayrollDeductions';
@@ -91,7 +52,6 @@ import PayrollEmployeeEarningRecords from './_Payroll/layouts/PayrollEmployeeEar
 import Medication from './_Medication/layouts/Medication';
 import Disease from './_Diseases/layouts/Disease';
 import DiseaseMinistry from './_Diseases/layouts/DiseaseMinistry';
-import AddPrescription from './_Medication/layouts/AddPrescription';
 import PatientReport from './_Patient/layouts/PatientReport';
 import AddPatientProcedure from './_Procedure/layouts/AddPatientProcedure';
 import AddRadiologyRequest from './_Radiology/layouts/AddRadiologyRequest';
@@ -128,12 +88,6 @@ const MedicationStockTake = lazy(() => import('./_Medication/layouts/MedicationS
 const PersonalAccountCharges = lazy(() => import('./_Charges/layouts/PersonalAccountCharges'));
 const PersonalAccountChargeDetail = lazy(() => import('./_Charges/layouts/PersonalAccountChargeDetail'));
 
-// Procedures
-const AddProcedureGroup = lazy(() => import('./_Procedure/layouts/AddProcedureGroup'));
-const AddProcedures = lazy(() => import('./_Procedure/layouts/AddProcedures'));
-const Procedures = lazy(() => import('./_Procedure/layouts/Procedures'));
-const ProcedureGroups = lazy(() => import('./_Procedure/layouts/ProcedureGroups'));
-
 // Doctor
 const Doctor = lazy(() => import('./_Doctor/layouts/Doctor'));
 
@@ -159,7 +113,6 @@ const Appointments = lazy(() => import('./_Appointment/layouts/Appointments'));
 const PharmacyRequest = lazy(() => import('./_Pharmacy/layouts/PharmacyRequest'));
 
 const AddVitals = lazy(() => import('./_VitalSigns/layouts/AddVitals'));
-const AppointmentDetail = lazy(() => import('./_Appointment/layouts/AppointmentDetail'));
 const Admission = lazy(() => import('./_Admission/layouts/Admission'));
 const AdmissionCategory = lazy(() => import('./_Admission/layouts/AdmissionCategory'));
 const AdmissionDetail = lazy(() => import('./_Admission/layouts/AdmissionDetail'));
@@ -174,7 +127,6 @@ const MaternityProfile = lazy(() => import('./_Maternity/layouts/MaternityProfil
 const MaternityServices = lazy(() => import('./_Maternity/layouts/MaternityServices'));
 const Homepage = lazy(() => import('./layouts/Homepage'));
 const PatientDetail = lazy(() => import('./_Patient/layouts/PatientDetail'));
-const MiscellaneousCharges = lazy(() => import('./layouts/MiscellaneousCharges'));
 const Wards = lazy(() => import('./layouts/Wards'));
 
 const UserDetail = lazy(() => import('./_User/layout/UserDetail'));
@@ -233,9 +185,6 @@ function App() {
             <Route path="/" element={<Homepage />} />
 
             <Route path="/administration" element={<Administration />} />
-            <Route path="/admin-drugs" element={<Drugs />} />
-            <Route path="/dispense-drugs" element={<DispenseDrugs />} />
-            <Route path="/add-dispense-drugs" element={<AddDispenseDrugs />} />
 
             <Route path="/accounting-suppliers" element={<AccountingSuppliers />} />
             <Route path="/accounting-items" element={<AccountingItem />} />
@@ -243,8 +192,6 @@ function App() {
             <Route path="/charts-of-account" element={<ChartOfAccounts />} />
             <Route path="/service-types" element={<ServiceTypes />} />
             <Route path="/consultation-credit-accounts" element={<ConsultationCreditAccounts />} />
-
-            <Route path="/bed-allocation" element={<DoctorAdmissionBedAllocation />} />
 
             <Route path="/view-cost-centre" element={<CostCentre />} />
 
@@ -276,7 +223,6 @@ function App() {
             <Route path="/add-patient" element={<AddPatient />} />
             <Route path="/patient-prescription/:id" element={<PatientPrescription />} />
             <Route path="/patient-detail/:id" element={<PatientDetail />} />
-            <Route path="/add-prescription/:id" element={<AddPrescription />} />
             <Route path="/patient-reports" element={<PatientReport />} />
             <Route path="/add-patient-procedure/:id" element={<AddPatientProcedure />} />
             <Route path="/confirm-patient-charges" element={<ConfirmPatientCharges />} />
@@ -307,65 +253,19 @@ function App() {
 
             {/* lab */}
 
-            <Route path="/miscellaneous-charges" element={<MiscellaneousCharges />} />
-
-            <Route path="/requisitions" element={<Requisitions />} />
-            <Route path="/add-requisitions" element={<AddRequisitions />} />
-
-            <Route path="/physiotherapy" element={<Physiotherapy />} />
-            <Route path="add-physiotherapy" element={<AddPhysiotherapyItems />} />
             <Route path="/dispenses-physiotherapy-items" element={<DispensesPhysioTherapy />} />
-            <Route path="/add-physio-item-dispense" element={<AddDispensePhysioItem />} />
-
-            <Route path="/admin-departments" element={<Departments />} />
 
             <Route path="/personal-account-charges" element={<PersonalAccountCharges />} />
             <Route path="/personal-account-charge-detail/:id" element={<PersonalAccountChargeDetail />} />
 
             <Route path="/appointments" element={<Appointments />} />
-            <Route path="/appointment-detail/:id" element={<AppointmentDetail />} />
             <Route path="/add-admission/:id" element={<AddAdmission />} />
-
-            <Route path="/suppliers" element={<Suppliers />} />
-            <Route path="/add-suppliers" element={<AddSuppliers />} />
-            <Route path="/supplier-detail/:id" element={<SupplierDetail />} />
-            <Route path="/supplier-classification" element={<SupplierClassification />} />
-            <Route path="/add-supplier-classification" element={<AddSupplierClassification />} />
-            <Route path="/supplier-classification-detail" element={<SupplierClassificationDetail />} />
-
-            <Route path="/admin-add-department" element={<AddDepartment />} />
-            <Route path="/department-detail/:id" element={<DepartmentDetail />} />
 
             <Route path="/nursing-station" element={<NursingStation />} />
             <Route path="/nursing-station-patient-queue" element={<PatientQueueNursingStation />} />
             <Route path="/triaged-patients" element={<PatientsTriaged />} />
             <Route path="/walkin-patient-queue" element={<WalkInPatientQueue />} />
             <Route path="/patient-visits" element={<PatientVisits />} />
-
-            <Route path="/add-allergies/:id" element={<AddAllergies />} />
-
-            <Route path="/procedures" element={<Procedures />} />
-            <Route path="/procedure-items" element={<ProceduresItems />} />
-            <Route path="/add-procedure-details" element={<AddProcedures />} />
-            <Route path="/procedure-groups" element={<ProcedureGroups />} />
-            <Route path="/add-procedure-group" element={<AddProcedureGroup />} />
-
-            <Route path="pharmaceuticals" element={<Pharmaceuticals />} />
-            <Route path="add-pharmaceuticals" element={<AddPharmaceuticals />} />
-
-            <Route path="measuring-unit" element={<MeasuringUnit />} />
-            <Route path="add-measuring-unit" element={<AddMeasuringUnit />} />
-
-            <Route path="/price-lists" element={<PriceLists />} />
-            <Route path="/services-price-list" element={<PriceLists />} />
-
-            <Route path="/price-list-items" element={<PriceListItems />} />
-            <Route path="/pharmaceutical-price-list" element={<PriceListItems />} />
-
-            <Route path="/pricelist-detail/:id" element={<PriceListDetail />} />
-
-            <Route path="/items" element={<Items />} />
-            <Route path="/add-item" element={<AddItem />} />
 
             {/* radiology */}
             <Route path="/radiology-requests" element={<Radiology />} />
@@ -374,15 +274,10 @@ function App() {
             <Route path="/add-radiology-results/:id" element={<AddRadiologyResults />} />
             <Route path="/radiology-visits" element={<RadiologyVisits />} />
 
-            <Route path="/add-subitem" element={<AddSubItem />} />
             <Route path="/item-type" element={<ItemType />} />
-            <Route path="/item-category" element={<ItemCategory />} />
-            <Route path="/add-item-category" element={<AddItemCategory />} />
 
             <Route path="/wards" element={<Wards />} />
             <Route path="/add-ward" element={<AddWard />} />
-            <Route path="/add-ward-type" element={<AddWardType />} />
-            <Route path="/ward-prices" element={<WardPrice />} />
             <Route path="/ward-type" element={<WardType />} />
 
             <Route path="/stores" element={<Stores />} />
@@ -405,7 +300,6 @@ function App() {
             <Route path="/add-maternity-delivery-details/:id" element={<AddMaternityDeliveryDetails />} />
             <Route path="/add-maternity-deworming-details/:id" element={<AddMaternityDewormingDetail />} />
 
-            <Route path="/add-service" element={<AddService />} />
             <Route path="/admin-services" element={<Services />} />
 
             <Route path="/admin-users" element={<Users />} />
@@ -413,11 +307,8 @@ function App() {
             <Route path="/admin-add-user" element={<AddUser />} />
 
             <Route path="/admin-user-type" element={<UserTypes />} />
-            <Route path="/admin-add-user-type" element={<AddUserType />} />
 
             <Route path="/admin-privileges" element={<Privileges />} />
-            <Route path="/admin-group-privileges" element={<GroupPrivileges />} />
-            <Route path="/admin-group-privileges-details/:id" element={<GroupPrivilegesDetails />} />
 
             <Route path="/hospital-stores" element={<HospitalStores />} />
 
