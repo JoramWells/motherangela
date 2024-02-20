@@ -19,6 +19,7 @@ import Select from 'react-select';
 import { useGetAllALabsQuery } from '../api/alab.api';
 import { selectStyles } from '../../utils/styles';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
+import CustomInput from '../../components/Forms/CustomInput';
 
 const AddLabTest = () => {
   const [departmentName, setDepartmentName] = useState('');
@@ -37,30 +38,32 @@ const AddLabTest = () => {
   return (
     <VStack
       w="full"
-      h="100vh"
-      alignItems="center"
       bgColor="gray.50"
-      mt="65px"
-      p={4}
+      mt="50px"
+      p={3}
     >
       <BreadCrumbNav />
-      <Box
-        w="50%"
-        mt={3}
+      <VStack
+        w="45%"
         bgColor="white"
         // boxShadow="lg"
         border="1px"
         borderColor="gray.200"
         p={5}
         rounded="lg"
+        spacing="1.5rem"
       >
         <HStack
           w="full"
           justifyContent="space-between"
-          mb={5}
         >
+          <IconButton
+            size="sm"
+          >
+            <FaArrowLeft />
+          </IconButton>
           <Text
-            fontSize="xl"
+            fontSize="16px"
             fontWeight="semibold"
             color="gray.700"
           >
@@ -68,11 +71,11 @@ const AddLabTest = () => {
           </Text>
         </HStack>
 
-        <Divider mb={5} />
-
         {/* select */}
         <FormControl>
-          <FormLabel>
+          <FormLabel
+            fontSize="14px"
+          >
             Select Lab Test
           </FormLabel>
           <Select
@@ -81,80 +84,36 @@ const AddLabTest = () => {
           />
         </FormControl>
         {/* sub item */}
-        <FormControl mt={5}>
-          <FormLabel fontSize="lg">Sub-Test Description</FormLabel>
+        <FormControl>
+          <FormLabel fontSize="14px">Sub-Test Description</FormLabel>
           <Input
-            size="lg"
-            // placeholder="Enter Department Name"
-            value={departmentName}
-            onChange={(e) => setDepartmentName(e.target.value)}
-          />
-        </FormControl>
-        {/* sub-test */}
-        <FormControl mt={5}>
-          <FormLabel fontSize="lg">Normal Values</FormLabel>
-          <Input
-            size="lg"
             // placeholder="Enter Department Name"
             value={departmentName}
             onChange={(e) => setDepartmentName(e.target.value)}
           />
         </FormControl>
 
-        <FormControl mt={5}>
-          <FormLabel fontSize="lg">
-            Normal Values
-            {' '}
-            <span style={{
-              color: 'gray',
-            }}
-            >
-              (Start Values)
-
-            </span>
-          </FormLabel>
-          <Input
-            size="lg"
-            // placeholder="Enter Department Name"
-            value={departmentName}
-            onChange={(e) => setDepartmentName(e.target.value)}
-          />
-        </FormControl>
+        <CustomInput
+          label="Normal Values"
+        />
 
         {/* end value */}
-        <FormControl mt={5}>
-          <FormLabel fontSize="lg">
-            Normal Values
-            {' '}
-            <span style={{
-              color: 'gray',
-            }}
-            >
-              (End Values)
 
-            </span>
-          </FormLabel>
-          <Input
-            size="lg"
-            // placeholder="Enter Department Name"
-            value={departmentName}
-            onChange={(e) => setDepartmentName(e.target.value)}
-          />
-        </FormControl>
+        <CustomInput
+          label="Normal Value (Start)"
+        />
+        <CustomInput
+          label="Normal Value (End)"
+        />
 
-        <HStack mt={5} w="full" justifyContent="end">
-          <Button>
-            Cancel
-          </Button>
-          <Button
-            size="md"
-            colorScheme="blue"
-            // onClick={() => dispatch(addDepartment(inputValues))}
-          >
-            Save
-          </Button>
-        </HStack>
-      </Box>
+        <Button
+          size="md"
+          w="full"
+          colorScheme="blue"
+        >
+          Save
+        </Button>
+      </VStack>
     </VStack>
   );
 };
