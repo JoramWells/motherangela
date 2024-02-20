@@ -23,6 +23,7 @@ import { useGetAllPriceListItemsQuery } from '../../api/pricelListItems.api';
 import { useGetAllAccountingCostCentresQuery } from '../../api/accounts/accountingCostCentre.api';
 import { useGetAllAccountingStoresQuery } from '../../api/accounts/accountingStore.api';
 import { useGetAllSpecimenTypesQuery } from '../api/specimenType.api';
+import { useGetProcedureItemQuery } from '../../api/procedureItem.api';
 
 const LabRequestsSample = () => {
   const { id } = useParams();
@@ -82,6 +83,11 @@ const LabRequestsSample = () => {
     { value: 4, label: 'NEGATIVE' },
     { value: 5, label: 'REACTIVE' },
   ];
+  const [searchParams] = useSearchParams();
+  const procedureItemID = searchParams.get('procedure_id');
+
+  const { data: procedureItemData } = useGetProcedureItemQuery(procedureItemID);
+  console.log(procedureItemData);
 
   const costCentreOptions = useCallback(() => costCentreData?.map((item) => ({
     value: item.cost_centre_id, label: item.cost_centre_description,
@@ -116,7 +122,6 @@ const LabRequestsSample = () => {
   const categoryOptions = medicationCategoryCallback();
   medicationOptions = filteredMedicationOptions();
 
-  const [searchParams] = useSearchParams();
   const patient_id = searchParams.get('patient_id');
 
   const inputValues = {

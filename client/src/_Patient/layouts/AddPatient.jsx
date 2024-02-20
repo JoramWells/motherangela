@@ -16,6 +16,7 @@ import StepperNav from '../components/Nav/StepperNav';
 import PersonalDetail from '../components/PersonalDetail';
 import NextOfKin from '../components/PatientForm/NextOfKin';
 import { useAddPersonalAccountChargeMutation } from '../../api/personalAccountCharges.api';
+import StepperNavButtons from '../components/Nav/StepperNavButtons';
 
 const sunrise = moment('6:00 a.m', 'h:mm a');
 const sunset = moment('6:00 p.m', 'h:mm a');
@@ -35,7 +36,18 @@ const AddPatient = () => {
   const [appointmentID, setAppointmentID] = useState('');
 
   const [activeStep, setActiveStep] = useState(1);
-  const [account_type_id, setAccountTypeID] = useState('');
+  const [first_name, setFirstName] = useState('');
+  const [last_name, setLastName] = useState('');
+  const [middle_name, setMiddleName] = useState('');
+  const [dob, setDOB] = useState('');
+  const [email, setEmail] = useState('');
+  const [nhif_no, setNHIF] = useState('');
+  const [patient_gender, setPatientGender] = useState('');
+  const [id_number, setID] = useState('');
+  const [residence, setResidence] = useState('');
+  const [next_of_kin, setNextOfKin] = useState('');
+  const [next_of_kin_name, setNextOfKinName] = useState('');
+  const [next_of_kin_cell_phone, setNextOfKinCellPhone] = useState('');
   const { id } = useParams();
 
   const steps = [
@@ -82,11 +94,24 @@ const AddPatient = () => {
       account_type_id: accountType,
       consultation_type: '28',
       insuranceAccount,
-      patient_gender: personalData.patient_gender?.value,
-      ...personalData,
-      ...nextOfKinData,
+      first_name,
+      middle_name,
+      last_name,
+      dob,
+      email,
+      nhif_no,
+      patient_gender: patient_gender?.value,
+      id_number,
+      residence: residence?.value,
+      next_of_kin: next_of_kin?.value,
+      next_of_kin_name,
+      next_of_kin_cell_phone,
     },
-  ], [accountType, personalData, nextOfKinData, insuranceAccount]);
+  ], [accountType, insuranceAccount, first_name,
+    middle_name, last_name, dob, email, nhif_no, id_number,
+    next_of_kin_name, next_of_kin_cell_phone, patient_gender?.value,
+    residence?.value, next_of_kin?.value,
+  ]);
 
   const [addPatient, { isLoading, data }] = useAddPatientMutation();
   const [addPersonalAccountCharge,
@@ -197,20 +222,36 @@ const AddPatient = () => {
         {/* PERSONAL DETAILS */}
         {activeStep === 1 && (
         <PersonalDetail
-          handleNext={handleNext}
-          handleBack={handleBack}
-          setPersonalData={setPersonalData}
-          activeStep={activeStep}
+          first_name={first_name}
+          last_name={last_name}
+          middle_name={middle_name}
+          dob={dob}
+          email={email}
+          nhif_no={nhif_no}
+          patient_gender={patient_gender}
+          id_number={id_number}
+          residence={residence}
+          setFirstName={setFirstName}
+          setLastName={setLastName}
+          setMiddleName={setMiddleName}
+          setDOB={setDOB}
+          setEmail={setEmail}
+          setNHIF={setNHIF}
+          setPatientGender={setPatientGender}
+          setID={setID}
+          setResidence={setResidence}
         />
         )}
 
         {/* NEXT OF KIN */}
         {activeStep === 2 && (
         <NextOfKin
-          handleNext={handleNext}
-          handleBack={handleBack}
-          setNextOfKinData={setNextOfKinData}
-          activeStep={activeStep}
+          next_of_kin={next_of_kin}
+          setNextOfKin={setNextOfKin}
+          next_of_kin_name={next_of_kin_name}
+          setNextOfKinName={setNextOfKinName}
+          next_of_kin_cell_phone={next_of_kin_cell_phone}
+          setNextOfKinCellPhone={setNextOfKinCellPhone}
         />
         )}
 
@@ -240,6 +281,13 @@ const AddPatient = () => {
 
           </Button>
         )}
+
+        {/* stepper navigation footer */}
+        <StepperNavButtons
+          handleBack={handleBack}
+          activeStep={activeStep}
+          handleNext={handleNext}
+        />
 
       </Box>
     </VStack>

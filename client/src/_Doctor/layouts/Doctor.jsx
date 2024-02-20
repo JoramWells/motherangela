@@ -5,7 +5,7 @@
 import {
   Avatar,
   Box,
-  Button, HStack,
+  Button, ButtonGroup, HStack,
   Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack,
 } from '@chakra-ui/react';
 import {
@@ -26,11 +26,12 @@ import PatientDetailAppointment from '../../_Patient/layouts/PatientDetailAppoin
 import PatientDetailAdmission from '../../_Patient/layouts/PatientDetailAdmission';
 import AppointmentsTab from '../../_Appointment/components/AppointmentsTab';
 import ProcedureTab from '../../_Procedure/components/ProcedureTab';
+import CustomSelect from '../../components/Forms/CustomSelect';
 
 const tabList = [
   { id: nanoid(), text: 'Admissions' },
   { id: nanoid(), text: 'Appointments' },
-  { id: nanoid(), text: 'Bill Exclusion' },
+  { id: nanoid(), text: 'Diagnosis' },
   { id: nanoid(), text: 'Internal Requests' },
   { id: nanoid(), text: 'Procedures' },
   { id: nanoid(), text: 'Vital Signs' },
@@ -88,6 +89,35 @@ const Doctor = () => {
       </HStack>
 
       {/*  */}
+
+      <HStack
+        w="full"
+        justifyContent="flex-end"
+      >
+        {/* <CustomSelect
+          label="Clinic Type"
+        /> */}
+        <ButtonGroup>
+          <Button
+            size="sm"
+          >
+            Bill Exclusion
+          </Button>
+          <Button
+            size="sm"
+          >
+            Clinic Type
+          </Button>
+          <Button
+            size="sm"
+            bgColor="blue.700"
+            color="white"
+          >
+            Save
+          </Button>
+        </ButtonGroup>
+      </HStack>
+
       <Tabs
         bgColor="white"
         color="gray.500"
@@ -134,7 +164,7 @@ const Doctor = () => {
 
           {/* bill exclusion panel */}
           <TabPanel>
-            <Text>Bill Exclusion</Text>
+            <Text>Diagnosis</Text>
           </TabPanel>
 
           {/* internal lab requests panel */}

@@ -75,10 +75,13 @@ const InternalLabRequestsDetail = () => {
     },
     {
       header: 'Action',
-      cell: () => (
+      cell: (props) => (
         <Button
           size="xs"
-          onClick={() => navigate(`/lab-request-sample/${id}`)}
+          onClick={() => navigate({
+            pathname: `/lab-request-sample/${id}`,
+            search: `?procedure_id=${props.row.original.procedure_id}`,
+          })}
         >
           Collect Sample
         </Button>

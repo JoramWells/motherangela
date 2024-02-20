@@ -124,7 +124,7 @@ const AddLabTest = () => {
           />
         </FormControl>
         {/* sub item */}
-        {procedureItemData
+        {procedureItemData || id
           ? (
             <CustomInput
               label="Sub-Test Description"
@@ -167,7 +167,7 @@ const AddLabTest = () => {
           onChange={setNormalValuesEnd}
         />
 
-        {id ? (
+        {id !== 'null' ? (
           <HStack
             w="full"
             justifyContent="flex-end"

@@ -15,11 +15,13 @@ const StepperNavButtons = ({
 
     </Button>
     <Button
-      type="submit"
+      // type="submit"
       size="sm"
+      onClick={() => handleNext()}
       // rightIcon={<Fa}
     >
-      Next
+
+      {activeStep === 3 ? 'Complete' : 'Next'}
 
     </Button>
     {/* {activeStep === 4 ? (

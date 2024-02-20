@@ -36,7 +36,8 @@ const nextOfKinOPtions = [
 ];
 // hospital details
 const NextOfKin = ({
-  handleNext, setNextOfKinData, handleBack, activeStep,
+  next_of_kin, setNextOfKin, next_of_kin_name, setNextOfKinName,
+  next_of_kin_cell_phone, setNextOfKinCellPhone,
 }) => {
   const { id } = useParams();
 
@@ -48,85 +49,61 @@ const NextOfKin = ({
 
   return (
 
-    <Formik
-      initialValues={initialValues}
-      onSubmit={(values, { setSubmitting }) => {
-        setNextOfKinData(values);
-        handleNext();
-        setSubmitting(false);
-      }}
+    <VStack
+      bgColor="white"
+      spacing={8}
     >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-        setFieldValue,
-      }) => (
-        <form onSubmit={handleSubmit}>
-          <VStack
-            bgColor="white"
-            spacing={8}
-          >
-            <FormControl>
-              <FormLabel>Next of Kin</FormLabel>
-              <Select
-                name="next_of_kin"
+      <FormControl>
+        <FormLabel>Next of Kin</FormLabel>
+        <Select
+          name="next_of_kin"
                 // styles={customStyles}
-                options={nextOfKinOPtions}
-                value={values.next_of_kin}
-                onChange={(kin) => setFieldValue('next_of_kin', kin)}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Next of Kin Full Name</FormLabel>
-              <Input
-                name="next_of_kin_name"
+          options={nextOfKinOPtions}
+          value={next_of_kin}
+          onChange={(kin) => setNextOfKin(kin)}
+        />
+      </FormControl>
+      <FormControl>
+        <FormLabel>Next of Kin Full Name</FormLabel>
+        <Input
+          name="next_of_kin_name"
                 // size="lg"
-                onChange={handleChange}
-                value={values.next_of_kin_name}
-              />
-            </FormControl>
+          onChange={(e) => setNextOfKinName(e.target.value)}
+          value={next_of_kin_name}
+        />
+      </FormControl>
 
-            <FormControl>
-              <FormLabel>Next of Kin Phone Number</FormLabel>
-              <Input
-                name="next_of_kin_cell_phone"
+      <FormControl>
+        <FormLabel>Next of Kin Phone Number</FormLabel>
+        <Input
+          name="next_of_kin_cell_phone"
                 // size="lg"
-                onChange={handleChange}
-                value={values.next_of_kin_cell_phone}
-              />
-            </FormControl>
+          onChange={(e) => setNextOfKinCellPhone(e.target.value)}
+          value={next_of_kin_cell_phone}
+        />
+      </FormControl>
+    </VStack>
 
-            {/* stepper nav buttons */}
-            <StepperNavButtons
-              handleBack={handleBack}
-              activeStep={activeStep}
-            />
-          </VStack>
-
-        </form>
-      )}
-    </Formik>
   );
 };
 
 NextOfKin.propTypes = {
-  activeStep: PropTypes.number,
-  handleNext: PropTypes.func,
-  handleBack: PropTypes.func,
-  setNextOfKinData: PropTypes.func,
+  next_of_kin: PropTypes.string,
+  next_of_kin_name: PropTypes.string,
+  next_of_kin_cell_phone: PropTypes.string,
+  setNextOfKin: PropTypes.func,
+  setNextOfKinName: PropTypes.func,
+  setNextOfKinCellPhone: PropTypes.func,
 
 };
 
 NextOfKin.defaultProps = {
-  activeStep: 1,
-  handleNext: () => { },
-  handleBack: () => { },
-  setNextOfKinData: () => { },
+  next_of_kin: '',
+  next_of_kin_name: '',
+  next_of_kin_cell_phone: '',
+  setNextOfKin: () => {},
+  setNextOfKinName: () => {},
+  setNextOfKinCellPhone: () => {},
 
 };
 

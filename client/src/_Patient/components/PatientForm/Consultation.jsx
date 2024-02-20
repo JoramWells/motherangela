@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { FormControl, FormLabel, VStack } from '@chakra-ui/react';
 import Select from 'react-select';
-import { useGetAllConsultationTypesQuery } from '../../../api/consultationType.api';
+import { useGetAllConsultationTypesQuery } from '../../../api/consultation/consultationType.api';
 
 const appointmentCategoryOptions = [
   { value: '1', label: 'General Doctor Appointment' },

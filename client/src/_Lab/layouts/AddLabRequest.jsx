@@ -14,7 +14,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import { useAddPersonalAccountChargeMutation } from '../../api/personalAccountCharges.api';
 import { useAddInternalLabRequestMutation } from '../../api/internalLabRequests.api';
-import { useGetProcedureItemQuery } from '../../api/procedureItem.api';
+import { useGetProceduresQuery } from '../api/procedureDetails.api';
 
 const selectStyles = {
   control: (provided, state) => ({
@@ -47,13 +47,17 @@ const AddLabRequest = () => {
   const [addPersonalAccountCharge,
     { isLoading: isLoadingCharges }] = useAddPersonalAccountChargeMutation();
 
-  const { data: procedureData } = useGetProcedureItemQuery();
+  // const { data: procedureData } = useGetProcedureItemQuery();
+  const { data: proceduresData } = useGetProceduresQuery();
 
   const patientID = searchParams.get('patient_id');
 
-  const procedureCallback = useCallback(() => procedureData?.map((item) => (
+  const filteredData = useCallback(() => proceduresData?.filter((item) => item.procedure_category?.category_name.toLowerCase().includes('lab tests' || 'lab procedures')), [proceduresData]);
+  console.log(filteredData());
+
+  const procedureCallback = useCallback(() => filteredData()?.map((item) => (
     { value: item.procedure_id, label: item.procedure_name, cost: item.procedure_cost }
-  )), [procedureData]);
+  )), [filteredData]);
 
   const procedureOptions = procedureCallback();
 

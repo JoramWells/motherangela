@@ -1,30 +1,19 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 import {
-  FormControl, FormLabel, HStack, IconButton, Input, VStack,
+  FormControl, FormLabel, HStack, Input, VStack,
 } from '@chakra-ui/react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { useParams } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa';
 import StepperNavButtons from './Nav/StepperNavButtons';
-import { useGetPatientQuery } from '../../api/patients.api';
 import CustomInput from './CustomInput';
 
-const customStyles = {
-  control: (provided, state) => ({
-    ...provided,
-    minHeight: '45px',
-    height: '45px',
-  }),
-  input: (provided) => ({
-    ...provided,
-  }),
-};
-
 const PersonalDetail = ({
-  handleNext, handleBack, activeStep, setPersonalData,
+  first_name, setFirstName, last_name, setLastName, middle_name, setMiddleName,
+  dob, setDOB, email, setEmail, nhif_no, setNHIF, patient_gender, setPatientGender,
+  id_number, setID, residence, setResidence,
 }) => {
   const residenceOptions = [
     { value: 'Nanyuki', label: 'Nanyuki' },
@@ -36,185 +25,170 @@ const PersonalDetail = ({
     { value: 'FEMALE', label: 'FEMALE' },
   ];
 
-  const initialValues = {
-    first_name: '',
-    last_name: '',
-    middle_name: '',
-    dob: '',
-    email: '',
-    nhif_no: '',
-    patient_gender: { value: 'MALE', label: 'MALE' },
-    id_number: '',
-    residence: '',
-  };
-
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={(values, { setSubmitting }) => {
-        setPersonalData(values);
-        handleNext();
-        setSubmitting(false);
-      }}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-        setFieldValue,
-      }) => (
-        <form onSubmit={handleSubmit}>
-          <VStack spacing={[6, 6, 6, 6, 4, 6]}>
-            {/* <IconButton>
+    <VStack spacing={[6, 6, 6, 6, 4, 6]}>
+      {/* <IconButton>
               <FaSearch />
             </IconButton> */}
 
-            <HStack w="full">
-              <CustomInput
-                label="Old Reference Number"
-              />
+      <HStack w="full">
+        <CustomInput
+          label="Old Reference Number"
+        />
 
-              <CustomInput
-                label="In-Patient File Number"
-              />
+        <CustomInput
+          label="In-Patient File Number"
+        />
 
-            </HStack>
-            <HStack w="full">
+      </HStack>
+      <HStack w="full">
 
-              <CustomInput
-                label="First Name"
-                name="first_name"
-                value={values.first_name}
-                handleChange={handleChange}
-              />
+        <CustomInput
+          label="First Name"
+          name="first_name"
+          value={first_name}
+          handleChange={setFirstName}
+        />
 
-              <CustomInput
-                label="Second Name"
-                name="middle_name"
-                value={values.middle_name}
-                handleChange={handleChange}
-              />
+        <CustomInput
+          label="Second Name"
+          name="middle_name"
+          value={middle_name}
+          handleChange={setMiddleName}
+        />
 
-              <CustomInput
-                label="Enter Last Name"
-                name="last_name"
-                value={values.last_name}
-                handleChange={handleChange}
-              />
+        <CustomInput
+          label="Enter Last Name"
+          name="last_name"
+          value={last_name}
+          handleChange={setLastName}
+        />
 
-            </HStack>
+      </HStack>
 
-            {/* category */}
-            <FormControl>
-              <FormLabel
-                fontSize="14px"
+      {/* category */}
+      <FormControl>
+        <FormLabel
+          fontSize="14px"
+        >
+          DOB
 
-              >
-                DOB
+        </FormLabel>
+        <Input
+          name="dob"
+          type="date"
+          onChange={(e) => setDOB(e.target.value)}
+          value={dob}
+        />
+      </FormControl>
 
-              </FormLabel>
-              <Input
-                name="dob"
-                type="date"
-                onChange={handleChange}
-                value={values.dob}
-              />
-            </FormControl>
+      {/* item code */}
+      <FormControl>
+        <FormLabel
+          fontSize="14px"
+        >
+          Select Gender
 
-            {/* item code */}
-            <FormControl>
-              <FormLabel
-                fontSize="14px"
+        </FormLabel>
+        <Select
+          name="patient_gender"
+          options={genderOptions}
+          value={patient_gender}
+          onChange={(val) => setPatientGender(val)}
+        />
 
-              >
-                Select Gender
+      </FormControl>
 
-              </FormLabel>
-              <Select
-                name="patient_gender"
-                options={genderOptions}
-                value={values.patient_gender}
-                onChange={(val) => setFieldValue('patient_gender', val)}
-              />
+      <HStack
+        w="full"
+      >
 
-            </FormControl>
+        <CustomInput
+          name="id_number"
+          value={id_number}
+          label="ID No."
+          handleChange={setID}
+        />
 
-            <HStack
-              w="full"
-            >
-
-              <CustomInput
-                name="id_number"
-                value={values.id_number}
-                label="ID No."
-                handleChange={handleChange}
-              />
-
-              <CustomInput
+        <CustomInput
                 // type="email"
-                name="email"
-                label="Enter Email Address"
-                value={values.email}
-                handleChange={handleChange}
-              />
-            </HStack>
+          name="email"
+          label="Enter Email Address"
+          value={email}
+          handleChange={setEmail}
+        />
+      </HStack>
 
-            <FormControl>
-              <FormLabel
-                fontSize="14px"
+      <FormControl>
+        <FormLabel
+          fontSize="14px"
+        >
+          Select Residence
 
-              >
-                Select Residence
+        </FormLabel>
+        <Select
+          name="residence"
+          options={residenceOptions}
+          value={residence}
+          onChange={(opt) => setResidence(opt)}
+        />
 
-              </FormLabel>
-              <Select
-                name="residence"
-                options={residenceOptions}
-                value={values.residence}
-                onChange={(opt) => setFieldValue('residence', opt)}
-              />
+      </FormControl>
 
-            </FormControl>
+      <CustomInput
+        name="nhif_no"
+        label="NHIF NO."
+        value={nhif_no}
+        handleChange={setNHIF}
+      />
 
-            <CustomInput
-              name="nhif_no"
-              label="NHIF NO."
-              value={values.nhif_no}
-              handleChange={handleChange}
-            />
-
-            {/* stepper navigation footer */}
-            <StepperNavButtons
-              handleBack={handleBack}
-              activeStep={activeStep}
-            />
-          </VStack>
-
-        </form>
-      )}
-    </Formik>
+    </VStack>
   );
 };
 
 PersonalDetail.propTypes = {
-  activeStep: PropTypes.number,
+  first_name: PropTypes.string,
+  last_name: PropTypes.string,
+  middle_name: PropTypes.string,
+  dob: PropTypes.string,
+  email: PropTypes.string,
+  nhif_no: PropTypes.string,
+  patient_gender: PropTypes.string,
+  id_number: PropTypes.string,
+  residence: PropTypes.string,
 
-  handleNext: PropTypes.func,
-  handleBack: PropTypes.func,
-  setPersonalData: PropTypes.func,
+  setFirstName: PropTypes.func,
+  setLastName: PropTypes.func,
+  setMiddleName: PropTypes.func,
+  setDOB: PropTypes.func,
+  setEmail: PropTypes.func,
+  setNHIF: PropTypes.func,
+  setPatientGender: PropTypes.func,
+  setID: PropTypes.func,
+  setResidence: PropTypes.func,
 
 };
 
 PersonalDetail.defaultProps = {
-  activeStep: 1,
+  first_name: '',
+  last_name: '',
+  middle_name: '',
+  dob: '',
+  email: '',
+  nhif_no: '',
+  patient_gender: '',
+  id_number: '',
+  residence: '',
 
-  handleNext: () => { },
-  handleBack: () => { },
-  setPersonalData: () => { },
+  setFirstName: () => {},
+  setLastName: () => {},
+  setMiddleName: () => {},
+  setDOB: () => {},
+  setEmail: () => {},
+  setNHIF: () => {},
+  setPatientGender: () => {},
+  setID: () => {},
+  setResidence: () => {},
 
 };
 export default PersonalDetail;

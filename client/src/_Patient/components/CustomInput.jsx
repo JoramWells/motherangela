@@ -18,7 +18,7 @@ const CustomInput = ({
       // placeholder="Enter First Name"
       size={['md', 'md', 'md', 'md', 'sm', 'md']}
       value={value}
-      onChange={handleChange}
+      onChange={(e) => handleChange(e.target.value)}
     />
 
   </FormControl>
