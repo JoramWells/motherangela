@@ -8,6 +8,7 @@ import {
 import { FaBoxOpen, FaEdit, FaTrash } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment/moment';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
 import { useGetProcedureItemsQuery } from '../../api/procedureItem.api';
@@ -40,6 +41,12 @@ const LabTemplates = () => {
         header: 'Normal Values',
         accessorKey: 'normal_values',
         cell: (props) => <Text>{props.getValue()}</Text>,
+
+      },
+      {
+        header: 'Updated',
+        accessorKey: 'updated_at',
+        cell: (props) => <Text>{moment(props.getValue()).format('ll')}</Text>,
 
       },
       {

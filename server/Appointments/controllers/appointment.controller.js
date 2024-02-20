@@ -8,6 +8,7 @@ const Appointments2 = require('../models/_appointment/appointments2.models');
 const Patient = require('../models/patient/patients.model');
 const InsuranceDetail = require('../models/insurance/insuranceDetail.model');
 const Users = require('../models/user/user.model');
+const VitalSigns = require('../models/vitals/vitalSigns.model');
 // const Patient = require('../../Patients/models/patient2.models');
 
 // const kafka = new Kafka({
@@ -84,6 +85,10 @@ const getAllAppointments = async (req, res, next) => {
           model: Users,
           attributes: ['full_name'],
         },
+        {
+          model:VitalSigns,
+          attributes:['temperature']
+        }
       ],
     });
 

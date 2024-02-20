@@ -78,7 +78,7 @@ const Procedure_detail = sequelize.define('procedure_details', {
   },
 });
 
-Procedure_detail.belongsTo(ProcedureCategory,{foreignKey:'procedure_category_id'})
+Procedure_detail.belongsTo(ProcedureCategory, { foreignKey: 'procedure_category_id' });
 
 // sequelize.sync().then(() => {
 //   console.log('Book table created');

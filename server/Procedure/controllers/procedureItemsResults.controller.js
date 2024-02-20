@@ -2,7 +2,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable camelcase */
 
-const Procedure_item_result = require('../../models/procedure/procedureItemResults.model');
+const Procedure_item_result = require('../models/_procedure/procedureItemResults.model');
 
 const addProcedureItemResults = async (req, res, next) => {
   try {

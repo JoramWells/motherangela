@@ -18,13 +18,14 @@ const addProcedureItem = async (req, res, next) => {
 const getAllProcedureItem = async (req, res, next) => {
   try {
     const procedures = await Procedure_item.findAll({
-      include:[
+      order: [['updated_at', 'DESC']],
+      include: [
         {
-          model:Procedure_detail,
-          attributes:['procedure_name']
-        }
-      ]
-  });
+          model: Procedure_detail,
+          attributes: ['procedure_name'],
+        },
+      ],
+    });
     res.json(procedures);
     next();
   } catch (error) {
@@ -44,9 +45,9 @@ const getProcedureItemById = async (req, res, next) => {
       include: [
         {
           model: Procedure_detail,
-          attributes: ['procedure_id','procedure_name']
-        }
-      ]
+          attributes: ['procedure_id', 'procedure_name'],
+        },
+      ],
     });
     res.json(procedure);
   } catch (error) {
@@ -55,21 +56,28 @@ const getProcedureItemById = async (req, res, next) => {
 };
 
 const editProcedureItem = async (req, res, next) => {
-  const {id} = req.params;
-  const { procedure_id,
-    procedure_item_description } = req.body;
+  const { id } = req.params;
+  const {
+    procedure_id,
+    procedure_item_description,
+    normal_values,
+    normal_values_start,
+    normal_values_end,
+  } = req.body;
   try {
     const procedure = await Procedure_item.findOne({
       where: {
-        procedure_item_id:id,
+        procedure_item_id: id,
       },
     });
     procedure.procedure_id = procedure_id;
     procedure.procedure_item_description = procedure_item_description;
-    procedure.procedure_item_description = procedure_item_description;
-    procedure.procedure_item_description = procedure_item_description;
-    procedure.procedure_item_description = procedure_item_description;
-    return procedure.save();
+    procedure.normal_values = normal_values;
+    procedure.normal_values_start = normal_values_start;
+    procedure.normal_values_end = normal_values_end;
+    procedure.save();
+    res.json(procedure);
+    next();
   } catch (error) {
     console.log(error);
     next(error);

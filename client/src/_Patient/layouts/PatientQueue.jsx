@@ -102,14 +102,17 @@ const PatientQueue = () => {
         // accessorKey: 'tem',
         cell: (props) => (
           <Box>
-            {!props.row.original.temperature
+            {!props.row.original.vitalSigns.length > 0
               ? (
                 <Button
                   variant="ghost"
                   // bgColor={}
                   colorScheme="orange"
                   size="xs"
-                  onClick={() => navigate(`/add-vitals/${props.row.original.patient_id}`)}
+                  onClick={() => navigate({
+                    pathname: `/add-vitals/${props.row.original.patient_id}`,
+                    search: `?appointment_id=${props.row.original.appointment_id}`,
+                  })}
                 >
                   RECORD
                 </Button>
@@ -163,6 +166,8 @@ const PatientQueue = () => {
   }, [data]);
 
   const filteredData = filterByDate();
+
+  console.log(filteredData);
 
   return (
     <VStack

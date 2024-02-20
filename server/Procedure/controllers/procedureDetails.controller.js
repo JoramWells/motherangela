@@ -18,12 +18,12 @@ const addProcedureDetail = async (req, res, next) => {
 const getAllProcedureDetails = async (req, res, next) => {
   try {
     const procedures = await Procedure_detail.findAll({
-      include:[
+      include: [
         {
-          model:ProcedureCategory,
-          attributes:['category_name']
-        }
-      ]
+          model: ProcedureCategory,
+          attributes: ['category_name'],
+        },
+      ],
     });
     res.json(procedures);
     next();

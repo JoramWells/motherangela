@@ -31,7 +31,7 @@ const AddVitals = () => {
     systolic: '',
     diastolic: '',
     weight: '',
-    height: '',
+    height: 0,
     bmi: '',
     sp02: '',
   });
