@@ -79,7 +79,6 @@ import ConsultationTypes from './layouts/ConsultationTypes';
 import AccountingSuppliers from './layouts/AccountingSuppliers';
 import AccountingItem from './layouts/AccountingItem';
 import AddAllergies from './layouts/AddAllergies';
-import LabTestsSummarySubSection from './_Lab/layouts/LabTestsSummarySubSection';
 import AddMaternityDeliveryDetails from './_Maternity/layouts/AddMaternityDeliveryDetails';
 import AddMaternityDewormingDetail from './_Maternity/layouts/AddMaternityDewormingDetail';
 import PayrollDeductions from './_Payroll/layouts/PayrollDeductions';
@@ -95,7 +94,6 @@ import DiseaseMinistry from './_Diseases/layouts/DiseaseMinistry';
 import AddPrescription from './_Medication/layouts/AddPrescription';
 import PatientReport from './_Patient/layouts/PatientReport';
 import AddPatientProcedure from './_Procedure/layouts/AddPatientProcedure';
-import AddLabRequest from './_Lab/layouts/AddLabRequest';
 import AddRadiologyRequest from './_Radiology/layouts/AddRadiologyRequest';
 import ConfirmPatientCharges from './_Charges/layouts/ConfirmPatientCharges';
 import BillTransport from './_Charges/layouts/BillTransport';
@@ -110,7 +108,6 @@ import Eligibility from './_Eligibility/layouts/Eligibility';
 import Hts from './_Eligibility/layouts/HTS';
 import AddAdmission from './_Admission/layouts/AddAdmission';
 import AddUser from './_User/layout/AddUser';
-import LabRequestsSample from './_Lab/layouts/LabRequestsSample';
 import CostCentre from './_CostCentre/layouts/CostCentre';
 import AddCostCentre from './_CostCentre/layouts/AddCostCentre';
 import IssueItemsCostCenter from './_Stores/layouts/IssueItemsCostCenter';
@@ -120,6 +117,7 @@ import ChartOfAccounts from './_ChartOfAccounts/layouts/ChartOfAccounts';
 import ServiceTypes from './_ChartOfAccounts/layouts/ServiceTypes';
 import ConsultationCreditAccounts from './_ChartOfAccounts/layouts/ConsultationCreditAccounts';
 import ItemsRoutes from './routes/admin/Items.routes';
+import LabRoutes from './routes/admin/Lab.routes';
 
 // Medication
 const MedicationCategory = lazy(() => import('./_Medication/layouts/MedicationCategory'));
@@ -158,12 +156,8 @@ const PharmacyDrugsRequested = lazy(() => import('./_Pharmacy/layouts/PharmacyDr
 const Appointments = lazy(() => import('./_Appointment/layouts/Appointments'));
 
 // Lab
-const InternalLabRequest = lazy(() => import('./_Lab/layouts/InternalLabRequest'));
-const InternalLabRequestDetail = lazy(() => import('./_Lab/layouts/InternalLabRequestDetail'));
-const LabTemplates = lazy(() => import('./_Lab/layouts/LabTemplates'));
 const PharmacyRequest = lazy(() => import('./_Pharmacy/layouts/PharmacyRequest'));
 
-const AddLabTest = lazy(() => import('./_Lab/layouts/AddLabTest'));
 const AddVitals = lazy(() => import('./_VitalSigns/layouts/AddVitals'));
 const AppointmentDetail = lazy(() => import('./_Appointment/layouts/AppointmentDetail'));
 const Admission = lazy(() => import('./_Admission/layouts/Admission'));
@@ -233,6 +227,7 @@ function App() {
         >
 
           <ItemsRoutes />
+          <LabRoutes />
 
           <Routes>
             <Route path="/" element={<Homepage />} />
@@ -311,13 +306,6 @@ function App() {
             <Route path="/admission-detail/:id" element={<AdmissionDetail />} />
 
             {/* lab */}
-            <Route path="/lab-tests-summary-sub-section" element={<LabTestsSummarySubSection />} />
-            <Route path="/lab-templates" element={<LabTemplates />} />
-            <Route path="/add-lab-test" element={<AddLabTest />} />
-            <Route path="/add-lab-request/:id" element={<AddLabRequest />} />
-            <Route path="/internal-lab-request" element={<InternalLabRequest />} />
-            <Route path="/internal-lab-request-detail/:id" element={<InternalLabRequestDetail />} />
-            <Route path="/lab-request-sample/:id" element={<LabRequestsSample />} />
 
             <Route path="/miscellaneous-charges" element={<MiscellaneousCharges />} />
 

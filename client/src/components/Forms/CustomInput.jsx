@@ -19,7 +19,7 @@ const CustomInput = ({
       // placeholder="Enter First Name"
       size={['md', 'md', 'md', 'md', 'sm', 'md']}
       value={value}
-      onChange={onChange}
+      onChange={(e) => onChange(e.target.value)}
       type={type}
     />
 

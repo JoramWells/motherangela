@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const procedureItemApi = createApi({
   reducerPath: 'procedureItemApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/procedure-items',
+    baseUrl: 'http://localhost:5011/procedure-items',
   }),
   endpoints: (builder) => ({
     getProcedureItems: builder.query({
@@ -21,7 +21,7 @@ export const procedureItemApi = createApi({
     }),
     updateProcedureItem: builder.mutation({
       query: ({ id, ...patch }) => ({
-        url: `update${id}`,
+        url: `update/${id}`,
         method: 'PUT',
         body: patch,
       }),
@@ -29,7 +29,7 @@ export const procedureItemApi = createApi({
     deleteProcedureItem: builder.mutation({
       query(id) {
         return {
-          url: `delete${id}`,
+          url: `delete/${id}`,
           method: 'DELETE',
         };
       },

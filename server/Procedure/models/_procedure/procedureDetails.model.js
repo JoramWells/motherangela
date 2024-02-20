@@ -4,6 +4,7 @@
 /* eslint-disable camelcase */
 const { DataTypes, Sequelize } = require('sequelize');
 const sequelize = require('../../db/connect');
+const ProcedureCategory = require('./procedureCategory.model');
 
 const Procedure_detail = sequelize.define('procedure_details', {
   procedure_id: {
@@ -76,6 +77,8 @@ const Procedure_detail = sequelize.define('procedure_details', {
     type: DataTypes.STRING,
   },
 });
+
+Procedure_detail.belongsTo(ProcedureCategory,{foreignKey:'procedure_category_id'})
 
 // sequelize.sync().then(() => {
 //   console.log('Book table created');

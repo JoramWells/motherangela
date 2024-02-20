@@ -8,31 +8,69 @@ import {
   HStack,
   IconButton,
   Input,
+  Skeleton,
   Text,
   VStack,
 } from '@chakra-ui/react';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useGetAllALabsQuery } from '../api/alab.api';
 import { selectStyles } from '../../utils/styles';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import CustomInput from '../../components/Forms/CustomInput';
+import { useGetProcedureItemQuery, useUpdateProcedureItemMutation } from '../../api/procedureItem.api';
+import { useGetProceduresQuery } from '../../api/procedureDetails.api';
 
 const AddLabTest = () => {
-  const [departmentName, setDepartmentName] = useState('');
+  const { id } = useParams();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { data: procedureItemData } = useGetProcedureItemQuery(id);
+  const [updateProcedureItem, {
+    isLoading: isLoadingProcedureItemUpdate,
+  }] = useUpdateProcedureItemMutation(id);
+
+  const [procedureName, setProcedureName] = useState();
+  const [procedureItemName, setProcedureItemName] = useState();
+  const [normalValues, setNormalValues] = useState('');
+  const [normalValuesStart, setNormalValuesStart] = useState('');
+  const [normalValuesEnd, setNormalValuesEnd] = useState('');
 
   const inputValues = {
-    departmentName,
+    id,
+    procedure_id: procedureName?.value,
+    procedure_item_description: procedureItemName,
+    normal_values: normalValues,
+    normal_values_start: normalValuesStart,
+    normal_values_end: normalValuesEnd,
   };
 
-  const { data } = useGetAllALabsQuery();
-  const labTestOptions = data?.map((item) => ({
-    value: item.a_lab_id, label: item.a_lab_description,
+  const { data } = useGetProceduresQuery();
+
+  // filter data according to lab procedure/tests
+  const filteredData = useCallback(() => data
+    ?.filter((item) => item.procedure_category?.category_name.toLowerCase()
+      .includes('lab tests' || 'lab procedures')), [data]);
+
+  useEffect(() => {
+    if (procedureItemData) {
+      setProcedureName({
+        value: procedureItemData?.procedure_detail?.procedure_id,
+        label: procedureItemData?.procedure_detail?.procedure_name,
+      });
+      setProcedureItemName(procedureItemData.procedure_item_description);
+      setNormalValues(procedureItemData.normal_values);
+      setNormalValuesStart(procedureItemData.normal_values_start);
+      setNormalValuesEnd(procedureItemData.normal_values_end);
+    }
+  }, [procedureItemData]);
+
+  console.log(procedureName);
+
+  const labTestOptions = filteredData()?.map((item) => ({
+    value: item.procedure_id, label: item.procedure_name,
   }));
 
   return (
@@ -81,38 +119,86 @@ const AddLabTest = () => {
           <Select
             styles={selectStyles}
             options={labTestOptions}
+            value={procedureName}
+            onChange={setProcedureName}
           />
         </FormControl>
         {/* sub item */}
-        <FormControl>
-          <FormLabel fontSize="14px">Sub-Test Description</FormLabel>
-          <Input
-            // placeholder="Enter Department Name"
-            value={departmentName}
-            onChange={(e) => setDepartmentName(e.target.value)}
-          />
-        </FormControl>
+        {procedureItemData
+          ? (
+            <CustomInput
+              label="Sub-Test Description"
+              value={procedureItemName}
+              onChange={setProcedureItemName}
+            />
+          )
+          : (
+            <FormControl>
+              <FormLabel
+                // color="gray.500"
+                fontSize="14px"
+              >
+                Sub-Test Description
+              </FormLabel>
+              <Skeleton
+                height="40px"
+                width="full"
+                rounded="md"
+              />
+            </FormControl>
+          )}
 
         <CustomInput
           label="Normal Values"
+          value={normalValues}
+          onChange={setNormalValues}
         />
 
         {/* end value */}
 
         <CustomInput
           label="Normal Value (Start)"
+          value={normalValuesStart}
+          onChange={setNormalValuesStart}
         />
         <CustomInput
           label="Normal Value (End)"
+          value={normalValuesEnd}
+          onChange={setNormalValuesEnd}
         />
 
-        <Button
-          size="md"
-          w="full"
-          colorScheme="blue"
-        >
-          Save
-        </Button>
+        {id ? (
+          <HStack
+            w="full"
+            justifyContent="flex-end"
+          >
+
+            <Button
+              size="sm"
+              colorScheme="red"
+              variant="outline"
+            >
+              Delete
+            </Button>
+            <Button
+              colorScheme="blue"
+              size="sm"
+              onClick={() => updateProcedureItem(inputValues)}
+            >
+              {isLoadingProcedureItemUpdate ? 'loading...' : 'Update'}
+            </Button>
+          </HStack>
+        )
+
+          : (
+            <Button
+              size="md"
+              w="full"
+              colorScheme="blue"
+            >
+              Save
+            </Button>
+          )}
       </VStack>
     </VStack>
   );

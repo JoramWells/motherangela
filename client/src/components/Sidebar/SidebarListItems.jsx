@@ -210,7 +210,7 @@ const SidebarListItems = () => {
           || pathname.includes('/lab-templates')
           || pathname.includes('/add-lab-request')
           || pathname.includes('/add-lab-test')
-          || pathname.includes('/add-lab-test')}
+          || pathname.includes('/lab-test-prices')}
         onClick={onToggle}
         text="Lab"
         link="/lab"
@@ -221,7 +221,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Test Summary', link: '/lab-tests-summary-sub-section' },
           { id: nanoid(), title: 'Lab Test Prices', link: '/lab-test-prices' },
           { id: nanoid(), title: 'View Lab Templates', link: '/lab-templates' },
-          { id: nanoid(), title: 'Register Lab Templates', link: '/add-lab-test' },
+          { id: nanoid(), title: 'Register Lab Templates', link: `/add-lab-test/${null}` },
         ]}
         icon={<FaTools size={15} />}
       />

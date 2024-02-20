@@ -2,6 +2,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 const sequelize = require('../db/connect');
+const ProcedureCategory = require('../models/_procedure/procedureCategory.model');
 const Procedure_detail = require('../models/_procedure/procedureDetails.model');
 
 const addProcedureDetail = async (req, res, next) => {
@@ -16,7 +17,14 @@ const addProcedureDetail = async (req, res, next) => {
 
 const getAllProcedureDetails = async (req, res, next) => {
   try {
-    const procedures = await Procedure_detail.findAll();
+    const procedures = await Procedure_detail.findAll({
+      include:[
+        {
+          model:ProcedureCategory,
+          attributes:['category_name']
+        }
+      ]
+    });
     res.json(procedures);
     next();
   } catch (error) {

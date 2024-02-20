@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/add', addProcedureItem);
 router.get('/fetchAll', getAllProcedureItem);
 router.get('/detail/:id', getProcedureItemById);
-router.put('/edit', editProcedureItem);
+router.put('/update/:id', editProcedureItem);
 router.delete('/delete/:id', deleteProcedureItem);
 
 module.exports = router;

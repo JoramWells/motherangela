@@ -12,9 +12,9 @@ import moment from 'moment/moment';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
-import { useGetProceduresQuery } from '../../_Procedure/api/procedureDetails.api';
 import { useAddPersonalAccountChargeMutation } from '../../api/personalAccountCharges.api';
 import { useAddInternalLabRequestMutation } from '../../api/internalLabRequests.api';
+import { useGetProcedureItemQuery } from '../../api/procedureItem.api';
 
 const selectStyles = {
   control: (provided, state) => ({
@@ -47,7 +47,7 @@ const AddLabRequest = () => {
   const [addPersonalAccountCharge,
     { isLoading: isLoadingCharges }] = useAddPersonalAccountChargeMutation();
 
-  const { data: procedureData } = useGetProceduresQuery();
+  const { data: procedureData } = useGetProcedureItemQuery();
 
   const patientID = searchParams.get('patient_id');
 

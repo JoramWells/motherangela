@@ -2,23 +2,22 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 import {
-  Button, HStack, Text, VStack,
+  Button, HStack, IconButton, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
-import { FaBoxOpen, FaFileDownload, FaPrint } from 'react-icons/fa';
+import { FaBoxOpen, FaEdit, FaTrash } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import moment from 'moment/moment';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
-import { useGetAllALabsQuery } from '../api/alab.api';
+import { useGetProcedureItemsQuery } from '../../api/procedureItem.api';
 
 const LabTemplates = () => {
   const navigate = useNavigate();
 
   const {
     data, error, isLoading, isFetching, isSuccess,
-  } = useGetAllALabsQuery();
+  } = useGetProcedureItemsQuery();
 
   // const { data } = useSelector((state) => state.patients);
   // console.log(data);
@@ -26,10 +25,40 @@ const LabTemplates = () => {
   const columns = useMemo(
     () => [
       {
-        header: 'Lab Test',
-        accessorKey: 'a_lab_description',
+        header: 'Lab Sub-Test',
+        accessorKey: 'procedure_item_description',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
+      },
+      {
+        header: 'Lab Test',
+        accessorKey: 'procedure_detail',
+        cell: (props) => <Text>{props.getValue()?.procedure_name}</Text>,
+
+      },
+      {
+        header: 'Normal Values',
+        accessorKey: 'normal_values',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+
+      },
+      {
+        header: 'Action',
+        cell: (props) => (
+          <HStack>
+            <IconButton
+              size="sm"
+              color="gray"
+              onClick={() => navigate(`/add-lab-test/${props.row.original.procedure_item_id}`)}
+            >
+              <FaEdit />
+            </IconButton>
+            <IconButton size="sm" color="gray">
+              <FaTrash />
+            </IconButton>
+          </HStack>
+
+        ),
       },
     ],
 
@@ -42,11 +71,7 @@ const LabTemplates = () => {
           subRows: [],
         }));
 
-  const filteredData = subRowData?.filter((item) => {
-    const itemDate = moment(item.appointment_date);
-    const todayDate = moment(new Date()).format('YYYY-MM-DD');
-    return itemDate.isSame(todayDate, 'day');
-  });
+  console.log(data);
 
   return (
     <VStack
@@ -57,7 +82,7 @@ const LabTemplates = () => {
       position="relative"
     >
       <BreadCrumbNav link="/add-lab-test" />
-      {filteredData?.length === 0 ? (
+      {subRowData?.length === 0 ? (
         <VStack p={5}>
 
           <FaBoxOpen size="120" color="gray" />
@@ -65,7 +90,7 @@ const LabTemplates = () => {
 
         </VStack>
       )
-        : (<DataTable2 data={filteredData} columns={columns} />)}
+        : (<DataTable2 data={subRowData} columns={columns} />)}
     </VStack>
   );
 };

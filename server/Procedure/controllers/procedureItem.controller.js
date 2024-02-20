@@ -2,6 +2,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 const sequelize = require('../db/connect');
+const Procedure_detail = require('../models/_procedure/procedureDetails.model');
 const Procedure_item = require('../models/_procedure/procedureItems.model');
 
 const addProcedureItem = async (req, res, next) => {
@@ -16,7 +17,14 @@ const addProcedureItem = async (req, res, next) => {
 
 const getAllProcedureItem = async (req, res, next) => {
   try {
-    const procedures = await Procedure_item.findAll();
+    const procedures = await Procedure_item.findAll({
+      include:[
+        {
+          model:Procedure_detail,
+          attributes:['procedure_name']
+        }
+      ]
+  });
     res.json(procedures);
     next();
   } catch (error) {
@@ -31,8 +39,14 @@ const getProcedureItemById = async (req, res, next) => {
   try {
     const procedure = await Procedure_item.findOne({
       where: {
-        procedure_id: id,
+        procedure_item_id: id,
       },
+      include: [
+        {
+          model: Procedure_detail,
+          attributes: ['procedure_id','procedure_name']
+        }
+      ]
     });
     res.json(procedure);
   } catch (error) {
@@ -41,16 +55,24 @@ const getProcedureItemById = async (req, res, next) => {
 };
 
 const editProcedureItem = async (req, res, next) => {
-  const { id, firstName } = req.body;
+  const {id} = req.params;
+  const { procedure_id,
+    procedure_item_description } = req.body;
   try {
     const procedure = await Procedure_item.findOne({
       where: {
-        id,
+        procedure_item_id:id,
       },
     });
-    procedure.firstName = firstName;
+    procedure.procedure_id = procedure_id;
+    procedure.procedure_item_description = procedure_item_description;
+    procedure.procedure_item_description = procedure_item_description;
+    procedure.procedure_item_description = procedure_item_description;
+    procedure.procedure_item_description = procedure_item_description;
     return procedure.save();
   } catch (error) {
+    console.log(error);
+    next(error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };

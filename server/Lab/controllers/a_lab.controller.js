@@ -19,8 +19,8 @@ const addAlab = async (req, res, next) => {
 const getAllAlabs = async (req, res, next) => {
   try {
     const results = await A_lab.findAll({ limit: 100 });
-    next();
     res.json(results);
+    next();
   } catch (error) {
     console.log(error);
     next(error);

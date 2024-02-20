@@ -1,32 +1,32 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const procedureApi = createApi({
-  reducerPath: 'procedureApi',
+export const procedureItemApi = createApi({
+  reducerPath: 'procedureItemApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5011/procedure-details',
+    baseUrl: 'http://localhost:5011/procedure-items',
   }),
   endpoints: (builder) => ({
-    getProcedures: builder.query({
+    getProcedureItems: builder.query({
       query: () => 'fetchAll',
     }),
-    addUserType: builder.mutation({
+    addProcedureItem: builder.mutation({
       query: (newUser) => ({
         url: 'add',
         method: 'POST',
         body: newUser,
       }),
     }),
-    getUserType: builder.query({
+    getProcedureItem: builder.query({
       query: (id) => `detail/${id}`,
     }),
-    updateUserType: builder.mutation({
+    updateProcedureItem: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `update${id}`,
         method: 'PUT',
         body: patch,
       }),
     }),
-    deleteUserType: builder.mutation({
+    deleteProcedureItem: builder.mutation({
       query(id) {
         return {
           url: `delete${id}`,
@@ -37,4 +37,7 @@ export const procedureApi = createApi({
   }),
 });
 
-export const { useGetProceduresQuery, useAddUserTypeMutation, useGetUserTypeQuery } = procedureApi;
+export const {
+  useGetProcedureItemsQuery, useAddProcedureItemMutation,
+  useGetProcedureItemQuery, useUpdateProcedureItemMutation, useDeleteProcedureItemMutation,
+} = procedureItemApi;
