@@ -1,14 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
-import {
-  FormControl, FormLabel, HStack, Input, VStack,
-} from '@chakra-ui/react';
-import Select from 'react-select';
+import { HStack, VStack } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
-import { Formik } from 'formik';
-import { useParams } from 'react-router-dom';
-import StepperNavButtons from './Nav/StepperNavButtons';
-import CustomInput from './CustomInput';
+import CustomInput from '../../components/Forms/CustomInput';
+import CustomSelect from '../../components/Forms/CustomSelect';
 
 const PersonalDetail = ({
   first_name, setFirstName, last_name, setLastName, middle_name, setMiddleName,
@@ -27,9 +22,6 @@ const PersonalDetail = ({
 
   return (
     <VStack spacing={[6, 6, 6, 6, 4, 6]}>
-      {/* <IconButton>
-              <FaSearch />
-            </IconButton> */}
 
       <HStack w="full">
         <CustomInput
@@ -47,57 +39,41 @@ const PersonalDetail = ({
           label="First Name"
           name="first_name"
           value={first_name}
-          handleChange={setFirstName}
+          onChange={setFirstName}
         />
 
         <CustomInput
           label="Second Name"
           name="middle_name"
           value={middle_name}
-          handleChange={setMiddleName}
+          onChange={setMiddleName}
         />
 
         <CustomInput
           label="Enter Last Name"
           name="last_name"
           value={last_name}
-          handleChange={setLastName}
+          onChange={setLastName}
         />
 
       </HStack>
 
-      {/* category */}
-      <FormControl>
-        <FormLabel
-          fontSize="14px"
-        >
-          DOB
-
-        </FormLabel>
-        <Input
-          name="dob"
-          type="date"
-          onChange={(e) => setDOB(e.target.value)}
-          value={dob}
-        />
-      </FormControl>
+      {/* DOB */}
+      <CustomInput
+        label="DOB"
+        type="date"
+        name="date"
+        value={dob}
+        onChange={setDOB}
+      />
 
       {/* item code */}
-      <FormControl>
-        <FormLabel
-          fontSize="14px"
-        >
-          Select Gender
-
-        </FormLabel>
-        <Select
-          name="patient_gender"
-          options={genderOptions}
-          value={patient_gender}
-          onChange={(val) => setPatientGender(val)}
-        />
-
-      </FormControl>
+      <CustomSelect
+        label="Gender"
+        options={genderOptions}
+        value={patient_gender}
+        onChange={setPatientGender}
+      />
 
       <HStack
         w="full"
@@ -107,7 +83,7 @@ const PersonalDetail = ({
           name="id_number"
           value={id_number}
           label="ID No."
-          handleChange={setID}
+          onChange={setID}
         />
 
         <CustomInput
@@ -115,31 +91,22 @@ const PersonalDetail = ({
           name="email"
           label="Enter Email Address"
           value={email}
-          handleChange={setEmail}
+          onChange={setEmail}
         />
       </HStack>
 
-      <FormControl>
-        <FormLabel
-          fontSize="14px"
-        >
-          Select Residence
-
-        </FormLabel>
-        <Select
-          name="residence"
-          options={residenceOptions}
-          value={residence}
-          onChange={(opt) => setResidence(opt)}
-        />
-
-      </FormControl>
+      <CustomSelect
+        label="Residence"
+        options={residenceOptions}
+        value={residence}
+        onChange={setResidence}
+      />
 
       <CustomInput
         name="nhif_no"
         label="NHIF NO."
         value={nhif_no}
-        handleChange={setNHIF}
+        onChange={setNHIF}
       />
 
     </VStack>

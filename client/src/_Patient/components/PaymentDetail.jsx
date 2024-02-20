@@ -1,14 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import {
-  FormControl, FormLabel, Text, VStack,
-} from '@chakra-ui/react';
-import Select from 'react-select';
+import { VStack } from '@chakra-ui/react';
 import moment from 'moment/moment';
 import { useCallback } from 'react';
 import Corporate from './Cooporate';
 import { useGetAllAccountTypesQuery } from '../../api/accountType.api';
 import { useAddPatientMutation } from '../../api/patients.api';
+import CustomSelect from '../../components/Forms/CustomSelect';
 
 const PaymentDetail = ({
   insuranceAccount,
@@ -37,29 +35,27 @@ const PaymentDetail = ({
   return (
 
     <VStack
-      spacing={8}
+      // spacing={8}
       w="full"
     >
-      <FormControl>
-        <FormLabel fontSize="14px">Select Payment Type</FormLabel>
-        <Select
-          options={accountTypeOptions}
+      <CustomSelect
+        label="Payment Type"
+        options={accountTypeOptions}
                 // styles={customStyles}
-          value={paymentType}
-          onChange={setPaymentType}
-        />
+        value={paymentType}
+        onChange={setPaymentType}
+      />
 
-        {/* {values.} */}
-        {paymentType?.value === '1' && (
+      {/* {values.} */}
+      {paymentType?.value === '1' && (
         <Corporate
           insuranceAccount={insuranceAccount}
           setInsuranceAccount={setInsuranceAccount}
           setCost={setCost}
           cost={cost}
         />
-        )}
+      )}
 
-      </FormControl>
     </VStack>
 
   );

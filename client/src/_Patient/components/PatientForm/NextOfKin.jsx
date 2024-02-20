@@ -1,15 +1,10 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
-import {
-  Button,
-  FormControl, FormLabel, HStack, Input, Text, VStack,
-} from '@chakra-ui/react';
-import Select from 'react-select';
+import { VStack } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
-import { Formik } from 'formik';
 import { useParams } from 'react-router-dom';
-import StepperNavButtons from '../Nav/StepperNavButtons';
-import { useGetPatientQuery } from '../../../api/patients.api';
+import CustomSelect from '../../../components/Forms/CustomSelect';
+import CustomInput from '../../../components/Forms/CustomInput';
 
 const customStyles = {
   control: (provided, state) => ({
@@ -52,36 +47,28 @@ const NextOfKin = ({
     <VStack
       bgColor="white"
       spacing={8}
+      w="full"
     >
-      <FormControl>
-        <FormLabel>Next of Kin</FormLabel>
-        <Select
-          name="next_of_kin"
-                // styles={customStyles}
-          options={nextOfKinOPtions}
-          value={next_of_kin}
-          onChange={(kin) => setNextOfKin(kin)}
-        />
-      </FormControl>
-      <FormControl>
-        <FormLabel>Next of Kin Full Name</FormLabel>
-        <Input
-          name="next_of_kin_name"
-                // size="lg"
-          onChange={(e) => setNextOfKinName(e.target.value)}
-          value={next_of_kin_name}
-        />
-      </FormControl>
+      <CustomSelect
+        label="Next of Kin"
+        options={nextOfKinOPtions}
+        value={next_of_kin}
+        onChange={setNextOfKin}
+      />
+      <CustomInput
+        label="Next of Kin Full Name"
+        name="next_of_kin_name"
+        onChange={setNextOfKinName}
+        value={next_of_kin_name}
+      />
 
-      <FormControl>
-        <FormLabel>Next of Kin Phone Number</FormLabel>
-        <Input
-          name="next_of_kin_cell_phone"
+      <CustomInput
+        label="Next of Kin Phone Number"
+        name="next_of_kin_cell_phone"
                 // size="lg"
-          onChange={(e) => setNextOfKinCellPhone(e.target.value)}
-          value={next_of_kin_cell_phone}
-        />
-      </FormControl>
+        onChange={setNextOfKinCellPhone}
+        value={next_of_kin_cell_phone}
+      />
     </VStack>
 
   );

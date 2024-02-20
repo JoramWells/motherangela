@@ -1,30 +1,13 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
-import {
-  FormControl,
-  FormLabel,
-  HStack,
-  Input,
-  Tag,
-  VStack,
-} from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
-import Select from 'react-select';
 import { useGetInsurancesQuery } from '../../api/insurance.api';
 import { useGetInsuranceServiceCostMappingQuery } from '../../api/insuranceServiceCostMapping.api';
-
-const customStyles = {
-  control: (provided, state) => ({
-    ...provided,
-    minHeight: '45px',
-    height: '45px',
-  }),
-  input: (provided) => ({
-    ...provided,
-  }),
-};
+import CustomInput from '../../components/Forms/CustomInput';
+import CustomSelect from '../../components/Forms/CustomSelect';
 
 const Corporate = ({
   insuranceAccount, setInsuranceAccount, cost, setCost,
@@ -56,8 +39,6 @@ const Corporate = ({
     if (!cost) { setCost(insuranceServiceCostData?.cost); }
   }, [setCost, insuranceServiceCostData?.cost, cost]);
 
-  console.log(cost, 'insys');
-
   return (
 
     <VStack
@@ -67,91 +48,39 @@ const Corporate = ({
       spacing={6}
       mt={6}
     >
-      <FormControl>
-        <HStack w="full" alignItems="center" justifyContent="space-between">
-          <FormLabel fontSize="14px">Select Insurance Account</FormLabel>
-          <Tag
-            onClick={() => navigate('/add-insurance')}
-            colorScheme="green"
-            _hover={{
-              cursor: 'pointer',
-            }}
-          >
-            NEW
-
-          </Tag>
-
-        </HStack>
-        <Select
-          // styles={customStyles}
-          options={insuranceOptions}
-          value={insuranceAccount}
-          onChange={(e) => setInsuranceAccount(e)}
-        />
-
-      </FormControl>
+      <CustomSelect
+        label="Insurance Account"
+        options={insuranceOptions}
+        value={insuranceAccount}
+        onChange={(e) => setInsuranceAccount(e)}
+      />
 
       {/* select Department */}
-      <FormControl>
-        <HStack w="full" alignItems="center" justifyContent="space-between">
-          <FormLabel fontSize="14px">Company Scheme</FormLabel>
-          <Tag
-            onClick={() => navigate('/add-ward')}
-            _hover={{
-              cursor: 'pointer',
-            }}
-          >
-            NEW
+      <CustomSelect
+        label="Company Scheme"
+        options={statusOptions}
+        value={insuranceAccount}
+        onChange={setInsuranceAccount}
+      />
 
-          </Tag>
+      <CustomInput
+        label="Staff No."
+        placeholder="Enter Staff Number"
+        value={mobileNo}
+        onChange={setMobileNo}
+      />
 
-        </HStack>
-        <Select
-          // styles={customStyles}
-          options={statusOptions}
-          value={insuranceAccount}
-          onChange={(e) => setInsuranceAccount(e)}
-        />
+      <CustomInput
+        label="Insurance Membership Number"
+        value={insurance_membership_number}
+        onChange={setInsuranceMemberShipNo}
+      />
 
-      </FormControl>
-
-      <FormControl>
-        <FormLabel
-          fontSize="14px"
-        >
-          Staff Number
-
-        </FormLabel>
-        <Input
-          // size="lg"
-          placeholder="Enter Staff Number"
-          value={mobileNo}
-          onChange={(e) => setMobileNo(e.target.value)}
-        />
-      </FormControl>
-
-      <FormControl>
-        <FormLabel>Insurance Membership Number</FormLabel>
-        <Input
-          // size="lg"
-          value={insurance_membership_number}
-          onChange={(e) => setInsuranceMemberShipNo(e.target.value)}
-        />
-      </FormControl>
-
-      <FormControl>
-        <FormLabel
-          fontSize="14px"
-        >
-          Principal Member Name
-
-        </FormLabel>
-        <Input
-          // size="lg"
-          value={mobileNo}
-          onChange={(e) => setMobileNo(e.target.value)}
-        />
-      </FormControl>
+      <CustomInput
+        label="Principal Member Name"
+        value={mobileNo}
+        onChange={setMobileNo}
+      />
     </VStack>
   );
 };

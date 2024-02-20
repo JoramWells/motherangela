@@ -1,13 +1,14 @@
-/* eslint-disable no-mixed-operators */
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-mixed-operators */
 /* eslint-disable camelcase */
 import {
-  Box, Button, VStack,
+  Button, HStack, VStack,
 } from '@chakra-ui/react';
 import {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import moment from 'moment/moment';
 import { useAddPatientMutation } from '../../api/patients.api';
@@ -27,8 +28,6 @@ const isDay = () => {
 };
 
 const AddPatient = () => {
-  const [personalData, setPersonalData] = useState({});
-  const [nextOfKinData, setNextOfKinData] = useState({});
   const [insuranceAccount, setInsuranceAccount] = useState('');
   const [paymentType, setPaymentType] = useState('');
   const [cost, setCost] = useState(0);
@@ -71,17 +70,6 @@ const AddPatient = () => {
   const handleBack = () => {
     setActiveStep((prevStep) => prevStep - 1);
   };
-
-  // DATA STRUCTURE
-  // personalData={
-  //   patient_gender:{value:'MALE', label:'MALE'}
-  // residence:{value:1, label:'Nanyuki}
-  // }
-  useEffect(() => {
-    personalData.patient_gender = personalData.patient_gender?.value;
-    personalData.residence = personalData.residence?.value;
-    nextOfKinData.next_of_kin = nextOfKinData.next_of_kin?.value;
-  }, [personalData, nextOfKinData]);
 
   // OPD DAY || OPD NIGHT
   const consultation_type = 'CONSULTATION CONSULTATION-OPD DAY';
@@ -163,10 +151,7 @@ const AddPatient = () => {
   ], [appointmentID, patientID, consultation_type,
   ]);
 
-  const handleSteps = () => {
-    setActiveStep((prev) => (3 - prev) % 4 + 1);
-    console.log('HGY');
-  };
+  const navigate = useNavigate();
 
   useEffect(() => {
     // if (searchParams.get('step') === 'kin') {
@@ -185,8 +170,14 @@ const AddPatient = () => {
         addPersonalAccountCharge(chargesInputValues2[0]);
       }
     }
-  }, [data, addPersonalAccountCharge, cashInputValues, insuranceAccount, chargesInputValues2,
-    patientID, chargesInputValues, searchParams,
+
+    if (!isLoading && !isLoadingCharges) {
+      navigate(-1);
+    }
+  }, [data, addPersonalAccountCharge, cashInputValues,
+    insuranceAccount, chargesInputValues2, patientID,
+    chargesInputValues, searchParams, isLoading,
+    isLoadingCharges, navigate,
 
   ]);
 
@@ -202,21 +193,20 @@ const AddPatient = () => {
     inputValues,
   ]);
 
-  console.log(personalData, 'personal');
-
   return (
     <VStack w="full" h="100vh" bgColor="gray.50" mt="50px">
 
       {/* stepper navigation */}
       <StepperNav activeStep={activeStep} steps={steps} />
 
-      <Box
+      <VStack
         w={['50%', '50%', '50%', '50%', '60%', '50%']}
         p={5}
         rounded="lg"
         bgColor="white"
         border="1px"
         borderColor="gray.200"
+        spacing={4}
       >
 
         {/* PERSONAL DETAILS */}
@@ -265,31 +255,42 @@ const AddPatient = () => {
           setInsuranceAccount={setInsuranceAccount}
           cost={cost}
           setCost={setCost}
-          handleNext={handleNext}
-          handleBack={handleBack}
-          activeStep={activeStep}
         />
         )}
 
         {/* complete info */}
-        {activeStep === 4 && (
-          <Button
-            colorScheme="green"
-            onClick={() => handleSubmit()}
+        {activeStep === 3 ? (
+          <HStack
+            w="full"
+            justifyContent="flex-end"
           >
-            {isLoading || isLoadingCharges ? 'loading...' : 'Save Patient'}
+            <Button
+              onClick={() => handleBack()}
+              size="sm"
+            >
+              Back
+            </Button>
+            <Button
+              colorScheme="green"
+              onClick={() => handleSubmit()}
+              size="sm"
+              isLoading={isLoading || isLoadingCharges}
+            >
+              {isLoading ? 'Saving Patient' : isLoadingCharges ? 'Saving Payment' : 'Complete'}
 
-          </Button>
-        )}
+            </Button>
+          </HStack>
+        )
 
-        {/* stepper navigation footer */}
-        <StepperNavButtons
-          handleBack={handleBack}
-          activeStep={activeStep}
-          handleNext={handleNext}
-        />
+          : (
+            <StepperNavButtons
+              handleBack={handleBack}
+              activeStep={activeStep}
+              handleNext={handleNext}
+            />
+          )}
 
-      </Box>
+      </VStack>
     </VStack>
   );
 };
