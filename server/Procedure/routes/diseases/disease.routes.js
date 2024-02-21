@@ -1,7 +1,7 @@
 const express = require('express');
 const {
   addDisease, getAllDiseases, getDiseaseDetail, editDisease, deleteDisease,
-} = require('../controllers/disease.controller');
+} = require('../../controllers/disease.controller');
 
 const router = express.Router();
 

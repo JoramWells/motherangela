@@ -2,10 +2,10 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 // const { Kafka } = require('kafkajs');
-const sequelize = require('../db/connect');
-const Appointments2 = require('../models/_appointment/appointments2.models');
-const VitalSigns = require('../models/_vitals/vitalSigns.model');
-const Patient = require('../models/patient/patient2.models');
+const sequelize = require('../../VitalSigns/db/connect');
+const Appointments2 = require('../../VitalSigns/models/_appointment/appointments2.models');
+const VitalSigns = require('../../VitalSigns/models/_vitals/vitalSigns.model');
+const Patient = require('../../VitalSigns/models/patient/patient2.models');
 
 const addVitals = async (req, res, next) => {
   try {

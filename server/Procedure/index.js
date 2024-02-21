@@ -9,7 +9,9 @@ const procedureGroupRoutes = require('./routes/procedureGroup.routes');
 const procedureDetailsRoutes = require('./routes/procedureDetails.routes');
 const procedureItemsRoutes = require('./routes/procedureItems.routes');
 const procedureRoutes = require('./routes/procedure.routes');
-
+const diseaseRoutes = require('./routes/diseases/disease.routes');
+const diseaseMinistryRoutes = require('./routes/diseases/diseaseMinistry.routes');
+const internalPharmacyRequestRoutes = require('./routes/internalPharmacyRequest.routes');
 
 const app = express();
 
@@ -30,6 +32,11 @@ app.use('/procedure', procedureRoutes);
 app.use('/procedure-group', procedureGroupRoutes);
 app.use('/procedure-details', procedureDetailsRoutes);
 app.use('/procedure-items', procedureItemsRoutes);
+
+app.use('/disease', diseaseRoutes);
+app.use('/disease-ministry', diseaseMinistryRoutes);
+
+app.use('/internal-pharmacy-request', internalPharmacyRequestRoutes);
 
 // app.use((err, req, res, next) => {
 //   const errStatus = err.status || 500;

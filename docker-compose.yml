@@ -127,39 +127,6 @@ services:
     networks:
       - huruma
 
-  vitals-service:
-    build:
-      context: ./server/VitalSigns
-      dockerfile: Dockerfile
-    image: vitals-image
-    volumes:
-      - ./server/VitalSigns/:/usr/src/app
-      - /usr/src/app/node_modules
-    ports:
-      - 5006:5006
-    depends_on:
-      - database
-      # - kafka-2
-
-    networks:
-      - huruma
-
-  pharmacy-service:
-    build:
-      context: ./server/Pharmacy
-      dockerfile: Dockerfile
-    image: pharmacy-image
-    volumes:
-      - ./server/Pharmacy/:/usr/src/app
-      - /usr/src/app/node_modules
-    ports:
-      - 5007:5007
-    depends_on:
-      - database
-      # - kafka-2
-
-    networks:
-      - huruma
 
 
   eligibility-service:
@@ -245,24 +212,7 @@ services:
       # - kafka-2
 
     networks:
-      - huruma    
-
-  diseases-service:
-    build:
-      context: ./server/Diseases
-      dockerfile: Dockerfile
-    image: diseases-image
-    volumes:
-      - ./server/Diseases/:/usr/src/app
-      - /usr/src/app/node_modules
-    ports:
-      - 5013:5013
-    depends_on:
-      - database
-      # - kafka-2
-
-    networks:
-      - huruma               
+      - huruma                
   
       
   root-server:
@@ -314,9 +264,7 @@ services:
       - admission-service
       - appointment-service
       - charges-service
-      - diseases-service
       - patient-service
-      - vitals-service
       - eligibility-service
       - lab-service
       - procedure-service

@@ -2,14 +2,14 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 const Sequelize = require('sequelize');
-const sequelize = require('../db/connect');
+const sequelize = require('../../Pharmacy/db/connect');
 // const Appointments = require('../../models/appointment/appointments.models');
-const Medication = require('../models/medication/medication.model');
+const Medication = require('../../Pharmacy/models/medication/medication.model');
 // const Patient = require('../../models/patient/patient2.models');
-const Internal_pharmacy_request2 = require('../models/_pharmacy/internalPharmacyRequests.models2');
-const Procedure_detail = require('../models/procedure/procedureDetails.model');
-const Users = require('../models/user/user.model');
-const Patient = require('../models/patient/patient2.models');
+const Internal_pharmacy_request2 = require('../../Pharmacy/models/_pharmacy/internalPharmacyRequests.models2');
+const Procedure_detail = require('../../Pharmacy/models/procedure/procedureDetails.model');
+const Users = require('../../Pharmacy/models/user/user.model');
+const Patient = require('../../Pharmacy/models/patient/patient2.models');
 
 const addInternalPharmacyRequest = async (req, res, next) => {
   try {

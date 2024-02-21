@@ -96,6 +96,7 @@ const getAllPatients = async (req, res, next) => {
     res.json(patients);
     next();
   } catch (error) {
+    console.log(error)
     res.sendStatus(500).json({ error: 'Internal Server error' });
     next(error);
   }
