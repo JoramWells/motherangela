@@ -30,7 +30,7 @@ const outPatientList = [
   {
     id: nanoid(),
     text: 'Diseases',
-    link: '/diseases',
+    link: '/diseases-duplicates',
   },
   {
     id: nanoid(),

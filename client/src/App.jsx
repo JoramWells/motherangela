@@ -78,6 +78,7 @@ import ServiceTypes from './_ChartOfAccounts/layouts/ServiceTypes';
 import ConsultationCreditAccounts from './_ChartOfAccounts/layouts/ConsultationCreditAccounts';
 import ItemsRoutes from './routes/admin/Items.routes';
 import LabRoutes from './routes/admin/Lab.routes';
+import DiseasesDuplicates from './_Diseases/layouts/DiseasesDuplicates';
 
 // Medication
 const MedicationCategory = lazy(() => import('./_Medication/layouts/MedicationCategory'));
@@ -200,6 +201,7 @@ function App() {
 
             <Route path="/diseases" element={<Disease />} />
             <Route path="/disease-ministry" element={<DiseaseMinistry />} />
+            <Route path="/diseases-duplicates" element={<DiseasesDuplicates />} />
 
             <Route path="/doctor/:id" element={<Doctor />} />
 

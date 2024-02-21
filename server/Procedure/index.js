@@ -10,6 +10,7 @@ const procedureDetailsRoutes = require('./routes/procedureDetails.routes');
 const procedureItemsRoutes = require('./routes/procedureItems.routes');
 const procedureRoutes = require('./routes/procedure.routes');
 const diseaseRoutes = require('./routes/diseases/disease.routes');
+const diseaseDuplicatesRoutes = require('./routes/diseases/diseaseDuplicates.routes');
 const diseaseMinistryRoutes = require('./routes/diseases/diseaseMinistry.routes');
 const internalPharmacyRequestRoutes = require('./routes/internalPharmacyRequest.routes');
 
@@ -35,6 +36,7 @@ app.use('/procedure-items', procedureItemsRoutes);
 
 app.use('/disease', diseaseRoutes);
 app.use('/disease-ministry', diseaseMinistryRoutes);
+app.use('/diseases-duplicates', diseaseDuplicatesRoutes);
 
 app.use('/internal-pharmacy-request', internalPharmacyRequestRoutes);
 

@@ -9,6 +9,7 @@ import AddWard from '../components/ward/AddWard';
 import AddService from '../components/servicess/AddService';
 import AddDiseases from '../components/diseases/AddDiseases';
 import AddInsurance from '../components/insurance/AddInsurance';
+import { useGetDiseasesDuplicatesQuery } from '../../api/diseasesDuplicates.api';
 
 const PatientCard = ({
   text, icon, onClick, selected,
@@ -92,20 +93,13 @@ const profileData = [
 ];
 
 const RegisterItems = () => {
+  const [diseaseName, setDiseaseName] = useState(null);
   const [sideItem, setSideItem] = useState(0);
   const { pathname } = useLocation();
   const [searchParams] = useSearchParams();
   const stepSearch = searchParams.get('step');
+  const diseaseID = searchParams.get('disease_id');
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!stepSearch) {
-      navigate({
-        pathname,
-        search: '?step=0',
-      });
-    }
-  }, [navigate, pathname, stepSearch]);
 
   const handleSetSideItem = useCallback((step) => {
     setSideItem(step);
@@ -114,6 +108,15 @@ const RegisterItems = () => {
       search: `?step=${step}`,
     });
   }, [setSideItem, navigate, pathname]);
+
+  useEffect(() => {
+    if (!stepSearch) {
+      navigate({
+        pathname,
+        search: '?step=0',
+      });
+    }
+  }, [navigate, pathname, stepSearch, handleSetSideItem]);
 
   return (
     <VStack
@@ -148,7 +151,9 @@ const RegisterItems = () => {
           ))}
         </VStack>
 
-        {sideItem === 0 && <AddDiseases />}
+        {sideItem === 0 && (
+        <AddDiseases />
+        )}
         {sideItem === 2 && <AddInsurance />}
         {sideItem === 3 && <AddMedications />}
         {sideItem === 4 && <AddService />}

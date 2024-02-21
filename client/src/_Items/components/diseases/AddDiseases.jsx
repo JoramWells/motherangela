@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-multi-spaces */
 /* eslint-disable camelcase */
@@ -6,27 +7,32 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import {  useParams, useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import CustomInput from '../../../components/Forms/CustomInput';
+import { useGetDiseasesDuplicatesQuery, useUpdateDiseasesDuplicatesMutation } from '../../../api/diseasesDuplicates.api';
 
 // import { useAddVitalSignsMutation } from '../api/vitalSigns.api';
 
 const AddDiseases = () => {
+  const [diseaseName, setDiseaseName] = useState(null);
   const [searchParams] = useSearchParams();
-  const appointment_id = searchParams.get('appointment_id');
+  const stepSearch = searchParams.get('step');
+  const diseaseID = searchParams.get('disease_id');
 
-  const { id: patient_id } = useParams();
+  const { data: diseaseData } = useGetDiseasesDuplicatesQuery(diseaseID);
 
-  // const [addEligibility, { isLoading, error }] = useAddEligibilityMutation();
+  const [updateDiseasesDuplicates] = useUpdateDiseasesDuplicatesMutation();
 
-  const inputValues = {
-    patient_id,
-    appointment_id,
-  };
+  useEffect(() => {
+    if (diseaseData) {
+      setDiseaseName(diseaseData.disease_name);
+    }
+  }, [diseaseData]);
 
   return (
 
     <VStack
-      w="50%"
+      w="45%"
             // boxShadow="lg"
       p={5}
       spacing="1.3rem"
@@ -39,6 +45,8 @@ const AddDiseases = () => {
       <CustomInput
         label="Disease Name"
         color="gray.500"
+        value={diseaseName}
+        onChange={setDiseaseName}
       />
 
       {/* save btn */}
@@ -48,7 +56,7 @@ const AddDiseases = () => {
         colorScheme="blue"
       >
         {/* {isLoading ? 'loading' : 'Save'} */}
-        Save
+        {diseaseID ? 'Update Disease Name' : 'Save Disease Name'}
       </Button>
     </VStack>
   );
