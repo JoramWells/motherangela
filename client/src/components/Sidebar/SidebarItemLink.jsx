@@ -6,8 +6,8 @@ import {
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import { FaChevronDown, FaChevronRight, FaUser } from 'react-icons/fa';
-import { Link, useLocation } from 'react-router-dom';
-import { Fragment, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Fragment } from 'react';
 import SidebarItemSubButton from './SidebarItemSubButton';
 
 const SidebarItemLink = ({
@@ -16,7 +16,6 @@ const SidebarItemLink = ({
   const location = useLocation();
   const { pathname } = location;
   const { isOpen, onToggle } = useDisclosure();
-  const [chevronColor, setChevronColor] = useState(false);
 
   return (
     (

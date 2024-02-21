@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react';
 // import axios from "axios"
 import {
-  FaBoxOpen,
+  FaBoxOpen, FaCheckCircle, FaInfoCircle,
 } from 'react-icons/fa';
 import { useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -113,10 +113,20 @@ const PatientQueue = () => {
                     pathname: `/add-vitals/${props.row.original.patient_id}`,
                     search: `?appointment_id=${props.row.original.appointment_id}`,
                   })}
+                  leftIcon={<FaInfoCircle />}
                 >
                   RECORD
                 </Button>
-              ) : <Button size="xs" colorScheme="green" variant="ghost">RECORDED</Button>}
+              ) : (
+                <Button
+                  size="xs"
+                  colorScheme="green"
+                  variant="ghost"
+                  leftIcon={<FaCheckCircle />}
+                >
+                  RECORDED
+                </Button>
+              )}
           </Box>
         ),
 

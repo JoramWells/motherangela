@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const vitalSignsApi = createApi({
   reducerPath: 'vitalSignsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5006/vital-signs',
+    baseUrl: 'http://localhost:5002/vital-signs',
   }),
   endpoints: (builder) => ({
     getAllVitalSigns: builder.query({

@@ -74,7 +74,7 @@ const AddVitals = () => {
       // alignItems="center"
       // justifyContent="center"
       bgColor="gray.50"
-      mt="60px"
+      mt="50px"
       p={3}
     >
       <HStack
@@ -100,7 +100,7 @@ const AddVitals = () => {
         rounded="lg"
         border="1px"
         borderColor="gray.200"
-        spacing="1.3rem"
+        spacing="1.5rem"
       >
         <HStack w="full" justifyContent="space-between">
           <IconButton
@@ -263,8 +263,9 @@ const AddVitals = () => {
           width="full"
           colorScheme="blue"
           onClick={() => addVitalSigns(inputValues)}
+          isLoading={isLoading}
         >
-          {isLoading ? 'loading' : 'Save'}
+          Update Patient Vitals
         </Button>
       </VStack>
     </VStack>

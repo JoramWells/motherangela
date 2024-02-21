@@ -57,58 +57,23 @@ const Disease = () => {
 
   return (
     <VStack
-      mt="65px"
+      mt="50px"
       w="full"
       bgColor="gray.50"
       p={3}
-      h="95vh"
-      position="relative"
     >
-      <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/add-admission" />
-
-        <HStack
-          w="100%"
-          justifyContent="space-between"
-          bgColor="white"
-          p={3}
-          rounded="lg"
-          mt={2}
-        >
-          <Text fontSize="xl" fontWeight="bold">
-            Diseases
-            <span style={{
-              fontSize: '18px',
-              // fontWeight: 'normal',
-              color: 'gray',
-            }}
-            >
-              {' '}
-              (
-              {subRowData?.length.toLocaleString()}
-              )
-
-            </span>
-          </Text>
-          <HStack>
-            <Button leftIcon={<FaPrint />}>Print Report</Button>
-
-            <Button leftIcon={<FaFileDownload />}>Download</Button>
-
-          </HStack>
-        </HStack>
-        <Box
-          w="100%"
-          bgColor="white"
-          p={3}
-          h="89%"
-        >
-          <DataTable2
-            searchQueryColumn="pay_status"
-            data={subRowData}
-            columns={columns}
-          />
-        </Box>
+      <BreadCrumbNav link="/add-admission" />
+      <Box
+        w="100%"
+        bgColor="white"
+        p={3}
+        h="89%"
+      >
+        <DataTable2
+          searchQueryColumn="pay_status"
+          data={subRowData}
+          columns={columns}
+        />
       </Box>
     </VStack>
   );

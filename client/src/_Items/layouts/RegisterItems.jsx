@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { HStack, Text, VStack } from '@chakra-ui/react';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
@@ -98,6 +98,15 @@ const RegisterItems = () => {
   const stepSearch = searchParams.get('step');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!stepSearch) {
+      navigate({
+        pathname,
+        search: '?step=0',
+      });
+    }
+  }, [navigate, pathname, stepSearch]);
+
   const handleSetSideItem = useCallback((step) => {
     setSideItem(step);
     navigate({
@@ -122,8 +131,8 @@ const RegisterItems = () => {
         <VStack
           bgColor="white"
           w="20%"
-          rounded="lg"
-          border="1px"
+          // rounded="lg"
+          borderRight="1px"
           borderColor="gray.200"
           p={2}
           alignItems="flex-start"

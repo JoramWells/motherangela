@@ -20,38 +20,47 @@ const outPatientList = [
   {
     id: nanoid(),
     text: 'Companies',
+    link: '/',
   },
   {
     id: nanoid(),
     text: 'Consultation',
+    link: '/',
   },
   {
     id: nanoid(),
     text: 'Diseases',
+    link: '/diseases',
   },
   {
     id: nanoid(),
     text: 'Insurance',
+    link: '/',
   },
   {
     id: nanoid(),
     text: 'Medication',
+    link: '/',
   },
   {
     id: nanoid(),
     text: 'NHIF Rebate',
+    link: '/',
   },
   {
     id: nanoid(),
     text: 'Services',
+    link: '/',
   },
   {
     id: nanoid(),
     text: 'Suppliers',
+    link: '/',
   },
   {
     id: nanoid(),
     text: 'Wards',
+    link: '/',
   },
 ];
 
@@ -164,6 +173,7 @@ const Items = () => {
               color="gray.500"
               fontWeight="normal"
               rounded="full"
+              onClick={() => navigate(item.link)}
             >
               {item.text}
             </Button>
