@@ -10,7 +10,9 @@ const addDiseasesDuplicates = async (req, res, next) => {
     res.status(201).json(diseasesDuplicates);
     next();
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: 'Internal Server Error' });
+    next(error);
   }
 };
 
@@ -30,12 +32,12 @@ const getDiseasesDuplicatesDetail = async (req, res, next) => {
   try {
     const { id } = req.params;
     if (id !== 'null') {
-      const diseasesDuplicates = await DiseasesDuplicates.findOne({
+      const results = await DiseasesDuplicates.findOne({
         where: {
           disease_duplicate_id: id,
         },
       });
-      res.json(diseasesDuplicates);
+      res.json(results);
       next();
     } else {
       res.json();
@@ -47,15 +49,18 @@ const getDiseasesDuplicatesDetail = async (req, res, next) => {
 };
 
 const editDiseasesDuplicates = async (req, res, next) => {
-  const { id, firstName } = req.body;
+  const { id } = req.params;
+  const { disease_name } = req.body;
   try {
-    const user = await DiseasesDuplicates.findOne({
+    const result = await DiseasesDuplicates.findOne({
       where: {
-        id,
+        disease_duplicate_id: id,
       },
     });
-    user.firstName = firstName;
-    return user.save();
+    result.disease_name = disease_name;
+    result.save();
+    res.json(result);
+    next();
   } catch (error) {
     res.status(500).json({ message: 'Internal Server Error' });
   }
@@ -66,15 +71,17 @@ const deleteDiseasesDuplicates = async (req, res, next) => {
     const { id } = req.params;
     const results = await DiseasesDuplicates.destroy({
       where: {
-        diseasesDuplicates_id: id,
+        disease_duplicate_id: id,
       },
     });
     if (results) {
-      return res.status(200).json({ message: 'User deleted successfully' });
+      res.status(200).json(results);
+      next();
     }
-    return res.status(404).json({ message: 'User not found.' });
   } catch (error) {
-    return res.status(500).json({ message: 'Internal Server Error' });
+    console.log(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+    next(error);
   }
 };
 

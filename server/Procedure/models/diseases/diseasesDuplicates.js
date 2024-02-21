@@ -6,6 +6,7 @@ const DiseasesDuplicates = sequelize.define('diseases_duplicates', {
   disease_duplicate_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
   },
   disease_name: {
     type: DataTypes.STRING,

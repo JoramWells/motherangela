@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const consultationTypeApi = createApi({
   reducerPath: 'consultationTypeApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/consultation-type',
+    baseUrl: 'http://localhost:5010/consultation-type',
   }),
   endpoints: (builder) => ({
     getAllConsultationTypes: builder.query({

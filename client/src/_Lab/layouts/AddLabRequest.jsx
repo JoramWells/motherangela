@@ -152,7 +152,7 @@ const AddLabRequest = () => {
         <FormControl>
           <FormLabel
             fontSize="14px"
-            fontWeight="bold"
+            // fontWeight="bold"
             // color="gray.500"
           >
             Select/Search Lab Test
@@ -171,7 +171,7 @@ const AddLabRequest = () => {
         <FormControl>
           <FormLabel
             fontSize="14px"
-            fontWeight="bold"
+            // fontWeight="bold"
             // color="gray.500"
           >
             Select Urgency
@@ -189,7 +189,7 @@ const AddLabRequest = () => {
         <FormControl>
           <FormLabel
             fontSize="14px"
-            fontWeight="bold"
+            // fontWeight="bold"
             // color="gray.500"
           >
             Cost
@@ -208,7 +208,7 @@ const AddLabRequest = () => {
         <FormControl>
           <FormLabel
             fontSize="14px"
-            fontWeight="bold"
+            // fontWeight="bold"
             // color="gray.500"
           >
             Quantity
@@ -230,8 +230,12 @@ const AddLabRequest = () => {
           onClick={() => handleSubmit(inputValues)}
           width="full"
           height="40px"
+          isLoading={isLoading}
+          fontSize="18px"
+          fontWeight="normal"
+          color="blue.50"
         >
-          {isLoading ? 'loading...' : 'Save'}
+          Request Lab Test
 
         </Button>
 

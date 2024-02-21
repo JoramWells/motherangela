@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unstable-nested-components */
 import {
-  Box, Button, HStack, Text, VStack,
+  Box, Button, HStack, Input, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
 import { useMemo } from 'react';
@@ -50,6 +50,10 @@ const InsuranceMedicationMapping = () => {
 
       },
       {
+        header: 'Service Cost',
+        cell: (props) => <Input size="sm" />,
+      },
+      {
         header: 'Visible',
         accessorKey: 'visible',
         cell: (props) => <Text>{props.getValue()}</Text>,
@@ -59,6 +63,8 @@ const InsuranceMedicationMapping = () => {
 
     [],
   );
+
+  console.log(data);
 
   return (
     <VStack
@@ -72,7 +78,7 @@ const InsuranceMedicationMapping = () => {
       <Box bgColor="white" w="full">
         <BreadCrumbNav link="/add-insurance" breadCrumbData={breadCrumbData} />
         <HStack w="full" mt={4} mb={2}>
-          <Text fontWeight="semibold" fontSize="xl" ml={2} color="gray.700">
+          <Text fontWeight="semibold" fontSize="18px" ml={2} color="gray.700">
             Medication Mappings
             {' '}
             (
@@ -81,14 +87,7 @@ const InsuranceMedicationMapping = () => {
           </Text>
         </HStack>
 
-        <Box
-          w="100%"
-          bgColor="white"
-          p={3}
-          h="89%"
-        >
-          <DataTable2 data={subrowData} columns={columns} />
-        </Box>
+        <DataTable2 data={subrowData} columns={columns} />
       </Box>
     </VStack>
   );

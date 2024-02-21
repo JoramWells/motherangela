@@ -7,9 +7,10 @@ import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   Avatar,
-  Box, Button, HStack, SkeletonCircle, Text, VStack,
+  Box, Button, HStack, IconButton, SkeletonCircle, Text, VStack,
 } from '@chakra-ui/react';
 import moment from 'moment/moment';
+import { FaSyringe } from 'react-icons/fa';
 import IndeterminateCheckbox from '../../_Doctor/components/IndeterminateCheckbox';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import TablePharmacyRequest from '../../_Pharmacy/components/TablePharmacyRequest';
@@ -77,13 +78,29 @@ const InternalLabRequestsDetail = () => {
       header: 'Action',
       cell: (props) => (
         <Button
-          size="xs"
+          size="sm"
+          colorScheme="blue"
           onClick={() => navigate({
             pathname: `/lab-request-sample/${id}`,
             search: `?procedure_id=${props.row.original.procedure_id}`,
           })}
+          pl={1}
+          leftIcon={(
+            <IconButton
+              size="xs"
+              ml={0}
+              bgColor="blue.400"
+              _hover={{
+                bgColor: 'blue.400',
+              }}
+            >
+              <FaSyringe
+                color="white"
+              />
+            </IconButton>
+          )}
         >
-          Collect Sample
+          Collect
         </Button>
       ),
     },

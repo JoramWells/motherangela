@@ -9,7 +9,7 @@ const router = express.Router();
 router.post('/add', addDiseasesDuplicates);
 router.get('/fetchAll', getAllDiseasesDuplicates);
 router.get('/detail/:id', getDiseasesDuplicatesDetail);
-router.put('/edit', editDiseasesDuplicates);
+router.put('/update/:id', editDiseasesDuplicates);
 router.delete('/delete/:id', deleteDiseasesDuplicates);
 
 module.exports = router;

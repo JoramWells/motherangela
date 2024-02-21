@@ -93,7 +93,6 @@ const profileData = [
 ];
 
 const RegisterItems = () => {
-  const [diseaseName, setDiseaseName] = useState(null);
   const [sideItem, setSideItem] = useState(0);
   const { pathname } = useLocation();
   const [searchParams] = useSearchParams();

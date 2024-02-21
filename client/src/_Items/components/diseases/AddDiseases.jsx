@@ -1,15 +1,20 @@
+/* eslint-disable consistent-return */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-multi-spaces */
 /* eslint-disable camelcase */
 import {
   Button,
+  HStack,
   VStack,
 } from '@chakra-ui/react';
-import {  useParams, useSearchParams } from 'react-router-dom';
+import {  useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import CustomInput from '../../../components/Forms/CustomInput';
-import { useGetDiseasesDuplicatesQuery, useUpdateDiseasesDuplicatesMutation } from '../../../api/diseasesDuplicates.api';
+import {
+  useAddDiseasesDuplicatesMutation, useDeleteDiseasesDuplicatesMutation,
+  useGetDiseasesDuplicatesQuery, useUpdateDiseasesDuplicatesMutation,
+} from '../../../api/diseasesDuplicates.api';
 
 // import { useAddVitalSignsMutation } from '../api/vitalSigns.api';
 
@@ -21,7 +26,37 @@ const AddDiseases = () => {
 
   const { data: diseaseData } = useGetDiseasesDuplicatesQuery(diseaseID);
 
-  const [updateDiseasesDuplicates] = useUpdateDiseasesDuplicatesMutation();
+  const [updateDiseasesDuplicates, { isLoading }] = useUpdateDiseasesDuplicatesMutation();
+  const [addDiseasesDuplicates,
+    { isLoading: isSavingDuplicates }] = useAddDiseasesDuplicatesMutation();
+
+  const [deleteDiseasesDuplicates,
+    { isLoading: isDeleting, data: deletingData }] = useDeleteDiseasesDuplicatesMutation();
+
+  console.log(deletingData);
+
+  const updateValues = {
+    id: diseaseID,
+    disease_name: diseaseName,
+  };
+
+  const inputValues = {
+    disease_name: diseaseName,
+  };
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoading) {
+      navigate('/diseases-duplicates');
+    }
+  }, [isLoading, navigate]);
+
+  useEffect(() => {
+    if (deletingData) {
+      return navigate('/diseases-duplicates');
+    }
+  }, [deletingData, navigate]);
 
   useEffect(() => {
     if (diseaseData) {
@@ -35,7 +70,7 @@ const AddDiseases = () => {
       w="45%"
             // boxShadow="lg"
       p={5}
-      spacing="1.3rem"
+      spacing="1.5rem"
       bgColor="white"
       rounded="lg"
       border="1px"
@@ -50,14 +85,47 @@ const AddDiseases = () => {
       />
 
       {/* save btn */}
-      <Button
-        size="md"
-        width="full"
-        colorScheme="blue"
-      >
-        {/* {isLoading ? 'loading' : 'Save'} */}
-        {diseaseID ? 'Update Disease Name' : 'Save Disease Name'}
-      </Button>
+
+      {diseaseID
+
+        ? (
+          <HStack
+            width="full"
+            justifyContent="flex-end"
+          >
+            <Button
+              size="sm"
+              variant="outline"
+              colorScheme="red"
+              isLoading={isDeleting}
+              onClick={() => deleteDiseasesDuplicates(diseaseID)}
+            >
+              Delete
+            </Button>
+            <Button
+              size="sm"
+              colorScheme="blue"
+              onClick={() => updateDiseasesDuplicates(updateValues)}
+              isLoading={isLoading}
+            >
+              Update
+            </Button>
+          </HStack>
+        )
+        : (
+          <Button
+            size="sm"
+            width="full"
+            colorScheme="blue"
+            onClick={diseaseID
+              ? () => updateDiseasesDuplicates(updateValues)
+              : () => addDiseasesDuplicates(inputValues)}
+            isLoading={isLoading || isSavingDuplicates}
+          >
+            {/* {isLoading ? 'loading' : 'Save'} */}
+            {diseaseID ? 'Update Disease Name' : 'Save Disease Name'}
+          </Button>
+        )}
     </VStack>
   );
 };

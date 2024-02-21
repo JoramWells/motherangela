@@ -1,4 +1,5 @@
 import {
+  FaBookMedical,
   FaCalendarTimes,
   FaCar,
   FaChild,
@@ -64,7 +65,9 @@ const SidebarListItems = () => {
           || pathname.includes('insurance')
           || pathname.includes('register-items')
           || pathname.includes('diseases-duplicates')
+          || pathname.includes('consultation-types')
           || pathname.includes('view-items')
+          || pathname.includes('add-lab-test')
         || pathname.includes('add-service')}
         onClick={onToggle}
         text="Administration"
@@ -76,10 +79,14 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Diseases', link: '/diseases-duplicates' },
           { id: nanoid(), title: 'Drugs', link: '/admin-drugs' },
           { id: nanoid(), title: 'Hospital Branch', link: '/general-store' },
+          { id: nanoid(), title: 'View Insurance Service Cost', link: '/insurance-service-cost-mapping' },
           { id: nanoid(), title: 'Insurances', link: '/admin-insurances' },
+          { id: nanoid(), title: 'Consultation Types Costing', link: '/consultation-types' },
           { id: nanoid(), title: 'Ministry Diseases', link: '/disease-ministry' },
           { id: nanoid(), title: 'Privileges', link: '/admin-privileges' },
           { id: nanoid(), title: 'Services', link: '/admin-services' },
+          { id: nanoid(), title: 'Register Lab Tests', link: '/add-lab-test/null' },
+          { id: nanoid(), title: 'Lab Sub-Tests Order', link: '/add-lab-sub-test/null' },
           { id: nanoid(), title: 'User Type', link: '/admin-user-type' },
           { id: nanoid(), title: 'Users', link: '/admin-users' },
 
@@ -243,6 +250,19 @@ const SidebarListItems = () => {
 
         ]}
         icon={<FaChild size={15} />}
+      />
+
+      <SidebarItemLink
+        selected={pathname === '/maternity-profile'
+          || pathname.includes('/diseases')}
+        onClick={onToggle}
+        text="Ministry of Health"
+        itemList={[
+          { id: nanoid(), title: 'MOH Reports', link: '/maternity-antenatal-profile' },
+          { id: nanoid(), title: 'ICD 10/Ministry Diseases', link: '/diseases' },
+
+        ]}
+        icon={<FaBookMedical size={15} />}
       />
 
       <SidebarItemLink

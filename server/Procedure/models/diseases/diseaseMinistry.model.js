@@ -2,7 +2,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../db/connect');
 
-const Diseases_ministry = sequelize.define('diseases_ministry', {
+const DiseasesMinistry = sequelize.define('diseases_ministry', {
   ministry_disease_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -18,6 +18,6 @@ const Diseases_ministry = sequelize.define('diseases_ministry', {
   },
 });
 
-module.exports = Diseases_ministry;
+module.exports = DiseasesMinistry;
 
 // has no classification and status

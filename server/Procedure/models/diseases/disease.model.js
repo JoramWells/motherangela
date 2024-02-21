@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../db/connect');
+const DiseasesMinistry = require('./diseaseMinistry.model');
 
 const Disease = sequelize.define('diseases', {
   disease_id: {
@@ -18,6 +19,7 @@ const Disease = sequelize.define('diseases', {
   },
 });
 
+Disease.belongsTo(DiseasesMinistry, { foreignKey: 'ministry_disease_id' });
 // create the pricelists model
 // sequelize.sync().then(()=>{
 //     console.log('Book table created')

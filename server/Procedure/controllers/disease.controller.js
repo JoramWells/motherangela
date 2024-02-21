@@ -3,6 +3,7 @@
 /* eslint-disable no-unused-vars */
 
 const Disease = require('../models/diseases/disease.model');
+const DiseasesMinistry = require('../models/diseases/diseaseMinistry.model');
 
 // diseases.belongsTo(Patient_details, { foreignKey: 'patient_id', as: 'patient_details' });
 // diseases.hasMany(Patient_details, { as: 'patients', foreignKey: 'patient_id' });
@@ -19,10 +20,18 @@ const addDisease = async (req, res, next) => {
 
 const getAllDiseases = async (req, res, next) => {
   try {
-    const diseases = await Disease.findAll();
+    const diseases = await Disease.findAll({
+      include: [
+        {
+          model: DiseasesMinistry,
+          attributes: ['ministry_disease_name'],
+        },
+      ],
+    });
     res.json(diseases);
     next();
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: 'Internal Server Error' });
     next(error);
   }

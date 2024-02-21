@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unstable-nested-components */
 import {
-  Box, Button, HStack, Text, VStack,
+  Box, Button, HStack, Input, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
 import { useMemo } from 'react';
@@ -54,7 +54,11 @@ const InsuranceServiceCostMapping = () => {
         header: 'Cost (KSH)',
         accessorKey: 'cost',
         enableSorting: false,
-        cell: (props) => <Text>{parseInt(props.getValue(), 10).toLocaleString()}</Text>,
+        cell: (props) => (
+          <Input
+            value={parseInt(props.getValue(), 10).toLocaleString()}
+          />
+        ),
 
       },
       {
@@ -80,8 +84,8 @@ const InsuranceServiceCostMapping = () => {
       <Box bgColor="white" w="full">
         <BreadCrumbNav link="/add-insurance" breadCrumbData={breadCrumbData} />
         <HStack w="full" mt={4} mb={2}>
-          <Text fontWeight="semibold" fontSize="xl" ml={2} color="gray.700">
-            Medication Service Cost Mappings
+          <Text fontWeight="semibold" fontSize="18px" ml={2} color="gray.700">
+            Insurance Service Cost Mappings
             {' '}
             (
             {subrowData?.length.toLocaleString()}
@@ -89,14 +93,7 @@ const InsuranceServiceCostMapping = () => {
           </Text>
         </HStack>
 
-        <Box
-          w="100%"
-          bgColor="white"
-          p={3}
-          h="89%"
-        >
-          <DataTable2 data={subrowData} columns={columns} />
-        </Box>
+        <DataTable2 data={subrowData} columns={columns} />
       </Box>
     </VStack>
   );

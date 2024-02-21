@@ -21,7 +21,7 @@ export const diseasesDuplicatesApi = createApi({
     }),
     updateDiseasesDuplicates: builder.mutation({
       query: ({ id, ...patch }) => ({
-        url: `update${id}`,
+        url: `update/${id}`,
         method: 'PUT',
         body: patch,
       }),
@@ -29,7 +29,7 @@ export const diseasesDuplicatesApi = createApi({
     deleteDiseasesDuplicates: builder.mutation({
       query(id) {
         return {
-          url: `delete${id}`,
+          url: `delete/${id}`,
           method: 'DELETE',
         };
       },

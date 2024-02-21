@@ -21,6 +21,8 @@ const Disease = () => {
 
   // const { data } = useSelector((state) => state.admission);
 
+  console.log(data);
+
   const columns = useMemo(
     () => [
       {
@@ -31,9 +33,8 @@ const Disease = () => {
       },
       {
         header: 'Ministry Disease',
-        accessorKey: 'ministry_disease_id',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        accessorKey: 'diseases_ministry',
+        cell: (props) => <Text>{props.getValue()?.ministry_disease_name}</Text>,
       },
       {
         header: 'ICD ten Code',

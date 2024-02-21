@@ -38,18 +38,23 @@ const getAllProcedureItem = async (req, res, next) => {
 const getProcedureItemById = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const procedure = await Procedure_item.findOne({
-      where: {
-        procedure_item_id: id,
-      },
-      include: [
-        {
-          model: Procedure_detail,
-          attributes: ['procedure_id', 'procedure_name'],
+    if (id !== 'null') {
+      const procedure = await Procedure_item.findOne({
+        where: {
+          procedure_item_id: id,
         },
-      ],
-    });
-    res.json(procedure);
+        include: [
+          {
+            model: Procedure_detail,
+            attributes: ['procedure_id', 'procedure_name'],
+          },
+        ],
+      });
+      res.json(procedure);
+    } else {
+      res.json();
+    }
+    next();
   } catch (error) {
     res.status(404).json(error.message);
   }
