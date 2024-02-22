@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/forbid-prop-types */
 import {
-  Box, Button, HStack, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, VStack,
+  Badge,
+  Box, Button, HStack, Table, TableContainer, Tag, Tbody, Td, Text, Th, Thead, Tr, VStack,
 } from '@chakra-ui/react';
 import {
   flexRender, getCoreRowModel, getFilteredRowModel,
@@ -14,6 +15,7 @@ import TableSearchInput from '../TableSearchInput';
 
 const DataTable2 = ({
   data, columns, searchQueryColumn, isTableHeight, hasPagination, hasSearch,
+  title,
 }) => {
   const [columnFilters, setColumnFilters] = useState([]);
 
@@ -31,6 +33,33 @@ const DataTable2 = ({
   });
   return (
     <>
+      <HStack
+        alignItems="center"
+        pl={3}
+        pt={6}
+        pb={3}
+        w="full"
+      >
+        <Text
+          fontSize="18px"
+          fontWeight="bold"
+          color="gray.700"
+        >
+          {title}
+          {' '}
+        </Text>
+        <Tag
+          rounded="full"
+        >
+          <Text
+            fontSize="14px"
+            fontWeight="bold"
+            color="gray.500"
+          >
+            {data?.length}
+          </Text>
+        </Tag>
+      </HStack>
       {hasSearch && (
       <TableSearchInput
         setColumFilters={setColumnFilters}
@@ -170,6 +199,7 @@ DataTable2.propTypes = {
   data: PropTypes.array,
   columns: PropTypes.array,
   searchQueryColumn: PropTypes.string,
+  title: PropTypes.string,
   isTableHeight: PropTypes.bool,
   hasPagination: PropTypes.bool,
   hasSearch: PropTypes.bool,
@@ -179,6 +209,7 @@ DataTable2.defaultProps = {
   data: [],
   columns: [],
   searchQueryColumn: 'first_name',
+  title: 'Title',
   isTableHeight: true,
   hasPagination: true,
   hasSearch: true,

@@ -2,10 +2,11 @@ import {
   FaBookMedical,
   FaCalendarTimes,
   FaCar,
+  FaCashRegister,
   FaChild,
   FaFileInvoiceDollar,
   FaFirstAid,
-  FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaMoneyCheck, FaPills,
+  FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaMoneyCheck, FaPiggyBank, FaPills,
   FaProcedures,
   FaRadiation, FaRegCheckCircle, FaRegMoneyBillAlt,
   FaStore, FaToolbox, FaTools, FaTrain, FaUser, FaUserNurse,
@@ -118,6 +119,23 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Patient Reports', link: '/patient-reports' },
         ]}
         icon={<FaCalendarTimes size={15} />}
+      />
+
+      {/*  */}
+      <SidebarItemLink
+        selected={
+          pathname.includes('/add-bank-account')
+          || pathname.includes('/hts')
+}
+        onClick={onToggle}
+        text="Banking"
+        itemList={[
+          { id: nanoid(), title: 'New Bank Account', link: '/add-bank-account' },
+          { id: nanoid(), title: 'View Bank Account', link: '/view-bank-account' },
+          { id: nanoid(), title: 'View Bank Account Transactions', link: '/view-bank-account-transactions' },
+          { id: nanoid(), title: 'Bank Account Reconciliation', link: '/bank-account-reconciliation' },
+        ]}
+        icon={<FaPiggyBank size={15} />}
       />
 
       {/*  */}
@@ -277,6 +295,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Procedure Reports', link: '/pharmeuticals' },
           { id: nanoid(), title: 'Triaged Patients', link: '/triaged-patients' },
           { id: nanoid(), title: 'Vital Signs & Allergies', link: '/vital-signs' },
+          { id: nanoid(), title: 'View Patient Monitoring Notes', link: '/patient-monitory-notes' },
 
         ]}
         icon={<FaUserNurse size={15} />}
@@ -358,6 +377,22 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Provident Fund Bracket', link: '/all-reports' },
         ]}
         icon={<FaHospitalAlt size={15} />}
+      />
+
+      <SidebarItemLink
+        selected={pathname === '/payroll-transactions' || pathname.includes('/payroll-employee-loan-details')
+          || pathname.includes('/payroll-employee-benefits')}
+        onClick={onToggle}
+        text="Petty Cash"
+        link="/payroll"
+        itemList={[
+          { id: nanoid(), title: 'Petty Cash Transaction', link: '/petty-cash-transaction' },
+          { id: nanoid(), title: 'Employee Loans', link: '/payroll-employee-loan-details' || pathname.includes('/add-patient') },
+          { id: nanoid(), title: 'Regular Time Details', link: '/all-reports' },
+          { id: nanoid(), title: 'Overtime', link: '/all-reports' },
+          { id: nanoid(), title: 'Tardiness', link: '/all-reports' },
+        ]}
+        icon={<FaCashRegister size={15} />}
       />
 
       <SidebarItemLink

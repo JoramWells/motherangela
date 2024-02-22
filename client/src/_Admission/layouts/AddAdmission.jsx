@@ -12,7 +12,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import {
   useCallback, useEffect, useMemo, useState,
@@ -27,6 +27,8 @@ import { useGetAllAdmissionCategoriesQuery } from '../../api/admissionCategory.a
 import { useGetUsersQuery } from '../../api/users.api';
 import { useAddAdmissionMutation } from '../../api/admissions.api';
 import { useAddAdmissionBedAllocationMutation } from '../../api/admission/admissionBedAllocation.api';
+import CustomSelect from '../../components/Forms/CustomSelect';
+import CustomInput from '../../components/Forms/CustomInput';
 // import { useAddVitalSignsMutation } from '../api/vitalSigns.api';
 
 const AddAdmission = () => {
@@ -89,7 +91,11 @@ const AddAdmission = () => {
     data: admissionSaveData,
   }] = useAddAdmissionMutation();
 
-  console.log(admissionSaveData);
+  useEffect(() => {
+    if (admissionSaveData) {
+      navigate(-1);
+    }
+  }, [admissionSaveData, navigate]);
 
   const wardsOptions = useCallback(() => data?.map((item) => ({
     value: item.ward_id, label: item.ward_description,
@@ -163,7 +169,7 @@ const AddAdmission = () => {
       // alignItems="center"
       // justifyContent="center"
       bgColor="gray.50"
-      mt="60px"
+      mt="50px"
       p={3}
     >
       <HStack
@@ -187,9 +193,9 @@ const AddAdmission = () => {
         // boxShadow="lg"
         p={5}
         rounded="lg"
-        border="1px"
-        borderColor="gray.200"
-        spacing="1.3rem"
+        // border="1px"
+        // borderColor="gray.200"
+        spacing="1.5rem"
       >
         <HStack w="full" justifyContent="space-between">
           <IconButton
@@ -207,34 +213,21 @@ const AddAdmission = () => {
           </Text>
         </HStack>
         {/* sub item */}
-        <FormControl>
-          <FormLabel
-            fontSize="14px"
-            fontWeight="bold"
-          >
-            Select Doctor
-          </FormLabel>
-          <Select
-            options={userDataOptions()}
-            value={doctor_id}
-            onChange={setDoctor_id}
-          />
-        </FormControl>
+        <CustomSelect
+          label="Doctor"
+          options={userDataOptions()}
+          value={doctor_id}
+          onChange={setDoctor_id}
+        />
 
         {/* item code prefix */}
-        <FormControl>
-          <FormLabel
-            fontSize="14px"
-            fontWeight="bold"
-          >
-            Select Ward
-          </FormLabel>
-          <Select
-            options={wardsOptions()}
-            onChange={setWard_id}
-            value={ward_id}
-          />
-        </FormControl>
+
+        <CustomSelect
+          label="Ward"
+          options={wardsOptions()}
+          onChange={setWard_id}
+          value={ward_id}
+        />
 
         <FormControl>
           <HStack
@@ -243,7 +236,7 @@ const AddAdmission = () => {
           >
             <FormLabel
               fontSize="14px"
-              fontWeight="bold"
+              // fontWeight="bold"
               pt={2}
             >
               Select Bed Number
@@ -266,59 +259,36 @@ const AddAdmission = () => {
           />
         </FormControl>
 
-        <FormControl>
-          <FormLabel
-            fontSize="14px"
-            fontWeight="bold"
-          >
-            Select Admission Category
-          </FormLabel>
-          <Select
-            options={admissionCategoryOptions()}
-            value={admission_category_id}
-            onChange={setAdmission_category_id}
-          />
-        </FormControl>
-        <FormControl>
+        <CustomSelect
+          label="Admission Category"
+          options={admissionCategoryOptions()}
+          value={admission_category_id}
+          onChange={setAdmission_category_id}
+        />
 
-          <FormLabel
-            fontSize="14px"
-            fontWeight="bold"
-          >
-            Referral Type
-          </FormLabel>
-          <Select
-            options={referralTypeOptions}
-            value={referralType}
-            onChange={setReferralType}
-          />
-        </FormControl>
+        <CustomSelect
+          label="Referral Type"
+          options={referralTypeOptions}
+          value={referralType}
+          onChange={setReferralType}
+        />
 
-        <FormControl>
-
-          <FormLabel
-            fontSize="14px"
-            fontWeight="bold"
-          >
-            Branch
-          </FormLabel>
-          <Input />
-        </FormControl>
+        <CustomInput label="Branch" />
 
         {/* save btn */}
         <Button
           size="md"
           width="full"
-          // colorScheme="blue"
-          bgColor="blue.700"
+          colorScheme="blue"
           color="white"
           // bgGradient={'linear'}
           onClick={() => addAdmission(inputValues)}
-          _hover={{
-            bgColor: 'blue.600',
-          }}
+          // fontWeight="normal"
+          fontSize="16px"
+          rightIcon={<FaArrowRight />}
+          isLoading={admissionLoading || admissionBedAllocationLoading}
         >
-          {admissionLoading || admissionBedAllocationLoading ? 'loading' : 'Save'}
+          New Patient Admission
         </Button>
       </VStack>
     </VStack>

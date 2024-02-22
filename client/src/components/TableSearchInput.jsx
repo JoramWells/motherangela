@@ -65,12 +65,14 @@ const TableSearchInput = ({ columnFilters, setColumFilters, searchQueryColumn })
       <HStack>
         <Button
           size="sm"
+          color="gray.500"
           leftIcon={<FaPrint />}
         >
           Print
         </Button>
         <Button
           size="sm"
+          color="gray.500"
           leftIcon={<FaDownload />}
         >
           Download

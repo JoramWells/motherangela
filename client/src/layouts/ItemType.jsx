@@ -6,7 +6,7 @@ import {
 // import { useEffect } from "react"
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import PriceListTable from '../components/tables/PriceListTable';
+import DataTable2 from '../components/tables/DataTable';
 // import { getAllItemTypes } from "../_reducers/itemTypeSlice"
 
 const columns = [
@@ -58,7 +58,7 @@ const ItemType = () => {
         borderColor="gray.100"
         rounded="lg"
       >
-        <PriceListTable data={subrowData} columns={columns} />
+        <DataTable2 data={subrowData} columns={columns} />
       </Box>
     </VStack>
   );

@@ -7,57 +7,14 @@ import {
 } from '@chakra-ui/react';
 // import axios from "axios"
 import {
-  FaAudible,
-  FaBoxOpen, FaFileDownload, FaHandshake, FaPrint, FaSpeakerDeck, FaUserNurse,
+  FaBoxOpen, FaCheck, FaInfoCircle,
 } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { nanoid } from '@reduxjs/toolkit';
 import moment from 'moment/moment';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
-import { useGetPatientsQuery } from '../../api/patients.api';
 import { useGetAppointmentsQuery } from '../../api/appointments.api';
-
-const outPatientList = [
-
-  {
-    id: nanoid(),
-    text: 'ANC',
-  },
-  {
-    id: nanoid(),
-    text: 'Cervical Screening',
-  },
-  {
-    id: nanoid(),
-    text: 'Child Health Information',
-  },
-  {
-    id: nanoid(),
-    text: 'Child Weight Gaps',
-  },
-  {
-    id: nanoid(),
-    text: 'Child Height Gaps',
-  },
-  {
-    id: nanoid(),
-    text: 'FP',
-  },
-  {
-    id: nanoid(),
-    text: 'PNC',
-  },
-  {
-    id: nanoid(),
-    text: 'FP',
-  },
-  {
-    id: nanoid(),
-    text: 'SGBV',
-  },
-];
 
 const UserNameAvatar = ({ fullName }) => (
   <HStack>
@@ -117,24 +74,45 @@ const PatientsTriaged = () => {
         // accessorKey: 'tem',
         cell: (props) => (
           <Box>
-            {!props.row.original.temperature
+            {!props.row.original.vitalSigns.length > 0
               ? (
                 <Button
                   variant="ghost"
+                  // bgColor={}
                   colorScheme="orange"
-                  size="sm"
-                  onClick={() => navigate(`/add-vitals/${props.row.original.patient_id}`)}
+                  size="xs"
+                  onClick={() => navigate({
+                    pathname: `/add-vitals/${props.row.original.patient_id}`,
+                    search: `?appointment_id=${props.row.original.appointment_id}`,
+                  })}
+                  leftIcon={<FaInfoCircle />}
                 >
-                  NOT RECORDED
+                  RECORD
                 </Button>
-              ) : <Button size="sm" colorScheme="green" variant="ghost">RECORDED</Button>}
+              ) : (
+                <Button
+                  size="xs"
+                  colorScheme="green"
+                  variant="ghost"
+                  leftIcon={<FaCheck />}
+                >
+                  RECORDED
+                </Button>
+              )}
           </Box>
         ),
 
       },
       {
         header: 'Action',
-        cell: (props) => (<Button onClick={() => navigate(`/add-allergies/${props.row.original.patient_id}`)}>Record Allergies</Button>),
+        cell: (props) => (
+          <Button
+            size="sm"
+            onClick={() => navigate(`/add-allergies/${props.row.original.patient_id}`)}
+          >
+            Record Allergies
+          </Button>
+        ),
       },
     ],
 
@@ -164,36 +142,6 @@ const PatientsTriaged = () => {
       <Box bgColor="white" w="full">
         <BreadCrumbNav link="/add-patient" />
 
-        <HStack
-          w="100%"
-          justifyContent="space-between"
-          bgColor="white"
-          p={3}
-          rounded="lg"
-          mt={2}
-        >
-          <Text fontSize="xl" fontWeight="bold">
-            Triaged Patients
-            <span style={{
-              fontSize: '18px',
-              // fontWeight: 'normal',
-              color: 'gray',
-            }}
-            >
-              {' '}
-              (
-              {filteredData?.length}
-              )
-
-            </span>
-          </Text>
-          <HStack>
-            <Button leftIcon={<FaPrint />}>Print Report</Button>
-
-            <Button leftIcon={<FaFileDownload />}>Download</Button>
-
-          </HStack>
-        </HStack>
         {filteredData?.length === 0 ? (
           <VStack
             p={2}
@@ -218,14 +166,11 @@ const PatientsTriaged = () => {
           </VStack>
         )
           : (
-            <Box
-              w="100%"
-              bgColor="white"
-              p={3}
-              h="89%"
-            >
-              <DataTable2 data={filteredData} columns={columnsx} />
-            </Box>
+            <DataTable2
+              data={filteredData}
+              columns={columnsx}
+              title="Triage Patients"
+            />
           )}
       </Box>
     </VStack>

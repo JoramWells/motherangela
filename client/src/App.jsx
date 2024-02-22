@@ -24,7 +24,6 @@ import Insurance from './_Insurance/layouts/Insurances';
 import AddInsurance from './_Insurance/layouts/AddInsurance';
 import UserTypes from './_User/layout/UserTypes';
 import Radiology from './_Radiology/layouts/Radiology';
-import NursingStation from './layouts/NursingStation';
 
 import AddAdmissionCategory from './_Admission/layouts/AddAdmissionCategory';
 import AdmissionType from './_Admission/layouts/AdmissionType';
@@ -79,6 +78,7 @@ import ConsultationCreditAccounts from './_ChartOfAccounts/layouts/ConsultationC
 import ItemsRoutes from './routes/admin/Items.routes';
 import LabRoutes from './routes/admin/Lab.routes';
 import DiseasesDuplicates from './_Diseases/layouts/DiseasesDuplicates';
+import NursingStation from './_Patient/layouts/NursingStation';
 
 // Medication
 const MedicationCategory = lazy(() => import('./_Medication/layouts/MedicationCategory'));

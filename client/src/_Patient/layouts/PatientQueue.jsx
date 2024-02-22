@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react';
 // import axios from "axios"
 import {
-  FaBoxOpen, FaCheckCircle, FaInfoCircle,
+  FaBoxOpen, FaCheck, FaCheckCircle, FaInfoCircle,
 } from 'react-icons/fa';
 import { useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +27,7 @@ const UserNameAvatar = ({ fullName }) => (
     <Text
       textTransform="uppercase"
       fontWeight="bold"
-      color="gray.700"
+      color="gray.600"
     >
       {fullName}
 
@@ -122,7 +122,7 @@ const PatientQueue = () => {
                   size="xs"
                   colorScheme="green"
                   variant="ghost"
-                  leftIcon={<FaCheckCircle />}
+                  leftIcon={<FaCheck />}
                 >
                   RECORDED
                 </Button>
@@ -185,7 +185,6 @@ const PatientQueue = () => {
       w="full"
       bgColor="gray.50"
       p={3}
-      h="95vh"
       position="relative"
     >
       <Box bgColor="white" w="full">
@@ -215,14 +214,8 @@ const PatientQueue = () => {
           </VStack>
         )
           : (
-            <Box
-              w="100%"
-              bgColor="white"
-              p={3}
-              h="89%"
-            >
-              <DataTable2 data={filteredData || []} columns={columnsx} />
-            </Box>
+
+            <DataTable2 data={filteredData || []} columns={columnsx} />
           )}
       </Box>
     </VStack>

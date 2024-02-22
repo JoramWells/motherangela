@@ -3,7 +3,7 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
-import PrivilegeTable from '../components/tables/PrivilegeTable';
+import DataTable2 from '../components/tables/DataTable';
 
 const columns = [
   {
@@ -34,7 +34,7 @@ const Privileges = () => {
         p={3}
       />
       <Box w="50%" border="1px" borderColor="gray.100" rounded="lg">
-        <PrivilegeTable data={subrowData} columns={columns} />
+        <DataTable2 data={subrowData} columns={columns} />
       </Box>
     </VStack>
   );

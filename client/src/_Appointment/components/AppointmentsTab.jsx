@@ -76,16 +76,9 @@ const AppointmentsTab = () => {
     >
       <HStack
         w="full"
-        justify="space-between"
-        padding={2}
+        justify="flex-end"
+        // padding={2}
       >
-        <Text
-          fontSize="18px"
-          color="gray.700"
-          fontWeight="bold"
-        >
-          All
-        </Text>
 
         <HStack>
           <Menu>
@@ -103,6 +96,8 @@ const AppointmentsTab = () => {
             </MenuButton>
             <MenuList
               p="5px"
+              boxShadow="lg"
+              border={0}
             >
               <MenuItem>All</MenuItem>
               <MenuItem>Today</MenuItem>

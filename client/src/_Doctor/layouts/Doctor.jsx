@@ -4,7 +4,6 @@
 /* eslint-disable react/prop-types */
 import {
   Avatar,
-  Box,
   Button, ButtonGroup, HStack,
   Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack,
 } from '@chakra-ui/react';
@@ -15,18 +14,13 @@ import {
 } from 'react-router-dom';
 
 import { nanoid } from '@reduxjs/toolkit';
-import moment from 'moment/moment';
-import { FaPlus } from 'react-icons/fa';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import VitalSigns from '../components/VitalSigns';
 import { useGetAppointmentDetailByIDQuery, useGetAppointmentQuery } from '../../api/appointments.api';
-import { useGetInternalPharmacyRequestQuery } from '../../_Pharmacy/api/internalPharmacyRequest.api';
 import InternalRequests from '../components/InternalRequests';
-import PatientDetailAppointment from '../../_Patient/layouts/PatientDetailAppointment';
 import PatientDetailAdmission from '../../_Patient/layouts/PatientDetailAdmission';
 import AppointmentsTab from '../../_Appointment/components/AppointmentsTab';
 import ProcedureTab from '../../_Procedure/components/ProcedureTab';
-import CustomSelect from '../../components/Forms/CustomSelect';
 
 const tabList = [
   { id: nanoid(), text: 'Admissions' },
@@ -45,7 +39,6 @@ const Doctor = () => {
   const navigate = useNavigate();
 
   const patient_id = searchParams.get('patient_id');
-  const { data: pharmacyRequestData } = useGetInternalPharmacyRequestQuery(patient_id);
   const { data: appointmentsData } = useGetAppointmentDetailByIDQuery(patient_id);
 
   const breadCrumbData = [
@@ -121,7 +114,10 @@ const Doctor = () => {
       <Tabs
         bgColor="white"
         color="gray.500"
-        variant="enclosed"
+        // variant="enclosed"
+        // border={0}
+        // border="0"
+        // borderBottom={0}
         _activeStep={{
           fontWeight: 'bold',
         }}
@@ -138,9 +134,9 @@ const Doctor = () => {
                 // bgColor="white"
               _selected={{
                 bgColor: 'white',
-                border: '1px',
+                // border: '1px',
                 borderColor: 'gray.200',
-                borderBottom: '0',
+                borderBottom: '2px',
                 color: 'blue.500',
                 fontWeight: 'bold',
               }}
