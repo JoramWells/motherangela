@@ -5,6 +5,8 @@ const sequelize = require('../../db/connect');
 const Patient = require('../patient/patients.model');
 const InsuranceDetail = require('../insurance/insuranceDetail.model');
 const Users = require('../user/user.model');
+const ConsultationTypesGroup = require('../consultation/consultationTypeGroups.model');
+const ConsultationTypesSubGroups = require('../consultation/consultationTypeSubGroups.model');
 
 const Appointments2 = sequelize.define('appointments2', {
   appointment_id: {
@@ -78,7 +80,7 @@ const Appointments2 = sequelize.define('appointments2', {
     type: DataTypes.STRING,
   },
   consultation_type_sub_group_id: {
-    type: DataTypes.STRING,
+    type: DataTypes.BIGINT,
   },
   referral_type_id: {
     type: DataTypes.INTEGER,
@@ -109,6 +111,7 @@ const Appointments2 = sequelize.define('appointments2', {
 
 Appointments2.belongsTo(Patient, { foreignKey: 'patient_id' });
 Appointments2.belongsTo(Users, { foreignKey: 'doctor_id', targetKey: 'user_id' });
+Appointments2.belongsTo(ConsultationTypesSubGroups, { foreignKey:'consultation_type_sub_group_id'})
 // Patient.hasMany(Appointments2, { foreignKey: 'patient_id' });
 Appointments2.belongsTo(InsuranceDetail, { foreignKey: 'reference_account_id', targetKey: 'insurance_id' });
 

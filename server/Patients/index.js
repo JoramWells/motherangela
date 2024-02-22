@@ -5,6 +5,7 @@ const cors = require('cors');
 
 const sequelize = require('./db/connect');
 const patientRoutes = require('./routes/patient.routes');
+const clusterMiddleware = require('./middleware/clusterMiddleware');
 
 const app = express();
 
@@ -12,6 +13,8 @@ const PORT = process.env.PORT || 5003;
 const corsOption = {
   origin: ['http://localhost:3000'],
 };
+
+app.use(clusterMiddleware);
 
 app.use(express.json());
 app.use(express.urlencoded({

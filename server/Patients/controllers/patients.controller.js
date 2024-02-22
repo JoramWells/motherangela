@@ -28,7 +28,7 @@ const addPatients = async (req, res, next) => {
     // the reference account_id is the id of the insurance-service-cost-mapping
     const reference_account_id = insuranceAccount?.value;
 
-    console.log(reference_account_id);
+    console.log(req.body);
     // await producer.send({
     //   topic: 'register-patient',
     //   messages: [

@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable indent */
 /* eslint-disable no-unused-vars */
 /* eslint-disable linebreak-style */
@@ -13,6 +14,7 @@ const diseaseRoutes = require('./routes/diseases/disease.routes');
 const diseaseDuplicatesRoutes = require('./routes/diseases/diseaseDuplicates.routes');
 const diseaseMinistryRoutes = require('./routes/diseases/diseaseMinistry.routes');
 const internalPharmacyRequestRoutes = require('./routes/internalPharmacyRequest.routes');
+const clusterMiddleware = require('./middleware/clusterMiddleware');
 
 const app = express();
 
@@ -20,6 +22,8 @@ const PORT = process.env.PORT || 5011;
 const corsOption = {
     origin: ['*'],
 };
+
+app.use(clusterMiddleware);
 
 app.use(express.json());
 app.use(express.urlencoded({

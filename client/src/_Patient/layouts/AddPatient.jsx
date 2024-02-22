@@ -1,5 +1,5 @@
-/* eslint-disable no-nested-ternary */
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-mixed-operators */
 /* eslint-disable camelcase */
 import {
@@ -103,7 +103,7 @@ const AddPatient = () => {
 
   const [addPatient, { isLoading, data }] = useAddPatientMutation();
   const [addPersonalAccountCharge,
-    { isLoading: isLoadingCharges }] = useAddPersonalAccountChargeMutation();
+    { isLoading: isLoadingCharges, data: dataCharges }] = useAddPersonalAccountChargeMutation();
 
   const chargesInputValues2 = useMemo(() => [
     {
@@ -171,26 +171,17 @@ const AddPatient = () => {
       }
     }
 
-    // if (!isLoading && !isLoadingCharges) {
-    //   navigate(-1);
-    // }
+    if (dataCharges) {
+      navigate(-1);
+    }
   }, [data, addPersonalAccountCharge, cashInputValues,
     insuranceAccount, chargesInputValues2, patientID,
     chargesInputValues, searchParams, isLoading,
-    isLoadingCharges, navigate,
-
-  ]);
+    isLoadingCharges, dataCharges, navigate]);
 
   const handleSubmit = useCallback(() => {
     addPatient(inputValues[0]);
-
-    // timeout
-    // setTimeout(() => {
-    //   addPersonalAccountCharge(chargesInputValues);
-    // }, 3000);
-  }, [addPatient,
-    // appointmentID, patientID,
-    inputValues,
+  }, [addPatient, inputValues,
   ]);
 
   return (
@@ -274,9 +265,9 @@ const AddPatient = () => {
               colorScheme="green"
               onClick={() => handleSubmit()}
               size="sm"
-              isLoading={isLoading || isLoadingCharges}
+              isLoading={isLoadingCharges}
             >
-              {isLoading ? 'Saving Patient' : isLoadingCharges ? 'Saving Payment' : 'Complete'}
+              Complete
 
             </Button>
           </HStack>

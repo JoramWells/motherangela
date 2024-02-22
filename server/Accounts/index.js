@@ -3,6 +3,8 @@
 /* eslint-disable linebreak-style */
 const express = require('express');
 const cors = require('cors');
+const cluster = require('cluster');
+const cpus = require('os').cpus().length;
 
 const sequelize = require('./db/connect');
 const accountTypeRoutes = require('./routes/accountType.routes');
@@ -15,8 +17,9 @@ const accountingJournal = require('./routes/accountingJournal.routes')
 const accountingAccountDetails = require('./routes/accountingAccountDetails.routes')
 const serviceTypeRoutes = require('./routes/serviceType.routes')
 const consultationTypeRoutes = require('./routes/consultation/consultationType.routes');
+const consultationTypeGroupRoutes = require('./routes/consultation/consultationTypeGroup.routes');
+const consultationTypeSubGroupRoutes = require('./routes/consultation/consultationTypeSubGroup.routes');
 const consultationGroupsWithCreditAccountsRoutes = require('./routes/consultation/consultationGroupsWithCreditAccounts.routes');
-
 
 const app = express();
 
@@ -24,6 +27,20 @@ const PORT = process.env.PORT || 5010;
 const corsOption = {
     origin: ['*'],
 };
+
+if (cluster.isMaster) {
+    console.log(`Master ${process.pid} is running`);
+
+    // Fork workers
+    for (let i = 0; i < cpus; i++) {
+        cluster.fork();
+    }
+
+    cluster.on('exit', (worker, code, signal) => {
+        console.log(`Worker ${worker.process.pid} died`);
+        // You may choose to respawn the worker here if necessary
+    });
+} else {
 
 app.use(express.json());
 app.use(express.urlencoded({
@@ -43,6 +60,8 @@ app.use('/cost-centre', accountingCostCentre);
 app.use('/stores', accountingStore);
 app.use('/service-types', serviceTypeRoutes);
 app.use('/consultation-type', consultationTypeRoutes);
+app.use('/consultation-type-groups', consultationTypeGroupRoutes);
+app.use('/consultation-type-sub-groups', consultationTypeSubGroupRoutes);
 app.use('/consultation-groups-with-credit-accounts', consultationGroupsWithCreditAccountsRoutes);
 
 // app.use((err, req, res, next) => {
@@ -64,3 +83,4 @@ testConnection();
 app.listen(PORT, () => {
     console.log(`App running on http://localhost:${PORT}`);
 });
+}

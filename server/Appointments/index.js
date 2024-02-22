@@ -3,10 +3,13 @@
 /* eslint-disable linebreak-style */
 const express = require('express');
 const cors = require('cors');
+const cluster = require('cluster');
+const cpus = require('os').cpus().length;
 
 const sequelize = require('./db/connect');
 const appointmentRoutes = require('./routes/appointment.routes');
 const vitalsSignsRoutes = require('./routes/vitals.routes');
+const clusterMiddleware = require('./middleware/clusterMiddleware');
 
 const app = express();
 
@@ -15,33 +18,48 @@ const corsOption = {
     origin: ['*'],
 };
 
-app.use(express.json());
-app.use(express.urlencoded({
-    extended: true,
-}));
+if (cluster.isMaster) {
+    console.log(`Master ${process.pid} is running`);
 
-// enable cors
-app.use(cors());
+    // Fork workers
+    for (let i = 0; i < cpus; i++) {
+        cluster.fork();
+    }
 
-app.use('/appointment', appointmentRoutes);
-app.use('/vital-signs', vitalsSignsRoutes);
-
-// app.use((err, req, res, next) => {
-//   const errStatus = err.status || 500;
-//   const errMessage = err.message || 'Something went wrong';
-//   return res.status(errStatus).json(errMessage);
-// });
-
-const testConnection = async () => {
-    await sequelize.authenticate().then(() => {
-        console.log('Connected to database successfully');
-    }).catch((error) => {
-        console.error('Unable to connect to database: ', error);
+    cluster.on('exit', (worker, code, signal) => {
+        console.log(`Worker ${worker.process.pid} died`);
+        // You may choose to respawn the worker here if necessary
     });
-};
+} else {
 
-testConnection();
+    app.use(express.json());
+    app.use(express.urlencoded({
+        extended: true,
+    }));
 
-app.listen(PORT, () => {
-    console.log(`App running on http://localhost:${PORT}`);
-});
+    // enable cors
+    app.use(cors());
+
+    app.use('/appointment', appointmentRoutes);
+    app.use('/vital-signs', vitalsSignsRoutes);
+
+    // app.use((err, req, res, next) => {
+    //   const errStatus = err.status || 500;
+    //   const errMessage = err.message || 'Something went wrong';
+    //   return res.status(errStatus).json(errMessage);
+    // });
+
+    const testConnection = async () => {
+        await sequelize.authenticate().then(() => {
+            console.log('Connected to database successfully');
+        }).catch((error) => {
+            console.error('Unable to connect to database: ', error);
+        });
+    };
+
+    testConnection();
+
+    app.listen(PORT, () => {
+        console.log(`App running on http://localhost:${PORT}`);
+    });
+}

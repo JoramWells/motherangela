@@ -56,6 +56,8 @@ import {
 } from './api/consultation/consultationTypesWitCreditAccounts';
 import { admissionBedAllocationApi } from './api/admission/admissionBedAllocation.api';
 import { diseasesDuplicatesApi } from './api/diseasesDuplicates.api';
+import { consultationTypeGroupApi } from './api/consultation/consultationTypeGroup.api';
+import { consultationTypeSubGroupApi } from './api/consultation/consultationTypeSubGroup.api';
 
 export const store = configureStore({
   reducer: {
@@ -78,6 +80,8 @@ export const store = configureStore({
     [creditPaymentApi.reducerPath]: creditPaymentApi.reducer,
     [companyApi.reducerPath]: companyApi.reducer,
     [consultationTypeApi.reducerPath]: consultationTypeApi.reducer,
+    [consultationTypeGroupApi.reducerPath]: consultationTypeGroupApi.reducer,
+    [consultationTypeSubGroupApi.reducerPath]: consultationTypeSubGroupApi.reducer,
     [medicationApi.reducerPath]: medicationApi.reducer,
     [medicationCategoryApi.reducerPath]: medicationCategoryApi.reducer,
     [medicationPurchasesApi.reducerPath]: medicationPurchasesApi.reducer,
@@ -136,6 +140,8 @@ export const store = configureStore({
     .concat(creditPaymentApi.middleware)
     .concat(companyApi.middleware)
     .concat(consultationTypeApi.middleware)
+    .concat(consultationTypeGroupApi.middleware)
+    .concat(consultationTypeSubGroupApi.middleware)
     .concat(medicationApi.middleware)
     .concat(medicationCategoryApi.middleware)
     .concat(medicationPurchasesApi.middleware)

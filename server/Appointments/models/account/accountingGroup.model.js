@@ -3,15 +3,18 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../db/connect');
 
-const ConsultationTypesGroup = sequelize.define('consultation_types_groups', {
-  consultation_type_group_id: {
-    type: DataTypes.BIGINT,
+const AccountingGroups = sequelize.define('accounting_groups', {
+  account_group_id: {
+    type: DataTypes.INTEGER,
     primaryKey: true,
   },
-  consultation_type_group_description: {
+  account_group_description: {
     type: DataTypes.STRING,
   },
+  parent_account_group_id: {
+    type: DataTypes.INTEGER,
+  },
 });
-module.exports = ConsultationTypesGroup;
+module.exports = AccountingGroups;
 
 // has no classification and status

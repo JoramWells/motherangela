@@ -7,16 +7,39 @@ import {
   Box, Button, HStack, IconButton, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text, VStack,
 } from '@chakra-ui/react';
 import moment from 'moment/moment';
-import { useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import {
   FaChevronCircleDown, FaEllipsisH, FaFilter, FaPlus,
 } from 'react-icons/fa';
+import Select from 'react-select';
 import DataTable2 from '../../components/tables/DataTable';
 import { useGetAppointmentDetailByIDQuery } from '../../api/appointments.api';
+import { useGetAllConsultationTypeGroupsQuery } from '../../api/consultation/consultationTypeGroup.api';
+import { useGetAllConsultationTypeSubGroupsQuery } from '../../api/consultation/consultationTypeSubGroup.api';
+
+const selectStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    minHeight: '38px',
+    height: '38px',
+    // backgroundColor: 'whitesmoke',
+    border: '2px solid whitesmoke',
+    paddingBottom: '5px',
+    alignItems: 'center',
+    display: 'flex',
+    borderRadius: '8px',
+    width: '150px',
+    fontWeight: 'bold',
+  }),
+  input: (provided) => ({
+    ...provided,
+  }),
+};
 
 const AppointmentsTab = () => {
   const navigate = useNavigate();
+  const [clinicType, setClinicType] = useState('');
   const [searchParams] = useSearchParams();
 
   const { id: appointment_id } = useParams();
@@ -24,6 +47,18 @@ const AppointmentsTab = () => {
   //   get patient_id from search params
   const patient_id = searchParams.get('patient_id');
   const { data: appointmentsData } = useGetAppointmentDetailByIDQuery(patient_id);
+  const { data: clinicData } = useGetAllConsultationTypeSubGroupsQuery();
+
+  const clinicOption = useCallback(() => clinicData?.map((item) => ({
+    value: item.consultation_type_sub_group_id, label: item.consultation_type_sub_group_description,
+  })), [clinicData]);
+
+  const handleDataUpdate = () => {
+    console.log('updated data');
+  };
+
+  console.log(appointmentsData);
+
   const columns = useMemo(
     () => [
       {
@@ -114,8 +149,18 @@ const AppointmentsTab = () => {
               </MenuItem>
             </MenuList>
           </Menu>
+
+          <Select
+            value={clinicType}
+            onChange={(value) => setClinicType(value)}
+            styles={selectStyles}
+            options={clinicOption()}
+            placeholder="Clinic Type"
+          />
+
           <Button
             size="sm"
+            height="37px"
             border="2px"
             borderColor="blue.500"
             //   rounded="full"
@@ -137,6 +182,7 @@ const AppointmentsTab = () => {
           </Button>
           <Button
             size="sm"
+            height="37px"
             border="2px"
             borderColor="blue.500"
             //   rounded="full"

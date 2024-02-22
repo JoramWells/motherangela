@@ -59,12 +59,12 @@ const Doctor = () => {
     <VStack
       h="100vh"
       w="full"
-      mt="65px"
+      mt="50px"
       bgColor="gray.50"
       alignItems="center"
       // justifyContent="center"
       spacing="1rem"
-      p={3}
+      p={2}
     >
       <HStack
         w="full"

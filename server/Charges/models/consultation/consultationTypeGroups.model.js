@@ -5,7 +5,7 @@ const sequelize = require('../../db/connect');
 
 const ConsultationTypesGroup = sequelize.define('consultation_types_groups', {
   consultation_type_group_id: {
-    type: DataTypes.BIGINT,
+    type: DataTypes.INTEGER,
     primaryKey: true,
   },
   consultation_type_group_description: {
