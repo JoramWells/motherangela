@@ -6,7 +6,7 @@ const Patient = require('../patient/patients.models');
 const InsuranceDetail = require('../insurance/insuranceDetail.model');
 const Users = require('../user/user.model');
 
-const Appointments2 = sequelize.define('appointments2', {
+const Appointments2 = sequelize.define('appointments', {
   appointment_id: {
     type: DataTypes.UUID,
     primaryKey: true,

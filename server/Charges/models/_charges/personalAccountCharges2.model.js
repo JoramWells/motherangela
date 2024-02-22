@@ -2,6 +2,7 @@
 const { DataTypes, UUIDV4 } = require('sequelize');
 const sequelize = require('../../db/connect');
 const Patient = require('../patient/patients.models');
+const Patient_details = require('../patient/patients.models');
 
 const PersonalAccountCharge = sequelize.define('personal_account_charge', {
   personal_account_charge_id: {
@@ -94,6 +95,6 @@ const PersonalAccountCharge = sequelize.define('personal_account_charge', {
 // }).catch((error) => {
 //   console.error('Unable to create table :', error);
 // });
-PersonalAccountCharge.belongsTo(Patient, { foreignKey: 'patient_id' });
+PersonalAccountCharge.belongsTo(Patient_details, { foreignKey: 'patient_id_pac' });
 
 module.exports = PersonalAccountCharge;

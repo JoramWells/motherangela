@@ -209,9 +209,12 @@ const PatientQueue = () => {
         <HStack
           w="full"
           justifyContent="flex-end"
+          p={2}
         >
           <IconButton
             onClick={onOpen}
+            size="sm"
+            variant="outline"
           >
             <FaFilter />
           </IconButton>

@@ -9,11 +9,12 @@ const Appointments2 = require('../appointment/appointments2.models');
 const WardBed = require('../ward/wardBed.model');
 const Wards = require('../ward/ward.model');
 
-const Admissions2 = sequelize.define('admissions2', {
+const Admissions2 = sequelize.define('admissions', {
   admission_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     primaryKey: true,
-    defaultValue: UUIDV4,
+    // defaultValue: UUIDV4,
+    autoIncrement: true,
   },
   appointment_id: {
     type: DataTypes.UUID,

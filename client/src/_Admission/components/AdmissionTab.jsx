@@ -38,7 +38,7 @@ const selectStyles = {
   }),
 };
 
-const AppointmentsTab = () => {
+const AdmissionTab = () => {
   const navigate = useNavigate();
   const [clinicType, setClinicType] = useState('');
   const [searchParams] = useSearchParams();
@@ -231,4 +231,4 @@ const AppointmentsTab = () => {
   );
 };
 
-export default AppointmentsTab;
+export default AdmissionTab;

@@ -22,6 +22,7 @@ import PatientDetailAdmission from '../../_Patient/layouts/PatientDetailAdmissio
 import AppointmentsTab from '../../_Appointment/components/AppointmentsTab';
 import ProcedureTab from '../../_Procedure/components/ProcedureTab';
 import DiagnosisTab from '../components/DiagnosisTab';
+import { useGetAdmissionQuery, useGetAllAdmissionsQuery } from '../../api/admissions.api';
 
 const tabList = [
   { id: nanoid(), text: 'Admissions' },
@@ -37,10 +38,12 @@ const Doctor = () => {
   const [searchParams] = useSearchParams();
 
   const { data, isLoading } = useGetAppointmentQuery(id);
+  const { data: admissionData } = useGetAdmissionQuery(id);
+  console.log(admissionData, 'admData');
   const navigate = useNavigate();
 
   const patient_id = searchParams.get('patient_id');
-  const { data: appointmentsData } = useGetAppointmentDetailByIDQuery(patient_id);
+  // const { data: appointmentsData } = useGetAppointmentDetailByIDQuery(patient_id);
 
   const breadCrumbData = [
     {
@@ -50,7 +53,7 @@ const Doctor = () => {
     },
     {
       id: nanoid(),
-      title: `${data?.patient.first_name} ${data?.patient.middle_name}`,
+      title: `${data?.patient_detail?.first_name} ${data?.patient_detail?.middle_name}`,
       link: '/',
       isCurrentPage: true,
     },
@@ -64,7 +67,7 @@ const Doctor = () => {
       bgColor="gray.50"
       alignItems="center"
       // justifyContent="center"
-      spacing="1rem"
+      spacing="0"
       p={2}
     >
       <HStack
@@ -76,44 +79,14 @@ const Doctor = () => {
           breadCrumbData={breadCrumbData}
         />
         <Avatar
-          name={`${data?.patient?.first_name} ${data?.patient?.last_name}`}
+          name={`${data?.patient_detail?.first_name} ${data?.patient_detail?.last_name}`}
           size="sm"
           fontWeight="bold"
         />
       </HStack>
 
-      {/*  */}
-
-      <HStack
-        w="full"
-        justifyContent="flex-end"
-      >
-        {/* <CustomSelect
-          label="Clinic Type"
-        /> */}
-        <ButtonGroup>
-          <Button
-            size="sm"
-          >
-            Bill Exclusion
-          </Button>
-          <Button
-            size="sm"
-          >
-            Clinic Type
-          </Button>
-          <Button
-            size="sm"
-            bgColor="blue.700"
-            color="white"
-          >
-            Save
-          </Button>
-        </ButtonGroup>
-      </HStack>
-
       <Tabs
-        bgColor="white"
+        // bgColor="white"
         color="gray.500"
         // variant="enclosed"
         // border={0}
@@ -127,11 +100,17 @@ const Doctor = () => {
         rounded="lg"
 
       >
-        <TabList>
+        <TabList
+          bgColor="white"
+          // p={2}
+          h="45px"
+          // rounded="lg"
+        >
           {tabList.map((item) => (
             <Tab
               key={item.id}
               fontSize="14px"
+              // p={2}
                 // bgColor="white"
               _selected={{
                 bgColor: 'white',
@@ -151,7 +130,7 @@ const Doctor = () => {
 
           {/* patient admission panel */}
           <TabPanel>
-            <PatientDetailAdmission data={appointmentsData} />
+            <PatientDetailAdmission data={admissionData} />
           </TabPanel>
 
           {/* appointments panel */}

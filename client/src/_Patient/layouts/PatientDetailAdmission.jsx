@@ -13,6 +13,7 @@ import DataTable2 from '../../components/tables/DataTable';
 
 const PatientDetailAdmission = ({ data }) => {
   const navigate = useNavigate();
+  console.log(data);
   const columns = useMemo(
     () => [
       {

@@ -4,6 +4,8 @@
 /* eslint-disable linebreak-style */
 const express = require('express');
 const cors = require('cors');
+const cluster = require('cluster');
+const cpus = require('os').cpus().length;
 
 const sequelize = require('./db/connect');
 const procedureGroupRoutes = require('./routes/procedureGroup.routes');
@@ -23,8 +25,19 @@ const corsOption = {
     origin: ['*'],
 };
 
-app.use(clusterMiddleware);
+if (cluster.isMaster) {
+    console.log(`Master ${process.pid} is running`);
 
+    // Fork workers
+    for (let i = 0; i < cpus; i++) {
+        cluster.fork();
+    }
+
+    cluster.on('exit', (worker, code, signal) => {
+        console.log(`Worker ${worker.process.pid} died`);
+        // You may choose to respawn the worker here if necessary
+    });
+} else {
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true,
@@ -63,3 +76,4 @@ testConnection();
 app.listen(PORT, () => {
     console.log(`App running on http://localhost:${PORT}`);
 });
+}

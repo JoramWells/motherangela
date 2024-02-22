@@ -5,7 +5,8 @@ const Sequelize = require('sequelize');
 const sequelize = require('../db/connect');
 const Medication = require('../models/medication/medication.model');
 const Internal_pharmacy_request2 = require('../models/pharmacy/internalPharmarcyRequest.model');
-const Patient = require('../models/patient/patients.model');
+const Patient = require('../models/patient/patient.model');
+const Patient_details = require('../models/patient/patients.models');
 
 const addInternalPharmacyRequest = async (req, res, next) => {
   try {
@@ -27,7 +28,7 @@ const getAllInternalPharmacyRequests = async (req, res, next) => {
       group: ['internal_pharmacy_request2s.appointment_id', 'patient.patient_id'],
       include: [
         {
-          model: Patient,
+          model: Patient_details,
           attributes: ['first_name', 'middle_name', 'last_name', 'dob', 'patient_id'],
         },
       ],
@@ -50,7 +51,7 @@ const getInternalPharmacyRequest = async (req, res, next) => {
       },
       include: [
         {
-          model: Patient,
+          model: Patient_details,
           attributes: ['first_name', 'middle_name', 'dob', 'patient_gender', 'patient_id'],
         },
         {

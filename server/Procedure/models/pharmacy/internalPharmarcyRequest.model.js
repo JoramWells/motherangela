@@ -5,20 +5,22 @@ const { DataTypes, UUIDV4 } = require('sequelize');
 const sequelize = require('../../db/connect');
 // const Patient_details = require('../patient/patients.models');
 const Medication = require('../medication/medication.model');
-const Patient = require('../patient/patients.model');
+const Patient_details = require('../patient/patients.models');
 // const Appointments2 = require('../appointment/appointments2.models');
 
-const Internal_pharmacy_request2 = sequelize.define('internal_pharmacy_request2s', {
+const Internal_pharmacy_request2 = sequelize.define('internal_pharmacy_requests', {
   pharmacy_request_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     primaryKey: true,
-    defaultValue: UUIDV4,
+    // defaultValue: UUIDV4,
+    unique: true,
+    autoIncrement: true,
   },
   appointment_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
   },
   patient_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
   },
   doctor_id: {
     type: DataTypes.INTEGER,
@@ -83,7 +85,7 @@ const Internal_pharmacy_request2 = sequelize.define('internal_pharmacy_request2s
 //   console.error('Unable to create table :', error);
 // });
 
-Internal_pharmacy_request2.belongsTo(Patient, { foreignKey: 'patient_id' });
+Internal_pharmacy_request2.belongsTo(Patient_details, { foreignKey: 'patient_id' });
 // Internal_pharmacy_request2.belongsTo(Appointments2, { foreignKey: 'appointment_id' });
 Internal_pharmacy_request2.belongsTo(Medication, { foreignKey: 'medication_id' });
 

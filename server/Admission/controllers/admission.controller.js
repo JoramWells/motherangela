@@ -55,10 +55,11 @@ const getAllAdmission = async (req, res, next) => {
   }
 };
 
+
 const getAdmissionDetail = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const admission = await Admissions2.findOne({
+    const admission = await Admissions2.findAll({
       limit: 100,
       where: {
         admission_id: id,

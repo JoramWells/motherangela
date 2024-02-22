@@ -49,8 +49,8 @@ const addPersonalAccountCharge = async (req, res, next) => {
 const getAllPersonalAccountCharges = async (req, res, next) => {
   try {
     const results = await PersonalAccountCharge.findAll({
-      attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('personal_account_charge.patient_id')), 'patient_id'],
-        [Sequelize.fn('COUNT', Sequelize.col('personal_account_charge.patient_id')), 'patient_count'],
+      attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('personal_account_charge.patient_id_pac')), 'patient_id'],
+        [Sequelize.fn('COUNT', Sequelize.col('personal_account_charge.patient_id_pac')), 'patient_count'],
         'date_of_charge',
       ],
       group: [
@@ -96,7 +96,7 @@ const getUserPersonalAccountCharge = async (req, res, next) => {
     const { id } = req.params;
     const result = await PersonalAccountCharge.findAll({
       where: {
-        patient_id: id,
+        patient_id_pac: id,
       },
       include: [
         {

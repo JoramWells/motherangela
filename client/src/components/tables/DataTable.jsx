@@ -14,7 +14,8 @@ import { FaSort } from 'react-icons/fa';
 import TableSearchInput from '../TableSearchInput';
 
 const DataTable2 = ({
-  data, columns, searchQueryColumn, isTableHeight, hasPagination, hasSearch,
+  data, columns, searchQueryColumn, isTableHeight,
+  hasPagination, hasSearch,
   title,
 }) => {
   const [columnFilters, setColumnFilters] = useState([]);
@@ -36,13 +37,13 @@ const DataTable2 = ({
       <HStack
         alignItems="center"
         pl={3}
-        pt={6}
+        // pt={6}
         pb={3}
         w="full"
       >
         <Text
           fontSize="18px"
-          fontWeight="bold"
+          // fontWeight="600"
           color="gray.700"
         >
           {title}
@@ -50,11 +51,12 @@ const DataTable2 = ({
         </Text>
         <Tag
           rounded="full"
+          colorScheme="orange"
         >
           <Text
             fontSize="14px"
             fontWeight="bold"
-            color="gray.500"
+            // color="gray.500"
           >
             {data?.length}
           </Text>
@@ -68,7 +70,8 @@ const DataTable2 = ({
       />
       )}
       <TableContainer
-        h={isTableHeight && '700px'}
+        // h={isTableHeight && '700px'}
+        maxH="700px"
         overflowY="auto"
         mt={0}
         bgColor="white"

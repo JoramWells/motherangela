@@ -1,6 +1,6 @@
 // import { useMemo } from 'react';
 import { HStack, Text } from '@chakra-ui/react';
-import { useGetProceduresQuery } from '../api/procedureDetails.api';
+import { useGetProceduresQuery } from '../../api/procedureDetails.api';
 import TableSelectRow from './TableSelectRow';
 import IndeterminateCheckbox from './IndeterminateCheckbox';
 

@@ -1,14 +1,12 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 const sequelize = require('../db/connect');
-const AdmissionsBedAllocation2 = require(
-    '../models/_admission/admissionBedAllocation2.model',
-);
-
+const Admissions_bed_allocation =
+require('../models/_admission/admissionBedAllocation.model');
 
 const addAdmissionBedAllocation = async (req, res, next) => {
   try {
-    const results = await AdmissionsBedAllocation2.create(req.body);
+    const results = await Admissions_bed_allocation.create(req.body);
     res.json(results);
     next();
     console.log('Allocating bed...');
@@ -22,7 +20,7 @@ const addAdmissionBedAllocation = async (req, res, next) => {
 const getAllAdmissionBedAllocation = async (req, res, next) => {
   try {
     await sequelize.sync().then(() => {
-      AdmissionsBedAllocation2.findAll({ limit: 100 })
+      Admissions_bed_allocation.findAll({ limit: 100 })
           .then((response) => {
           // console.log(response);
             res.status(200).json(response);
@@ -41,7 +39,7 @@ const getAllAdmissionBedAllocation = async (req, res, next) => {
 const getAdmissionBedAllocation = async (req, res, next) => {
   const { id } = req.params;
   await sequelize.sync().then(() => {
-    AdmissionsBedAllocation2.findOne({
+    Admissions_bed_allocation.findOne({
       where: {
         id,
       },
@@ -54,7 +52,7 @@ const getAdmissionBedAllocation = async (req, res, next) => {
 const editAdmissionBedAllocation = async (req, res, next) => {
   const { id, serviceName, serviceCategory } = req.body;
   await sequelize.sync().then(() => {
-    AdmissionsBedAllocation2.findOne({
+    Admissions_bed_allocation.findOne({
       where: {
         id,
       },
@@ -71,7 +69,7 @@ const editAdmissionBedAllocation = async (req, res, next) => {
 const deleteAdmissionBedAllocation = async (req, res, next) => {
   const { id } = req.params;
   await sequelize.sync().then(() => {
-    AdmissionsBedAllocation2.destroy({
+    Admissions_bed_allocation.destroy({
       where: {
         id,
       },

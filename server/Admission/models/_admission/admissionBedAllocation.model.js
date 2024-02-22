@@ -8,6 +8,8 @@ const Admissions_bed_allocation = sequelize
       bed_allocation_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
+        unique: true,
       },
       admission_id: {
         type: DataTypes.INTEGER,

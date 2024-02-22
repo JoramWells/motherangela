@@ -1,17 +1,15 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable no-unused-vars */
 
 import {
-  Box, Button, HStack, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text, VStack,
+  Button,
+  Text, VStack,
 } from '@chakra-ui/react';
-import moment from 'moment/moment';
 import { useMemo } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { FaChevronCircleDown, FaEllipsisH } from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa';
 import DataTable2 from '../../components/tables/DataTable';
-import { useGetAppointmentDetailByIDQuery } from '../../api/appointments.api';
 import { useGetUserPersonalAccountDetailQuery } from '../../api/personalAccountCharges.api';
 
 const ProcedureTab = () => {
@@ -26,12 +24,25 @@ const ProcedureTab = () => {
       {
         header: 'Procedure',
         accessorKey: 'service_desc',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => (
+          <Text
+            color="gray.700"
+            fontWeight="bold"
+          >
+            {props.getValue()}
+          </Text>
+        ),
       },
       {
         header: 'Charges',
         accessorKey: 'amount',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => (
+          <Text
+            fontWeight="bold"
+          >
+            {parseInt(props.getValue(), 10).toLocaleString()}
+          </Text>
+        ),
       },
       {
         header: 'Status',
@@ -50,38 +61,42 @@ const ProcedureTab = () => {
   return (
     <VStack
       spacing="0"
+      bgColor="white"
+      position="relative"
+      rounded="lg"
+      p={3}
     >
-      <HStack
-        w="full"
-        justify="flex-end"
-      >
-        <Button
-          size="sm"
-          border="1px"
-          borderColor="gray.500"
+
+      <Button
+        size="sm"
+        border="1px"
+        borderColor="gray.500"
         //   rounded="full"
-          backgroundColor="blue.50"
+        backgroundColor="blue.600"
+        color="white"
+        position="absolute"
+        top={3}
+        right={5}
         //   color="blue.500"
-          onClick={() => navigate({
-            pathname: `/add-patient-procedure/${id}`,
-            search: `?patient_id=${patientID}`,
-          })}
-        >
-          New Procedure
-        </Button>
-
-      </HStack>
-
-      <VStack
-        w="100%"
+        leftIcon={<FaPlus />}
+        onClick={() => navigate({
+          pathname: `/add-patient-procedure/${id}`,
+          search: `?patient_id=${patientID}`,
+        })}
+        _hover={{
+          bgColor: 'blue.500',
+        }}
       >
-        <DataTable2
-          columns={columns}
-          data={data}
-          hasSearch={false}
-          isTableHeight={false}
-        />
-      </VStack>
+        New
+      </Button>
+
+      <DataTable2
+        columns={columns}
+        data={data}
+        title="Procedure History"
+        hasSearch={false}
+        isTableHeight={false}
+      />
     </VStack>
   );
 };

@@ -5,7 +5,6 @@
 const moment = require('moment/moment');
 // const { Kafka } = require('kafkajs');
 const sequelize = require('../db/connect');
-const Patient = require('../models/patient2.models');
 
 // const kafka = new Kafka({
 //   clientId: 'patient',
@@ -93,7 +92,7 @@ const addPatients = async (req, res, next) => {
 // get all priceListItems
 const getAllPatients = async (req, res, next) => {
   try {
-    const patients = await Patient.findAll({ limit: 100 });
+    const patients = await Patient_details.findAll({ limit: 100 });
     res.json(patients);
     next();
   } catch (error) {
@@ -126,7 +125,7 @@ const editPatient = async (req, res, next) => {
     first_name, middle_name, last_name, id_number, cell_phone,
   } = req.body;
   try {
-    const editPAtient = await Patient.findOne({
+    const editPAtient = await Patient_details.findOne({
       where: {
         patient_id: id,
       },
@@ -148,7 +147,7 @@ const editPatient = async (req, res, next) => {
 const deletePatient = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const results = await Patient.destroy({
+    const results = await Patient_details.destroy({
       where: {
         patient_id: id,
       },

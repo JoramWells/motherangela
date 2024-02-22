@@ -3,7 +3,6 @@
 /* eslint-disable no-unused-vars */
 // const { Kafka } = require('kafkajs');
 const sequelize = require('../db/connect');
-const Appointments2 = require('../models/_appointment/appointments2.models');
 // const Insurance_detail = require('../../root/models/insurance/insurance.model');
 const InsuranceDetail = require('../models/insurance/insuranceDetail.model');
 const Users = require('../models/user/user.model');
@@ -40,7 +39,7 @@ const addAppointments = async (req, res, next) => {
 //   } = req.body;
 
 //   try {
-//     const isAppointed = await Appointments2.findOne({
+//     const isAppointed = await Appointments.findOne({
 //       where: {
 //         patient_id: patientId,
 //       },
@@ -60,7 +59,7 @@ const addAppointments = async (req, res, next) => {
 //       next();
 //       return isAppointed.save();
 //     }
-//     const newAppointment = await Appointments2.create(req.body);
+//     const newAppointment = await Appointments.create(req.body);
 //     res.json(newAppointment);
 
 //     next();
@@ -135,6 +134,7 @@ const getAllAppointmentsById = async (req, res, next) => {
     });
 
     res.status(200).json(appointmentResults);
+    next()
   } catch (error) {
     console.log(error)
     next(error);
@@ -144,7 +144,7 @@ const getAllAppointmentsById = async (req, res, next) => {
 // const getAppointmentDetail = async (req, res, next) => {
 //   const { id } = req.params;
 //   await sequelize.sync().then(() => {
-//     Appointments2.findOne({
+//     Appointments.findOne({
 //       where: {
 //         appointment_id: id,
 //       },
@@ -163,7 +163,7 @@ const getAllAppointmentsById = async (req, res, next) => {
 const getAppointmentDetail = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const result = await Appointments2.findOne({
+    const result = await Appointments.findOne({
       where: {
         appointment_id: id,
       },
@@ -178,6 +178,7 @@ const getAppointmentDetail = async (req, res, next) => {
     res.json(result);
     next();
   } catch (error) {
+    console.log(error)
     res.sendStatus(500).json({ message: 'Internal Server Error' });
     next(error);
   }
@@ -186,7 +187,7 @@ const getAppointmentDetail = async (req, res, next) => {
 const editAppointmentDetail = async (req, res, next) => {
   const { id, serviceName, serviceCategory } = req.body;
   await sequelize.sync().then(() => {
-    Appointments2.findOne({
+    Appointments.findOne({
       where: {
         id,
       },
@@ -205,7 +206,7 @@ const editAppointmentDetail = async (req, res, next) => {
 const add = async (req, res, next) => {
   const { id, serviceName, serviceCategory } = req.body;
   await sequelize.sync().then(() => {
-    Appointments2.findOne({
+    Appointments.findOne({
       where: {
         id,
       },
@@ -221,7 +222,7 @@ const add = async (req, res, next) => {
 const deleteAppointment = async (req, res, next) => {
   const { id } = req.params;
   await sequelize.sync().then(() => {
-    Appointments2.destroy({
+    Appointments.destroy({
       where: {
         id,
       },

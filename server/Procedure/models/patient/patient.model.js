@@ -1,13 +1,13 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
-const { DataTypes } = require('sequelize');
+const { DataTypes, UUIDV4 } = require('sequelize');
 const sequelize = require('../../db/connect');
 
-const Patient_details = sequelize.define('patient_details', {
+const Patient = sequelize.define('patient', {
   patient_id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
     primaryKey: true,
-    unique:true
-    // defaultValue: UUIDV4,
+    defaultValue: UUIDV4,
   },
   in_patient_file_no: {
     type: DataTypes.STRING,
@@ -107,11 +107,21 @@ const Patient_details = sequelize.define('patient_details', {
   },
 });
 
-// sequelize.query('ALTER TABLE Patient_details ALTER COLUMN patient_id TYPE VARCHAR(255);')
+// sequelize.query('ALTER TABLE Patient ALTER COLUMN patient_id TYPE VARCHAR(255);')
 //   .then(() => {
 //     console.log('Column data type modified successfully.');
 //   })
 //   .catch((error) => {
 //     console.error('Error modifying column data type:', error);
 //   });
-module.exports = Patient_details;
+// create the pricelists model
+
+// Patient.hasMany(Appointments2, { foreignKey: 'patient_id', onDelete: 'CASCADE' });
+
+// sequelize.sync().then(() => {
+//   console.log('Book table created');
+// }).catch((error) => {
+//   console.error('Unable to create table :', error);
+// });
+
+module.exports = Patient;

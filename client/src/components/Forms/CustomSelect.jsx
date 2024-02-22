@@ -21,7 +21,7 @@ const selectStyles = {
 };
 
 const CustomSelect = ({
-  onChange, value, label, options, color,
+  onChange, value, label, options, color, isLoading,
 }) => (
   <FormControl>
 
@@ -38,6 +38,7 @@ const CustomSelect = ({
       options={options}
       value={value}
       onChange={(val) => onChange(val)}
+      isLoading={isLoading}
     />
 
   </FormControl>
@@ -47,6 +48,7 @@ CustomSelect.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.string,
   color: PropTypes.string,
+  isLoading: PropTypes.bool,
   label: PropTypes.string,
   options: PropTypes.array,
 };
@@ -55,6 +57,7 @@ CustomSelect.defaultProps = {
   onChange: () => { },
   color: 'black',
   value: '',
+  isLoading: false,
   label: '',
   options: [],
 };

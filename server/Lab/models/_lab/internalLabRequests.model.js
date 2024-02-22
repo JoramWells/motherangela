@@ -12,6 +12,7 @@ const InternalLabRequests = sequelize.define('internal_lab_requests', {
   lab_request_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true
   },
   appointment_id: {
     type: DataTypes.INTEGER,

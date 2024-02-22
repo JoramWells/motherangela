@@ -84,7 +84,7 @@ const AddAdmission = () => {
     isLoading: admissionBedAllocationLoading,
   }] = useAddAdmissionBedAllocationMutation();
 
-  const { data: userData } = useGetUsersQuery();
+  const { data: userData, isLoading } = useGetUsersQuery();
 
   const [addAdmission, {
     isLoading: admissionLoading,
@@ -218,6 +218,7 @@ const AddAdmission = () => {
           options={userDataOptions()}
           value={doctor_id}
           onChange={setDoctor_id}
+          isLoading={isLoading}
         />
 
         {/* item code prefix */}

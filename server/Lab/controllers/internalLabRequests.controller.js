@@ -8,6 +8,7 @@ const InternalLabRequests = require('../models/_lab/internalLabRequests.model');
 const Patient = require('../models/patient/patients.models');
 const Appointments2 = require('../models/appointment/appointments.model');
 const InsuranceDetail = require('../models/insurance/insuranceDetail.model');
+const Patient_details = require('../models/patient/patients.models');
 
 const addInternalLabRequest = async (req, res, next) => {
   try {
@@ -20,6 +21,7 @@ const addInternalLabRequest = async (req, res, next) => {
     res.sendStatus(500).json({ message: 'Internal server error!!' });
   }
 };
+
 
 // get all priceListItems
 const getAllInternalLabRequests = async (req, res, next) => {
@@ -67,7 +69,7 @@ const getInternalLabRequest = async (req, res, next) => {
           attributes: ['appointment_date', 'charges', 'appointment_time'],
         },
         {
-          model: Patient,
+          model: Patient_details,
           attributes: ['first_name', 'middle_name', 'dob', 'patient_gender'],
         },
         {

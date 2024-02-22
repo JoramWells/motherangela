@@ -1,29 +1,37 @@
 import {
-  FormControl, FormLabel, Textarea, VStack,
+  FormControl, FormLabel, HStack, Textarea, VStack,
 } from '@chakra-ui/react';
 
 const DiagnosisTab = () => (
-  <VStack>
-    <FormControl>
-      <FormLabel
-        style={{
-          fontSize: '18px',
-          color: 'gray.700',
-        }}
-      >
-        Presenting Complaints
-      </FormLabel>
-      <Textarea />
-    </FormControl>
+  <VStack
+    bgColor="white"
+    p={5}
+    rounded="lg"
+  >
+    <HStack
+      w="full"
+    >
+      <FormControl>
+        <FormLabel
+          style={{
+            fontSize: '18px',
+            color: 'gray.700',
+          }}
+        >
+          Presenting Complaints
+        </FormLabel>
+        <Textarea />
+      </FormControl>
 
-    <FormControl>
-      <FormLabel>History of Presenting Complaints</FormLabel>
-      <Textarea />
-    </FormControl>
-    <FormControl>
-      <FormLabel>Previous Medical History</FormLabel>
-      <Textarea />
-    </FormControl>
+      <FormControl>
+        <FormLabel>History of Presenting Complaints</FormLabel>
+        <Textarea />
+      </FormControl>
+      <FormControl>
+        <FormLabel>Previous Medical History</FormLabel>
+        <Textarea />
+      </FormControl>
+    </HStack>
 
     {/*  */}
     <FormControl>
