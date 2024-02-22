@@ -4,9 +4,9 @@
 const sequelize = require('../db/connect');
 const Procedure_detail = require('../models/procedure/procedureDetails.model');
 const Users = require('../models/user/user.model');
-const InternalLabRequests = require('../models/_lab/internalLabRequests2.model');
+const InternalLabRequests = require('../models/_lab/internalLabRequests.model');
 const Patient = require('../models/patient/patients.models');
-const Appointments2 = require('../models/appointment/appointments2.models');
+const Appointments2 = require('../models/appointment/appointments.model');
 const InsuranceDetail = require('../models/insurance/insuranceDetail.model');
 
 const addInternalLabRequest = async (req, res, next) => {

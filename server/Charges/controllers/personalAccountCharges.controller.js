@@ -3,7 +3,7 @@
 /* eslint-disable no-unused-vars */
 
 const Sequelize = require('sequelize');
-const PersonalAccountCharge = require('../models/_charges/personalAccountCharges2.model');
+const PersonalAccountCharge = require('../models/_charges/personalAccountCharges.model');
 const Patient = require('../models/patient/patients.models');
 // const Patient = require('../../models/charges/patient2.models');
 

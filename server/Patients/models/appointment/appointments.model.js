@@ -6,19 +6,21 @@ const Patient = require('../patient2.models');
 const InsuranceDetail = require('../insurance/insuranceDetail.model');
 const Users = require('../user/user.model');
 
-const Appointments2 = sequelize.define('appointments2', {
+const Appointments2 = sequelize.define('appointments', {
   appointment_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     primaryKey: true,
-    defaultValue: UUIDV4,
+    autoIncrement:true,
+    unique:true
+    // defaultValue: UUIDV4,
   },
   doctor_id: {
     type: DataTypes.INTEGER,
   },
   patient_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     references: {
-      model: 'patient',
+      model: 'patient_details',
       key: 'patient_id',
     },
     onDelete: 'CASCADE',

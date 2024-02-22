@@ -6,6 +6,8 @@ const Personal_account_charge = sequelize.define('personal_account_charges', {
   personal_account_charge_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
+    unique:true,
+    autoIncrement:true
   },
   charge_no: {
     type: DataTypes.STRING,

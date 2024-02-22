@@ -74,6 +74,7 @@ const getAllAppointments = async (req, res, next) => {
   try {
     const appointmentResults = await Appointments.findAll({
       limit: 100,
+      order:[['appointment_date', 'DESC']],
       include: [
         {
           model: Patient_details,
@@ -117,7 +118,6 @@ const getAllAppointmentsById = async (req, res, next) => {
       where: {
         patient_id: id,
       },
-      limit: 100,
       include: [
         {
           model: Patient_details,

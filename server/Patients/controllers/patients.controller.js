@@ -18,6 +18,7 @@ const Patient = require('../models/patient2.models');
 // const Appointments2 = require('../../Appointments/models/appointments2.models');
 const InsuranceServiceCostMapping = require('../models/insurance/insuranceServiceCostMapping.model');
 const Appointments2 = require('../models/appointment/appointments.model');
+const Patient_details = require('../models/patients.models');
 
 // using *Patients model
 const addPatients = async (req, res, next) => {
@@ -41,7 +42,7 @@ const addPatients = async (req, res, next) => {
     // await producer.disconnect();
 
     // create a new user profile
-    const newProfile = await Patient.create(req.body);
+    const newProfile = await Patient_details.create(req.body);
     let newAppointment = {};
 
     // // Check if user has a corporate. results = null, charges = 0
@@ -58,7 +59,7 @@ const addPatients = async (req, res, next) => {
         newAppointment = await Appointments2.create({
           patient_id: newProfile?.patient_id,
           account_type_id: req.body.account_type_id,
-          appointment_date: moment().format('MM-DD-YYYY'),
+          appointment_date: moment().format('YYYY-MM-DD'),
           appointment_time: moment().format('hh:mm:ss'),
           charges: cost,
           reference_account_id,
@@ -69,7 +70,7 @@ const addPatients = async (req, res, next) => {
       newAppointment = await Appointments2.create({
         patient_id: newProfile?.patient_id,
         account_type_id: req.body.account_type_id,
-        appointment_date: moment().format('MM-DD-YYYY'),
+        appointment_date: moment().format('YYYY-MM-DD'),
         appointment_time: moment().format('hh:mm:ss'),
         charges: 350,
         reference_account_id,
