@@ -2,6 +2,7 @@
 /* eslint-disable camelcase */
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../db/connect');
+const Patient_details = require('../patient/patients.models');
 // const Patient_details = require('../patient/patients.models');
 // const Account_type = require('../accountTypes.model');
 
@@ -15,6 +16,11 @@ const Appointments = sequelize.define('appointments', {
     },
     patient_id: {
         type: DataTypes.INTEGER,
+        references:{
+            model:'patient_details',
+            key:'patient_id'
+        },
+        onDelete:'CASCADE'
     },
     appointment_date: {
         type: DataTypes.STRING,
@@ -157,7 +163,7 @@ const Appointments = sequelize.define('appointments', {
 
 }, { timestamps: false });
 
-// Appointments.belongsTo(Patient_details, { foreignKey: 'patient_id' });
+Appointments.belongsTo(Patient_details, { foreignKey: 'patient_id' });
 // Appointments.belongsTo(Account_type, { foreignKey: 'account_type_id' });
 
 // sequelize.sync().then(() => {

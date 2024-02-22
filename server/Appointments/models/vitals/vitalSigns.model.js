@@ -2,7 +2,7 @@
 const { DataTypes, UUIDV4 } = require('sequelize');
 const sequelize = require('../../db/connect');
 const Appointments2 = require('../_appointment/appointments2.models');
-const Patient = require('../patient/patients.model');
+const Patient_details = require('../patient/patients.models');
 
 const VitalSigns = sequelize.define('vitalSigns', {
   id: {
@@ -48,7 +48,7 @@ const VitalSigns = sequelize.define('vitalSigns', {
 
 VitalSigns.belongsTo(Appointments2, { foreignKey: 'appointment_id' });
 Appointments2.hasMany(VitalSigns,{foreignKey:'appointment_id'})
-VitalSigns.belongsTo(Patient, { foreignKey: 'patient_id' });
+VitalSigns.belongsTo(Patient_details, { foreignKey: 'patient_id' });
 
 // sequelize.sync().then(() => {
 //   console.log('Vital Signs table created');

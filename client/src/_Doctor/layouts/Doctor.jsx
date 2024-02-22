@@ -21,6 +21,7 @@ import InternalRequests from '../components/InternalRequests';
 import PatientDetailAdmission from '../../_Patient/layouts/PatientDetailAdmission';
 import AppointmentsTab from '../../_Appointment/components/AppointmentsTab';
 import ProcedureTab from '../../_Procedure/components/ProcedureTab';
+import DiagnosisTab from '../components/DiagnosisTab';
 
 const tabList = [
   { id: nanoid(), text: 'Admissions' },
@@ -160,7 +161,7 @@ const Doctor = () => {
 
           {/* bill exclusion panel */}
           <TabPanel>
-            <Text>Diagnosis</Text>
+            <DiagnosisTab />
           </TabPanel>
 
           {/* internal lab requests panel */}

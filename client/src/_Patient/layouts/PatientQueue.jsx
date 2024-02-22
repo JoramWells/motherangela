@@ -46,7 +46,7 @@ const PatientQueue = () => {
     () => [
       {
         header: 'Patient Name',
-        accessorKey: 'patient',
+        accessorKey: 'patient_detail',
         cell: (props) => (
           <Box onClick={() => navigate(`/patient-detail/${props.row.original.patient_id}`)}>
             <UserNameAvatar
@@ -102,7 +102,7 @@ const PatientQueue = () => {
         // accessorKey: 'tem',
         cell: (props) => (
           <Box>
-            {!props.row.original.vitalSigns.length > 0
+            {!props.row.original.vitalSigns > 0
               ? (
                 <Button
                   variant="ghost"
@@ -177,7 +177,7 @@ const PatientQueue = () => {
 
   const filteredData = filterByDate();
 
-  console.log(filteredData);
+  console.log(data);
 
   return (
     <VStack
@@ -190,7 +190,7 @@ const PatientQueue = () => {
       <Box bgColor="white" w="full">
         <BreadCrumbNav link="/add-patient?type=admission" />
 
-        {filteredData?.length === 0 ? (
+        {data?.length === 0 ? (
           <VStack
             p={2}
             h="75vh"
@@ -215,7 +215,7 @@ const PatientQueue = () => {
         )
           : (
 
-            <DataTable2 data={filteredData || []} columns={columnsx} />
+            <DataTable2 data={data || []} columns={columnsx} />
           )}
       </Box>
     </VStack>

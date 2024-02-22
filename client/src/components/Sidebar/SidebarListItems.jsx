@@ -156,13 +156,13 @@ const SidebarListItems = () => {
       {/*  */}
       <SidebarItemLink
         selected={pathname === '/charts-of-account' || pathname.includes('/service-types')
-          || pathname.includes('/view-cost-centre')}
+          || pathname.includes('/view-cst-centre')}
         onClick={onToggle}
         text="Charts of Account"
         // link="/ccc"
         itemList={[
           { id: nanoid(), title: 'View Charts', link: '/charts-of-account' },
-          { id: nanoid(), title: 'Chart Reports', link: '/view-cost-centre' },
+          { id: nanoid(), title: 'Chart Reports', link: '/vew-cost-centre' },
           { id: nanoid(), title: 'Service Types', link: '/service-types' },
           { id: nanoid(), title: 'Consultation Categories Credit Accounts', link: '/consultation-credit-accounts' },
         ]}
@@ -201,6 +201,20 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Personal Account Charges', link: '/personal-account-charges' },
         ]}
         icon={<FaCalendarTimes size={15} />}
+      />
+
+      {/*  */}
+      <SidebarItemLink
+        selected={pathname === '/doctor'
+          || pathname.includes('/viw-cost-centre')}
+        onClick={onToggle}
+        text="Doctor"
+        // link="/ccc"
+        itemList={[
+          { id: nanoid(), title: 'Patient Queue', link: '/regter-cost-centre' },
+          { id: nanoid(), title: 'Patient Notes', link: '/doctor-notes' },
+        ]}
+        icon={<FaBookMedical size={15} />}
       />
 
       <SidebarItemLink

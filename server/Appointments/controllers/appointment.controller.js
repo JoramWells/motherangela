@@ -5,11 +5,12 @@
 const sequelize = require('../db/connect');
 const Appointments2 = require('../models/_appointment/appointments2.models');
 // const Insurance_detail = require('../../root/models/insurance/insurance.model');
-const Patient = require('../models/patient/patients.model');
 const InsuranceDetail = require('../models/insurance/insuranceDetail.model');
 const Users = require('../models/user/user.model');
 const VitalSigns = require('../models/vitals/vitalSigns.model');
 const ConsultationTypesSubGroups = require('../models/consultation/consultationTypeSubGroups.model');
+const Appointments = require('../models/_appointment/appointments.model');
+const Patient_details = require('../models/patient/patients.models');
 // const Patient = require('../../Patients/models/patient2.models');
 
 // const kafka = new Kafka({
@@ -71,29 +72,29 @@ const addAppointments = async (req, res, next) => {
 // get all priceListItems
 const getAllAppointments = async (req, res, next) => {
   try {
-    const appointmentResults = await Appointments2.findAll({
+    const appointmentResults = await Appointments.findAll({
       limit: 100,
       include: [
         {
-          model: Patient,
+          model: Patient_details,
           attributes: ['first_name', 'middle_name', 'last_name', 'patient_gender'],
         },
-        {
-          model: InsuranceDetail,
-          attributes: ['insurance_name'],
-        },
-        {
-          model: Users,
-          attributes: ['full_name'],
-        },
-        {
-          model:VitalSigns,
-          attributes:['temperature']
-        },
-        {
-          model:ConsultationTypesSubGroups,
+        // {
+        //   model: InsuranceDetail,
+        //   attributes: ['insurance_name'],
+        // },
+        // {
+        //   model: Users,
+        //   attributes: ['full_name'],
+        // },
+        // {
+        //   model:VitalSigns,
+        //   attributes:['temperature']
+        // },
+        // {
+          // model:ConsultationTypesSubGroups,
           // attributes:['consultation_type_sub_group_description']
-        }
+        // }
       ],
     });
 
@@ -112,24 +113,24 @@ const getAllAppointments = async (req, res, next) => {
 const getAllAppointmentsById = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const appointmentResults = await Appointments2.findAll({
+    const appointmentResults = await Appointments.findAll({
       where: {
         patient_id: id,
       },
       limit: 100,
       include: [
         {
-          model: Patient,
+          model: Patient_details,
           attributes: ['first_name', 'middle_name'],
         },
         {
           model: InsuranceDetail,
           attributes: ['insurance_name'],
         },
-        {
-          model: ConsultationTypesSubGroups,
-          attributes: ['consultation_type_sub_group_description']
-        }
+        // {
+        //   model: ConsultationTypesSubGroups,
+        //   attributes: ['consultation_type_sub_group_description']
+        // }
       ],
     });
 
@@ -168,7 +169,7 @@ const getAppointmentDetail = async (req, res, next) => {
       },
       include: [
         {
-          model: Patient,
+          model: Patient_details,
           attributes: ['first_name', 'middle_name', 'dob', 'patient_gender'],
 
         },

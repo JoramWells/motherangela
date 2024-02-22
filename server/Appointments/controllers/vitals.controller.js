@@ -4,8 +4,8 @@
 // const { Kafka } = require('kafkajs');
 const sequelize = require('../db/connect');
 const Appointments2 = require('../models/_appointment/appointments2.models');
+const Patient_details = require('../models/patient/patients.models');
 const VitalSigns = require('../models/vitals/vitalSigns.model');
-const Patient = require('../models/patient/patients.model');
 
 const addVitals = async (req, res, next) => {
   try {
@@ -29,7 +29,7 @@ const getAllVitals = async (req, res, next) => {
           attributes: ['patient_id'],
           include: [
             {
-              model: Patient,
+              model: Patient_details,
               attributes: ['first_name'],
             },
           ],
@@ -58,7 +58,7 @@ const getAllVitalsById = async (req, res, next) => {
       limit: 100,
       include: [
         {
-          model: Patient,
+          model: Patient_details,
           attributes: ['first_name', 'middle_name'],
         },
       ],
@@ -79,7 +79,7 @@ const getVitalDetail = async (req, res, next) => {
       },
       include: [
         {
-          model: Patient,
+          model: Patient_details,
           attributes: ['first_name', 'middle_name', 'dob', 'patient_gender'],
 
         },

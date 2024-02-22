@@ -1,83 +1,115 @@
-import { useMemo } from 'react';
-import { HStack, Text } from '@chakra-ui/react';
-import TableSelectRow from './TableSelectRow';
-import IndeterminateCheckbox from './IndeterminateCheckbox';
-import { useGetDiseaseMinistriesQuery } from '../../api/diseaseMinistry.api copy';
+import {
+  FormControl, FormLabel, Textarea, VStack,
+} from '@chakra-ui/react';
 
-// const columnHelper = createColumnHelper();
-
-const column = [
-  {
-    id: 'select',
-    header: ({ table }) => (
-      <IndeterminateCheckbox
-        {...{
-          checked: table.getIsAllRowsSelected(),
-          indeterminate: table.getIsSomeRowsSelected(),
-          onChange: table.getToggleAllRowsSelectedHandler(),
+const DiagnosisTab = () => (
+  <VStack>
+    <FormControl>
+      <FormLabel
+        style={{
+          fontSize: '18px',
+          color: 'gray.700',
         }}
-      />
-    ),
-    cell: ({ row }) => (
-      <IndeterminateCheckbox
-        {...{
-          checked: row.getIsSelected(),
-          disabled: !row.getCanSelect(),
-          indeterminate: row.getIsSomeSelected(),
-          onChange: row.getToggleSelectedHandler(),
-        }}
-      />
-    ),
-  },
-  // columnHelper.accessor('procedure_id', {
-  //   header: '#Id',
-  //   cell: (props) => <Text color="gray.500">{props.getValue()}</Text>,
-  // }),
-  {
-    accessorKey: 'ministry_disease_name',
-    header: 'Diagnosis',
-    cell: (props) => <Text>{props.getValue()}</Text>,
-  },
-];
+      >
+        Presenting Complaints
+      </FormLabel>
+      <Textarea />
+    </FormControl>
 
-const DiagnosisTab = () => {
-  const { data } = useGetDiseaseMinistriesQuery();
-  const finalData = useMemo(() => data, [data]);
-  console.log(data, 'dieses');
-  return (
-    <>
-      <HStack w="100%" p={2} justifyContent="space-between">
-        <HStack w="1/2" flex={1}>
-          <Text
-            fontSize="xl"
-            fontWeight="semibold"
-            color="gray.700"
-          >
-            Selected Procedures
+    <FormControl>
+      <FormLabel>History of Presenting Complaints</FormLabel>
+      <Textarea />
+    </FormControl>
+    <FormControl>
+      <FormLabel>Previous Medical History</FormLabel>
+      <Textarea />
+    </FormControl>
 
-          </Text>
+    {/*  */}
+    <FormControl>
+      <FormLabel>Obstetrics & Gynaecology</FormLabel>
+      <Textarea />
+    </FormControl>
 
-        </HStack>
-        <HStack w="md" flex={1} justifyContent="space-between">
-          <Text
-            fontSize="xl"
-            fontWeight="semibold"
-            color="gray.700"
-          >
-            Recent Procedures
+    <FormControl>
+      <FormLabel>Social Family History</FormLabel>
+      <Textarea />
+    </FormControl>
 
-          </Text>
-          <Text color="gray.500">
-            View More
-          </Text>
-        </HStack>
-      </HStack>
-      <TableSelectRow
-        data={finalData}
-        column={column}
-      />
-    </>
-  );
-};
+    <FormControl>
+      <FormLabel>General Examination</FormLabel>
+      <Textarea />
+    </FormControl>
+
+    {/*  */}
+    <FormControl>
+      <FormLabel>Per Abdomen</FormLabel>
+      <Textarea />
+    </FormControl>
+
+    <FormControl>
+      <FormLabel>Pelvic Examination</FormLabel>
+      <Textarea />
+    </FormControl>
+
+    <FormControl>
+      <FormLabel>Cardio Vascular System</FormLabel>
+      <Textarea />
+    </FormControl>
+
+    {/*  */}
+    <FormControl>
+      <FormLabel>Central Nervous System</FormLabel>
+      <Textarea />
+    </FormControl>
+
+    <FormControl>
+      <FormLabel>Respiratory System</FormLabel>
+      <Textarea />
+    </FormControl>
+
+    <FormControl>
+      <FormLabel>Musco-skeletal System</FormLabel>
+      <Textarea />
+    </FormControl>
+
+    {/*  */}
+    <FormControl>
+      <FormLabel>Eye</FormLabel>
+      <Textarea />
+    </FormControl>
+
+    {/*  */}
+    <FormControl>
+      <FormLabel>Ear, Nose & Throat</FormLabel>
+      <Textarea />
+    </FormControl>
+
+    {/*  */}
+    <FormControl>
+      <FormLabel>Breast</FormLabel>
+      <Textarea />
+    </FormControl>
+
+    <FormControl>
+      <FormLabel>Skin</FormLabel>
+      <Textarea />
+    </FormControl>
+
+    {/*  */}
+    <FormControl>
+      <FormLabel>Other Examinations</FormLabel>
+      <Textarea />
+    </FormControl>
+
+    <FormControl>
+      <FormLabel>Impression</FormLabel>
+      <Textarea />
+    </FormControl>
+
+    {/* investigation */}
+    {/* test category */}
+  </VStack>
+);
 
 export default DiagnosisTab;
