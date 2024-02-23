@@ -130,98 +130,102 @@ const AppointmentsTab = () => {
   return (
     <VStack
       spacing="0"
+      bgColor="white"
+      position="relative"
+      p={5}
+      rounded="lg"
     >
       <HStack
         w="full"
         justify="flex-end"
+        position="absolute"
+        right={5}
         // padding={2}
       >
 
-        <HStack>
-          <Menu>
-            <MenuButton
-              px=".6rem"
+        <Menu>
+          <MenuButton
+            px=".6rem"
               // py={2}
-              transition="all 0.2s"
-              borderRadius="md"
-              as={IconButton}
-              size="sm"
-              colorScheme="blue"
-              // rounded="full"
-            >
-              <FaFilter />
-            </MenuButton>
-            <MenuList
-              p="5px"
-              boxShadow="lg"
-              border={0}
-            >
-              <MenuItem>All</MenuItem>
-              <MenuItem>Today</MenuItem>
-              <MenuDivider />
-              <MenuItem
-                color="green.500"
-              >
-                Paid
-              </MenuItem>
-              <MenuItem
-                color="red.500"
-              >
-                Unpaid
-              </MenuItem>
-            </MenuList>
-          </Menu>
-
-          <Select
-            value={clinicType}
-            onChange={(value) => setClinicType(value)}
-            styles={selectStyles}
-            options={clinicOption()}
-            placeholder="Clinic Type"
-          />
-
-          <Button
+            transition="all 0.2s"
+            borderRadius="md"
+            as={IconButton}
             size="sm"
-            height="37px"
-            border="2px"
-            borderColor="blue.500"
-            //   rounded="full"
-            backgroundColor="white"
-            leftIcon={<FaPlus />}
-            color="blue.500"
-            // rounded="full"
-            onClick={() => navigate(
-              {
-                pathname: `/add-admission/${patient_id}`,
-                search: `?appointment_id=${appointment_id}`,
-              },
-            )}
-            _hover={{
-              backgroundColor: 'blue.50',
-            }}
+            colorScheme="blue"
           >
-            Admission
-          </Button>
-          <Button
-            size="sm"
-            height="37px"
-            border="2px"
-            borderColor="blue.500"
-            //   rounded="full"
-            backgroundColor="white"
-            leftIcon={<FaPlus />}
-            color="blue.500"
-            // rounded="full"
-            _hover={{
-              backgroundColor: 'blue.50',
-            }}
+            <FaFilter />
+          </MenuButton>
+          <MenuList
+            p="5px"
+            boxShadow="lg"
+            border={0}
           >
-            Appointment
-          </Button>
-        </HStack>
+            <MenuItem>All</MenuItem>
+            <MenuItem>Today</MenuItem>
+            <MenuDivider />
+            <MenuItem
+              color="green.500"
+            >
+              Paid
+            </MenuItem>
+            <MenuItem
+              color="red.500"
+            >
+              Unpaid
+            </MenuItem>
+          </MenuList>
+        </Menu>
+
+        <Select
+          value={clinicType}
+          onChange={(value) => setClinicType(value)}
+          styles={selectStyles}
+          options={clinicOption()}
+          placeholder="Clinic Type"
+        />
+
+        <Button
+          size="sm"
+          height="37px"
+          border="2px"
+          borderColor="blue.500"
+            //   rounded="full"
+          backgroundColor="white"
+          leftIcon={<FaPlus />}
+          color="blue.500"
+            // rounded="full"
+          onClick={() => navigate(
+            {
+              pathname: `/add-admission/${patient_id}`,
+              search: `?appointment_id=${appointment_id}`,
+            },
+          )}
+          _hover={{
+            backgroundColor: 'blue.50',
+          }}
+        >
+          Admission
+        </Button>
+        <Button
+          size="sm"
+          height="37px"
+          border="2px"
+          borderColor="blue.500"
+            //   rounded="full"
+          backgroundColor="white"
+          leftIcon={<FaPlus />}
+          color="blue.500"
+            // rounded="full"
+          _hover={{
+            backgroundColor: 'blue.50',
+          }}
+        >
+          Appointment
+        </Button>
       </HStack>
 
       <DataTable2
+        title="Appointment History"
         columns={columns}
         data={appointmentsData}
         hasSearch={false}
