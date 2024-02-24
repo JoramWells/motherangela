@@ -18,7 +18,7 @@ const payrollEmployeeDeductionsRoutes = require('./routes/payrollEmployeeDeducti
 
 const app = express();
 
-const PORT = process.env.PORT || 5003;
+const PORT = process.env.PORT || 5006;
 const corsOption = {
   origin: ['http://localhost:3000'],
 };

@@ -127,6 +127,23 @@ services:
     networks:
       - huruma
 
+  payroll-service:
+    build:
+      context: ./server/Payroll
+      dockerfile: Dockerfile
+    image: payroll-image
+    volumes:
+      - ./server/Payroll/:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 5006:5006
+    depends_on:
+      - database
+      # - kafka-2
+
+    networks:
+      - huruma
+
 
 
   eligibility-service:
@@ -265,6 +282,7 @@ services:
       - appointment-service
       - charges-service
       - patient-service
+      - payroll-service
       - eligibility-service
       - lab-service
       - procedure-service

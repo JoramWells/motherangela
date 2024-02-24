@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 
-const Payroll_pay_type = require('../../models/payroll/payrollPayTypes.model');
+const Payroll_pay_type = require('../models/_payroll/payrollPayTypes.model');
 
 const addPayrollPayTypes = async (req, res, next) => {
   try {

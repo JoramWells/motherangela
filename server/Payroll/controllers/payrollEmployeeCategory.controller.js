@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 
-const Payroll_employee_category = require('../../models/payroll/payrollEmployeeCategory.model');
+const Payroll_employee_category = require('../models/_payroll/payrollEmployeeCategory.model');
 
 const addPayrollEmployeeCategory = async (req, res, next) => {
   try {

@@ -2,9 +2,9 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 
-const Payroll_employee_record = require('../../models/payroll/payrollEmployeeRecords.model');
-const Payroll_job_title = require('../../models/payroll/payrollJobTitles.model');
-const Payroll_taxable_state = require('../../models/payroll/payrollTaxableStatus.model');
+const Payroll_employee_record = require('../models/_payroll/payrollEmployeeRecords.model');
+const Payroll_job_title = require('../models/_payroll/payrollJobTitles.model');
+const Payroll_taxable_state = require('../models/_payroll/payrollTaxableStatus.model');
 
 // Admissions.belongsTo(Patient_details, { foreignKey: 'patient_id', as: 'patient_details' });
 // Admissions.hasMany(Patient_details, { as: 'patients', foreignKey: 'patient_id' });

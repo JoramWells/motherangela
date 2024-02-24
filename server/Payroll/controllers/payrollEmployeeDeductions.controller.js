@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 
-const Payroll_employee_deduction = require('../../models/payroll/payrollEmployeeDeductions.model');
+const Payroll_employee_deduction = require('../models/_payroll/payrollEmployeeDeductions.model');
 
 // Admissions.belongsTo(Patient_details, { foreignKey: 'patient_id', as: 'patient_details' });
 // Admissions.hasMany(Patient_details, { as: 'patients', foreignKey: 'patient_id' });

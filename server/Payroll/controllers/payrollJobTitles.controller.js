@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 
-const Payroll_job_title = require('../../models/payroll/payrollJobTitles.model');
+const Payroll_job_title = require('../models/_payroll/payrollJobTitles.model');
 
 // Admissions.belongsTo(Patient_details, { foreignKey: 'patient_id', as: 'patient_details' });
 // Admissions.hasMany(Patient_details, { as: 'patients', foreignKey: 'patient_id' });

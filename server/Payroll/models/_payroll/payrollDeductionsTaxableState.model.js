@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
 const { DataTypes } = require('sequelize');
-const sequelize = require('../../root/db/connect');
+const sequelize = require('../../../root/db/connect');
 
-const Payroll_taxable_state = sequelize.define('payroll_taxable_states', {
+const Payroll_deductions_taxable_state = sequelize.define('payroll_deductions_taxable_state', {
   taxable_state_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -13,4 +13,4 @@ const Payroll_taxable_state = sequelize.define('payroll_taxable_states', {
 
 }, { timestamps: false });
 
-module.exports = Payroll_taxable_state;
+module.exports = Payroll_deductions_taxable_state;

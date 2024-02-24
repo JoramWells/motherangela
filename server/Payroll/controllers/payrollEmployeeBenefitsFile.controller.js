@@ -2,8 +2,8 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 
-const Payroll_employee_benefits_file = require('../../models/payroll/payrollEmployeeBenefitsFile.model');
-const Payroll_employee_loan_record = require('../../models/payroll/payrollEmployeeLoanRecord.model.js');
+const Payroll_employee_benefits_file = require('../models/_payroll/payrollEmployeeBenefitsFile.model');
+const Payroll_employee_loan_record = require('../models/_payroll/payrollEmployeeLoanRecord.model.js');
 
 // Admissions.belongsTo(Patient_details, { foreignKey: 'patient_id', as: 'patient_details' });
 // Admissions.hasMany(Patient_details, { as: 'patients', foreignKey: 'patient_id' });

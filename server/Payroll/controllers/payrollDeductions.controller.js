@@ -2,8 +2,8 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 
-const Payroll_deduction = require('../../models/payroll/payrollDeductions.model');
-const Payroll_taxable_state = require('../../models/payroll/payrollTaxableStatus.model');
+const Payroll_deduction = require('../models/_payroll/payrollDeductions.model');
+const Payroll_taxable_state = require('../models/_payroll/payrollTaxableStatus.model');
 
 // Admissions.belongsTo(Patient_details, { foreignKey: 'patient_id', as: 'patient_details' });
 // Admissions.hasMany(Patient_details, { as: 'patients', foreignKey: 'patient_id' });
