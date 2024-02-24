@@ -2,12 +2,15 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unstable-nested-components */
 import {
-  Box, Button, HStack, Text, VStack,
+  Box, Button, HStack, IconButton, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
+import {
+  FaEdit, FaLocationArrow, FaMailBulk, FaPhone,
+} from 'react-icons/fa';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
 import { useGetInsurancesQuery } from '../../api/insurance.api';
@@ -41,21 +44,94 @@ const Insurance = () => {
 
       },
       {
-        header: 'Payment % Out Patient',
-        accessorKey: 'payment_percentage_out_patient',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        header: 'Box Address',
+        // accessorKey: 'box_address',
+        cell: (props) => (
+          <VStack
+            alignItems="flex-start"
+          >
+            <HStack>
+              <FaLocationArrow
+                color="gray"
+              />
+              <Text>{props.row.original.box_address}</Text>
+            </HStack>
+            <HStack>
+              <FaPhone
+                color="gray"
+              />
+              <Text>{props.row.original.phone_no}</Text>
+            </HStack>
 
+            <HStack>
+              <FaMailBulk
+                color="gray"
+              />
+
+              <Text
+                color="gray.500"
+              >
+                {props.row.original.email_address}
+              </Text>
+            </HStack>
+
+          </VStack>
+        ),
       },
       {
-        header: 'Payment % In Patient',
-        accessorKey: 'payment_percentage_in_patient',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        header: 'Payment Percentage(%)',
+        accessorKey: 'payment_percentage_out_patient',
+        enableSorting: false,
+        cell: (props) => (
+          <VStack
+            justifyContent="flex-start"
+          >
+            <HStack
+              w="full"
+              justifyContent="space-between"
+            >
+              <Text
+                color="gray.500"
+              >
+                Out Patient:
+              </Text>
+              <Text>{props.row.original.payment_percentage_out_patient}</Text>
+
+            </HStack>
+
+            {/*  */}
+            <HStack
+              w="full"
+              justifyContent="space-between"
+            >
+              <Text
+                color="gray.500"
+              >
+                In Patient:
+              </Text>
+              <Text>{props.getValue()}</Text>
+            </HStack>
+          </VStack>
+        ),
 
       },
       {
         header: 'Action',
-        cell: () => <Button>more</Button>,
+        cell: (props) => (
+          <HStack>
+            <IconButton
+              size="sm"
+              onClick={() => navigate({
+                pathname: '/register-items',
+                search: `?step=2&insurance_id=${props.row.original.insurance_id}`,
+              })}
+            >
+              <FaEdit
+                color="gray"
+              />
+            </IconButton>
+          </HStack>
+        ),
       },
     ],
 

@@ -58,6 +58,7 @@ import { admissionBedAllocationApi } from './api/admission/admissionBedAllocatio
 import { diseasesDuplicatesApi } from './api/diseasesDuplicates.api';
 import { consultationTypeGroupApi } from './api/consultation/consultationTypeGroup.api';
 import { consultationTypeSubGroupApi } from './api/consultation/consultationTypeSubGroup.api';
+import { insuranceTypeApi } from './api/insuranceType.api';
 
 export const store = configureStore({
   reducer: {
@@ -87,6 +88,7 @@ export const store = configureStore({
     [medicationPurchasesApi.reducerPath]: medicationPurchasesApi.reducer,
     [medicationStockTakeApi.reducerPath]: medicationStockTakeApi.reducer,
     [insuranceMedicationMappingApi.reducerPath]: insuranceMedicationMappingApi.reducer,
+    [insuranceTypeApi.reducerPath]: insuranceTypeApi.reducer,
     [insuranceServiceCostMappingApi.reducerPath]: insuranceServiceCostMappingApi.reducer,
     [personalAccountChargeApi.reducerPath]: personalAccountChargeApi.reducer,
     [accountingSupplierApi.reducerPath]: accountingSupplierApi.reducer,
@@ -147,6 +149,7 @@ export const store = configureStore({
     .concat(medicationPurchasesApi.middleware)
     .concat(medicationStockTakeApi.middleware)
     .concat(insuranceMedicationMappingApi.middleware)
+    .concat(insuranceTypeApi.middleware)
     .concat(insuranceServiceCostMappingApi.middleware)
     .concat(personalAccountChargeApi.middleware)
     .concat(accountingItemApi.middleware)

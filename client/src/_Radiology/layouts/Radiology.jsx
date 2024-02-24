@@ -109,23 +109,24 @@ const Radiology = () => {
 
   return (
     <VStack
-      mt="65px"
+      mt="50px"
       w="full"
       bgColor="gray.50"
       p={3}
-      h="95vh"
       position="relative"
     >
-      <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/add-item" />
-        <Box
-          w="100%"
-          bgColor="white"
-          p={3}
-          h="89%"
-        >
-          <DataTable2 data={subrowData} columns={columnsx} />
-        </Box>
+      <BreadCrumbNav link="/add-item" />
+      <Box
+        w="100%"
+        bgColor="white"
+        p={3}
+        h="89%"
+      >
+        <DataTable2
+          data={subrowData}
+          columns={columnsx}
+          title="Radiology Requests"
+        />
       </Box>
     </VStack>
   );

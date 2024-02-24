@@ -47,17 +47,22 @@ const getAllInsurances = async (req, res, next) => {
 const getInsuranceDetail = async (req, res, next) => {
   const { id } = req.params;
   try {
-    await sequelize.sync().then(() => {
-      Insurance_detail.findOne({
+    if(id !== 'null'){
+      const results = await Insurance_detail.findOne({
         where: {
-          id,
+          insurance_id:id,
         },
-      }).then((response) => {
-        res.status(200).json(response);
-      }).catch((error) => res.status(404).json(error.message));
-    });
+      })
+      res.json(results)
+    }else{
+      res.json()
+    }
+      next()
+      console.log('fetching insurances...')
   } catch (error) {
+    console.log(error)
     res.status(404).json(error.message);
+    next(error)
   }
 };
 

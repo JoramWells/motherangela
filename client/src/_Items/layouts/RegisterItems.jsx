@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 import { HStack, Text, VStack } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
@@ -10,6 +11,7 @@ import AddService from '../components/servicess/AddService';
 import AddDiseases from '../components/diseases/AddDiseases';
 import AddInsurance from '../components/insurance/AddInsurance';
 import { useGetDiseasesDuplicatesQuery } from '../../api/diseasesDuplicates.api';
+import { useGetInsuranceQuery } from '../../api/insurance.api';
 
 const PatientCard = ({
   text, icon, onClick, selected,
@@ -95,27 +97,37 @@ const profileData = [
 const RegisterItems = () => {
   const [sideItem, setSideItem] = useState(0);
   const { pathname } = useLocation();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const stepSearch = searchParams.get('step');
   const diseaseID = searchParams.get('disease_id');
+  const insurance_id = searchParams.get('insurance_id');
+
   const navigate = useNavigate();
+
+  const { data: insuranceData } = useGetInsuranceQuery(insurance_id);
+
+  console.log(insuranceData, 'innnsdaa');
 
   const handleSetSideItem = useCallback((step) => {
     setSideItem(step);
-    navigate({
-      pathname,
-      search: `?step=${step}`,
-    });
-  }, [setSideItem, navigate, pathname]);
+    console.log(step, 'nav');
+
+    // Check insurance id
+    if (insurance_id) {
+      navigate({
+        pathname: '/register-items',
+        search: `?step=2&insurance_id=${insurance_id}`,
+      });
+    }
+    setSearchParams({ step });
+  }, [setSideItem, setSearchParams, insurance_id, navigate]);
 
   useEffect(() => {
     if (!stepSearch) {
-      navigate({
-        pathname,
-        search: '?step=0',
-      });
+      handleSetSideItem(0);
     }
-  }, [navigate, pathname, stepSearch, handleSetSideItem]);
+    // handleSetSideItem(stepSearch);
+  }, [stepSearch, handleSetSideItem]);
 
   return (
     <VStack
@@ -153,7 +165,11 @@ const RegisterItems = () => {
         {sideItem === 0 && (
         <AddDiseases />
         )}
-        {sideItem === 2 && <AddInsurance />}
+        {sideItem === 2 && (
+        <AddInsurance
+          insuranceData={insuranceData}
+        />
+        )}
         {sideItem === 3 && <AddMedications />}
         {sideItem === 4 && <AddService />}
         {sideItem === 6 && <AddWard />}

@@ -479,6 +479,7 @@ const SidebarListItems = () => {
         selected={pathname === '/radiology' || pathname.includes('/add-radiology-request')
           || pathname.includes('/radiology-details')
           || pathname.includes('/radiology-visits')
+          || pathname.includes('/radiology-requests')
           || pathname.includes('/add-radiology-results')}
         onClick={onToggle}
         text="Radiology"
