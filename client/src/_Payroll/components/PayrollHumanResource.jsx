@@ -6,8 +6,8 @@ import {
 } from '@chakra-ui/react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
-import { useGetPayrollEmployeeCategoriesQuery } from '../../api/payrollEmployeeCategory.api';
-import { useGetAllPayrollPayTypesQuery } from '../../api/payrollPayType.api';
+import { useGetPayrollEmployeeCategoriesQuery } from '../../api/payroll/payrollEmployeeCategory.api';
+import { useGetAllPayrollPayTypesQuery } from '../../api/payroll/payrollPayType.api';
 
 const customStyles = {
   control: (provided, state) => ({

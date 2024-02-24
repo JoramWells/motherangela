@@ -9,8 +9,16 @@ const UserNameAvatar = ({ fullName, link }) => (
       size="sm"
       name={fullName}
       color="white"
+      fontWeight="bold"
     />
-    <Link to={link}>{fullName}</Link>
+    <Link
+      to={link}
+      style={{
+        fontWeight: 'bold',
+      }}
+    >
+      {fullName}
+    </Link>
   </HStack>
 );
 

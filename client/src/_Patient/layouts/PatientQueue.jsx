@@ -23,7 +23,7 @@ import { useGetAppointmentsQuery } from '../../api/appointments.api';
 const UserNameAvatar = ({ fullName }) => (
   <HStack>
     <Avatar
-      size="xs"
+      size="sm"
       name={fullName}
       color="white"
       fontWeight="bold"
@@ -260,7 +260,12 @@ const PatientQueue = () => {
         )
           : (
 
-            <DataTable2 data={data || []} columns={columnsx} />
+            <DataTable2
+              title="Patient Queue"
+              data={data || []}
+              columns={columnsx}
+              isLoading={isLoading}
+            />
           )}
       </Box>
 

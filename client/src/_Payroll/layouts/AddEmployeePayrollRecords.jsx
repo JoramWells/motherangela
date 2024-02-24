@@ -8,10 +8,10 @@ import {
 import { useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import { useSearchParams } from 'react-router-dom';
-import { useAddPatientMutation } from '../api/patients.api';
-import { AssociatedUserAccount, PayrollContacts, PersonalDetail } from '../components/PayrollForms/Payroll';
-import PayrollHumanResource from '../components/PayrollForms/PayrollHumanResource';
-import PayrollBankDetails from '../components/PayrollForms/PayrollBankDetails';
+import { useAddPatientMutation } from '../../api/patients.api';
+import { AssociatedUserAccount, PayrollContacts, PersonalDetail } from '../components/Payroll';
+import PayrollHumanResource from '../components/PayrollHumanResource';
+import PayrollBankDetails from '../components/PayrollBankDetails';
 
 const AddEmployeePayrollRecords = () => {
   const [first_name, setFirstName] = useState('');

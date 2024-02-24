@@ -24,17 +24,17 @@ const TableSearchInput = ({ columnFilters, setColumFilters, searchQueryColumn })
       justifyContent="space-between"
     >
       <HStack
-        w="35%"
+        w="25%"
         // bgColor="red"
       >
         <Input
           placeholder="Search..."
           onChange={(e) => onFilterChange('patient_detail', e.target.value)}
-          backgroundColor="gray.50"
+          // backgroundColor="gray.50"
           border="1px"
           // w="25%"
           borderColor="gray.200"
-          rounded="md"
+          rounded="lg"
           // _active={{
           //   boxShadow: 'lg',
           // }}
@@ -52,7 +52,9 @@ const TableSearchInput = ({ columnFilters, setColumFilters, searchQueryColumn })
           value={patientName}
         />
 
-        <IconButton>
+        <IconButton
+          variant="outline"
+        >
           <FaFilter color="gray" />
 
         </IconButton>

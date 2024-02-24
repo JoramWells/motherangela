@@ -8,14 +8,15 @@ const AddService = () => (
   <VStack
     w="50%"
     bgColor="white"
+    p={3}
   >
     <Tabs
       isFitted
       w="full"
       size="sm"
-      border="1px"
-      rounded="lg"
-      borderColor="gray.200"
+      // border="1px"
+      // rounded="lg"
+      // borderColor="gray.200"
     >
       <TabList>
         <Tab

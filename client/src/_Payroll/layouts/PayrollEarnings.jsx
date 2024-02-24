@@ -12,8 +12,8 @@ import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
-import { useGetAllPayrollDeductionsQuery } from '../../api/payrollDeductions.api';
-import { useGetAllPayrollEarningsQuery } from '../../api/payrollEarnings.api';
+import { useGetAllPayrollDeductionsQuery } from '../../api/payroll/payrollDeductions.api';
+import { useGetAllPayrollEarningsQuery } from '../../api/payroll/payrollEarnings.api';
 
 const PayrollEarnings = () => {
   const navigate = useNavigate();

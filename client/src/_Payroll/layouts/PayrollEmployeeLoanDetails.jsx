@@ -12,7 +12,7 @@ import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
-import { useGetAllPayrollEmployeeRecordsQuery } from '../../api/payrollEmployeeRecords.api';
+import { useGetAllPayrollEmployeeRecordsQuery } from '../../api/payroll/payrollEmployeeRecords.api';
 import UserNameAvatar from '../../components/UserNameAvatar';
 
 const PayrollEmployeeLoanDetails = () => {

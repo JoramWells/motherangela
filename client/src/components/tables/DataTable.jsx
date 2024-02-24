@@ -2,7 +2,7 @@
 /* eslint-disable react/forbid-prop-types */
 import {
   Badge,
-  Box, Button, HStack, Table, TableContainer, Tag, Tbody, Td, Text, Th, Thead, Tr, VStack,
+  Box, Button, HStack, Spinner, Table, TableContainer, Tag, Tbody, Td, Text, Th, Thead, Tr, VStack,
 } from '@chakra-ui/react';
 import {
   flexRender, getCoreRowModel, getFilteredRowModel,
@@ -15,7 +15,7 @@ import TableSearchInput from '../TableSearchInput';
 
 const DataTable2 = ({
   data, columns, searchQueryColumn, isTableHeight,
-  hasPagination, hasSearch,
+  hasPagination, hasSearch, isLoading,
   title,
 }) => {
   const [columnFilters, setColumnFilters] = useState([]);
@@ -38,13 +38,14 @@ const DataTable2 = ({
         alignItems="center"
         pl={3}
         // pt={6}
-        pb={3}
+        // pb={1}
         w="full"
       >
         <Text
           fontSize="18px"
           // fontWeight="600"
           color="gray.700"
+          fontWeight="bold"
         >
           {title}
           {' '}
@@ -71,18 +72,28 @@ const DataTable2 = ({
       )}
       <TableContainer
         // h={isTableHeight && '700px'}
-        maxH="700px"
+        maxH="650px"
         overflowY="auto"
-        mt={0}
+        m={2}
         bgColor="white"
-        p={2}
         w="full"
+        border="1px"
+        borderRadius="xl"
+        borderColor="gray.100"
+        position="relative"
       >
-        <Table>
+        <Table
+          w="full"
+        >
           {table.getHeaderGroups()
             .map((headerGroup) => (
               <Thead
                 key={headerGroup.id}
+                position="sticky"
+                top={0}
+                zIndex={1}
+                h="45px"
+                bgColor="gray.50"
               >
                 {headerGroup.headers.map((header) => (
                   <Th
@@ -90,7 +101,6 @@ const DataTable2 = ({
                     w={header.getSize()}
                     position="relative"
                     whiteSpace="break-spaces"
-                    bgColor="gray.50"
 
                   >
                     <HStack>
@@ -119,25 +129,47 @@ const DataTable2 = ({
                 ))}
               </Thead>
             ))}
-          <Tbody>
-            {table.getRowModel().rows.map((row) => (
-              <Tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <Td
-                    key={cell.id}
-                    fontSize="14px"
-                  >
-                    {
+
+          {isLoading
+            ? (
+
+              <HStack
+                p={4}
+                alignItems="flex-start"
+                justifyContent="center"
+              >
+                <Spinner />
+
+                <Text
+                  fontSize="14px"
+                  color="gray.500"
+                >
+                  Fetching data. Please wait...
+                </Text>
+              </HStack>
+            )
+
+            : (
+              <Tbody>
+                {table.getRowModel().rows.map((row) => (
+                  <Tr key={row.id}>
+                    {row.getVisibleCells().map((cell) => (
+                      <Td
+                        key={cell.id}
+                        fontSize="14px"
+                      >
+                        {
                       flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext(),
                       )
                     }
-                  </Td>
+                      </Td>
+                    ))}
+                  </Tr>
                 ))}
-              </Tr>
-            ))}
-          </Tbody>
+              </Tbody>
+            )}
         </Table>
 
         {/* enable/disable pagination */}
@@ -151,6 +183,9 @@ const DataTable2 = ({
           rounded="lg"
           fontWeight="semibold"
           color="gray.600"
+          position="sticky"
+          bottom="0px"
+          zIndex={1}
           // border="1px"
           // borderColor="gray.200"
           // boxShadow="lg"
@@ -206,6 +241,7 @@ DataTable2.propTypes = {
   isTableHeight: PropTypes.bool,
   hasPagination: PropTypes.bool,
   hasSearch: PropTypes.bool,
+  isLoading: PropTypes.bool,
 };
 
 DataTable2.defaultProps = {
@@ -215,5 +251,6 @@ DataTable2.defaultProps = {
   title: 'Title',
   isTableHeight: true,
   hasPagination: true,
+  isLoading: false,
   hasSearch: true,
 };

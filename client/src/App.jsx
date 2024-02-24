@@ -44,7 +44,7 @@ import AddMaternityDewormingDetail from './_Maternity/layouts/AddMaternityDeworm
 import PayrollDeductions from './_Payroll/layouts/PayrollDeductions';
 import PayrollEarnings from './_Payroll/layouts/PayrollEarnings';
 import PayrollEmployeeRecords from './_Payroll/layouts/PayrollEmployeeRecords';
-import AddEmployeeRecords from './layouts/AddEmployeePayrollRecords';
+import AddEmployeeRecords from './_Payroll/layouts/AddEmployeePayrollRecords';
 import PayrollEmployeeLoanDetails from './_Payroll/layouts/PayrollEmployeeLoanDetails';
 import PayrollEmployeeBenefitsFile from './_Payroll/layouts/PayrollEmployeeBenefitsFile';
 import PayrollEmployeeEarningRecords from './_Payroll/layouts/PayrollEmployeeEarningRecords';

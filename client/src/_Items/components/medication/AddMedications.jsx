@@ -40,9 +40,9 @@ const AddMedications = () => (
       isFitted
       w="full"
       size="sm"
-      border="1px"
-      rounded="lg"
-      borderColor="gray.200"
+      // border="1px"
+      // rounded="lg"
+      // borderColor="gray.200"
     >
       <TabList>
         {dataList.map((item) => (

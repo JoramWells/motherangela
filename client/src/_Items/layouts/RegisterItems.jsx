@@ -36,7 +36,7 @@ const PatientCard = ({
         color: 'blue.500',
         bgColor: 'blue.50',
       }}
-      color={selected ? 'blue.500' : 'gray.400'}
+      color={selected ? 'blue.500' : 'gray.700'}
     >
       {icon}
       <Text
@@ -135,22 +135,26 @@ const RegisterItems = () => {
       w="full"
       mt="50px"
       p={3}
+      bgColor="white"
     >
       <BreadCrumbNav />
       <HStack
         w="full"
         alignItems="flex-start"
-        spacing={4}
+        spacing={0}
       >
         <VStack
           bgColor="white"
-          w="20%"
+          w="17%"
           // rounded="lg"
           borderRight="1px"
           borderColor="gray.200"
           p={2}
           alignItems="flex-start"
           spacing={0}
+          h="100vh"
+          position="sticky"
+          top={0}
         >
           {profileData.map((item) => (
             <PatientCard
