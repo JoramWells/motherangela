@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
 const { DataTypes, UUIDV4 } = require('sequelize');
 const sequelize = require('../../db/connect');
-const Appointments = require('../appointment/appointments2.models');
-const Patient_details = require('../patient/patient2.models');
+const Appointments = require('../_appointment/appointments.model');
+const Patient_details = require('../patient/patients.models');
 
 const Eligibility = sequelize.define('eligibility', {
   id: {

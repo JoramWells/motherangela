@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
 const { DataTypes, UUIDV4 } = require('sequelize');
 const sequelize = require('../../db/connect');
-const Appointments2 = require('../_appointment/appointments2.models');
 const Patient_details = require('../patient/patients.models');
+const Appointments = require('../_appointment/appointments.model');
 
 const VitalSigns = sequelize.define('vitalSigns', {
   id: {
@@ -11,10 +11,10 @@ const VitalSigns = sequelize.define('vitalSigns', {
     defaultValue: UUIDV4,
   },
   appointment_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
   },
   patient_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
   },
   temperature: {
     type: DataTypes.STRING,
@@ -46,8 +46,8 @@ const VitalSigns = sequelize.define('vitalSigns', {
 
 });
 
-VitalSigns.belongsTo(Appointments2, { foreignKey: 'appointment_id' });
-Appointments2.hasMany(VitalSigns,{foreignKey:'appointment_id'})
+VitalSigns.belongsTo(Appointments, { foreignKey: 'appointment_id' });
+Appointments.hasMany(VitalSigns,{foreignKey:'appointment_id'})
 VitalSigns.belongsTo(Patient_details, { foreignKey: 'patient_id' });
 
 // sequelize.sync().then(() => {

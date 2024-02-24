@@ -4,8 +4,9 @@
 /* eslint-disable camelcase */
 const { DataTypes, Sequelize } = require('sequelize');
 const sequelize = require('../../db/connect');
+const ProcedureCategory = require('./procedureCategory.model');
 
-const Procedure_detail = sequelize.define('procedure_details', {
+const ProcedureDetail = sequelize.define('procedure_details', {
   procedure_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -91,4 +92,6 @@ const Procedure_detail = sequelize.define('procedure_details', {
 //   });
 // };
 
-module.exports = Procedure_detail;
+ProcedureDetail.belongsTo(ProcedureCategory,{foreignKey:'procedure_category_id'})
+
+module.exports = ProcedureDetail;

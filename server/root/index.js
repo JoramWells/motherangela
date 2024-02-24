@@ -43,14 +43,6 @@ const medicationStockTakeRoutes = require('./routes/medication/medicationStockTa
 const insuranceMedicationMapping = require('./routes/insurance/insuranceMedicationMapping.routes');
 const insuranceServiceCostMapping = require('./routes/insurance/insuranceServiceCostMapping.routes');
 const personalAccountChargeRoutes = require('./routes/charges/personalAccountCharges.routes');
-const payrollDeductionsRoutes = require('./routes/payroll/payrollDeductions.routes');
-const payrollEarningsRoutes = require('./routes/payroll/payrollEarnings.routes');
-const payrollEmployeeRecordsRoutes = require('./routes/payroll/payrollEmployeeRecords.routes');
-const payrollJobTitleRoutes = require('./routes/payroll/payrollJobTitle.routes');
-const payrollEmployeeCategoryRoutes = require('./routes/payroll/payrollEmployeeCategory.routes');
-const payrollPayTypeRoutes = require('./routes/payroll/payrollPayType.routes');
-const payrollEmployeeBenefitsFileRoutes = require('./routes/payroll/payrollEmployeeBenefitFile.routes');
-const payrollEmployeeDeductionsRoutes = require('./routes/payroll/payrollEmployeeDeductions.routes');
 const userPrivilegeDetailRoutes = require('./routes/userPrivilegeDetail.routes');
 
 const app = express();
@@ -108,14 +100,6 @@ app.use('/medication-stock-take', medicationStockTakeRoutes);
 app.use('/insurance-medication-mapping', insuranceMedicationMapping);
 app.use('/insurance-service-cost-mapping', insuranceServiceCostMapping);
 app.use('/personal-account-charge', personalAccountChargeRoutes);
-app.use('/payroll-deductions', payrollDeductionsRoutes);
-app.use('/payroll-earnings', payrollEarningsRoutes);
-app.use('/payroll-employee-records', payrollEmployeeRecordsRoutes);
-app.use('/payroll-job-title', payrollJobTitleRoutes);
-app.use('/payroll-employee-category', payrollEmployeeCategoryRoutes);
-app.use('/payroll-pay-type', payrollPayTypeRoutes);
-app.use('/payroll-employee-benefits-file', payrollEmployeeBenefitsFileRoutes);
-app.use('/payroll-employee-deductions', payrollEmployeeDeductionsRoutes);
 app.use('/user-privilege-details', userPrivilegeDetailRoutes);
 
 // app.use((err, req, res, next) => {

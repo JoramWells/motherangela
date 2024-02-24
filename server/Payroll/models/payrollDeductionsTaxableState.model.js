@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 const { DataTypes } = require('sequelize');
-const sequelize = require('../../db/connect');
+const sequelize = require('../../root/db/connect');
 
 const Payroll_deductions_taxable_state = sequelize.define('payroll_deductions_taxable_state', {
   taxable_state_id: {

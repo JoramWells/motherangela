@@ -5,7 +5,6 @@ import {
   Box, Button, HStack, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
-import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -24,7 +23,7 @@ const Radiology = () => {
     () => [
       {
         header: 'Patient Name',
-        accessorKey: 'patient',
+        accessorKey: 'patient_detail',
         cell: (props) => (
           <Box onClick={() => navigate(`/patient-detail/${props.getValue().patient_id}`)}>
             <UserNameAvatar
@@ -36,15 +35,15 @@ const Radiology = () => {
       },
       {
         header: 'Payment Details',
-        accessorKey: 'appointments2',
-        cell: (props) => <Text>{props.getValue().insurance_detail?.insurance_name}</Text>,
+        accessorKey: 'appointment',
+        cell: (props) => <Text>{props.getValue()?.insurance_detail?.insurance_name}</Text>,
         size: 200,
 
       },
       {
         header: 'INVESTIGATION REQUESTED',
         accessorKey: 'procedure_detail',
-        cell: (props) => <Text>{props.getValue().procedure_name}</Text>,
+        cell: (props) => <Text>{props.getValue()?.procedure_name}</Text>,
 
       },
       {

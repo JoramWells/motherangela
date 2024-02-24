@@ -27,25 +27,50 @@ const Admission = () => {
     () => [
       {
         header: 'Patient Name',
-        accessorKey: 'patient',
+        accessorKey: 'patient_detail',
         cell: (props) => (
-          <HStack>
-            <Avatar
-              rounded="full"
-              fontWeight="bold"
-              color="white"
-              size="sm"
-              name={props.getValue() ? `${props.getValue()?.first_name
-              } ${props.getValue()?.middle_name}` : '0'}
-            />
-            <Text
-              textTransform="uppercase"
-              fontWeight="bold"
+          <VStack
+            alignItems="flex-start"
+            spacing={0}
+          >
+            <HStack
+              alignItems="flex-start"
+              spacing={2}
             >
-              {props.getValue() ? `${props.getValue()?.first_name
-              } ${props.getValue()?.middle_name}` : '0'}
-            </Text>
-          </HStack>
+              <Avatar
+                rounded="full"
+                fontWeight="bold"
+                color="white"
+                size="sm"
+                name={props.getValue() ? `${props.getValue()?.first_name
+                } ${props.getValue()?.middle_name}` : '0'}
+              />
+              <VStack
+                // ml={10}
+                alignItems="flex-start"
+                spacing=".3rem"
+              >
+                <Text
+                  textTransform="uppercase"
+                  fontWeight="bold"
+                >
+                  {props.getValue() ? `${props.getValue()?.first_name
+                  } ${props.getValue()?.middle_name}` : '0'}
+                </Text>
+                <Text
+                  color="gray.500"
+                >
+                  {moment(props.getValue()?.dob).format('ll')}
+                </Text>
+                <Text
+                  color="gray.500"
+                >
+                  {props.getValue()?.patient_gender === 0 ? 'MALE' : 'FEMALE'}
+                </Text>
+              </VStack>
+            </HStack>
+
+          </VStack>
         ),
 
       },
@@ -53,7 +78,18 @@ const Admission = () => {
         header: 'Admission Date',
         accessorKey: 'admission_date',
         enableSorting: false,
-        cell: (props) => <Text>{moment(new Date(props.getValue())).format('ll')}</Text>,
+        cell: (props) => (
+          <VStack
+            alignItems="left"
+          >
+            <Text>{moment(new Date(props.getValue())).format('ll')}</Text>
+            <Text
+              color="gray.500"
+            >
+              {moment(props.row.original.admission_time, 'HH:mm').format('hh:mm a')}
+            </Text>
+          </VStack>
+        ),
 
       },
       {
@@ -66,14 +102,16 @@ const Admission = () => {
               <Tag
                 colorScheme="green"
                 variant="subtle"
-                rounded="xl"
-                border="1px"
+                rounded="full"
+                // border="1px"
+                size="sm"
               >
                 PAID
               </Tag>
             ) : (
               <Tag
-                rounded="md"
+                rounded="full"
+                size="sm"
                 colorScheme="red"
                 variant="subtle"
               >
@@ -95,14 +133,15 @@ const Admission = () => {
         enableSorting: false,
         cell: (props) => (
           <VStack
-            // color="white"
+            color="white"
             rounded="lg"
             fontWeight="extrabold"
             h={7}
             w={7}
             justifyContent="center"
             border="2px"
-            borderColor="gray.600"
+            borderColor="gray.200"
+            bgColor="gray.500"
           >
             <Text>{props.getValue()?.bed_number}</Text>
           </VStack>
@@ -117,8 +156,9 @@ const Admission = () => {
               colorScheme="gray"
               variant="ghost"
               color="gray"
-              pr={3}
+              pr=".6rem"
               as={IconButton}
+              size="sm"
               rightIcon={<FaEllipsisH />}
             />
             <MenuList
@@ -155,25 +195,23 @@ const Admission = () => {
       mt="50px"
       w="full"
       bgColor="gray.50"
-      p={2}
-      h="95vh"
+      p={3}
       position="relative"
     >
-      <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/add-admission" />
+      <BreadCrumbNav link="/add-admission" />
 
-        <Box
-          w="100%"
-          bgColor="white"
-          p={3}
-          h="89%"
-        >
-          <DataTable2
-            searchQueryColumn="pay_status"
-            data={subRowData}
-            columns={columns}
-          />
-        </Box>
+      <Box
+        w="100%"
+        bgColor="white"
+        p={3}
+        h="89%"
+      >
+        <DataTable2
+          title="Patient Admission"
+          searchQueryColumn="pay_status"
+          data={subRowData}
+          columns={columns}
+        />
       </Box>
     </VStack>
   );

@@ -9,6 +9,8 @@ const Patient = require('../models/patient/patients.models');
 const Appointments2 = require('../models/appointment/appointments.model');
 const InsuranceDetail = require('../models/insurance/insuranceDetail.model');
 const Patient_details = require('../models/patient/patients.models');
+const ProcedureCategory = require('../models/procedure/procedureCategory.model');
+const ServiceType = require('../models/services/serviceType.model');
 
 const addInternalLabRequest = async (req, res, next) => {
   try {
@@ -44,6 +46,18 @@ const getAllInternalLabRequests = async (req, res, next) => {
         {
           model: Procedure_detail,
           attributes: ['procedure_name', 'procedure_cost'],
+          include: [
+            {
+              model: ProcedureCategory,
+              attributes:['category_id', 'category_name','service_type_id'],
+              include:[
+                {
+                  model:ServiceType,
+                  attributes: ['service_type_id','service_type_description']
+                }
+              ]
+            }
+          ]
         },
       ],
     });
@@ -55,6 +69,7 @@ const getAllInternalLabRequests = async (req, res, next) => {
     next(error);
   }
 };
+
 
 const getInternalLabRequest = async (req, res, next) => {
   const { id } = req.params;

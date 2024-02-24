@@ -8,9 +8,9 @@ const Inpatient_case_types = require(
 );
 const Admissions2 = require('../models/_admission/admission2.model');
 const WardBed = require('../models/ward/wardBed.model');
-const Patient = require('../models/patient/patients.model');
 const Admission_category = require('../models/_admission/admissionCategory');
 const Wards = require('../models/ward/ward.model');
+const Patient_details = require('../models/patient/patients.model');
 
 
 const addAdmission = async (req, res, next) => {
@@ -33,8 +33,8 @@ const getAllAdmission = async (req, res, next) => {
       limit: 100,
       include: [
         {
-          model: Patient,
-          attributes: ['first_name', 'middle_name'],
+          model: Patient_details,
+          attributes: ['first_name', 'middle_name', 'dob', 'patient_gender'],
         },
         {
           model: WardBed,

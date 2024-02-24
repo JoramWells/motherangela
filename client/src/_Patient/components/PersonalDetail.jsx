@@ -16,8 +16,8 @@ const PersonalDetail = ({
   ];
 
   const genderOptions = [
-    { value: 'MALE', label: 'MALE' },
-    { value: 'FEMALE', label: 'FEMALE' },
+    { value: '1', label: 'MALE' },
+    { value: '2', label: 'FEMALE' },
   ];
 
   return (

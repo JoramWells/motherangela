@@ -17,9 +17,9 @@ const Admissions2 = sequelize.define('admissions', {
     autoIncrement: true,
   },
   appointment_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     references: {
-      model: 'appointments2',
+      model: 'appointments',
       key: 'appointment_id',
     },
     onDelete: 'CASCADE',
@@ -29,9 +29,9 @@ const Admissions2 = sequelize.define('admissions', {
     type: DataTypes.INTEGER,
   },
   patient_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     references: {
-      model: 'patient',
+      model: 'patient_details',
       key: 'patient_id',
     },
     onDelete: 'CASCADE',

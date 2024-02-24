@@ -8,10 +8,12 @@ import { nanoid } from '@reduxjs/toolkit';
 import { useGetAdmissionQuery } from '../../api/admissions.api';
 import BedReallocation from '../components/AdmissionProfileTabs/BedReallocation';
 import InternalRequests from '../components/AdmissionProfileTabs/InternalRequests';
+import RecordsTab from '../components/AdmissionProfileTabs/RecordsTab';
+import VisitsTab from '../components/AdmissionProfileTabs/VisitsTab';
+import BillsTab from '../components/AdmissionProfileTabs/BillsTab';
 
 const tabList = [
-  { id: nanoid(), text: 'Anaesthetic Records' },
-  { id: nanoid(), text: 'Bed Reallocation' },
+  { id: nanoid(), text: 'Records' },
   { id: nanoid(), text: 'Bills' },
   { id: nanoid(), text: 'History' },
   { id: nanoid(), text: 'Inpatient Core Fee' },
@@ -59,13 +61,10 @@ const AdmissionProfile = () => {
 
           <TabPanels>
             <TabPanel>
-              <p>one!</p>
+              <RecordsTab />
             </TabPanel>
             <TabPanel>
-              <BedReallocation />
-            </TabPanel>
-            <TabPanel>
-              <p>three!</p>
+              <BillsTab />
             </TabPanel>
             <TabPanel>
               <p>one!</p>
@@ -89,10 +88,7 @@ const AdmissionProfile = () => {
               <InternalRequests />
             </TabPanel>
             <TabPanel>
-              <BedReallocation />
-            </TabPanel>
-            <TabPanel>
-              <p>three!</p>
+              <VisitsTab />
             </TabPanel>
           </TabPanels>
         </Tabs>

@@ -1,24 +1,24 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable indent */
 /* eslint-disable camelcase */
-const { DataTypes, UUIDV4 } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../../db/connect');
-const Patient = require('../patient/patients.model');
 const InsuranceDetail = require('../insurance/insuranceDetail.model');
-const Users = require('../user/user.model');
+const Patient_details = require('../patient/patients.model');
+// const Patient_details = require('../patient/patients.models');
+// const Account_type = require('../accountTypes.model');
 
-const Appointments2 = sequelize.define('appointments2', {
+const Appointments = sequelize.define('appointments', {
   appointment_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     primaryKey: true,
-    defaultValue: UUIDV4,
   },
   doctor_id: {
     type: DataTypes.INTEGER,
   },
   patient_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     references: {
-      model: 'patient',
+      model: 'patient_details',
       key: 'patient_id',
     },
     onDelete: 'CASCADE',
@@ -53,6 +53,9 @@ const Appointments2 = sequelize.define('appointments2', {
   admission_status: {
     type: DataTypes.STRING,
   },
+  vital_signs: {
+    type: DataTypes.STRING,
+  },
   patient_registration_charge: {
     type: DataTypes.INTEGER,
   },
@@ -60,6 +63,51 @@ const Appointments2 = sequelize.define('appointments2', {
     type: DataTypes.STRING,
   },
   patient_monitoring_notes: {
+    type: DataTypes.STRING,
+  },
+  temperature: {
+    type: DataTypes.STRING,
+  },
+  pulse_rate: {
+    type: DataTypes.STRING,
+  },
+  respiratory_rate: {
+    type: DataTypes.STRING,
+  },
+  systolic: {
+    type: DataTypes.STRING,
+  },
+  diastolic: {
+    type: DataTypes.STRING,
+  },
+  weight: {
+    type: DataTypes.STRING,
+  },
+  height: {
+    type: DataTypes.STRING,
+  },
+  body_mass_index: {
+    type: DataTypes.STRING,
+  },
+  temperature_2: {
+    type: DataTypes.STRING,
+  },
+  pulse_rate_2: {
+    type: DataTypes.STRING,
+  },
+  respiratory_rate_2: {
+    type: DataTypes.STRING,
+  },
+  systolic_2: {
+    type: DataTypes.STRING,
+  },
+  diastolic_2: {
+    type: DataTypes.STRING,
+  },
+  weight_2: {
+    type: DataTypes.STRING,
+  },
+  height_2: {
     type: DataTypes.STRING,
   },
   nhif_claim_number: {
@@ -70,6 +118,9 @@ const Appointments2 = sequelize.define('appointments2', {
   },
   consultation_group_id: {
     type: DataTypes.INTEGER,
+  },
+  sp02: {
+    type: DataTypes.STRING,
   },
   company_id: {
     type: DataTypes.INTEGER,
@@ -84,6 +135,12 @@ const Appointments2 = sequelize.define('appointments2', {
     type: DataTypes.INTEGER,
   },
   muac_for_infants: {
+    type: DataTypes.STRING,
+  },
+  weight_conclusion: {
+    type: DataTypes.STRING,
+  },
+  height_conclusion: {
     type: DataTypes.STRING,
   },
   clinic_id: {
@@ -107,10 +164,12 @@ const Appointments2 = sequelize.define('appointments2', {
 
 }, { timestamps: false });
 
-Appointments2.belongsTo(Patient, { foreignKey: 'patient_id' });
-Appointments2.belongsTo(Users, { foreignKey: 'doctor_id', targetKey: 'user_id' });
-// Patient.hasMany(Appointments2, { foreignKey: 'patient_id' });
-Appointments2.belongsTo(InsuranceDetail, { foreignKey: 'reference_account_id', targetKey: 'insurance_id' });
+Appointments.belongsTo(Patient_details, { foreignKey: 'patient_id' });
+Appointments.belongsTo(
+InsuranceDetail,
+{ foreignKey: 'reference_account_id', targetKey: 'insurance_id' },
+);
+// Appointments.belongsTo(Account_type, { foreignKey: 'account_type_id' });
 
 // sequelize.sync().then(() => {
 //   console.log('Book table created');
@@ -118,4 +177,4 @@ Appointments2.belongsTo(InsuranceDetail, { foreignKey: 'reference_account_id', t
 //   console.error('Unable to create table :', error);
 // });
 
-module.exports = Appointments2;
+module.exports = Appointments;

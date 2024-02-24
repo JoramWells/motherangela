@@ -7,15 +7,13 @@ import {
 } from '@chakra-ui/react';
 // import axios from "axios"
 import {
-  FaAudible,
-  FaBoxOpen, FaEye, FaFileDownload, FaHandshake, FaPrint, FaUserNurse,
+  FaBoxOpen,
 } from 'react-icons/fa';
 import { useCallback, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment/moment';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
-import { useGetAppointmentsQuery } from '../../api/appointments.api';
 import { useGetAllEligibilityQuery } from '../api/eligibility.api';
 
 const UserNameAvatar = ({ fullName }) => (
@@ -42,16 +40,17 @@ const Eligibility = () => {
   const {
     data, error, isLoading, isFetching, isSuccess,
   } = useGetAllEligibilityQuery();
+  console.log(error);
 
   const columnsx = useMemo(
     () => [
       {
         header: 'Patient Name',
-        accessorKey: 'appointments2',
+        accessorKey: 'appointment',
         cell: (props) => (
           <Box onClick={() => navigate(`/patient-detail/${props.row.original.patient_id}`)}>
             <UserNameAvatar
-              fullName={`${props.getValue()?.patient.first_name} ${props.getValue()?.patient.middle_name}`}
+              fullName={`${props.getValue()?.patient_detail.first_name} ${props.getValue()?.patient_detail.middle_name}`}
             />
             <Text>{props.row.original.patient_gender}</Text>
           </Box>
@@ -133,14 +132,13 @@ const Eligibility = () => {
 
   return (
     <VStack
-      mt="55px"
+      mt="50px"
       w="full"
       bgColor="gray.50"
       p={3}
-      h="95vh"
       position="relative"
     >
-      <Box bgColor="white" w="full">
+      <VStack bgColor="white" w="full">
         <BreadCrumbNav link="/add-patient?type=admission" />
 
         {filteredData?.length === 0 ? (
@@ -167,16 +165,14 @@ const Eligibility = () => {
           </VStack>
         )
           : (
-            <Box
-              w="100%"
-              bgColor="white"
-              p={3}
-              h="89%"
-            >
-              <DataTable2 data={filteredData} columns={columnsx} />
-            </Box>
+
+            <DataTable2
+              data={filteredData}
+              columns={columnsx}
+              title="Eligibility Queue"
+            />
           )}
-      </Box>
+      </VStack>
     </VStack>
   );
 };

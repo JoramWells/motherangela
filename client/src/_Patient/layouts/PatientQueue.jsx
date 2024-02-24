@@ -46,6 +46,8 @@ const PatientQueue = () => {
     data, error, isLoading, isFetching, isSuccess,
   } = useGetAppointmentsQuery();
 
+  console.log(data);
+
   const columnsx = useMemo(
     () => [
       {
@@ -82,21 +84,34 @@ const PatientQueue = () => {
       },
       {
         header: 'Eligibility',
-        // accessorKey: 'tem',
+        accessorKey: 'eligibilities',
         cell: (props) => (
           <Box>
-            <Button
-              variant="ghost"
+            { props.getValue()?.length > 0 ? (
+              <Tag
+                // size="xs"
+                colorScheme="green"
+                // variant="outline"
+                rounded="full"
+              // variant="ghost"
+              // leftIcon={<FaCheck />}
+              >
+                RECORD
+              </Tag>
+            ) : (
+              <Button
+                variant="ghost"
                   // bgColor={}
               // colorScheme="orange"
-              size="xs"
-              onClick={() => navigate({
-                pathname: `/add-eligibility-screening/${props.row.original.patient_id}`,
-                search: `?appointment_id=${props.row.original.appointment_id}`,
-              })}
-            >
-              RECORD
-            </Button>
+                size="xs"
+                onClick={() => navigate({
+                  pathname: `/add-eligibility-screening/${props.row.original.patient_id}`,
+                  search: `?appointment_id=${props.row.original.appointment_id}`,
+                })}
+              >
+                RECORD
+              </Button>
+            )}
           </Box>
         ),
 
@@ -126,7 +141,7 @@ const PatientQueue = () => {
                 <Tag
                   // size="xs"
                   colorScheme="green"
-                  variant="outline"
+                  // variant="outline"
                   rounded="full"
                   // variant="ghost"
                   // leftIcon={<FaCheck />}

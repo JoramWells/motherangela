@@ -194,28 +194,6 @@ const AppointmentsTab = () => {
           leftIcon={<FaPlus />}
           color="blue.500"
             // rounded="full"
-          onClick={() => navigate(
-            {
-              pathname: `/add-admission/${patient_id}`,
-              search: `?appointment_id=${appointment_id}`,
-            },
-          )}
-          _hover={{
-            backgroundColor: 'blue.50',
-          }}
-        >
-          Admission
-        </Button>
-        <Button
-          size="sm"
-          height="37px"
-          border="2px"
-          borderColor="blue.500"
-            //   rounded="full"
-          backgroundColor="white"
-          leftIcon={<FaPlus />}
-          color="blue.500"
-            // rounded="full"
           _hover={{
             backgroundColor: 'blue.50',
           }}

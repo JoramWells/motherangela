@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable no-unused-vars */
@@ -7,12 +8,17 @@ import {
 } from '@chakra-ui/react';
 import moment from 'moment/moment';
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaChevronCircleDown, FaEllipsisH } from 'react-icons/fa';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { FaChevronCircleDown, FaEllipsisH, FaPlus } from 'react-icons/fa';
 import DataTable2 from '../../components/tables/DataTable';
 
 const PatientDetailAdmission = ({ data }) => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const { id: appointment_id } = useParams();
+  const patient_id = searchParams.get('patient_id');
+
   console.log(data);
   const columns = useMemo(
     () => [
@@ -66,66 +72,45 @@ const PatientDetailAdmission = ({ data }) => {
   return (
     <VStack
       spacing="0"
+      bgColor="white"
+      padding={5}
+      rounded="lg"
+      position="relative"
     >
-      <HStack
-        w="98%"
-        justifyContent="space-between"
-        bgColor="white"
-        p={2}
-      >
-        <Text
-          fontSize="14px"
-          color="gray.700"
-          fontWeight="bold"
-        >
-          All
-        </Text>
 
-        <Menu>
-          <MenuButton
-            px={4}
-            py={2}
-            transition="all 0.2s"
-            borderRadius="md"
-            // borderWidth="1px"
-            // _hover={{ bg: 'gray.400' }}
-            // _expanded={{ bg: 'blue.400' }}
-            // _focus={{ boxShadow: 'outline' }}
-          >
-            <FaEllipsisH />
-          </MenuButton>
-          <MenuList
-            p="5px"
-          >
-            <MenuItem>All</MenuItem>
-            <MenuItem>Today</MenuItem>
-            <MenuDivider />
-            <MenuItem
-              color="green.500"
-              // bgColor="green.50"
-              // fontWeight="bold"
-            >
-              Paid
-            </MenuItem>
-            <MenuItem
-              color="red.500"
-              // bgColor="red.50"
-            >
-              Unpaid
-            </MenuItem>
-          </MenuList>
-        </Menu>
-      </HStack>
-      <VStack
-        w="100%"
+      <Button
+        size="sm"
+        height="37px"
+        border="2px"
+        borderColor="blue.500"
+        //   rounded="full"
+        backgroundColor="white"
+        leftIcon={<FaPlus />}
+        color="blue.500"
+        position="absolute"
+        right={7}
+        top={3}
+        // rounded="full"
+        onClick={() => navigate(
+          {
+            pathname: `/add-admission/${patient_id}`,
+            search: `?appointment_id=${appointment_id}`,
+          },
+        )}
+        _hover={{
+          backgroundColor: 'blue.50',
+        }}
       >
-        <DataTable2
-          columns={columns}
-          data={data}
-          hasSearch={false}
-          isTableHeight={false}
-        />
-      </VStack>
+        Admission
+      </Button>
+
+      <DataTable2
+        title="Admission History"
+        columns={columns}
+        data={data}
+        hasSearch={false}
+        isTableHeight={false}
+      />
     </VStack>
   );
 };

@@ -1,27 +1,27 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable indent */
 /* eslint-disable camelcase */
-const { DataTypes, UUIDV4 } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../../db/connect');
-const Patient = require('../patient/patient2.models');
 // const InsuranceDetail = require('../insurance/insuranceDetail.model');
-// const Users = require('../user/user.model');
+const Patient_details = require('../patient/patient2.models');
+// const Patient_details = require('../patient/patients.models');
+// const Account_type = require('../accountTypes.model');
 
-const Appointments2 = sequelize.define('appointments2', {
+const Appointments = sequelize.define('appointments', {
   appointment_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     primaryKey: true,
-    defaultValue: UUIDV4,
   },
   doctor_id: {
     type: DataTypes.INTEGER,
   },
   patient_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     references: {
-      model: 'patient',
-      key: 'patient_id',
+      model: 'patient_details',
+      key: 'patient_id'
     },
-    onDelete: 'CASCADE',
+    onDelete: 'CASCADE'
   },
   appointment_date: {
     type: DataTypes.STRING,
@@ -164,11 +164,9 @@ const Appointments2 = sequelize.define('appointments2', {
 
 }, { timestamps: false });
 
-Appointments2.belongsTo(Patient, { foreignKey: 'patient_id' });
-// Appointments2.belongsTo(Users, { foreignKey: 'doctor_id', targetKey: 'user_id' });
-// Patient.hasMany(Appointments2, { foreignKey: 'patient_id' });
-// Appointments2.belongsTo(InsuranceDetail, { foreignKey: 'reference_account_id',
-// targetKey: 'insurance_id' });
+Appointments.belongsTo(Patient_details, { foreignKey: 'patient_id' });
+// Appointments.belongsTo(InsuranceDetail, { foreignKey: 'reference_account_id', targetKey: 'insurance_id' });
+// Appointments.belongsTo(Account_type, { foreignKey: 'account_type_id' });
 
 // sequelize.sync().then(() => {
 //   console.log('Book table created');
@@ -176,4 +174,4 @@ Appointments2.belongsTo(Patient, { foreignKey: 'patient_id' });
 //   console.error('Unable to create table :', error);
 // });
 
-module.exports = Appointments2;
+module.exports = Appointments;
