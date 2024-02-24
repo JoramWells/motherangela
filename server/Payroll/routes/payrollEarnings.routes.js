@@ -3,7 +3,7 @@ const express = require('express');
 const {
   addPayrollEarnings, getAllPayrollEarnings, getPayrollEarning,
   editPayrollEarning, deletePayrollEarnings,
-} = require('../../root/controllers/payroll/payrollEarnings.controller');
+} = require('../controllers/payrollEarnings.controller');
 
 const router = express.Router();
 

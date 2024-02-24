@@ -3,7 +3,7 @@ const express = require('express');
 const {
   addPayrollEmployeeRecord, getAllPayrollEmployeeRecords,
   getPayrollEmployeeRecord, editPayrollEmployeeRecord, deletePayrollEmployeeRecord,
-} = require('../../controllers/payroll/payrollEmployeeRecords.controller');
+} = require('../controllers/payrollEmployeeRecords.controller');
 
 const router = express.Router();
 

@@ -4,7 +4,7 @@ const {
   addPayrollEmployeeBenefits, getAllPayrollEmployeeBenefits,
   getPayrollEmployeeEmployeeBenefit, editPayrollEmployeeEmployeeBenefit,
   deletePayrollEmployeeEmployeeBenefit,
-} = require('../../controllers/payroll/payrollEmployeeBenefitsFile.controller');
+} = require('../controllers/payrollEmployeeBenefitsFile.controller');
 
 const router = express.Router();
 

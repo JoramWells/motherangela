@@ -3,7 +3,7 @@ const express = require('express');
 const {
   addPayrollEmployeeDeduction, getAllPayrollEmployeeDeductions,
   getPayrollEmployeeDeduction, editPayrollEmployeeDeduction, deletePayrollEmployeeDeduction,
-} = require('../../controllers/payroll/payrollEmployeeDeductions.controller');
+} = require('../controllers/payrollEmployeeDeductions.controller');
 
 const router = express.Router();
 

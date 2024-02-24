@@ -3,7 +3,7 @@ const express = require('express');
 const {
   addPayrollEmployeeCategory, getAllPayrollEmployeeCategories,
   getPayrollEmployeeCategory, editPayrollEmployeeCategory, deletePayrollEmployeeCategory,
-} = require('../../controllers/payroll/payrollEmployeeCategory.controller');
+} = require('../controllers/payrollEmployeeCategory.controller');
 
 const router = express.Router();
 
