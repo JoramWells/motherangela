@@ -14,9 +14,15 @@ import {
 } from 'react-router-dom';
 
 import { nanoid } from '@reduxjs/toolkit';
+import {
+  FaAccessibleIcon,
+  FaArchive,
+  FaBookMedical, FaCalendar, FaCalendarAlt,
+  FaRegFileArchive, FaSyringe, FaTablets, FaThermometerEmpty, FaUserTimes,
+} from 'react-icons/fa';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import VitalSigns from '../components/VitalSigns';
-import { useGetAppointmentDetailByIDQuery, useGetAppointmentQuery } from '../../api/appointments.api';
+import { useGetAppointmentQuery } from '../../api/appointments.api';
 import InternalRequests from '../components/InternalRequests';
 import PatientDetailAdmission from '../../_Patient/layouts/PatientDetailAdmission';
 import AppointmentsTab from '../../_Appointment/components/AppointmentsTab';
@@ -25,12 +31,69 @@ import DiagnosisTab from '../components/DiagnosisTab';
 import { useGetAdmissionQuery, useGetAllAdmissionsQuery } from '../../api/admissions.api';
 
 const tabList = [
-  { id: nanoid(), text: 'Admissions' },
-  { id: nanoid(), text: 'Appointments' },
-  { id: nanoid(), text: 'Diagnosis' },
-  { id: nanoid(), text: 'Internal Requests' },
-  { id: nanoid(), text: 'Procedures' },
-  { id: nanoid(), text: 'Vital Signs' },
+  {
+    id: nanoid(),
+    text: 'Admissions',
+    icon: <FaBookMedical style={{
+      marginBottom: '.2rem',
+      marginRight: '.3rem',
+    }}
+    />,
+  },
+  {
+    id: nanoid(),
+    text: 'Appointments',
+    icon: <FaCalendarAlt
+      style={{
+        marginBottom: '.2rem',
+        marginRight: '.3rem',
+      }}
+    />,
+
+  },
+  {
+    id: nanoid(),
+    text: 'Diagnosis',
+    icon: <FaSyringe
+      style={{
+        marginBottom: '.2rem',
+        marginRight: '.3rem',
+      }}
+    />,
+
+  },
+  {
+    id: nanoid(),
+    text: 'Internal Requests',
+    icon: <FaUserTimes
+      style={{
+        marginBottom: '.2rem',
+        marginRight: '.3rem',
+      }}
+    />,
+
+  },
+  {
+    id: nanoid(),
+    text: 'Procedures',
+    icon: <FaTablets
+      style={{
+        marginBottom: '.2rem',
+        marginRight: '.3rem',
+      }}
+    />,
+
+  },
+  {
+    id: nanoid(),
+    text: 'Vital Signs',
+    icon: <FaThermometerEmpty style={{
+      marginBottom: '.2rem',
+      marginRight: '.3rem',
+    }}
+    />,
+
+  },
 
 ];
 const Doctor = () => {
@@ -120,7 +183,10 @@ const Doctor = () => {
                 color: 'blue.500',
                 fontWeight: 'bold',
               }}
+              alignItems="center"
+              display="flex"
             >
+              {item.icon}
               {item.text}
             </Tab>
           ))}
