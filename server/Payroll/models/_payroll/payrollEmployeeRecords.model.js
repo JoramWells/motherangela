@@ -3,6 +3,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../db/connect');
 const Payroll_job_title = require('./payrollJobTitles.model');
+const AccountingDepartment = require('../accounts/accountingDepartment.model');
 
 const Payroll_employee_record = sequelize.define('payroll_employee_records', {
   employee_id:
@@ -141,5 +142,6 @@ const Payroll_employee_record = sequelize.define('payroll_employee_records', {
 
 });
 Payroll_employee_record.belongsTo(Payroll_job_title, { foreignKey: 'job_title_id' });
+Payroll_employee_record.belongsTo(AccountingDepartment, { foreignKey: 'department_id' });
 
 module.exports = Payroll_employee_record;

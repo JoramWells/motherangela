@@ -5,6 +5,7 @@
 const Sequelize = require('sequelize');
 const PersonalAccountCharge = require('../models/_charges/personalAccountCharges.model');
 const Patient = require('../models/patient/patients.models');
+const Patient_details = require('../models/patient/patients.models');
 // const Patient = require('../../models/charges/patient2.models');
 
 // const Personal_account_charge = require('../models/personalAccountCharges.model');
@@ -49,18 +50,16 @@ const addPersonalAccountCharge = async (req, res, next) => {
 const getAllPersonalAccountCharges = async (req, res, next) => {
   try {
     const results = await PersonalAccountCharge.findAll({
-      attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('personal_account_charge.patient_id_pac')), 'patient_id'],
-        [Sequelize.fn('COUNT', Sequelize.col('personal_account_charge.patient_id_pac')), 'patient_count'],
-        'date_of_charge',
-      ],
+      attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('personal_account_charges.patient_id_pac')), 'patient_id_pac'],
+        [Sequelize.fn('COUNT', Sequelize.col('personal_account_charges.patient_id_pac')), 'patient_count']],
       group: [
-        'personal_account_charge.patient_id',
+        'personal_account_charges.patient_id_pac',
         'date_of_charge',
-        'patient.patient_id',
+        'patient_detail.patient_id',
       ],
       include: [
         {
-          model: Patient,
+          model: Patient_details,
           attributes: ['first_name', 'middle_name'],
         },
       ],

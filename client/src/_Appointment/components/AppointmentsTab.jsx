@@ -4,13 +4,15 @@
 /* eslint-disable no-unused-vars */
 
 import {
+  Badge,
   Box, Button, HStack, IconButton, Menu, MenuButton, MenuDivider,
-  MenuItem, MenuList, Tag, Text, VStack,
+  MenuItem, MenuList, Tag, TagRightIcon, Text, VStack,
 } from '@chakra-ui/react';
 import moment from 'moment/moment';
 import { useCallback, useMemo, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import {
+  FaCheck,
   FaChevronCircleDown, FaEllipsisH, FaFilter, FaPlus,
 } from 'react-icons/fa';
 import Select from 'react-select';
@@ -47,7 +49,10 @@ const AppointmentsTab = () => {
 
   //   get patient_id from search params
   const patient_id = searchParams.get('patient_id');
-  const { data: appointmentsData } = useGetAppointmentDetailByIDQuery(patient_id);
+  const {
+    data: appointmentsData,
+    isLoading: isLoadingAppointments,
+  } = useGetAppointmentDetailByIDQuery(patient_id);
   const { data: clinicData } = useGetAllConsultationTypeSubGroupsQuery();
 
   const clinicOption = useCallback(() => clinicData?.map((item) => ({
@@ -109,11 +114,16 @@ const AppointmentsTab = () => {
                   // variant="outline"
                   rounded="full"
                 >
+                  <TagRightIcon
+                    as={FaCheck}
+                    mr={1}
+                    ml={0}
+                  />
                   Seen
                 </Tag>
               ) : (
                 <Tag
-                  colorScheme="orange"
+                  // colorScheme="orange"
                   // variant="outline"
                   rounded="full"
                 >
@@ -139,7 +149,8 @@ const AppointmentsTab = () => {
         w="full"
         justify="flex-end"
         position="absolute"
-        right={5}
+        right={6}
+        top={2}
         // padding={2}
       >
 
@@ -204,6 +215,7 @@ const AppointmentsTab = () => {
 
       <DataTable2
         title="Appointment History"
+        isLoading={isLoadingAppointments}
         columns={columns}
         data={appointmentsData}
         hasSearch={false}

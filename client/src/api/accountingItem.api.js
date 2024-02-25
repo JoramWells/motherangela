@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const accountingItemApi = createApi({
   reducerPath: 'accountingItemApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/accounting-items',
+    baseUrl: 'http://localhost:5010/accounting-items',
   }),
   endpoints: (builder) => ({
     getAllAccountingItems: builder.query({

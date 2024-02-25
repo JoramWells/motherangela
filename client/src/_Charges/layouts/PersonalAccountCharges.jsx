@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 // import axios from "axios"
 import {
-  FaBoxOpen, FaEllipsisV, FaFileDownload, FaHandshake, FaPrint, FaUserNurse,
+  FaBoxOpen, FaEllipsisV, FaEye, FaFileDownload, FaHandshake, FaPrint, FaUserNurse,
 } from 'react-icons/fa';
 import { useCallback, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -42,7 +42,7 @@ const PersonalAccountCharges = () => {
     () => [
       {
         header: 'Patient Name',
-        accessorKey: 'patient',
+        accessorKey: 'patient_detail',
         cell: (props) => (
           <Box onClick={() => navigate(`/personal-account-charge-detail/${props.row.original.personal_account_charge_id}`)}>
             <UserNameAvatar
@@ -90,9 +90,9 @@ const PersonalAccountCharges = () => {
             <IconButton
               color="gray.500"
               size="sm"
-              onClick={() => { navigate(`/personal-account-charge-detail/${props.row.original.patient_id}`); }}
+              onClick={() => { navigate(`/personal-account-charge-detail/${props.row.original.patient_id_pac}`); }}
             >
-              <FaEllipsisV />
+              <FaEye />
             </IconButton>
           </Tooltip>
         ),
@@ -152,7 +152,12 @@ const PersonalAccountCharges = () => {
               p={3}
               h="89%"
             >
-              <DataTable2 data={filteredData} columns={columnsx} />
+              <DataTable2
+                title="Personal Account Charges"
+                data={data}
+                columns={columnsx}
+                isLoading={isLoading}
+              />
             </Box>
           )}
       </Box>

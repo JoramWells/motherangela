@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const UserNameAvatar = ({ fullName, link }) => (
   <HStack>
     <Avatar
-      size="sm"
+      size="xs"
       name={fullName}
       color="white"
       fontWeight="bold"

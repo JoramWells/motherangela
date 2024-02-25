@@ -140,6 +140,20 @@ const SidebarListItems = () => {
 
       {/*  */}
       <SidebarItemLink
+        selected={
+          pathname.includes('/bank-loans')
+         }
+        onClick={onToggle}
+        text="Bank Loans"
+        itemList={[
+          { id: nanoid(), title: 'New Bank Loan', link: '/add-bank-loan' },
+          { id: nanoid(), title: 'View Bank Loan', link: '/bank-loan' },
+        ]}
+        icon={<FaFirstAid size={15} />}
+      />
+
+      {/*  */}
+      <SidebarItemLink
         selected={pathname === '/ccc'
           || pathname.includes('/eligibility')
           || pathname.includes('/hts')}

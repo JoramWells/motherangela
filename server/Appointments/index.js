@@ -18,48 +18,33 @@ const corsOption = {
     origin: ['*'],
 };
 
-if (cluster.isMaster) {
-    console.log(`Master ${process.pid} is running`);
+app.use(express.json());
+app.use(express.urlencoded({
+    extended: true,
+}));
 
-    // Fork workers
-    for (let i = 0; i < cpus; i++) {
-        cluster.fork();
-    }
+// enable cors
+app.use(cors());
 
-    cluster.on('exit', (worker, code, signal) => {
-        console.log(`Worker ${worker.process.pid} died`);
-        // You may choose to respawn the worker here if necessary
+app.use('/appointment', appointmentRoutes);
+app.use('/vital-signs', vitalsSignsRoutes);
+
+// app.use((err, req, res, next) => {
+//   const errStatus = err.status || 500;
+//   const errMessage = err.message || 'Something went wrong';
+//   return res.status(errStatus).json(errMessage);
+// });
+
+const testConnection = async () => {
+    await sequelize.authenticate().then(() => {
+        console.log('Connected to database successfully');
+    }).catch((error) => {
+        console.error('Unable to connect to database: ', error);
     });
-} else {
+};
 
-    app.use(express.json());
-    app.use(express.urlencoded({
-        extended: true,
-    }));
+testConnection();
 
-    // enable cors
-    app.use(cors());
-
-    app.use('/appointment', appointmentRoutes);
-    app.use('/vital-signs', vitalsSignsRoutes);
-
-    // app.use((err, req, res, next) => {
-    //   const errStatus = err.status || 500;
-    //   const errMessage = err.message || 'Something went wrong';
-    //   return res.status(errStatus).json(errMessage);
-    // });
-
-    const testConnection = async () => {
-        await sequelize.authenticate().then(() => {
-            console.log('Connected to database successfully');
-        }).catch((error) => {
-            console.error('Unable to connect to database: ', error);
-        });
-    };
-
-    testConnection();
-
-    app.listen(PORT, () => {
-        console.log(`App running on http://localhost:${PORT}`);
-    });
-}
+app.listen(PORT, () => {
+    console.log(`App running on http://localhost:${PORT}`);
+});

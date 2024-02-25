@@ -5,6 +5,7 @@
 const Payroll_employee_record = require('../models/_payroll/payrollEmployeeRecords.model');
 const Payroll_job_title = require('../models/_payroll/payrollJobTitles.model');
 const Payroll_taxable_state = require('../models/_payroll/payrollTaxableStatus.model');
+const AccountingDepartment = require('../models/accounts/accountingDepartment.model');
 
 // Admissions.belongsTo(Patient_details, { foreignKey: 'patient_id', as: 'patient_details' });
 // Admissions.hasMany(Patient_details, { as: 'patients', foreignKey: 'patient_id' });
@@ -27,6 +28,10 @@ const getAllPayrollEmployeeRecords = async (req, res, next) => {
           model: Payroll_job_title,
           attributes: ['job_title_description'],
         },
+        {
+          model:AccountingDepartment,
+          attributes:['department_name']
+        }
       ],
     });
     res.json(results);

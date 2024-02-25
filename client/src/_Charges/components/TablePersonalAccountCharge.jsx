@@ -242,7 +242,8 @@ const TablePersonalAccountCharge = ({
 
           <IconButton
             size="xs"
-            colorScheme="red"
+            // colorScheme="red"
+            variant="ghost"
             // variant="subtle"
           >
             <FaTrashAlt />

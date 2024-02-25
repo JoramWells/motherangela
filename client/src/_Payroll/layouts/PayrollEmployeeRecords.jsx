@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 import {
-  Box, Button, HStack, Text, VStack,
+  Box, Button, HStack, Tag, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
 import {
@@ -28,10 +28,27 @@ const PayrollEmployeeRecords = () => {
         header: 'Full Name',
         accessorKey: 'full_name',
         cell: (props) => (
-          <UserNameAvatar
-            fullName={props.getValue()}
-            link={`payroll-employee-records-details/${props.row.original.employee_id}`}
-          />
+          <VStack
+            alignItems="flex-start"
+            spacing={0}
+          >
+            <UserNameAvatar
+              fullName={props.getValue()}
+              link={`payroll-employee-records-details/${props.row.original.employee_id}`}
+            />
+            <VStack
+              ml={10}
+              alignItems="flex-start"
+              spacing={0}
+            >
+              <Text>{props.row.original.date_of_birth}</Text>
+              <Text
+                color="gray.500"
+              >
+                {props.row.original.gender}
+              </Text>
+            </VStack>
+          </VStack>
         ),
 
       },
@@ -44,9 +61,26 @@ const PayrollEmployeeRecords = () => {
       },
       {
         header: 'Department',
-        accessorKey: 'department_id',
+        accessorKey: 'accounting_department',
         enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => <Text>{props.getValue()?.department_name}</Text>,
+
+      },
+      {
+        header: 'Status',
+        accessorKey: 'active_status',
+        enableSorting: false,
+        cell: (props) => (
+          <HStack>
+            {props.getValue() === 1 ? (
+              <Tag
+                colorScheme="green"
+              >
+                Active
+              </Tag>
+            ) : <Tag>Inactive</Tag>}
+          </HStack>
+        ),
 
       },
       {
@@ -66,6 +100,8 @@ const PayrollEmployeeRecords = () => {
           ...item,
           subRows: [],
         }));
+
+  console.log(subRowData);
 
   return (
     <VStack

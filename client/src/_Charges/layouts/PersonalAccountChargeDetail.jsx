@@ -8,10 +8,12 @@ import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   Avatar,
-  Box, Button, HStack, IconButton, Tag, Text, VStack, useDisclosure,
+  Box, Button, HStack, IconButton, Tag, TagLeftIcon, Text, VStack, useDisclosure,
 } from '@chakra-ui/react';
 import moment from 'moment/moment';
-import { FaArrowRight, FaEdit, FaTrashAlt } from 'react-icons/fa';
+import {
+  FaArrowRight, FaCheck, FaEdit, FaTrashAlt,
+} from 'react-icons/fa';
 import IndeterminateCheckbox from '../../_Doctor/components/IndeterminateCheckbox';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import TablePharmacyRequest from '../../_Pharmacy/components/TablePharmacyRequest';
@@ -70,6 +72,7 @@ const PersonalAccountChargeDetail = () => {
               <Tag
                 colorScheme="red"
                 size="sm"
+                rounded="full"
               >
                 UNPAID
               </Tag>
@@ -78,7 +81,9 @@ const PersonalAccountChargeDetail = () => {
               <Tag
                 colorScheme="green"
                 size="sm"
+                rounded="full"
               >
+                <TagLeftIcon as={FaCheck} />
                 PAID
               </Tag>
             )
@@ -97,39 +102,6 @@ const PersonalAccountChargeDetail = () => {
       cell: (props) => <Text>{props.getValue()}</Text>,
     },
     {
-      header: 'ACTION',
-      cell: (props) => (
-        <HStack>
-          <IconButton
-            onClick={onOpen}
-            size="sm"
-            bgColor="blue.50"
-            _hover={{
-              bgColor: 'blue.100',
-            }}
-          >
-            <FaEdit
-              color="#42A5F5"
-            />
-          </IconButton>
-
-          {/*  */}
-          <IconButton
-            onClick={onOpen}
-            size="sm"
-            bgColor="red.50"
-            _hover={{
-              bgColor: 'red.100',
-            }}
-          >
-            <FaTrashAlt
-              color="#ef4444"
-            />
-          </IconButton>
-        </HStack>
-      ),
-    },
-    {
       header: 'Total',
       //   accessorKey: 'cost',
       cell: (props) => (
@@ -139,6 +111,39 @@ const PersonalAccountChargeDetail = () => {
         </Text>
       ),
     },
+    {
+      header: 'ACTION',
+      cell: (props) => (
+        <HStack>
+          <IconButton
+            onClick={onOpen}
+            size="sm"
+            // bgColor="blue.50"
+            // _hover={{
+            //   bgColor: 'blue.100',
+            // }}
+          >
+            <FaEdit
+              color="gray"
+            />
+          </IconButton>
+
+          {/*  */}
+          <IconButton
+            onClick={onOpen}
+            size="sm"
+            // bgColor="red.50"
+            // _hover={{
+            //   bgColor: 'red.100',
+            // }}
+          >
+            <FaTrashAlt
+              color="gray"
+            />
+          </IconButton>
+        </HStack>
+      ),
+    },
 
   ], [onOpen]);
   return (
@@ -146,7 +151,7 @@ const PersonalAccountChargeDetail = () => {
       w="full"
       h="100vh"
       bgColor="gray.50"
-      mt="65px"
+      mt="50px"
       alignItems="center"
       p={3}
     >
