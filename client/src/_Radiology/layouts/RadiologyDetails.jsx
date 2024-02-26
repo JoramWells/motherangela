@@ -42,7 +42,7 @@ const RadiologyDetails = () => {
     },
     {
       id: nanoid(),
-      title: `${data?.patient.first_name} ${data?.patient.middle_name}`,
+      title: `${data?.patient_detail?.first_name} ${data?.patient_detail?.middle_name}`,
       link: '/',
       // isCurrentPage: true,
     },

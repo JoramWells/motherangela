@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   Divider, FormControl, FormLabel, Input, Textarea, VStack,
 } from '@chakra-ui/react';
@@ -68,11 +69,6 @@ const GeneralExaminationTab = () => (
       />
     </FormControl>
 
-    <Divider
-      mt={5}
-      mb={5}
-    />
-
     {/*  */}
     <FormControl>
       <FormLabel
@@ -86,7 +82,7 @@ const GeneralExaminationTab = () => (
       <FormLabel
         fontSize="14px"
       >
-        Lorem ipsum...
+        Menopause, Hormone Problems, Contraception (birth control) & infertility
       </FormLabel>
       <Textarea />
     </FormControl>

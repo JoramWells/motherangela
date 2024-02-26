@@ -48,7 +48,7 @@ const PatientVisits = () => {
     () => [
       {
         header: 'Patient Name',
-        accessorKey: 'patient',
+        accessorKey: 'patient_detail',
         cell: (props) => (
           <Box onClick={() => navigate(`/patient-detail/${props.row.original.patient_id}`)}>
             <UserNameAvatar
@@ -117,20 +117,22 @@ const PatientVisits = () => {
       w="full"
       bgColor="gray.50"
       p={3}
-      h="95vh"
       position="relative"
     >
-      <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/add-patient" />
+      <BreadCrumbNav link="/add-patient" />
 
-        <Box
-          w="100%"
-          bgColor="white"
-          p={3}
-          h="89%"
-        >
-          <DataTable2 data={filteredData} columns={columnsx} />
-        </Box>
+      <Box
+        w="100%"
+        bgColor="white"
+        p={3}
+        rounded="lg"
+      >
+        <DataTable2
+          data={data}
+          isLoading={isLoading}
+          columns={columnsx}
+          title="Patient Visits"
+        />
       </Box>
     </VStack>
   );

@@ -10,7 +10,9 @@ import {
 } from '@chakra-ui/react';
 // import axios from "axios"
 import {
-  FaBoxOpen, FaCheck, FaCheckCircle, FaFilter, FaInfoCircle,
+  FaBoxOpen, FaCheck, FaCheckCircle,
+  FaEyeSlash, FaFilter, FaInfoCircle, FaRegEye,
+  FaStethoscope, FaUserNurse,
 } from 'react-icons/fa';
 import { useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -23,7 +25,7 @@ import { useGetAppointmentsQuery } from '../../api/appointments.api';
 const UserNameAvatar = ({ fullName }) => (
   <HStack>
     <Avatar
-      size="sm"
+      size="xs"
       name={fullName}
       color="white"
       fontWeight="bold"
@@ -157,19 +159,17 @@ const PatientQueue = () => {
         header: 'Action',
         cell: (props) => (
           <HStack justifyContent="flex-start" alignItems="flex-start">
-            <Button
+            <IconButton
               // variant="outline"
-              color="gray.700"
               // borderColor="gray.700"
               size="xs"
               onClick={() => navigate({
                 pathname: `/doctor/${props.row.original.appointment_id}`,
                 search: `?patient_id=${props.row.original.patient_id}`,
               })}
-              textTransform="uppercase"
             >
-              See Patient
-            </Button>
+              <FaUserNurse />
+            </IconButton>
           </HStack>
         ),
       },

@@ -33,7 +33,10 @@ const InternalRequests = () => {
 
   const patient_id = searchParams.get('patient_id');
 
-  const { data: pharmacyRequestData } = useGetInternalPharmacyRequestQuery(patient_id);
+  const {
+    data: pharmacyRequestData,
+    isLoading: isPharmacyLoading,
+  } = useGetInternalPharmacyRequestQuery(patient_id);
   const { data: labRequestData } = useGetInternalLabRequestQuery(patient_id);
 
   const columnsx = useMemo(() => [
@@ -62,8 +65,7 @@ const InternalRequests = () => {
       accessorKey: 'medication',
       cell: (props) => (
         <Text
-          fontWeight="bold"
-          color="gray.600"
+          color="gray.800"
         >
           {props.getValue()?.medication_name}
         </Text>
@@ -173,28 +175,28 @@ const InternalRequests = () => {
           <VStack
             justifyContent="center"
             alignItems="center"
-            spacing={0}
             w="full"
+            position="relative"
           >
-            <HStack
-              w="full"
-              justifyContent="flex-end"
-              alignItems="center"
+            <Button
+              bgColor="white"
+              position="absolute"
+                // color="gray.700"
+                // colorScheme="green"
+              border="2px"
+              borderColor="gray.700"
+              rounded="full"
+              top="-.5rem"
+              right="10px"
+              size="sm"
+              onClick={() => navigate({
+                pathname: `/add-lab-request/${id}`,
+                search: `?patient_id=${patient_id}`,
+              })}
             >
-              <Button
-                leftIcon={<FaPlus />}
-                variant="outline"
-                colorScheme="blue"
-                size="sm"
-                onClick={() => navigate({
-                  pathname: `/add-lab-request/${id}`,
-                  search: `?patient_id=${patient_id}`,
-                })}
-              >
-                New
+              New
 
-              </Button>
-            </HStack>
+            </Button>
             <DataTable2
               data={labRequestData}
               columns={columnsx}
@@ -226,21 +228,20 @@ const InternalRequests = () => {
           <VStack
             justifyContent="center"
             alignItems="center"
-            spacing={0}
+            // spacing={0}
             position="relative"
           >
 
             <Button
-              leftIcon={<FaPlus />}
               // variant="outline"
-              // bgColor="gray.100"
+              bgColor="white"
               position="absolute"
               // color="gray.700"
-              colorScheme="green"
-              // border="2px"
-              // borderColor="gray.700"
-              // rounded="full"
-              top="0px"
+              // colorScheme="green"
+              border="2px"
+              borderColor="gray.700"
+              rounded="full"
+              top="-.5rem"
               right="10px"
               size="sm"
               onClick={() => navigate({
@@ -256,6 +257,7 @@ const InternalRequests = () => {
               hasSearch={false}
               columns={pharmacyColumns}
               data={pharmacyRequestData}
+              isLoading={isPharmacyLoading}
             />
           </VStack>
 

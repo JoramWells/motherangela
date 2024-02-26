@@ -59,7 +59,7 @@ const SystemicExaminationTab = () => (
       <FormLabel
         fontSize="14px"
       >
-        Lorem ipsum...
+        Diseases and Disorders of the blood vessels and heart
       </FormLabel>
       <Textarea />
     </FormControl>
