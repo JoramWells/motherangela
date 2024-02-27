@@ -7,6 +7,8 @@ const AccountingAssetCategory = sequelize.define('accounting_asset_categories', 
   asset_category_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
+    allowNull: false
   },
   asset_category_description: {
     type: DataTypes.STRING,

@@ -59,6 +59,8 @@ import { diseasesDuplicatesApi } from './api/diseasesDuplicates.api';
 import { consultationTypeGroupApi } from './api/consultation/consultationTypeGroup.api';
 import { consultationTypeSubGroupApi } from './api/consultation/consultationTypeSubGroup.api';
 import { insuranceTypeApi } from './api/insuranceType.api';
+import { accountingAssetCategoryApi } from './api/accounts/accounting_assets/accountingAssetCategory.api';
+import { accountingAssetLocationApi } from './api/accounts/accounting_assets/accountingAssetLocation.api';
 
 export const store = configureStore({
   reducer: {
@@ -115,7 +117,9 @@ export const store = configureStore({
     [priceListItemApi.reducerPath]: priceListItemApi.reducer,
     [accountingCostCentreApi.reducerPath]: accountingCostCentreApi.reducer,
     [accountingStoresApi.reducerPath]: accountingStoresApi.reducer,
+    [accountingAssetLocationApi.reducerPath]: accountingAssetLocationApi.reducer,
     [accountingDepartmentApi.reducerPath]: accountingDepartmentApi.reducer,
+    [accountingAssetCategoryApi.reducerPath]: accountingAssetCategoryApi.reducer,
     [accountingJournalApi.reducerPath]: accountingJournalApi.reducer,
     [accountingAccountDetailsApi.reducerPath]: accountingAccountDetailsApi.reducer,
     [consultationTypesWitCreditAccountsApi.reducerPath
@@ -178,7 +182,9 @@ export const store = configureStore({
     .concat(accountingStoresApi.middleware)
     .concat(accountingDepartmentApi.middleware)
     .concat(accountingJournalApi.middleware)
+    .concat(accountingAssetCategoryApi.middleware)
     .concat(accountingAccountDetailsApi.middleware)
+    .concat(accountingAssetLocationApi.middleware)
     .concat(consultationTypesWitCreditAccountsApi.middleware)
     .concat(specimenTypeApi.middleware)
   ,

@@ -79,6 +79,10 @@ import ItemsRoutes from './routes/admin/Items.routes';
 import LabRoutes from './routes/admin/Lab.routes';
 import DiseasesDuplicates from './_Diseases/layouts/DiseasesDuplicates';
 import NursingStation from './_Patient/layouts/NursingStation';
+import AddAssetCategory from './_Assets/layouts/AddAssetCategory';
+import AssetLocations from './_Assets/layouts/AssetLocations';
+import AddAssetLocation from './_Assets/layouts/AddAssetLocation';
+import AddAssets from './_Assets/layouts/AddAssets';
 
 // Medication
 const MedicationCategory = lazy(() => import('./_Medication/layouts/MedicationCategory'));
@@ -109,6 +113,8 @@ const WalkInPatientQueue = lazy(() => import('./_Pharmacy/layouts/WalkInPatientQ
 const PharmacyDrugsRequested = lazy(() => import('./_Pharmacy/layouts/PharmacyDrugsRequested'));
 
 const Appointments = lazy(() => import('./_Appointment/layouts/Appointments'));
+
+const AssetCategories = lazy(() => import('./_Assets/layouts/AssetCategories'));
 
 // Lab
 const PharmacyRequest = lazy(() => import('./_Pharmacy/layouts/PharmacyRequest'));
@@ -183,7 +189,14 @@ function App() {
           <LabRoutes />
 
           <Routes>
+            sss
             <Route path="/" element={<Homepage />} />
+
+            <Route path="/asset-categories" element={<AssetCategories />} />
+            <Route path="/add-asset-category/:id" element={<AddAssetCategory />} />
+            <Route path="/assets-location" element={<AssetLocations />} />
+            <Route path="/add-asset-location/:id" element={<AddAssetLocation />} />
+            <Route path="/add-asset/:id" element={<AddAssets />} />
 
             <Route path="/administration" element={<Administration />} />
 

@@ -1,30 +1,36 @@
 import { FormControl, FormLabel, Input } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
+import { useCallback } from 'react';
 
 const CustomInput = ({
   onChange, value, name, label, color, type,
-}) => (
-  <FormControl>
+}) => {
+  const handleInputChange = useCallback((e) => {
+    onChange(e.target.value);
+  }, [onChange]);
+  return (
+    <FormControl>
 
-    <FormLabel
-      fontSize="14px"
-      textTransform="capitalize"
-      color={color}
-    >
-      {label}
+      <FormLabel
+        fontSize="14px"
+        textTransform="capitalize"
+        color={color}
+      >
+        {label}
 
-    </FormLabel>
-    <Input
-      name={name}
-      // placeholder="Enter First Name"
-      size={['md', 'md', 'md', 'md', 'sm', 'md']}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      type={type}
-    />
+      </FormLabel>
+      <Input
+        name={name}
+        // placeholder="Enter First Name"
+        size={['md', 'md', 'md', 'md', 'sm', 'md']}
+        value={value}
+        onChange={handleInputChange}
+        type={type}
+      />
 
-  </FormControl>
-);
+    </FormControl>
+  );
+};
 
 CustomInput.propTypes = {
   onChange: PropTypes.func,

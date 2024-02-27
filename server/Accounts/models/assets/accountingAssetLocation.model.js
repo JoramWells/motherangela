@@ -7,6 +7,8 @@ const AccountingAssetLocation = sequelize.define('accounting_asset_locations', {
   asset_location_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
+    allowNull: false
   },
   asset_location_description: {
     type: DataTypes.STRING,

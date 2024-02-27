@@ -9,6 +9,7 @@ import {
   FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaMoneyCheck, FaPiggyBank, FaPills,
   FaProcedures,
   FaRadiation, FaRegCheckCircle, FaRegMoneyBillAlt,
+  FaStar,
   FaStore, FaToolbox, FaTools, FaTrain, FaUser, FaUserNurse,
 } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -119,6 +120,27 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Patient Reports', link: '/patient-reports' },
         ]}
         icon={<FaCalendarTimes size={15} />}
+      />
+
+      {/*  */}
+      <SidebarItemLink
+        selected={
+          pathname.includes('/asset-categories')
+          || pathname.includes('/add-asset-category')
+          || pathname.includes('/add-asset-location')
+          || pathname.includes('/add-asset')
+          || pathname.includes('/assets-location')
+        }
+        onClick={onToggle}
+        text="Assets"
+        itemList={[
+          { id: nanoid(), title: 'Register Asset Category', link: '/add-asset-category/null' },
+          { id: nanoid(), title: 'Asset Categories', link: '/asset-categories' },
+          { id: nanoid(), title: 'Asset Locations', link: '/assets-location' },
+          { id: nanoid(), title: 'Add Asset Locations', link: '/add-asset-location/null' },
+          { id: nanoid(), title: 'New Asset', link: '/add-asset/null' },
+        ]}
+        icon={<FaStar size={15} />}
       />
 
       {/*  */}

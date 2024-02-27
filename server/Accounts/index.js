@@ -15,6 +15,8 @@ const accountingStore = require('./routes/accountingStore.routes')
 const accountingDepartment = require('./routes/accountingDepartment.routes')
 const accountingJournal = require('./routes/accountingJournal.routes')
 const accountingAccountDetails = require('./routes/accountingAccountDetails.routes')
+const accountingAssetCategory = require('./routes/accounting_assets/accountingAssetCategory.routes')
+const accountingAssetLocation = require('./routes/accounting_assets/accountingAssetLocation.routes')
 const serviceTypeRoutes = require('./routes/serviceType.routes')
 const consultationTypeRoutes = require('./routes/consultation/consultationType.routes');
 const consultationTypeGroupRoutes = require('./routes/consultation/consultationTypeGroup.routes');
@@ -56,6 +58,8 @@ app.use('/accounting-department', accountingDepartment);
 app.use('/accounting-items', accountingItemRoutes);
 app.use('/accounting-journal', accountingJournal);
 app.use('/account-details', accountingAccountDetails);
+app.use('/account-asset-location', accountingAssetLocation);
+app.use('/account-asset-category', accountingAssetCategory);
 app.use('/cost-centre', accountingCostCentre);
 app.use('/stores', accountingStore);
 app.use('/service-types', serviceTypeRoutes);
