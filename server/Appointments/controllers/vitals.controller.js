@@ -3,7 +3,7 @@
 /* eslint-disable no-unused-vars */
 // const { Kafka } = require('kafkajs');
 const sequelize = require('../db/connect');
-const Appointments2 = require('../models/_appointment/appointments2.models');
+const Appointments = require('../models/_appointment/appointments.model');
 const Patient_details = require('../models/patient/patients.models');
 const VitalSigns = require('../models/vitals/vitalSigns.model');
 
@@ -25,7 +25,7 @@ const getAllVitals = async (req, res, next) => {
       limit: 100,
       include: [
         {
-          model: Appointments2,
+          model: Appointments,
           attributes: ['patient_id'],
           include: [
             {

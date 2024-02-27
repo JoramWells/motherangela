@@ -1,12 +1,13 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-unused-vars */
 /* eslint-disable linebreak-style */
 const express = require('express');
 const cors = require('cors');
 
-const sequelize = require('./db/connect');
-const patientRoutes = require('./routes/patient.routes');
 const cluster = require('cluster');
 const cpus = require('os').cpus().length;
+const patientRoutes = require('./routes/patient.routes');
+const sequelize = require('./db/connect');
 
 const app = express();
 
@@ -28,35 +29,33 @@ if (cluster.isMaster) {
     // You may choose to respawn the worker here if necessary
   });
 } else {
+  app.use(express.json());
+  app.use(express.urlencoded({
+    extended: true,
+  }));
 
+  // enable cors
+  app.use(cors());
 
-app.use(express.json());
-app.use(express.urlencoded({
-  extended: true,
-}));
+  app.use('/patient', patientRoutes);
 
-// enable cors
-app.use(cors());
+  // app.use((err, req, res, next) => {
+  //   const errStatus = err.status || 500;
+  //   const errMessage = err.message || 'Something went wrong';
+  //   return res.status(errStatus).json(errMessage);
+  // });
 
-app.use('/patient', patientRoutes);
+  const testConnection = async () => {
+    await sequelize.authenticate().then(() => {
+      console.log('Connected to database successfully');
+    }).catch((error) => {
+      console.error('Unable to connect to database: ', error);
+    });
+  };
 
-// app.use((err, req, res, next) => {
-//   const errStatus = err.status || 500;
-//   const errMessage = err.message || 'Something went wrong';
-//   return res.status(errStatus).json(errMessage);
-// });
+  testConnection();
 
-const testConnection = async () => {
-  await sequelize.authenticate().then(() => {
-    console.log('Connected to database successfully');
-  }).catch((error) => {
-    console.error('Unable to connect to database: ', error);
+  app.listen(PORT, () => {
+    console.log(`App running on http://localhost:${PORT}`);
   });
-};
-
-testConnection();
-
-app.listen(PORT, () => {
-  console.log(`App running on http://localhost:${PORT}`);
-});
 }

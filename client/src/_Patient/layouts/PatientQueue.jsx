@@ -10,14 +10,15 @@ import {
 } from '@chakra-ui/react';
 // import axios from "axios"
 import {
-  FaBoxOpen, FaCheck, FaCheckCircle,
-  FaEyeSlash, FaFilter, FaInfoCircle, FaRegEye,
-  FaStethoscope, FaUserNurse,
+  FaBoxOpen, FaFilter, FaUserNurse,
 } from 'react-icons/fa';
-import { useCallback, useMemo, useState } from 'react';
+import {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment/moment';
 import Select from 'react-select';
+import io from 'socket.io-client';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
 import { useGetAppointmentsQuery } from '../../api/appointments.api';
@@ -41,6 +42,8 @@ const UserNameAvatar = ({ fullName }) => (
   </HStack>
 );
 
+const socket = io('http://localhost:5003');
+
 const PatientQueue = () => {
   const navigate = useNavigate();
 
@@ -49,6 +52,10 @@ const PatientQueue = () => {
   } = useGetAppointmentsQuery();
 
   console.log(data);
+
+  useEffect(() => {
+    socket.on('newAppointment', () => alert('new data'));
+  }, []);
 
   const columnsx = useMemo(
     () => [

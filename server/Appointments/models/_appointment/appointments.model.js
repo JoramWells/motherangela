@@ -17,11 +17,11 @@ const Appointments = sequelize.define('appointments', {
     },
     patient_id: {
         type: DataTypes.INTEGER,
-        references:{
-            model:'patient_details',
-            key:'patient_id'
+        references: {
+            model: 'patient_details',
+            key: 'patient_id',
         },
-        onDelete:'CASCADE'
+        onDelete: 'CASCADE',
     },
     appointment_date: {
         type: DataTypes.STRING,

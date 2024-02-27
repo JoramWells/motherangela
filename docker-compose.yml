@@ -47,6 +47,15 @@ services:
   #   networks:
   #     - huruma
 
+  # redis:
+  #   image: redis:alpine
+  #   ports:
+  #     - "6379:6380"
+  #   # volumes:
+  #   #   - redis_data:/data
+  #   networks:
+  #     - huruma
+
   database:
     image: postgres:alpine
     environment:
@@ -71,6 +80,8 @@ services:
       - /usr/src/app/node_modules
     ports:
       - 5004:5004
+    environment:
+      COMPOSE_HTTP_TIMEOUT: 120
     depends_on:
       - database
     networks:
@@ -87,8 +98,11 @@ services:
       - /usr/src/app/node_modules
     ports:
       - 5002:5002
+    environment:
+      COMPOSE_HTTP_TIMEOUT: 120
     depends_on:
       - database
+      # - redis
       # - kafka-1
     networks:
       - huruma
@@ -103,8 +117,11 @@ services:
       - /usr/src/app/node_modules
     ports:
       - 5003:5003
+    environment:
+      COMPOSE_HTTP_TIMEOUT: 120
     depends_on:
       - database
+      # - redis
       # - kafka-2
 
     networks:
@@ -120,6 +137,8 @@ services:
       - /usr/src/app/node_modules
     ports:
       - 5005:5005
+    environment:
+      COMPOSE_HTTP_TIMEOUT: 120
     depends_on:
       - database
       # - kafka-2
@@ -137,6 +156,8 @@ services:
       - /usr/src/app/node_modules
     ports:
       - 5006:5006
+    environment:
+      COMPOSE_HTTP_TIMEOUT: 120
     depends_on:
       - database
       # - kafka-2
@@ -156,6 +177,8 @@ services:
       - /usr/src/app/node_modules
     ports:
       - 5008:5008
+    environment:
+      COMPOSE_HTTP_TIMEOUT: 120
     depends_on:
       - database
       # - kafka-2
@@ -173,6 +196,8 @@ services:
       - /usr/src/app/node_modules
     ports:
       - 5009:5009
+    environment:
+      COMPOSE_HTTP_TIMEOUT: 120
     depends_on:
       - database
       # - kafka-2
@@ -190,6 +215,8 @@ services:
       - /usr/src/app/node_modules
     ports:
       - 5010:5010
+    environment:
+      COMPOSE_HTTP_TIMEOUT: 120
     depends_on:
       - database
       # - kafka-2
@@ -207,6 +234,8 @@ services:
       - /usr/src/app/node_modules
     ports:
       - 5011:5011
+    environment:
+      COMPOSE_HTTP_TIMEOUT: 120
     depends_on:
       - database
       # - kafka-2
@@ -224,6 +253,8 @@ services:
       - /usr/src/app/node_modules
     ports:
       - 5012:5012
+    environment:
+      COMPOSE_HTTP_TIMEOUT: 120
     depends_on:
       - database
       # - kafka-2
@@ -243,6 +274,8 @@ services:
       - /usr/src/app/node_modules
     ports:
       - "5001:5001"
+    environment:
+      COMPOSE_HTTP_TIMEOUT: 120
     depends_on:
       - database
       # - kafka
@@ -277,6 +310,8 @@ services:
       - /usr/src/app/node_modules
     ports:
       - "3000:3000"
+    environment:
+      COMPOSE_HTTP_TIMEOUT: 120
     depends_on:
       - admission-service
       - appointment-service
@@ -305,6 +340,10 @@ services:
   #     - client
   #   networks:
   #     - huruma
+
+# volumes:
+#   redis_data:
+#     driver: local
 
 networks:
  huruma:

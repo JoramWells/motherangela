@@ -18,7 +18,7 @@ const Corporate = ({
 
   const navigate = useNavigate();
 
-  const { data, isLoading } = useGetInsurancesQuery();
+  const { data, isLoading: isLoadingInsurance } = useGetInsurancesQuery();
 
   const { data: insuranceServiceCostData } = useGetInsuranceServiceCostMappingQuery(
     insuranceAccount?.value ? insuranceAccount?.value : 0,
@@ -51,6 +51,7 @@ const Corporate = ({
       <CustomSelect
         label="Insurance Account"
         options={insuranceOptions}
+        isLoading={isLoadingInsurance}
         value={insuranceAccount}
         onChange={(e) => setInsuranceAccount(e)}
       />

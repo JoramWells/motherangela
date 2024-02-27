@@ -18,7 +18,7 @@ const PaymentDetail = ({
 
   const [addPatient] = useAddPatientMutation();
 
-  const { data } = useGetAllAccountTypesQuery();
+  const { data, isLoading } = useGetAllAccountTypesQuery();
 
   const consultationOPDay = { value: '', label: 'CONSULTATION OPD DAY' };
   const consultationOPDNight = 'CONSULTATION OPD NIGHT';
@@ -41,7 +41,7 @@ const PaymentDetail = ({
       <CustomSelect
         label="Payment Type"
         options={accountTypeOptions}
-                // styles={customStyles}
+        isLoading={isLoading}
         value={paymentType}
         onChange={setPaymentType}
       />

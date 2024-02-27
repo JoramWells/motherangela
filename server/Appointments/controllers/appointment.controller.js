@@ -2,6 +2,8 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 // const { Kafka } = require('kafkajs');
+const redis = require('redis');
+const moment = require('moment');
 const sequelize = require('../db/connect');
 // const Insurance_detail = require('../../root/models/insurance/insurance.model');
 const InsuranceDetail = require('../models/insurance/insuranceDetail.model');
@@ -11,6 +13,12 @@ const ConsultationTypesSubGroups = require('../models/consultation/consultationT
 const Appointments = require('../models/_appointment/appointments.model');
 const Patient_details = require('../models/patient/patients.models');
 const Eligibility = require('../models/eligibility/eligibility.model');
+const Insurance_service_cost_mapping = require('../models/insurance/insuranceServiceCostMapping.model');
+
+// const client = redis.createClient({ host: 'huruma_redis_1', port: 6380 })
+// .on('error', (err) => console.log('Redis err', err.message)).connect();
+
+// (async () => { await client.connect(); })();
 // const Patient = require('../../Patients/models/patient2.models');
 
 // const kafka = new Kafka({
@@ -31,6 +39,54 @@ const addAppointments = async (req, res, next) => {
   //     });
   //   },
   // });
+
+  // check whether insurance has been selected
+try {
+  let newAppointment = {};
+  const { insuranceAccount } = req.body;
+  const reference_account_id = insuranceAccount?.value;
+
+  if (insuranceAccount) {
+    const results = await Insurance_service_cost_mapping.findOne({
+      where: {
+        insurance_id: reference_account_id,
+      },
+    });
+    // check the price of the insurance
+    if (results?.cost) {
+      const { cost } = results;
+
+      // create a new Appointment
+      newAppointment = await Appointments.create({
+        patient_id: req.body,
+        account_type_id: req.body.account_type_id,
+        appointment_date: moment().format('YYYY-MM-DD'),
+        appointment_time: moment().format('hh:mm:ss'),
+        charges: cost,
+        reference_account_id,
+      });
+    } else {
+      newAppointment = await Appointments.afterCreate({
+        patient_id: req.body.patient_id,
+        account_type_id: req.body.account_type_id,
+        appointment_date: moment().format('YYYY-MM-DD'),
+        appointment_time: moment().format('hh:mm:ss'),
+        charges: 350,
+        reference_account_id,
+      });
+    }
+
+    // send to client
+    res.status(200).json({
+      patient_id: newAppointment.patient_id,
+      appointment_id: newAppointment.appointment_id,
+    });
+    next();
+  }
+} catch (error) {
+  console.log(error);
+  next(error);
+}
 };
 
 // const addAppointments = async (req, res, next) => {
@@ -72,9 +128,10 @@ const addAppointments = async (req, res, next) => {
 // get all priceListItems
 const getAllAppointments = async (req, res, next) => {
   try {
+    // await client.connect().then(() => console.log('connected'));
     const appointmentResults = await Appointments.findAll({
       limit: 100,
-      order:[['appointment_date', 'DESC']],
+      order: [['appointment_date', 'DESC']],
       include: [
         {
           model: Patient_details,
@@ -93,13 +150,14 @@ const getAllAppointments = async (req, res, next) => {
         //   attributes:['temperature']
         // },
         {
-          model:Eligibility,
-          attributes:['id']
-        }
+          model: Eligibility,
+          attributes: ['id'],
+        },
       ],
     });
 
     res.status(200).json(appointmentResults);
+    // await client.set('appointments', appointmentResults);
     // console.log(appointmentResults);
 
     console.log('fetching data..');
@@ -129,15 +187,15 @@ const getAllAppointmentsById = async (req, res, next) => {
         },
         {
           model: Eligibility,
-          attributes: ['id']
-        }
+          attributes: ['id'],
+        },
       ],
     });
 
     res.status(200).json(appointmentResults);
-    next()
+    next();
   } catch (error) {
-    console.log(error)
+    console.log(error);
     next(error);
   }
 };
@@ -179,7 +237,7 @@ const getAppointmentDetail = async (req, res, next) => {
     res.json(result);
     next();
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.sendStatus(500).json({ message: 'Internal Server Error' });
     next(error);
   }

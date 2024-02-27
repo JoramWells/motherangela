@@ -3,6 +3,10 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 const moment = require('moment/moment');
+const express = require('express');
+
+const http = require('http');
+const { Server } = require('socket.io');
 // const { Kafka } = require('kafkajs');
 const sequelize = require('../db/connect');
 
@@ -18,6 +22,17 @@ const sequelize = require('../db/connect');
 const InsuranceServiceCostMapping = require('../models/insurance/insuranceServiceCostMapping.model');
 const Appointments2 = require('../models/appointment/appointments.model');
 const Patient_details = require('../models/patients.models');
+
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
+
+io.on('connection', (socket) => { console.log('Connected to patient client'); });
+
+// connect
+// io.on('connection', (socket) => {
+//   console.log('A client connected');
+// });
 
 // using *Patients model
 const addPatients = async (req, res, next) => {
@@ -55,7 +70,7 @@ const addPatients = async (req, res, next) => {
       if (results?.cost) {
         const { cost } = results;
 
-        newAppointment = await Appointments2.create({
+        newAppointment = await Appointments2.afterCreate({
           patient_id: newProfile?.patient_id,
           account_type_id: req.body.account_type_id,
           appointment_date: moment().format('YYYY-MM-DD'),
@@ -63,10 +78,11 @@ const addPatients = async (req, res, next) => {
           charges: cost,
           reference_account_id,
         });
+        io.emit('newAppointment');
       }
     } else {
       // // Create ew Appointment. Initial amount 350 for new patient
-      newAppointment = await Appointments2.create({
+      newAppointment = await Appointments2.afterCreate({
         patient_id: newProfile?.patient_id,
         account_type_id: req.body.account_type_id,
         appointment_date: moment().format('YYYY-MM-DD'),
@@ -96,7 +112,7 @@ const getAllPatients = async (req, res, next) => {
     res.json(patients);
     next();
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.sendStatus(500).json({ error: 'Internal Server error' });
     next(error);
   }
@@ -105,7 +121,7 @@ const getAllPatients = async (req, res, next) => {
 const getPatientDetail = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const patient = await Patient.findOne({
+    const patient = await Patient_details.findOne({
       where: {
         patient_id: id,
       },

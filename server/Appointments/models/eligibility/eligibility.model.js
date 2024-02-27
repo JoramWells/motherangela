@@ -12,9 +12,11 @@ const Eligibility = sequelize.define('eligibility', {
   },
   appointment_id: {
     type: DataTypes.INTEGER,
+    allowNull: true,
   },
   patient_id: {
     type: DataTypes.INTEGER,
+    allowNull: true,
   },
   isTested: {
     type: DataTypes.STRING,
@@ -48,8 +50,8 @@ const Eligibility = sequelize.define('eligibility', {
 });
 
 Eligibility.belongsTo(Appointments, { foreignKey: 'appointment_id' });
-Appointments.hasMany(Eligibility,{foreignKey:'appointment_id'})
-Eligibility.belongsTo(Patient_details, { foreignKey: 'patient_id' });
+Appointments.hasMany(Eligibility, { foreignKey: 'appointment_id' });
+// Eligibility.belongsTo(Patient_details, { foreignKey: 'patient_id' });
 
 sequelize.sync().then(() => {
   console.log('Eligible Table create');

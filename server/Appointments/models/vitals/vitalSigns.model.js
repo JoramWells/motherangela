@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 const { DataTypes, UUIDV4 } = require('sequelize');
 const sequelize = require('../../db/connect');
@@ -12,6 +13,7 @@ const VitalSigns = sequelize.define('vitalSigns', {
   },
   appointment_id: {
     type: DataTypes.INTEGER,
+    allowNull: true,
   },
   patient_id: {
     type: DataTypes.INTEGER,
@@ -46,9 +48,9 @@ const VitalSigns = sequelize.define('vitalSigns', {
 
 });
 
-VitalSigns.belongsTo(Appointments, { foreignKey: 'appointment_id' });
-Appointments.hasMany(VitalSigns,{foreignKey:'appointment_id'})
-VitalSigns.belongsTo(Patient_details, { foreignKey: 'patient_id' });
+// VitalSigns.belongsTo(Appointments, { foreignKey: 'appointment_id' });
+// Appointments.hasMany(VitalSigns, { foreignKey: 'appointment_id' });
+// VitalSigns.belongsTo(Patient_details, { foreignKey: 'patient_id' });
 
 // sequelize.sync().then(() => {
 //   console.log('Vital Signs table created');

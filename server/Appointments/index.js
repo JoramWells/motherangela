@@ -2,14 +2,30 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable linebreak-style */
 const express = require('express');
+const redis = require('redis');
 const cors = require('cors');
 const cluster = require('cluster');
 const cpus = require('os').cpus().length;
-
+const { promisify } = require(('util'));
 const sequelize = require('./db/connect');
 const appointmentRoutes = require('./routes/appointment.routes');
 const vitalsSignsRoutes = require('./routes/vitals.routes');
 const clusterMiddleware = require('./middleware/clusterMiddleware');
+
+const client = redis.createClient('6379', 'redis');
+
+const connectRedis = async () => {
+    try {
+        await client.connect();
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+// connectRedis();
+// client.on('error', (err) => console.log(err));
+// client.on('connect', () => console.log('connected'));
+// const redisSet = promisify(client.set).bind(client);
 
 const app = express();
 
