@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 /* eslint-disable camelcase */
-const { DataTypes } = require('sequelize');
+import { DataTypes } from 'sequelize';
 const sequelize = require('../../db/connect');
 const Patient_details = require('../patient/patients.models');
 const InsuranceDetail = require('../insurance/insuranceDetail.model');

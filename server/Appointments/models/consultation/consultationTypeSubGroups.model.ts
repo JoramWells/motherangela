@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
-const { DataTypes } = require('sequelize');
+import { DataTypes } from 'sequelize';
 const sequelize = require('../../db/connect');
 
 const ConsultationTypesSubGroups = sequelize.define('consultation_types_sub_groups', {

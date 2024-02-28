@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const {
   addVitals, getAllVitals, getVitalDetail, editVitals, deleteVitals,
 } = require('../controllers/vitals.controller');

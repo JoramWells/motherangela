@@ -2,6 +2,8 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 // const { Kafka } = require('kafkajs');
+import {Request, Response, NextFunction, RequestHandler, RequestParamHandler} from 'express'
+
 const redis = require('redis');
 const moment = require('moment');
 const sequelize = require('../db/connect');
@@ -28,7 +30,12 @@ const Insurance_service_cost_mapping = require('../models/insurance/insuranceSer
 
 // const consumer = kafka.consumer({ groupId: 'appointment-create-group' });
 
-const addAppointments = async (req, res, next) => {
+interface Appointment {
+  appointment_id: number,
+  patient_id: number
+}
+
+const addAppointments = async (req: Request, res: Response, next:NextFunction) => {
   // await consumer.connect();
   // await consumer.subscribe({ topic: 'register-patient' });
 
@@ -42,7 +49,10 @@ const addAppointments = async (req, res, next) => {
 
   // check whether insurance has been selected
 try {
-  let newAppointment = {};
+  let newAppointment: Appointment = {
+    patient_id:0,
+    appointment_id:0
+  };
   const { insuranceAccount } = req.body;
   const reference_account_id = insuranceAccount?.value;
 
@@ -126,7 +136,7 @@ try {
 // };
 
 // get all priceListItems
-const getAllAppointments = async (req, res, next) => {
+const getAllAppointments = async (req:Request, res:Response, next:NextFunction) => {
   try {
     // await client.connect().then(() => console.log('connected'));
     const appointmentResults = await Appointments.findAll({
@@ -169,7 +179,7 @@ const getAllAppointments = async (req, res, next) => {
 };
 
 // get all priceListItems
-const getAllAppointmentsById = async (req, res, next) => {
+const getAllAppointmentsById = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   try {
     const appointmentResults = await Appointments.findAll({
@@ -219,7 +229,7 @@ const getAllAppointmentsById = async (req, res, next) => {
 //   });
 // };
 
-const getAppointmentDetail = async (req, res, next) => {
+const getAppointmentDetail = async (req:Request, res:Response, next:NextFunction) => {
   const { id } = req.params;
   try {
     const result = await Appointments.findOne({
@@ -243,52 +253,37 @@ const getAppointmentDetail = async (req, res, next) => {
   }
 };
 
-const editAppointmentDetail = async (req, res, next) => {
+const editAppointmentDetail = async (req: Request, res:Response, next:NextFunction) => {
   const { id, serviceName, serviceCategory } = req.body;
-  await sequelize.sync().then(() => {
-    Appointments.findOne({
-      where: {
-        id,
-      },
-    })
-      .then((response) => {
-        response.service_name = serviceName;
-        response.service_category = serviceCategory;
-        return response.save();
-      })
-      .catch((error) => console.error(error));
-  });
+  try {
+        const results = await Appointments.findOne({
+          where: {
+            id,
+          },
+        });
+        results.service_name = serviceName;
+        results.service_category = serviceCategory;
+        results.save();
+        next()
+  } catch (error) {
+    next(error)
+  }
 };
 
-// add vitals
-
-const add = async (req, res, next) => {
-  const { id, serviceName, serviceCategory } = req.body;
-  await sequelize.sync().then(() => {
-    Appointments.findOne({
-      where: {
-        id,
-      },
-    })
-      .then((response) => {
-        response.service_name = serviceName;
-        response.service_category = serviceCategory;
-        return response.save();
-      })
-      .catch((error) => console.error(error));
-  });
-};
-const deleteAppointment = async (req, res, next) => {
+const deleteAppointment = async (req:Request, res:Response, next:NextFunction) => {
   const { id } = req.params;
-  await sequelize.sync().then(() => {
-    Appointments.destroy({
-      where: {
-        id,
-      },
-    }).then((response) => {
-      res.status(200);
-    });
-  }).catch((err) => console.log(err));
+  try {
+      const results = await Appointments.destroy({
+        where: {
+          id,
+        },
+      });
+      res.status(200).json(results);
+      next();
+  } catch (error) {
+    next(error);
+    console.log(error)
+  }
 };
 
 module.exports = {

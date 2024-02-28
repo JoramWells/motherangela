@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-const { DataTypes } = require('sequelize');
+import { DataTypes } from 'sequelize';
 const sequelize = require('../../db/connect');
 
 const InsuranceDetail = sequelize.define('insurance_details', {
@@ -60,7 +60,7 @@ const InsuranceDetail = sequelize.define('insurance_details', {
 // create the pricelists model
 sequelize.sync().then(()=>{
     console.log('Book table created')
-}).catch(error=>{
+}).catch((error: Error)=>{
     console.error('Unable to create table :', error)
 })
 

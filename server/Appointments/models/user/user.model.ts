@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-const { DataTypes } = require('sequelize');
+import { DataTypes } from 'sequelize';
 const sequelize = require('../../db/connect');
 const User_types = require('./userType.models');
 

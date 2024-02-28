@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
-const { DataTypes, UUIDV4 } = require('sequelize');
+import { DataTypes, UUIDV4 } from 'sequelize';
 const sequelize = require('../../db/connect');
 const Patient_details = require('../patient/patients.models');
 const Appointments = require('../_appointment/appointments.model');

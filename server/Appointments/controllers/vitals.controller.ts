@@ -1,13 +1,15 @@
 /* eslint-disable consistent-return */
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
+
+import { NextFunction, Request, Response } from "express";
+
 // const { Kafka } = require('kafkajs');
-const sequelize = require('../db/connect');
 const Appointments = require('../models/_appointment/appointments.model');
 const Patient_details = require('../models/patient/patients.models');
 const VitalSigns = require('../models/vitals/vitalSigns.model');
 
-const addVitals = async (req, res, next) => {
+const addVitals = async (req:Request, res:Response, next:NextFunction) => {
   try {
     const newVitals = await VitalSigns.create(req.body);
     res.json(newVitals);
@@ -19,7 +21,7 @@ const addVitals = async (req, res, next) => {
 };
 
 // get all priceListItems
-const getAllVitals = async (req, res, next) => {
+const getAllVitals = async (req:Request, res:Response, next:NextFunction) => {
   try {
     const appointmentResults = await VitalSigns.findAll({
       limit: 100,
@@ -48,7 +50,7 @@ const getAllVitals = async (req, res, next) => {
 };
 
 // get all priceListItems
-const getAllVitalsById = async (req, res, next) => {
+const getAllVitalsById = async (req:Request, res:Response, next:NextFunction) => {
   const { id } = req.params;
   try {
     const appointmentResults = await VitalSigns.findAll({
@@ -70,7 +72,7 @@ const getAllVitalsById = async (req, res, next) => {
   }
 };
 
-const getVitalDetail = async (req, res, next) => {
+const getVitalDetail = async (req:Request, res:Response, next:NextFunction) => {
   const { id } = req.params;
   try {
     const result = await VitalSigns.findOne({
@@ -93,52 +95,41 @@ const getVitalDetail = async (req, res, next) => {
   }
 };
 
-const editVitals = async (req, res, next) => {
+const editVitals = async (req:Request, res:Response, next:NextFunction) => {
   const { id, serviceName, serviceCategory } = req.body;
-  await sequelize.sync().then(() => {
-    VitalSigns.findOne({
-      where: {
-        id,
-      },
-    })
-      .then((response) => {
-        response.service_name = serviceName;
-        response.service_category = serviceCategory;
-        return response.save();
-      })
-      .catch((error) => console.error(error));
-  });
+  try {
+      const results = await VitalSigns.findOne({
+        where: {
+          id,
+        },
+      });
+      results.service_name = serviceName;
+      results.service_category = serviceCategory;
+      results.save();
+      next();
+  } catch (error) {
+    console.log(error)
+    next(error)
+    
+  }
+
 };
 
-// add vitals
-
-const add = async (req, res, next) => {
-  const { id, serviceName, serviceCategory } = req.body;
-  await sequelize.sync().then(() => {
-    VitalSigns.findOne({
-      where: {
-        id,
-      },
-    })
-      .then((response) => {
-        response.service_name = serviceName;
-        response.service_category = serviceCategory;
-        return response.save();
-      })
-      .catch((error) => console.error(error));
-  });
-};
-const deleteVitals = async (req, res, next) => {
+const deleteVitals = async (req:Request, res:Response, next:NextFunction) => {
   const { id } = req.params;
-  await sequelize.sync().then(() => {
-    VitalSigns.destroy({
-      where: {
-        id,
-      },
-    }).then((response) => {
-      res.status(200);
-    });
-  }).catch((err) => console.log(err));
+  try {
+      const results = await VitalSigns.destroy({
+        where: {
+          id,
+        },
+      });
+      res.status(200).json(results);
+      next();
+  } catch (error) {
+    next(error)
+  }
+
+
 };
 
 module.exports = {

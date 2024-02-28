@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-const { DataTypes, UUIDV4 } = require('sequelize');
+import { DataTypes, UUIDV4 } from 'sequelize';
 const sequelize = require('../../db/connect');
 const Appointments = require('../_appointment/appointments.model');
 const Patient_details = require('../patient/patients.models');
@@ -55,7 +55,7 @@ Appointments.hasMany(Eligibility, { foreignKey: 'appointment_id' });
 
 sequelize.sync().then(() => {
   console.log('Eligible Table create');
-}).catch((error) => {
+}).catch((error: Error) => {
   console.error('Unable to create table :', error);
 });
 

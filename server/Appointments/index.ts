@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 /* eslint-disable no-unused-vars */
 /* eslint-disable linebreak-style */
-const express = require('express');
+import express,{Application} from 'express';
 const redis = require('redis');
 const cors = require('cors');
 const cluster = require('cluster');
@@ -10,7 +10,7 @@ const { promisify } = require(('util'));
 const sequelize = require('./db/connect');
 const appointmentRoutes = require('./routes/appointment.routes');
 const vitalsSignsRoutes = require('./routes/vitals.routes');
-const clusterMiddleware = require('./middleware/clusterMiddleware');
+// const clusterMiddleware = require('./middleware/clusterMiddleware');
 
 const client = redis.createClient('6379', 'redis');
 
@@ -27,7 +27,7 @@ const connectRedis = async () => {
 // client.on('connect', () => console.log('connected'));
 // const redisSet = promisify(client.set).bind(client);
 
-const app = express();
+const app:Application = express();
 
 const PORT = process.env.PORT || 5002;
 const corsOption = {
@@ -43,7 +43,7 @@ app.use(express.urlencoded({
 app.use(cors());
 
 app.use('/appointment', appointmentRoutes);
-app.use('/vital-signs', vitalsSignsRoutes);
+// app.use('/vital-signs', vitalsSignsRoutes);
 
 // app.use((err, req, res, next) => {
 //   const errStatus = err.status || 500;
@@ -54,7 +54,7 @@ app.use('/vital-signs', vitalsSignsRoutes);
 const testConnection = async () => {
     await sequelize.authenticate().then(() => {
         console.log('Connected to database successfully');
-    }).catch((error) => {
+    }).catch((error: Error) => {
         console.error('Unable to connect to database: ', error);
     });
 };
