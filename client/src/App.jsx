@@ -83,6 +83,9 @@ import AddAssetCategory from './_Assets/layouts/AddAssetCategory';
 import AssetLocations from './_Assets/layouts/AssetLocations';
 import AddAssetLocation from './_Assets/layouts/AddAssetLocation';
 import AddAssets from './_Assets/layouts/AddAssets';
+import Assets from './_Assets/layouts/Assets';
+import BankAccounts from './_Bank/layouts/BankAccounts';
+import BankAccountReconciliations from './_Bank/layouts/BankAccountsReconciliation';
 
 // Medication
 const MedicationCategory = lazy(() => import('./_Medication/layouts/MedicationCategory'));
@@ -193,12 +196,16 @@ function App() {
             <Route path="/" element={<Homepage />} />
 
             <Route path="/asset-categories" element={<AssetCategories />} />
+            <Route path="/assets" element={<Assets />} />
             <Route path="/add-asset-category/:id" element={<AddAssetCategory />} />
             <Route path="/assets-location" element={<AssetLocations />} />
             <Route path="/add-asset-location/:id" element={<AddAssetLocation />} />
             <Route path="/add-asset/:id" element={<AddAssets />} />
 
             <Route path="/administration" element={<Administration />} />
+
+            <Route path="/bank-accounts" element={<BankAccounts />} />
+            <Route path="/bank-account-reconciliation" element={<BankAccountReconciliations />} />
 
             <Route path="/accounting-suppliers" element={<AccountingSuppliers />} />
             <Route path="/accounting-items" element={<AccountingItem />} />

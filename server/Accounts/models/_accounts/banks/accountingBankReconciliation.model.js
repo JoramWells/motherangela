@@ -2,8 +2,9 @@
 /* eslint-disable camelcase */
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../../db/connect');
+const AccountingAccountDetails = require('../accountingAccountDetails.model');
 
-const AccountingBankReconciliation = sequelize.define('accounting_bank_reconciliation', {
+const AccountingBankReconciliation = sequelize.define('accounting_banks_reconciliation', {
   banks_reconciliation_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -26,9 +27,9 @@ const AccountingBankReconciliation = sequelize.define('accounting_bank_reconcili
   cleared_withdrawals: {
     type: DataTypes.INTEGER,
   },
-  quantity_of_adjustment: {
-    type: DataTypes.INTEGER,
-  },
+  // quantity_of_adjustment: {
+  //   type: DataTypes.INTEGER,
+  // },
   cleared_deposits: {
     type: DataTypes.STRING,
   },
@@ -42,6 +43,9 @@ const AccountingBankReconciliation = sequelize.define('accounting_bank_reconcili
     type: DataTypes.INTEGER,
   },
 });
+
+AccountingBankReconciliation.belongsTo(AccountingAccountDetails,{foreignKey:'account_id'})
+
 module.exports = AccountingBankReconciliation;
 
 // has no classification and status

@@ -126,14 +126,17 @@ const SidebarListItems = () => {
       <SidebarItemLink
         selected={
           pathname.includes('/asset-categories')
+          || pathname.includes('/assetS')
           || pathname.includes('/add-asset-category')
           || pathname.includes('/add-asset-location')
+          || pathname.includes('/assets')
           || pathname.includes('/add-asset')
           || pathname.includes('/assets-location')
         }
         onClick={onToggle}
         text="Assets"
         itemList={[
+          { id: nanoid(), title: 'Assets', link: '/assets' },
           { id: nanoid(), title: 'Register Asset Category', link: '/add-asset-category/null' },
           { id: nanoid(), title: 'Asset Categories', link: '/asset-categories' },
           { id: nanoid(), title: 'Asset Locations', link: '/assets-location' },
@@ -147,13 +150,15 @@ const SidebarListItems = () => {
       <SidebarItemLink
         selected={
           pathname.includes('/add-bank-account')
-          || pathname.includes('/hts')
+          || pathname.includes('/bank-account-transactions')
+          || pathname.includes('/bank-account-reconciliation')
+          || pathname.includes('/bank-accounts')
 }
         onClick={onToggle}
         text="Banking"
         itemList={[
           { id: nanoid(), title: 'New Bank Account', link: '/add-bank-account' },
-          { id: nanoid(), title: 'View Bank Account', link: '/view-bank-account' },
+          { id: nanoid(), title: 'Bank Accounts', link: '/bank-accounts' },
           { id: nanoid(), title: 'View Bank Account Transactions', link: '/view-bank-account-transactions' },
           { id: nanoid(), title: 'Bank Account Reconciliation', link: '/bank-account-reconciliation' },
         ]}

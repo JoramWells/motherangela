@@ -61,6 +61,9 @@ import { consultationTypeSubGroupApi } from './api/consultation/consultationType
 import { insuranceTypeApi } from './api/insuranceType.api';
 import { accountingAssetCategoryApi } from './api/accounts/accounting_assets/accountingAssetCategory.api';
 import { accountingAssetLocationApi } from './api/accounts/accounting_assets/accountingAssetLocation.api';
+import { accountingAssetApi } from './api/accounts/accounting_assets/accountingAsset.api';
+import { accountingBankAccountApi } from './api/accounts/bank/accountingBankAccounts.api';
+import { accountingBankReconciliationApi } from './api/accounts/bank/accountingBankReconciliation.api';
 
 export const store = configureStore({
   reducer: {
@@ -122,6 +125,9 @@ export const store = configureStore({
     [accountingAssetCategoryApi.reducerPath]: accountingAssetCategoryApi.reducer,
     [accountingJournalApi.reducerPath]: accountingJournalApi.reducer,
     [accountingAccountDetailsApi.reducerPath]: accountingAccountDetailsApi.reducer,
+    [accountingAssetApi.reducerPath]: accountingAssetApi.reducer,
+    [accountingBankReconciliationApi.reducerPath]: accountingBankReconciliationApi.reducer,
+    [accountingBankAccountApi.reducerPath]: accountingBankAccountApi.reducer,
     [consultationTypesWitCreditAccountsApi.reducerPath
     ]: consultationTypesWitCreditAccountsApi.reducer,
     [specimenTypeApi.reducerPath]: specimenTypeApi.reducer,
@@ -178,12 +184,15 @@ export const store = configureStore({
     .concat(vitalSignsApi.middleware)
     .concat(eligibilityApi.middleware)
     .concat(priceListItemApi.middleware)
+    .concat(accountingAssetApi.middleware)
     .concat(accountingCostCentreApi.middleware)
     .concat(accountingStoresApi.middleware)
     .concat(accountingDepartmentApi.middleware)
     .concat(accountingJournalApi.middleware)
     .concat(accountingAssetCategoryApi.middleware)
     .concat(accountingAccountDetailsApi.middleware)
+    .concat(accountingBankReconciliationApi.middleware)
+    .concat(accountingBankAccountApi.middleware)
     .concat(accountingAssetLocationApi.middleware)
     .concat(consultationTypesWitCreditAccountsApi.middleware)
     .concat(specimenTypeApi.middleware)

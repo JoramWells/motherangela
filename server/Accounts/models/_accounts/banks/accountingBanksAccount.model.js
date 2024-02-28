@@ -2,6 +2,7 @@
 /* eslint-disable camelcase */
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../../db/connect');
+const AccountingAccountDetails = require('../accountingAccountDetails.model');
 
 const AccountingBankAccounts = sequelize.define('accounting_bank_accounts', {
   bank_id: {
@@ -18,6 +19,9 @@ const AccountingBankAccounts = sequelize.define('accounting_bank_accounts', {
     type: DataTypes.INTEGER,
   },
 });
+
+AccountingBankAccounts.belongsTo(AccountingAccountDetails, {foreignKey:'account_id'})
+
 module.exports = AccountingBankAccounts;
 
 // has no classification and status
