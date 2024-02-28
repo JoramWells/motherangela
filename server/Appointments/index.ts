@@ -4,11 +4,12 @@
 import express,{Application} from 'express';
 const redis = require('redis');
 const cors = require('cors');
+const compression = require('compression')
 const cluster = require('cluster');
 const cpus = require('os').cpus().length;
 const { promisify } = require(('util'));
 const sequelize = require('./db/connect');
-const appointmentRoutes = require('./routes/appointment.routes');
+const appointmentRoutes = require('./routes/appointmentRoutes');
 const vitalsSignsRoutes = require('./routes/vitals.routes');
 // const clusterMiddleware = require('./middleware/clusterMiddleware');
 
@@ -34,15 +35,16 @@ const corsOption = {
     origin: ['*'],
 };
 
+
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true,
 }));
-
+app.use(compression())
 // enable cors
 app.use(cors());
 
-app.use('/appointment', appointmentRoutes);
+app.use('/api/appointment', appointmentRoutes);
 // app.use('/vital-signs', vitalsSignsRoutes);
 
 // app.use((err, req, res, next) => {
