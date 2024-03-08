@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 const { DataTypes } = require('sequelize');
-const sequelize = require('../../db/connect');
+const sequelize = require('../../../../db/connect');
 const AccountingGroups = require('./accountingGroup.model');
 
 const AccountingAccountDetails = sequelize.define('accounting_account_details', {
@@ -32,7 +32,7 @@ const AccountingAccountDetails = sequelize.define('accounting_account_details', 
   },
 });
 
-AccountingAccountDetails.belongsTo(AccountingGroups,{foreignKey:'account_group_id'})
+AccountingAccountDetails.belongsTo(AccountingGroups, { foreignKey: 'account_group_id' });
 
 module.exports = AccountingAccountDetails;
 

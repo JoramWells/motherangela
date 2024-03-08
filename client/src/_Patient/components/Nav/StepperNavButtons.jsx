@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const StepperNavButtons = ({
   handleNext, handleBack, activeStep,
 }) => (
-  <HStack w="full" justifyContent="flex-end">
+  <HStack w="full" justifyContent="center">
     <Button
       onClick={() => handleBack()}
       isDisabled={activeStep === 1}
@@ -18,7 +18,8 @@ const StepperNavButtons = ({
       // type="submit"
       size="sm"
       onClick={() => handleNext()}
-      // rightIcon={<Fa}
+      colorScheme="blue"
+      // rightIcon={}
     >
 
       {activeStep === 3 ? 'Complete' : 'Next'}

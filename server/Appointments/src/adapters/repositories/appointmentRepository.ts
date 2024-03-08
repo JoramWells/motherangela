@@ -10,6 +10,7 @@ class AppointmentRepository {
 
   async getAllAppointments() {
     return await Appointments.findAll({
+      limit:100,
       order: [["appointment_date", "DESC"]],
       include: [
         {

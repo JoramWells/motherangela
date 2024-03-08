@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { VStack } from '@chakra-ui/react';
+import { Button, VStack } from '@chakra-ui/react';
 import moment from 'moment/moment';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import Corporate from './Cooporate';
 import { useGetAllAccountTypesQuery } from '../../api/accountType.api';
 import { useAddPatientMutation } from '../../api/patients.api';
@@ -10,9 +10,10 @@ import CustomSelect from '../../components/Forms/CustomSelect';
 
 const PaymentDetail = ({
   insuranceAccount,
-  setInsuranceAccount, paymentType, setPaymentType,
-  cost, setCost,
+  setInsuranceAccount,
 }) => {
+  const [paymentType, setPaymentType] = useState();
+  const [cost, setCost] = useState();
   // const [accountType, setAccountType] = useState({ value: '', label: '' });
   // const [paymentOption, setPaymentOption] = useState({ value: '', label: '' });
 
@@ -35,26 +36,46 @@ const PaymentDetail = ({
   return (
 
     <VStack
-      // spacing={8}
+      // spacing={}
       w="full"
+      mt="50px"
+      p={3}
     >
-      <CustomSelect
-        label="Payment Type"
-        options={accountTypeOptions}
-        isLoading={isLoading}
-        value={paymentType}
-        onChange={setPaymentType}
-      />
+      <VStack
+        w="40%"
+        bgColor="white"
+        p={5}
+        border="1px"
+        borderColor="gray.200"
+        rounded="lg"
+        spacing={6}
+      >
+        <CustomSelect
+          label="Payment Type"
+          options={accountTypeOptions}
+          isLoading={isLoading}
+          value={paymentType}
+          onChange={setPaymentType}
+        />
 
-      {/* {values.} */}
-      {paymentType?.value === '1' && (
+        {/* {values.} */}
+        {paymentType?.value === '1' && (
         <Corporate
           insuranceAccount={insuranceAccount}
           setInsuranceAccount={setInsuranceAccount}
           setCost={setCost}
           cost={cost}
         />
-      )}
+        )}
+
+        <Button
+          colorScheme="blue"
+          w="full"
+          size="md"
+        >
+          Save
+        </Button>
+      </VStack>
 
     </VStack>
 

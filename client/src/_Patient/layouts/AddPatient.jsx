@@ -52,8 +52,8 @@ const AddPatient = () => {
   const steps = [
     { title: 'Personal', description: 'Personal Info', link: '/add-patient/?step=personal' },
     { title: 'Next of Kin', description: 'NofK Details', link: '/add-patient/?step=kin' },
-    { title: 'Payment', description: 'Payment Details', link: '/add-patient/?step=payment' },
-    { title: 'Finish', description: 'Complete Registration', link: '/' },
+    // { title: 'Payment', description: 'Payment Details', link: '/add-patient/?step=payment' },
+    // { title: 'Finish', description: 'Complete Registration', link: '/' },
   ];
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -159,25 +159,26 @@ const AddPatient = () => {
     // }
 
     if (data) {
-      setPatientID(data?.patient_id);
-      setAppointmentID(data?.appointment_id);
-    }
-    if (patientID) {
-      if (insuranceAccount) {
-        addPersonalAccountCharge(chargesInputValues[0]);
-      } else {
-        addPersonalAccountCharge(cashInputValues[0]);
-        addPersonalAccountCharge(chargesInputValues2[0]);
-      }
+      navigate(`/admission-appointment/${data?.patient_id}`);
     }
 
-    if (dataCharges) {
-      navigate(-1);
-    }
-  }, [data, addPersonalAccountCharge, cashInputValues,
-    insuranceAccount, chargesInputValues2, patientID,
-    chargesInputValues, searchParams, isLoading,
-    isLoadingCharges, dataCharges, navigate]);
+    // if (data) {
+    //   setPatientID(data?.patient_id);
+    //   setAppointmentID(data?.appointment_id);
+    // }
+    // if (patientID) {
+    //   if (insuranceAccount) {
+    //     addPersonalAccountCharge(chargesInputValues[0]);
+    //   } else {
+    //     addPersonalAccountCharge(cashInputValues[0]);
+    //     addPersonalAccountCharge(chargesInputValues2[0]);
+    //   }
+    // }
+
+    // if (dataCharges) {
+    //   navigate(-1);
+    // }
+  }, [data, navigate]);
 
   const handleSubmit = useCallback(() => {
     addPatient(inputValues[0]);
@@ -192,7 +193,7 @@ const AddPatient = () => {
 
       <VStack
         w={['50%', '50%', '50%', '50%', '60%', '50%']}
-        p={5}
+        p={10}
         rounded="lg"
         bgColor="white"
         border="1px"
@@ -237,7 +238,7 @@ const AddPatient = () => {
         )}
 
         {/* payment detail */}
-        {activeStep === 3 && (
+        {/* {activeStep === 3 && (
         <PaymentDetail
           paymentType={paymentType}
           setPaymentType={setPaymentType}
@@ -247,13 +248,13 @@ const AddPatient = () => {
           cost={cost}
           setCost={setCost}
         />
-        )}
+        )} */}
 
         {/* complete info */}
-        {activeStep === 3 ? (
+        {activeStep === 2 ? (
           <HStack
             w="full"
-            justifyContent="flex-end"
+            justifyContent="center"
           >
             <Button
               onClick={() => handleBack()}
@@ -265,7 +266,7 @@ const AddPatient = () => {
               colorScheme="green"
               onClick={() => handleSubmit()}
               size="sm"
-              isLoading={isLoadingCharges}
+              isLoading={isLoading}
             >
               Complete
 

@@ -5,6 +5,7 @@ import express,{Application} from 'express';
 const redis = require('redis');
 const cors = require('cors');
 const compression = require('compression')
+const morgan = require('morgan')
 const cluster = require('cluster');
 const cpus = require('os').cpus().length;
 const { promisify } = require(('util'));
@@ -43,6 +44,7 @@ app.use(express.urlencoded({
 app.use(compression())
 // enable cors
 app.use(cors());
+app.use(morgan('dev'))
 
 app.use('/api/appointment', appointmentRoutes);
 // app.use('/vital-signs', vitalsSignsRoutes);
@@ -66,3 +68,5 @@ testConnection();
 app.listen(PORT, () => {
     console.log(`App running on http://localhost:${PORT}`);
 });
+
+export default app;

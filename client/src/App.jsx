@@ -86,6 +86,8 @@ import AddAssets from './_Assets/layouts/AddAssets';
 import Assets from './_Assets/layouts/Assets';
 import BankAccounts from './_Bank/layouts/BankAccounts';
 import BankAccountReconciliations from './_Bank/layouts/BankAccountsReconciliation';
+import AddAppointMent from './_Appointment/layouts/AddAppointMent';
+import PaymentDetail from './_Patient/components/PaymentDetail';
 
 // Medication
 const MedicationCategory = lazy(() => import('./_Medication/layouts/MedicationCategory'));
@@ -101,6 +103,7 @@ const Doctor = lazy(() => import('./_Doctor/layouts/Doctor'));
 
 // Patient
 const AddPatient = lazy(() => import('./_Patient/layouts/AddPatient'));
+const AdmissionAppointment = lazy(() => import('./_Patient/layouts/AdmissionAppointment'));
 const PatientPrescription = lazy(() => import('./_Patient/layouts/PatientPrescription'));
 const Patients = lazy(() => import('./_Patient/layouts/Patients'));
 const PatientVisits = lazy(() => import('./_Patient/layouts/PatientVisits'));
@@ -240,6 +243,7 @@ function App() {
             {/* patient */}
 
             <Route path="/patients" element={<Patients />} />
+            <Route path="/admission-appointment/:id" element={<AdmissionAppointment />} />
             <Route path="/patient-queue" element={<PatientQueue />} />
             <Route path="/patient-departmental-status" element={<PatientDepartmentalStatus />} />
             <Route path="/add-patient" element={<AddPatient />} />
@@ -281,6 +285,9 @@ function App() {
             <Route path="/personal-account-charge-detail/:id" element={<PersonalAccountChargeDetail />} />
 
             <Route path="/appointments" element={<Appointments />} />
+            <Route path="/add-appointment/:id" element={<AddAppointMent />} />
+            <Route path="/payment-detail" element={<PaymentDetail />} />
+
             <Route path="/add-admission/:id" element={<AddAdmission />} />
 
             <Route path="/nursing-station" element={<NursingStation />} />

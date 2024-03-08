@@ -1,37 +1,21 @@
+/* eslint-disable no-unused-vars */
 import {
-  Button, FormControl, FormLabel, VStack,
+  Avatar,
+  Button, Text, VStack,
 } from '@chakra-ui/react';
-import { useState } from 'react';
-import Select from 'react-select';
+import { useCallback, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAddAppointmentMutation } from '../../api/appointments.api';
+import { useGetPatientQuery } from '../../api/patients.api';
+import CustomSelect from '../../components/Forms/CustomSelect';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import CustomInput from '../../components/Forms/CustomInput';
+import { useGetAllConsultationTypesQuery } from '../../api/consultation/consultationType.api';
 
 const appointmentCategoryOptions = [
   { value: '1', label: 'General Doctor Appointment' },
   { value: '2', label: 'Specialist Appointment' },
   { value: '3', label: 'Nursing Appointment' },
-];
-
-const consultationTypeOptions = [
-  { value: '1', label: 'ANC VISIT LINDA MAMA' },
-  { value: '2', label: 'CONSULTATION-(CWC)' },
-  { value: '3', label: 'CONSULTATION-CHEMO' },
-  { value: '4', label: 'CONSULTATION-DM CLINIC' },
-  { value: '5', label: 'CONSULTATION-DENTAL' },
-  { value: '6', label: 'CONSULTATION-GYNAE' },
-  { value: '7', label: 'CONSULTATION-NUTRITIONIST(CHILD)' },
-  { value: '8', label: 'CONSULTATION-OPD DAY' },
-  { value: '9', label: 'CONSULTATION-OPD NIGHT' },
-  { value: '10', label: 'CONSULTATION-NUTRITIONIST' },
-  { value: '11', label: 'CONSULTATION-CCC' },
-  { value: '12', label: 'CONSULTATION-ANC' },
-  { value: '13', label: 'CONSULTATION-PHYSIOTHERAPY' },
-  { value: '14', label: 'DENTAL REVIEW' },
-  { value: '15', label: 'E.N.T CONSULTATION' },
-  { value: '16', label: 'FREE CONSULTATION' },
-  { value: '17', label: 'NORMAL CONSULTATION' },
-  { value: '18', label: 'SECOND-LINDA MAMA' },
-  { value: '19', label: 'SPECIALIST CONSULTATION' },
-  { value: '20', label: 'SURGEON-SOPC' },
 ];
 
 const referralOptions = [
@@ -49,48 +33,95 @@ const AddAppointMent = () => {
   const [referral, setReferral] = useState('');
   const [clinic, setClinic] = useState('');
 
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const {
+    data: consultationTypeData,
+    isLoading: isConsultationLoading,
+  } = useGetAllConsultationTypesQuery();
+  const consultationTypesOptions = useCallback(() => consultationTypeData?.map((item) => ({
+    value: item.consultation_type_id, label: item.consultation_type_description,
+  })), [consultationTypeData]);
+
   const inputValues = {
     appointmentCategory, consultationType, referral, clinic,
   };
 
+  const { data: patientData } = useGetPatientQuery(id);
+
   const [addAppointment, { isLoading }] = useAddAppointmentMutation();
 
   return (
-    <VStack spacing={8}>
-      <FormControl>
-        <FormLabel>Select Appointment Category</FormLabel>
-        <Select
+    <VStack
+      mt="50px"
+      p={3}
+      w="full"
+      alignItems="center"
+    >
+      <BreadCrumbNav />
+      <VStack
+        spacing={8}
+        w="40%"
+        bgColor="white"
+        p={5}
+        border="1px"
+        borderColor="gray.200"
+        rounded="lg"
+      >
+
+        <VStack>
+          <Avatar
+            name={`${patientData?.first_name} ${patientData?.middle_name}`}
+            // size="lg"
+            fontWeight="bold"
+          />
+          <Text
+            fontSize="18px"
+            fontWeight="bold"
+          >
+            {`${patientData?.first_name} ${patientData?.middle_name}`}
+          </Text>
+        </VStack>
+        <CustomInput
+          label="Appointment Date"
+          type="date"
+        />
+
+        <CustomSelect
+          label="Appointment Category"
           options={appointmentCategoryOptions}
-          onChange={(category) => setAppointmentCategory(category)}
+          onChange={setAppointmentCategory}
         />
-      </FormControl>
 
-      <FormControl>
-        <FormLabel>Select Consultation Type</FormLabel>
-        <Select
-          options={consultationTypeOptions}
-          onChange={(consultation) => setConsultationType(consultation)}
+        <CustomSelect
+          label="Consultation Type"
+          options={consultationTypesOptions()}
+          isLoading={isConsultationLoading}
+          onChange={setConsultationType}
+          value={consultationType}
         />
-      </FormControl>
 
-      <FormControl>
-        <FormLabel>Is Referral?</FormLabel>
-        <Select
+        <CustomSelect
+          label="Referral Type"
           options={referralOptions}
-          onChange={(newReferral) => setReferral(newReferral)}
-
+          onChange={setReferral}
         />
-      </FormControl>
-      <FormControl>
-        <FormLabel>Select Clinic</FormLabel>
-        <Select
+        <CustomSelect
+          label="Clinic"
           options={clinicOptions}
-          onChange={(newClinic) => setClinic(newClinic)}
+          onChange={setClinic}
         />
-      </FormControl>
-      <Button onClick={() => addAppointment(inputValues)}>
-        {isLoading ? 'loading..' : 'Save'}
-      </Button>
+        <Button
+          size="md"
+          colorScheme="blue"
+          // rounded
+          w="full"
+          onClick={() => navigate('/payment-detail')}
+        >
+          {isLoading ? 'loading..' : 'Save'}
+        </Button>
+      </VStack>
     </VStack>
   );
 };
