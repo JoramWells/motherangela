@@ -20,7 +20,7 @@ import DataTable2 from '../../components/tables/DataTable';
 import { useGetAllAccountingAssetQuery } from '../../api/accounts/accounting_assets/accountingAsset.api';
 import { useGetAllAccountingBankAccountsQuery } from '../../api/accounts/bank/accountingBankAccounts.api';
 
-const socket = io('http://localhost:5003');
+// const socket = io('http://localhost:5003');
 
 const BankAccounts = () => {
   const navigate = useNavigate();
@@ -31,9 +31,9 @@ const BankAccounts = () => {
 
   console.log(data);
 
-  useEffect(() => {
-    socket.on('newAppointment', () => alert('new data'));
-  }, []);
+  // useEffect(() => {
+  //   socket.on('newAppointment', () => alert('new data'));
+  // }, []);
 
   console.log(data);
 

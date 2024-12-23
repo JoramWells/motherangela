@@ -20,7 +20,7 @@ import DataTable2 from '../../components/tables/DataTable';
 import { useGetAllAccountingAssetQuery } from '../../api/accounts/accounting_assets/accountingAsset.api';
 import { useGetAllAccountingBankReconciliationQuery } from '../../api/accounts/bank/accountingBankReconciliation.api';
 
-const socket = io('http://localhost:5003');
+// const socket = io('http://localhost:5003');
 
 const BankAccountReconciliations = () => {
   const navigate = useNavigate();
@@ -31,9 +31,9 @@ const BankAccountReconciliations = () => {
 
   console.log(data);
 
-  useEffect(() => {
-    socket.on('newAppointment', () => alert('new data'));
-  }, []);
+  // useEffect(() => {
+  //   socket.on('newAppointment', () => alert('new data'));
+  // }, []);
 
   console.log(data);
 

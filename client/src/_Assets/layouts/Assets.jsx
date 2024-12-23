@@ -19,7 +19,7 @@ import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
 import { useGetAllAccountingAssetQuery } from '../../api/accounts/accounting_assets/accountingAsset.api';
 
-const socket = io('http://localhost:5003');
+// const socket = io('http://localhost:5003');
 
 const Assets = () => {
   const navigate = useNavigate();
@@ -30,9 +30,9 @@ const Assets = () => {
 
   console.log(data);
 
-  useEffect(() => {
-    socket.on('newAppointment', () => alert('new data'));
-  }, []);
+  // useEffect(() => {
+  //   socket.on('newAppointment', () => alert('new data'));
+  // }, []);
 
   console.log(data);
 

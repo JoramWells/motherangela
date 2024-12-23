@@ -17,7 +17,7 @@ import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
 import { useGetAllAccountingAssetLocationsQuery } from '../../api/accounts/accounting_assets/accountingAssetLocation.api';
 
-const socket = io('http://localhost:5003');
+// const socket = io('http://localhost:5003');
 
 const AssetLocations = () => {
   const navigate = useNavigate();
@@ -28,9 +28,9 @@ const AssetLocations = () => {
 
   console.log(data);
 
-  useEffect(() => {
-    socket.on('newAppointment', () => alert('new data'));
-  }, []);
+  // useEffect(() => {
+  //   socket.on('newAppointment', () => alert('new data'));
+  // }, []);
 
   console.log(data);
 

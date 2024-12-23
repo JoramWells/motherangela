@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const admissionApi = createApi({
   reducerPath: 'admissionApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5009/admission',
+    baseUrl: `${process.env.REACT_APP_API_URL}/api/admission-service/admission`,
+
   }),
   endpoints: (builder) => ({
     getAllAdmissions: builder.query({
