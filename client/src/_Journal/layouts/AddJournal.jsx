@@ -156,7 +156,9 @@ const AddJournal = () => {
     appointment_id: id,
   };
 
-  const { data: patientData } = useGetPatientQuery(id);
+  const { data: patientData } = useGetPatientQuery(id, {
+    skip: !id,
+  });
 
   useEffect(() => {
     setCategory(medication?.category);

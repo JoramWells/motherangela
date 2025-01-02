@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const specimenTypeApi = createApi({
   reducerPath: 'specimenTypeApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5005/specimen-type',
+    baseUrl: `${process.env.REACT_APP_API_URL}/api/lab-service/specimen-type`,
+
   }),
   endpoints: (builder) => ({
     getAllSpecimenTypes: builder.query({

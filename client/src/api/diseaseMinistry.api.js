@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const diseaseMinistryApi = createApi({
   reducerPath: 'diseaseMinistryApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/disease-ministry',
+    baseUrl: `${process.env.REACT_APP_API_URL}/api/root-server/disease-ministry`,
+
   }),
   endpoints: (builder) => ({
     getDiseaseMinistries: builder.query({

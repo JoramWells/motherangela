@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const consultationTypesWitCreditAccountsApi = createApi({
   reducerPath: 'consultationTypesWitCreditAccountsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5010/consultation-groups-with-credit-accounts',
+    baseUrl: `${process.env.REACT_APP_API_URL}/api/accounts-service/consultation-groups-with-credit-accounts`,
+
   }),
   endpoints: (builder) => ({
     getAllConsultationTypesWithCreditAccounts: builder.query({

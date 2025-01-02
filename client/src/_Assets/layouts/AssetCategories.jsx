@@ -17,8 +17,6 @@ import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
 import { useGetAllAccountingAssetCategoriesQuery } from '../../api/accounts/accounting_assets/accountingAssetCategory.api';
 
-const socket = io('http://localhost:5003');
-
 const AssetCategories = () => {
   const navigate = useNavigate();
 
@@ -27,10 +25,6 @@ const AssetCategories = () => {
   } = useGetAllAccountingAssetCategoriesQuery();
 
   console.log(data);
-
-  useEffect(() => {
-    socket.on('newAppointment', () => alert('new data'));
-  }, []);
 
   console.log(data);
 

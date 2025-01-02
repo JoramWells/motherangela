@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const accountingAssetCategoryApi = createApi({
   reducerPath: 'accountingAssetCategoryApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5010/account-asset-category',
+    baseUrl: `${process.env.REACT_APP_API_URL}/api/accounts-service/account-asset-category`,
+
   }),
   endpoints: (builder) => ({
     getAllAccountingAssetCategories: builder.query({

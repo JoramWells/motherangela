@@ -12,7 +12,7 @@ import { procedureItemApi } from './api/procedureItem.api';
 import { supplierApi } from './api/suppliers.api';
 import { insuranceApi } from './api/insurance.api';
 import { diseaseApi } from './api/disease.api';
-import { diseaseMinistryApi } from './api/diseaseMinistry.api copy';
+import { diseaseMinistryApi } from './api/diseaseMinistry.api';
 import { creditPaymentApi } from './api/creditPayment.api';
 import { companyApi } from './api/company.api';
 import { consultationTypeApi } from './api/consultation/consultationType.api';

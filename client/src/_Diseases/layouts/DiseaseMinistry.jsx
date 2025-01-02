@@ -8,7 +8,7 @@ import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useMemo } from 'react';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
-import { useGetDiseaseMinistriesQuery } from '../../api/diseaseMinistry.api copy';
+import { useGetDiseaseMinistriesQuery } from '../../api/diseaseMinistry.api';
 
 const DiseaseMinistry = () => {
   const {
