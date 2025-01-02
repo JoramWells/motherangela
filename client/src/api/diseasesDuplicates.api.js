@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const diseasesDuplicatesApi = createApi({
   reducerPath: 'diseasesDuplicatesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5011/diseases-duplicates',
+    baseUrl: `${process.env.REACT_APP_API_URL}/api/procedure-service/diseases-duplicates`,
+
   }),
   endpoints: (builder) => ({
     getAllDiseasesDuplicates: builder.query({

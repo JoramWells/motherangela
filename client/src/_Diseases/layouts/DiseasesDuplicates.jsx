@@ -65,7 +65,7 @@ const DiseasesDuplicates = () => {
       },
     ],
 
-    [],
+    [navigate],
   );
 
   const subRowData = data
