@@ -96,10 +96,11 @@ export const Sidebar = ({
     `}
     >
       <div
-        className="p-4 flex flex-row items-center border-b border-slate-200
+        className="p-2 flex flex-row items-center border-b border-slate-200
       justify-center"
       >
-        <Image
+        <p className="text-white font-bold text-lg" >Mother Angela</p>
+        {/* <Image
           src={"/img/logo1.svg"}
           alt="img"
           width={0}
@@ -107,7 +108,7 @@ export const Sidebar = ({
           style={{ width: "90px", height: "auto" }}
 
           // quality={100}
-        />
+        /> */}
       </div>
       {/* <SearchInputDropDown
   data={hospitalOptions() ?? []}

@@ -22,7 +22,7 @@ const DL  = [
   {
     id: "3",
     label: "Patients",
-    link: "/users/patients",
+    link: "/patients",
     icon: <Book size={17} />,
   },
   {

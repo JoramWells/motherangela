@@ -34,12 +34,12 @@ export const SidebarCollapseButton = ({
   };
 
   return (
-    <div className="pt-1 pb-1 ">
+    <>
       <Button
         onClick={onToggle}
-        className={`flex items-center text-[12px]  pl-4 pr-4 justify-between text-[#F3FAFF]/[.8]  text-sm rounded-none w-full bg-[#364f6b] shadow-none
-        overflow-y-auto hover:bg-[#F3FAFF]/[.1] transition delay-150 ease-in-out hover:text-[#F3FAFF] ${
-          isActive && "bg-gradient-to-r from-[#F1F1E6] text-[#364f6b]"
+        className={`flex items-center text-[12px]  pl-2 pr-4 justify-between text-[#F3FAFF]/[.8]  text-sm rounded-none w-full bg-transparent shadow-none
+        overflow-y-auto hover:bg-sky-900 transition delay-150 ease-in-out hover:text-[#F3FAFF] ${
+          isActive && "bg-gradient-to-r from-sky-700 to-sky-950 text-white border-l-4 rounded-l-sm"
         }
         `}
       >
@@ -87,6 +87,6 @@ export const SidebarCollapseButton = ({
           ))}
         </div>
       )}
-    </div>
+    </>
   );
 };
