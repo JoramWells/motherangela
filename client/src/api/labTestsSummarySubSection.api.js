@@ -3,7 +3,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const labTestsSummarySubSectionApi = createApi({
   reducerPath: 'labTestsSummarySubSectionApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/lab-tests-summary-sub-section',
+    // baseUrl: 'http://localhost:5000/lab-tests-summary-sub-section',
+    baseUrl: `${process.env.REACT_APP_API_URL}/api/lab-service/lab-tests-summary-sub-section`,
+
   }),
   endpoints: (builder) => ({
     getAllLabTestsSummarySubSection: builder.query({

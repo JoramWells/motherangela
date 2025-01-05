@@ -3,7 +3,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const maternityProfileApi = createApi({
   reducerPath: 'maternityProfileApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5001',
+    // baseUrl: 'http://localhost:5001',
+    baseUrl: `${process.env.REACT_APP_API_URL}/api/root-server`,
+
   }),
   endpoints: (builder) => ({
     getMaternityProfiles: builder.query({

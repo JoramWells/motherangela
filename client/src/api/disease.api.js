@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const diseaseApi = createApi({
   reducerPath: 'diseaseApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5011/disease',
+    baseUrl: `${process.env.REACT_APP_API_URL}/api/procedure-service/disease`,
+
   }),
   endpoints: (builder) => ({
     getDiseases: builder.query({

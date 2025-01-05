@@ -61,7 +61,7 @@ const InternalLabRequest = () => {
       {
         header: 'Age',
         accessorKey: 'cell_phone',
-        cell: (props) => <Text>{moment().diff(moment(props.row.original.patient.dob, 'YYYY'), 'years')}</Text>,
+        cell: (props) => <Text>{moment().diff(moment(props.row.original.patient?.dob, 'YYYY'), 'years')}</Text>,
 
       },
       {

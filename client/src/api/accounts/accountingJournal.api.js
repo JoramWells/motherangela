@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const accountingJournalApi = createApi({
   reducerPath: 'accountingJournalApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5010/accounting-journal',
+    baseUrl: `${process.env.REACT_APP_API_URL}/api/accounts-service/accounting-journal`,
+
   }),
   endpoints: (builder) => ({
     getAllAccountingJournals: builder.query({
