@@ -6,7 +6,7 @@ export const patientsApi = createApi({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/patient-service/patient`,
   }),
   endpoints: (builder) => ({
-    getPatients: builder.query<PatientInterface, unknown>({
+    getPatients: builder.query<PatientInterface[], void>({
       query: () => "fetchAll",
     }),
     addPatient: builder.mutation({

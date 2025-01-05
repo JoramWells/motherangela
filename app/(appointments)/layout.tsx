@@ -1,11 +1,19 @@
-'use client'
-import { Sidebar } from '@/components/custom/Sidebar/Sidebar';
-import SidebarListItemsComponent from '@/components/custom/Sidebar/SidebarListItemsComponent';
-import { store } from '@/lib/store'
-import { ArrowRightLeft, Book, History, LayoutDashboardIcon, NotebookPen, Users } from 'lucide-react';
-import React, { ReactNode } from 'react'
-import { Provider } from 'react-redux'
-import '../globals.css'
+"use client";
+import { Sidebar } from "@/components/custom/Sidebar/Sidebar";
+import SidebarListItemsComponent from "@/components/custom/Sidebar/SidebarListItemsComponent";
+import { store } from "@/lib/store";
+import {
+  ArrowRightLeft,
+  Book,
+  Check,
+  History,
+  LayoutDashboardIcon,
+  NotebookPen,
+  Users,
+} from "lucide-react";
+import React, { ReactNode } from "react";
+import { Provider } from "react-redux";
+import "../globals.css";
 const DL = [
   {
     id: "1",
@@ -21,13 +29,13 @@ const DL = [
   // },
   {
     id: "3",
-    label: "Patients",
-    link: "/patients",
-    icon: <Book size={17} />,
+    label: "Checklist",
+    link: "/checklist",
+    icon: <Check size={17} />,
   },
   {
     id: "4",
-    label: "Departmental Status",
+    label: "Diagnosis",
     link: "/users/otz",
     icon: <Users size={17} />,
   },
@@ -46,7 +54,7 @@ const DL = [
   {
     id: "7",
     label: "Visits",
-    link: "/users/visits",
+    link: "/visits",
     icon: <History size={17} />,
   },
   {
@@ -63,7 +71,7 @@ const DL = [
   },
 ];
 
-const layout = ({children}:{children: ReactNode}) => {
+const layout = ({ children }: { children: ReactNode }) => {
   return (
     <Provider store={store}>
       <div className="flex flex-row">
@@ -78,6 +86,6 @@ const layout = ({children}:{children: ReactNode}) => {
       </div>
     </Provider>
   );
-}
+};
 
-export default layout
+export default layout;

@@ -71,7 +71,7 @@ export function DataTable<TData, TValue>({columns, data}:DataTableInputProps<TDa
   })
 
   return (
-    <div className="w-full bg-white rounded-lg">
+    <>
       <div className="flex items-center p-2">
         {/* <Input
           placeholder="Filter emails..."
@@ -158,7 +158,7 @@ export function DataTable<TData, TValue>({columns, data}:DataTableInputProps<TDa
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 p-2">
+      <div className="flex items-center justify-end space-x-2 p-2 border-t">
         <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
@@ -182,6 +182,6 @@ export function DataTable<TData, TValue>({columns, data}:DataTableInputProps<TDa
           </Button>
         </div>
       </div>
-    </div>
+    </>
   )
 }

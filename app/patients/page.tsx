@@ -11,9 +11,18 @@ const Patients = () => {
   console.log(patientsData)
   return (
     <>
-    <BreadcrumbNav />
+      <BreadcrumbNav />
       <div className="p-2">
-        <DataTable columns={columns} data={patientsData ?? []} />
+        <div className="w-full bg-white rounded-lg border">
+          <div
+          className='pl-2 pt-2'
+          >
+            <h2
+            className='text-lg font-semibold text-zinc-500'
+            >Patient History</h2>
+          </div>
+          <DataTable columns={columns} data={patientsData ?? []} />
+        </div>
       </div>
     </>
   );
