@@ -7,10 +7,4 @@
     "prettier.disableLanguages": [
         "javascript"
     ],
-    "cSpell.words": [
-        "lucide",
-        "uuidv",
-        "Vira",
-        "viratrack"
-    ]
 }
