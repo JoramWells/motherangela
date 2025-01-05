@@ -2,6 +2,7 @@ declare interface AppointmentInterface {
   account_type_id: number;
   admission_status: string | null;
   appointment_time: string;
+  appointment_id: string;
   appointment_date: string | Date;
   charges: number;
   claim_number: string | null;

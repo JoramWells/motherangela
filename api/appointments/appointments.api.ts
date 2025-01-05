@@ -16,7 +16,7 @@ export const appointmentApi = createApi({
         body: newWard,
       }),
     }),
-    getAppointment: builder.query({
+    getAppointment: builder.query<AppointmentInterface, string>({
       query: (id) => `detail/${id}`,
     }),
     getAppointmentDetailByID: builder.query({

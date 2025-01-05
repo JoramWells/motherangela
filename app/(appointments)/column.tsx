@@ -62,8 +62,10 @@ export const columns: ColumnDef<AppointmentInterface>[] = [
   },
   {
     accessorKey:'action',
-    cell:()=>(
-      <Link href={''}>View</Link>
+    cell:({row})=>(
+      <Link
+      className="text-[12px]"
+      href={`/visits/${row.original.appointment_id}`}>View</Link>
     )
   }
 ];
