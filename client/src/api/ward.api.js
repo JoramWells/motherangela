@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const wardApi = createApi({
   reducerPath: 'wardApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5001/wards',
+    baseUrl: `${process.env.REACT_APP_API_URL}/api/root-server/wards`,
+
   }),
   endpoints: (builder) => ({
     getWards: builder.query({

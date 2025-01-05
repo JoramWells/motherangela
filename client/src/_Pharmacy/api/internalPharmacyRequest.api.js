@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const internalPharmacyRequestApi = createApi({
   reducerPath: 'internalPharmacyRequestApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5011/internal-pharmacy-request',
+    baseUrl: `${process.env.REACT_APP_API_URL}/api/pharmacy-service/internal-pharmacy-request`,
+
   }),
   endpoints: (builder) => ({
     getAllInternalPharmacyRequests: builder.query({

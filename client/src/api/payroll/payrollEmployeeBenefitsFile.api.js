@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const payrollEmployeeBenefitsApi = createApi({
   reducerPath: 'payrollEmployeeBenefitsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/payroll-employee-benefits-file',
+    baseUrl: `${process.env.REACT_APP_API_URL}/api/payroll-service/payroll-employee-benefits-file`,
+
   }),
   endpoints: (builder) => ({
     getAllPayrollEmployeeBenefits: builder.query({
