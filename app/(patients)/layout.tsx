@@ -52,7 +52,7 @@ const DL = [
   {
     id: "8",
     label: "In-patient",
-    link: "/patients/reports",
+    link: "/in-patient",
     icon: <History size={17} />,
   },
   {

@@ -4,7 +4,6 @@ import SidebarListItemsComponent from "@/components/custom/Sidebar/SidebarListIt
 import { store } from "@/lib/store";
 import {
   ArrowRightLeft,
-  Book,
   Check,
   History,
   LayoutDashboardIcon,

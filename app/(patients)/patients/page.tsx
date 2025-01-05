@@ -3,7 +3,7 @@
 import { useGetPatientsQuery } from '@/api/patients/patients.api';
 import { DataTable } from '@/components/custom/DataTable'
 import React from 'react'
-import { columns } from './column';
+import { columns } from '../column';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 
 const Patients = () => {
