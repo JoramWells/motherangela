@@ -8,7 +8,7 @@ export const maternityAntenatalProfileApi = createApi({
   endpoints: (builder) => ({
 
     // Get Maternity Antenatal Profile
-    getAllMaternityAntenatalProfile: builder.query({
+    getAllMaternityAntenatalProfile: builder.query<AntenatalProfileInterface[], void>({
       query: () => "/fetchAll",
     }),
     addMaternityAntenatalProfile: builder.mutation({

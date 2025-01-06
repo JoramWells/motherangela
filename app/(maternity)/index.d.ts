@@ -28,3 +28,17 @@ declare interface MaternityProfileInterface {
   telephone: string | null;
   tuberculosis: string | null;
 }
+
+declare interface AntenatalProfileInterface{
+  blood_group: string | null
+  hb: string | null
+  hiv: string | null
+  hiv_testing_done: string | null
+  maternity_antenatal_profile_id: string
+  maternity_profile?: MaternityProfileInterface
+  maternity_profile_id: string
+  rhesus: string | null
+  serology: string | null
+  tb_screening: string | null
+  urinalysis: string | null
+}

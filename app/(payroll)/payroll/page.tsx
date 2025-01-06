@@ -3,7 +3,7 @@
 import { DataTable } from "@/components/custom/table/DataTable";
 import React from "react";
 import BreadcrumbNav from "@/components/custom/nav/BreadcrumbNav";
-import { maternityAntenatalProfileColumns } from "../column";
+// import { maternityAntenatalProfileColumns } from "../column";
 import { useGetAllMaternityAntenatalProfileQuery } from "@/api/maternity/maternity-antenantal-profile.api";
 
 const Patients = () => {
@@ -19,7 +19,7 @@ const Patients = () => {
               Antenatal Profiles
             </h2>
           </div>
-          <DataTable columns={maternityAntenatalProfileColumns} data={profileData ?? []} />
+          {/* <DataTable columns={maternityAntenatalProfileColumns} data={profileData ?? []} /> */}
         </div>
       </div>
     </>
