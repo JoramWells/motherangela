@@ -1,7 +1,7 @@
 'use client'
 
 import { useGetPatientsQuery } from '@/api/patients/patients.api';
-import { DataTable } from '@/components/custom/DataTable'
+import { DataTable } from '@/components/custom/table/DataTable'
 import React from 'react'
 import { columns } from '../column';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';

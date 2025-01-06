@@ -1,5 +1,7 @@
 import { admissionApi } from "@/api/admission/admissions.api";
 import { appointmentApi } from "@/api/appointments/appointments.api";
+import { maternityAntenatalProfileApi } from "@/api/maternity/maternity-antenantal-profile.api";
+import { maternityProfileApi } from "@/api/maternity/maternity.api";
 import { patientsApi } from "@/api/patients/patients.api";
 import { configureStore } from "@reduxjs/toolkit";
 
@@ -8,6 +10,9 @@ export const store = configureStore({
     [patientsApi.reducerPath]: patientsApi.reducer,
     [appointmentApi.reducerPath]: appointmentApi.reducer,
     [admissionApi.reducerPath]: admissionApi.reducer,
+    [maternityProfileApi.reducerPath]: maternityProfileApi.reducer,
+    [maternityAntenatalProfileApi.reducerPath]:
+      maternityAntenatalProfileApi.reducer,
   },
   middleware: (getDefaultMiddleWare) =>
     getDefaultMiddleWare({
@@ -16,5 +21,7 @@ export const store = configureStore({
     })
       .concat(patientsApi.middleware)
       .concat(appointmentApi.middleware)
-      .concat(admissionApi.middleware),
+      .concat(admissionApi.middleware)
+      .concat(maternityAntenatalProfileApi.middleware)
+      .concat(maternityProfileApi.middleware),
 });

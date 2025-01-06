@@ -1,6 +1,6 @@
 "use client";
 
-import { DataTable } from "@/components/custom/DataTable";
+import { DataTable } from "@/components/custom/table/DataTable";
 import React from "react";
 import BreadcrumbNav from "@/components/custom/nav/BreadcrumbNav";
 import { admissionColumn } from "../column";

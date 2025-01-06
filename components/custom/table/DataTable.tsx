@@ -115,7 +115,9 @@ export function DataTable<TData, TValue>({columns, data}:DataTableInputProps<TDa
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id}
+                    className="text-[12px]"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(

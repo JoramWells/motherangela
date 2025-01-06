@@ -3,8 +3,8 @@
 import { DataTable } from "@/components/custom/table/DataTable";
 import React from "react";
 import BreadcrumbNav from "@/components/custom/nav/BreadcrumbNav";
-import { columns } from "../column";
 import { useGetAppointmentsQuery } from "@/api/appointments/appointments.api";
+import { columns } from "../column";
 
 const Patients = () => {
   const { data: appointmentData } = useGetAppointmentsQuery();
