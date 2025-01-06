@@ -1,29 +1,29 @@
 "use client";
 
-import { useGetPatientsQuery } from "@/api/patients/patients.api";
 import { DataTable } from "@/components/custom/DataTable";
 import React from "react";
-import { columns } from "./column";
 import BreadcrumbNav from "@/components/custom/nav/BreadcrumbNav";
+import { admissionColumn } from "../column";
+import { useGetAllAdmissionsQuery } from "@/api/admission/admissions.api";
 
-const Patients = () => {
-  const { data: patientsData } = useGetPatientsQuery();
+const Admission = () => {
+  const { data: patientsData } = useGetAllAdmissionsQuery();
   console.log(patientsData);
   return (
     <>
       <BreadcrumbNav />
       <div className="p-2">
         <div className="w-full bg-white rounded-lg border">
-          <div className="pl-2 pt-2">
-            <h2 className="text-lg font-semibold text-zinc-500">
+          <div className="p-2 border-b bg-slate-50 rounded-t-lg">
+            <h2 className="text-lg text-slate-700">
               Patient History
             </h2>
           </div>
-          <DataTable columns={columns} data={patientsData ?? []} />
+          <DataTable columns={admissionColumn} data={patientsData ?? []} />
         </div>
       </div>
     </>
   );
 };
 
-export default Patients;
+export default Admission;
