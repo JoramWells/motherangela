@@ -8,7 +8,6 @@ import { useGetAllPayrollEmployeeBenefitsQuery } from "@/api/payroll/payrollEmpl
 
 const Patients = () => {
   const { data: profileData } = useGetAllPayrollEmployeeBenefitsQuery();
-  console.log(profileData)
   return (
     <>
       <BreadcrumbNav />
@@ -16,7 +15,7 @@ const Patients = () => {
         <div className="w-full bg-white rounded-lg border">
           <div className="p-2 bg-zinc-50 rounded-t-lg border-b border-slate-200">
             <h2 className="text-lg  text-slate-700">
-              Employee Records
+              Employee Benefits
             </h2>
           </div>
           <DataTable columns={employeeBenefitsColumns} data={profileData ?? []} />

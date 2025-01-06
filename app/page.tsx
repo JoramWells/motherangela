@@ -11,6 +11,7 @@ export default function Home() {
           { id: 2, link: "/maternity", label: "Maternity" },
           { id: 3, link: "/patients", label: "Patients" },
           { id: 4, link: "/payroll", label: "Payroll" },
+          { id: 5, link: "/pharmacy", label: "Pharmacy" },
         ].map((item) => (
           <div className="flex-1 border rounded-lg p-2 h-[100px]" key={item.id}>
             <Link href={item.link}>{item.label}</Link>
