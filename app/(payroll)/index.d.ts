@@ -41,3 +41,12 @@ declare interface PayrollEmployeeRecordsInterface{
     termination_date: string | null
     user_id: string | null
 }
+
+declare interface PayrollEmployeeBenefitsFileInterface{
+    amount: string | number | null
+    employee_benefits_file_id: number
+    employee_id: string | null
+    other_income_type_id: string | null
+    payroll_employee_record?: PayrollEmployeeRecordsInterface
+    payroll_id: string | null
+}

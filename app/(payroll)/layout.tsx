@@ -23,10 +23,16 @@ const DL = [
     icon: <LayoutDashboardIcon size={17} />,
   },
   {
-    id: '2',
-    label: 'Payroll',
-    link: '/payroll',
-    icon: <HeartHandshake size={17} />
+    id: "5",
+    label: "Benefits",
+    link: "/benefits",
+    icon: <ArrowRightLeft size={17} />,
+  },
+  {
+    id: "2",
+    label: "Payroll",
+    link: "/payroll",
+    icon: <HeartHandshake size={17} />,
   },
   {
     id: "3",
@@ -39,12 +45,6 @@ const DL = [
     label: "Loan Records",
     link: "/loan-records",
     icon: <HandCoins size={17} />,
-  },
-  {
-    id: "5",
-    label: "Discharged",
-    link: "/discharged",
-    icon: <ArrowRightLeft size={17} />,
   },
   {
     id: "6",
