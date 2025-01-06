@@ -17,7 +17,7 @@ export const maternityProfileApi = createApi({
         body: newMaternity,
       }),
     }),
-    getMaternityProfile: builder.query({
+    getMaternityProfile: builder.query<MaternityProfileInterface, string>({
       query: (id) => `/detail/${id}`,
     }),
   }),

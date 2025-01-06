@@ -5,7 +5,7 @@ declare interface MaternityProfileInterface {
   blood_transfusion: string | null;
   diabetes: string | null;
   drug_allergies: string | null;
-  edd: string | null;
+  edd: Date | string | null;
   education: string | null;
   family_history_diabetes: string | null;
   family_history_hypertension: string | null;
@@ -14,7 +14,7 @@ declare interface MaternityProfileInterface {
   gravida: string | null;
   height: string | null;
   hypertension: string | null;
-  lmp: string | null;
+  lmp: Date | string | null;
   marital_status: string | null;
   maternity_profile_id: number | null;
   name_of_client: string | null;

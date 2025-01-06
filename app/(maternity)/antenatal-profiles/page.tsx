@@ -4,11 +4,12 @@ import { DataTable } from "@/components/custom/table/DataTable";
 import React from "react";
 import BreadcrumbNav from "@/components/custom/nav/BreadcrumbNav";
 import { useGetAppointmentsQuery } from "@/api/appointments/appointments.api";
-import { columns } from "../column";
+import { maternityProfileColumns } from "../column";
+import { useGetAllMaternityAntenatalProfileQuery } from "@/api/maternity/maternity-antenantal-profile.api";
 
 const Patients = () => {
-  const { data: appointmentData } = useGetAppointmentsQuery();
-  console.log(appointmentData)
+  const { data: profileData } = useGetAllMaternityAntenatalProfileQuery();
+  console.log(profileData)
   return (
     <>
       <BreadcrumbNav />
@@ -19,7 +20,7 @@ const Patients = () => {
               Patient History
             </h2>
           </div>
-          <DataTable columns={columns} data={appointmentData ?? []} />
+          {/* <DataTable columns={maternityProfileColumns} data={appointmentData ?? []} /> */}
         </div>
       </div>
     </>

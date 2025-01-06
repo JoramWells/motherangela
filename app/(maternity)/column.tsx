@@ -30,9 +30,7 @@ export const maternityProfileColumns: ColumnDef<MaternityProfileInterface>[] = [
     accessorKey: "name_of_client",
     header: "Name",
     cell: ({ row }) => (
-      <div
-      className="flex-row flex space-x-2 items-center"
-      >
+      <div className="flex-row flex space-x-2 items-center">
         <Avatar name={row.original.name_of_client as string} />
         <p className="capitalize text-[12px]">{row.original.name_of_client}</p>
       </div>
@@ -67,11 +65,21 @@ export const maternityProfileColumns: ColumnDef<MaternityProfileInterface>[] = [
     ),
   },
   {
+    accessorKey: "edd",
+    header: "EDD",
+    cell: ({ row }) => {
+      const edd = row.original.edd as string
+      return <p className="text-[12px] text-slate-500">
+        {(edd && edd?.length > 0) ? moment(row.original?.edd).format("ll"): 'Update'}
+      </p>;
+    },
+  },
+  {
     accessorKey: "action",
     cell: ({ row }) => (
       <Link
         className="text-[12px]"
-        href={`/visits/${row.original.appointment_id}`}
+        href={`/maternity/${row.original.maternity_profile_id}`}
       >
         View
       </Link>
