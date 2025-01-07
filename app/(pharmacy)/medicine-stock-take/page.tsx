@@ -1,14 +1,30 @@
+/* eslint-disable no-constant-binary-expression */
 'use client'
 
 import { useGetAllMedicationQuery } from '@/api/medication/medicine.api';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { DataTable } from '@/components/custom/table/DataTable';
-import React from 'react'
+import React, { useState } from 'react'
 import { medicineStockColumns } from '../column';
+import { useSearchParams } from 'next/navigation';
+import useSearch from '@/hooks/useSearch';
+import usePreprocessData from '@/hooks/usePreprocessData';
 
 const MedicinesStockPage = () => {
-    const {data} = useGetAllMedicationQuery()
-    console.log(data)
+    const [search, setSearch] = useState("");
+    const searchParams = useSearchParams();
+    const page = searchParams.get("page");
+    
+    const { data } = useGetAllMedicationQuery({
+      page: Number(page) ?? 1,
+      pageSize: 10,
+      searchQuery: search,
+    });
+
+    useSearch({search, setSearch})
+
+    const {data: processedData, total} = usePreprocessData(data)
+    console.log(processedData);
   return (
     <div>
       <BreadcrumbNav />
@@ -19,7 +35,9 @@ const MedicinesStockPage = () => {
                     Medicine Stock
                   </h2>
                 </div>
-                <DataTable columns={medicineStockColumns} data={data ?? []} />
+                <DataTable columns={medicineStockColumns} data={processedData ?? []}
+                total={total as number}
+                />
               </div>
             </div>
     </div>

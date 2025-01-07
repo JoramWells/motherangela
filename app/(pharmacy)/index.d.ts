@@ -85,3 +85,22 @@ declare interface MedicinePurchaseInterface {
   user: UserInterface;
   user_id: string;
 }
+
+declare interface MedicationStockTakeInterface {
+  correct_quantity: string;
+  current_quantity: string;
+  current_quantity_total_price: string;
+  date_of_stock_take: Date | string | null
+  expiry_date: Date | string
+  hospital_id: string
+  hospital_store_id: string
+  medication_category_id: string
+  medication_id: string
+  medication_name: string
+  medication_packaging_type_description: string
+  medication_stock_take_id: number
+  quantity_variance: string
+  unit_price: string
+  user_id: string
+  variance_total_price: string
+}

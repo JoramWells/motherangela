@@ -4,7 +4,7 @@
 import BreadcrumbNav from "@/components/custom/nav/BreadcrumbNav";
 import { DataTable } from "@/components/custom/table/DataTable";
 import React, { useState } from "react";
-import { medicineCategoryColumns, medicinePurchaseColumns } from "./column";
+import { medicineCategoryColumns, medicinePurchaseColumns, medicineStockTakeColumns } from "./column";
 import { useGetAllMedicineCategoryQuery } from "@/api/medication/medicineCategory.api";
 import { Button } from "@/components/ui/button";
 import CustomTab from "@/components/custom/nav/CustomTab";
@@ -12,13 +12,18 @@ import { useGetAllMedicinePurchasesQuery } from "@/api/medication/medicinePurcha
 import { useSearchParams } from "next/navigation";
 import useSearch from "@/hooks/useSearch";
 import usePreprocessData from "@/hooks/usePreprocessData";
+import { useGetAllMedicineStockTakeQuery } from "@/api/medication/medicationStockTake.api";
 
 const MedicinesStockPage = () => {
   const [search, setSearch] = useState('')
     const searchParams = useSearchParams();
     const page = searchParams.get("page");
 
-  const { data: medCategoryData } = useGetAllMedicineCategoryQuery();
+  const { data: medCategoryData } = useGetAllMedicineCategoryQuery({
+    page: Number(page) ?? 1,
+    pageSize: 10,
+    searchQuery: search,
+  });
   const { data: purchaseData } = useGetAllMedicinePurchasesQuery({
     page: Number(page) ?? 1,
     pageSize: 10,
@@ -27,11 +32,20 @@ const MedicinesStockPage = () => {
 
   useSearch({search, setSearch})
 
-  const {data,total} = usePreprocessData(purchaseData)
+  const {data: puchasedMed,total} = usePreprocessData(purchaseData)
+  const {data: preprocessedMedCategoryData, total: categoryTotal} = usePreprocessData(medCategoryData)
 
   const [tab, setTab] = useState('category')
 
-  console.log(purchaseData, 'op')
+  const { data: stockTakeData } = useGetAllMedicineStockTakeQuery({
+    page: Number(page) ?? 1,
+    pageSize: 10,
+    searchQuery: search,
+  });
+
+  const {data: processedStockData, total: stockTakeTotal} = usePreprocessData(stockTakeData)
+
+  console.log(processedStockData, "op");
   return (
     <div>
       <BreadcrumbNav />
@@ -44,6 +58,10 @@ const MedicinesStockPage = () => {
           {
             id: 2,
             label: "Purchases",
+          },
+          {
+            id: 3,
+            label: "Stock Take",
           },
         ]}
         value={tab}
@@ -67,7 +85,8 @@ const MedicinesStockPage = () => {
             </div>
             <DataTable
               columns={medicineCategoryColumns}
-              data={medCategoryData ?? []}
+              data={preprocessedMedCategoryData ?? []}
+              total={categoryTotal as number}
             />
           </div>
         )}
@@ -87,8 +106,34 @@ const MedicinesStockPage = () => {
                 NEW
               </Button>
             </div>
-            <DataTable columns={medicinePurchaseColumns} data={data ?? []} 
-            total={total as number}
+            <DataTable
+              columns={medicinePurchaseColumns}
+              data={puchasedMed ?? []}
+              total={total as number}
+            />
+          </div>
+        )}
+
+        {/*  */}
+        {tab === "stock take" && (
+          <div className="w-full bg-white rounded-lg border">
+            <div
+              className="p-2 bg-slate-50 rounded-t-lg border-b border-slate-200
+          flex flex-row justify-between items-center
+          "
+            >
+              <h2 className="text-lg  text-slate-700">Medicine Purchases</h2>
+              <Button
+                size={"sm"}
+                className="shadow-none bg-emerald-700 hover:bg-emerald-800"
+              >
+                NEW
+              </Button>
+            </div>
+            <DataTable
+              columns={medicineStockTakeColumns}
+              data={processedStockData ?? []}
+              total={stockTakeTotal as number}
             />
           </div>
         )}

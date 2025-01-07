@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const medicineCategoryApi = createApi({
-  reducerPath: "medicineCategoryApi",
+export const medicineStockTakeApi = createApi({
+  reducerPath: "medicineStockTakeApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/root-server/medication-category`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/root-server/medication-stock-take`,
   }),
   endpoints: (builder) => ({
-    getAllMedicineCategory: builder.query<
-      PaginatedResponse<MedicineCategoryInterface>,
+    getAllMedicineStockTake: builder.query<
+      PaginatedResponse<MedicineStockInterface>,
       { page: number; pageSize: number; searchQuery: string }
     >({
       query: (params) => {
@@ -22,24 +22,24 @@ export const medicineCategoryApi = createApi({
         return "fetchAll";
       },
     }),
-    addMedicineCategory: builder.mutation({
+    addMedicineStockTake: builder.mutation({
       query: (newMedicine) => ({
         url: "add",
         method: "POST",
         body: newMedicine,
       }),
     }),
-    getMedicineCategory: builder.query({
+    getMedicineStockTake: builder.query({
       query: (id) => `detail/${id}`,
     }),
-    updateMedicineCategory: builder.mutation({
+    updateMedicineStockTake: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `update${id}`,
         method: "PUT",
         body: patch,
       }),
     }),
-    deleteMedicineCategory: builder.mutation({
+    deleteMedicineStockTake: builder.mutation({
       query(id) {
         return {
           url: `delete${id}`,
@@ -51,6 +51,7 @@ export const medicineCategoryApi = createApi({
 });
 
 export const {
-  useGetAllMedicineCategoryQuery, useAddMedicineCategoryMutation, useGetMedicineCategoryQuery,
-  useUpdateMedicineCategoryMutation, useDeleteMedicineCategoryMutation,
-} = medicineCategoryApi;
+  useGetAllMedicineStockTakeQuery, useAddMedicineStockTakeMutation,
+  useGetMedicineStockTakeQuery,
+  useUpdateMedicineStockTakeMutation, useDeleteMedicineStockTakeMutation,
+} = medicineStockTakeApi;
