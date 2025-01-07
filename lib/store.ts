@@ -3,6 +3,8 @@ import { appointmentApi } from "@/api/appointments/appointments.api";
 import { maternityAntenatalProfileApi } from "@/api/maternity/maternity-antenantal-profile.api";
 import { maternityProfileApi } from "@/api/maternity/maternity.api";
 import { medicineApi } from "@/api/medication/medicine.api";
+import { medicineCategoryApi } from "@/api/medication/medicineCategory.api";
+import { medicinePurchasesApi } from "@/api/medication/medicinePurchases.api";
 import { patientsApi } from "@/api/patients/patients.api";
 import { payrollEmployeeBenefitsApi } from "@/api/payroll/payrollEmployeeBenefitsFile.api";
 import { payrollEmployeeRecordsApi } from "@/api/payroll/payrollEmployeeRecords.api";
@@ -20,6 +22,8 @@ export const store = configureStore({
     [payrollEmployeeBenefitsApi.reducerPath]:
       payrollEmployeeBenefitsApi.reducer,
     [medicineApi.reducerPath]: medicineApi.reducer,
+    [medicineCategoryApi.reducerPath]: medicineCategoryApi.reducer,
+    [medicinePurchasesApi.reducerPath]: medicinePurchasesApi.reducer,
   },
   middleware: (getDefaultMiddleWare) =>
     getDefaultMiddleWare({
@@ -33,5 +37,7 @@ export const store = configureStore({
       .concat(maternityProfileApi.middleware)
       .concat(payrollEmployeeRecordsApi.middleware)
       .concat(payrollEmployeeBenefitsApi.middleware)
-      .concat(medicineApi.middleware),
+      .concat(medicineApi.middleware)
+      .concat(medicineCategoryApi.middleware)
+      .concat(medicinePurchasesApi.middleware),
 });
