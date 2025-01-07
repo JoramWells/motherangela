@@ -87,7 +87,9 @@ const MedicinesStockPage = () => {
                 NEW
               </Button>
             </div>
-            <DataTable columns={medicinePurchaseColumns} data={data ?? []} />
+            <DataTable columns={medicinePurchaseColumns} data={data ?? []} 
+            total={total as number}
+            />
           </div>
         )}
       </div>
