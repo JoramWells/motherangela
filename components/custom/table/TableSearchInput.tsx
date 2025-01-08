@@ -1,22 +1,23 @@
- 
 import React, {
   type ReactNode,
   type Dispatch,
   type SetStateAction,
   type ChangeEvent,
-} from "react";
+} from 'react';
+// import { CSVLink } from "react-csv";
+
+import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
+// import { ChevronDownIcon } from "@radix-ui/react-icons";
+import {
+  ChevronDownIcon, FileDown, Search, X,
+} from 'lucide-react';
+import { type ColumnDef, type Table } from '@tanstack/react-table';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-} from "@/components/ui/dropdown-menu";
-// import { CSVLink } from "react-csv";
-
-import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
-// import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { ChevronDownIcon, FileDown, Search, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { type ColumnDef, type Table } from "@tanstack/react-table";
+} from '@/components/ui/dropdown-menu';
 
 interface TableSearchInputProps<TData, TValue> {
   columns: Array<ColumnDef<TData, TValue>>;
@@ -57,7 +58,7 @@ function TableSearchInput<TData, TValue>({
             <X
               size={16}
               className="text-slate-500 mr-2"
-              onClick={() => setSearch?.("")}
+              onClick={() => setSearch?.('')}
             />
           )}
         </div>
@@ -66,41 +67,41 @@ function TableSearchInput<TData, TValue>({
 
       <div className="flex flex-row space-x-4 items-center">
         {/* <CSVLink data={data as object[]}> */}
-          <Button
-            className="bg-slate-100 text-slate-600 hover:bg-slate-200
+        <Button
+          className="bg-slate-100 text-slate-600 hover:bg-slate-200
                 shadow-none font-bold
                 "
-            size={"sm"}
-          >
-            <FileDown size={15} className="mr-2" />
-            Export
-          </Button>
+          size="sm"
+        >
+          <FileDown size={15} className="mr-2" />
+          Export
+        </Button>
         {/* </CSVLink> */}
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="ml-auto shadow-none" size={"sm"}>
-              Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
+            <Button variant="ghost" className="ml-auto shadow-none" size="sm">
+              Columns
+              {' '}
+              <ChevronDownIcon className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             {table
               .getAllColumns()
               .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) => {
-                      column.toggleVisibility(!!value);
-                    }}
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
+              .map((column) => (
+                <DropdownMenuCheckboxItem
+                  key={column.id}
+                  className="capitalize"
+                  checked={column.getIsVisible()}
+                  onCheckedChange={(value) => {
+                    column.toggleVisibility(!!value);
+                  }}
+                >
+                  {column.id}
+                </DropdownMenuCheckboxItem>
+              ))}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

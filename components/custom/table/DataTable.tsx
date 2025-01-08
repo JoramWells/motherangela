@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import * as React from "react"
+import * as React from 'react';
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -12,10 +12,11 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table"
-import {  BookOpen } from "lucide-react"
+} from '@tanstack/react-table';
+import { BookOpen } from 'lucide-react';
 
-import { Button } from "@/components/ui/button"
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 import {
   Table,
@@ -24,9 +25,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import TableSearchInput from "./TableSearchInput"
+} from '@/components/ui/table';
+import TableSearchInput from './TableSearchInput';
 
 export interface DataTableInputProps<TData, TValue>{
   columns: Array<ColumnDef<TData, TValue>>
@@ -38,27 +38,21 @@ export interface DataTableInputProps<TData, TValue>{
   setSearch?: React.Dispatch<React.SetStateAction<string>>
 }
 
-
-
-
-
-
-
-export function DataTable<TData, TValue>({columns, data,
+export function DataTable<TData, TValue>({
+  columns, data,
   filter,
   total,
-isSearch=false,
-search,
-setSearch
+  isSearch = false,
+  search,
+  setSearch,
 
 }:DataTableInputProps<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([])
+  const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  )
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
+    [],
+  );
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
     data,
@@ -66,7 +60,7 @@ setSearch
     manualPagination: true,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
-    pageCount: total && Math.ceil(total/10),
+    pageCount: total && Math.ceil(total / 10),
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -79,40 +73,39 @@ setSearch
       columnVisibility,
       rowSelection,
     },
-  })
+  });
 
-    const pathname = usePathname();
-    const router = useRouter();
+  const pathname = usePathname();
+  const router = useRouter();
   const [pageNo, setPageNo] = React.useState(0);
 
   const pageParams = useSearchParams();
-  const page = pageParams.get("page");
+  const page = pageParams.get('page');
 
-    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
-      if(setSearch){
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (setSearch) {
       setSearch(value);
-      }
-      // debounceSearch && debounceSearch(value)
-    };
+    }
+    // debounceSearch && debounceSearch(value)
+  };
 
-    const updateQueryParams = React.useCallback(
-      (newStep: number) => {
-        const newPageParams = new URLSearchParams(pageParams);
-        newPageParams.set("page", newStep as unknown as string);
-        router.replace(`${pathname}?${newPageParams.toString()}`);
-      },
-      [pathname, router, pageParams]
-    );
-    React.useEffect(() => {
-      const { pageIndex } = table.getState().pagination;
-      if (page === null) {
-        updateQueryParams(1);
-      }
-      setPageNo(pageIndex + 1);
-      table.setPageIndex(Number(page) - 1);
-    }, [page, table, updateQueryParams]);
-
+  const updateQueryParams = React.useCallback(
+    (newStep: number) => {
+      const newPageParams = new URLSearchParams(pageParams);
+      newPageParams.set('page', newStep as unknown as string);
+      router.replace(`${pathname}?${newPageParams.toString()}`);
+    },
+    [pathname, router, pageParams],
+  );
+  React.useEffect(() => {
+    const { pageIndex } = table.getState().pagination;
+    if (page === null) {
+      updateQueryParams(1);
+    }
+    setPageNo(pageIndex + 1);
+    table.setPageIndex(Number(page) - 1);
+  }, [page, table, updateQueryParams]);
 
   return (
     <>
@@ -134,18 +127,16 @@ setSearch
           <TableHeader className="bg-zinc-50">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id} className="text-[12px]">
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id} className="text-[12px]">
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
@@ -154,13 +145,13 @@ setSearch
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
+                  data-state={row.getIsSelected() && 'selected'}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}
@@ -187,7 +178,12 @@ setSearch
         >
           <BookOpen size={14} />
           <p className="text-[12px]">
-            Page {table.getState().pagination.pageIndex + 1} of{" "}
+            Page
+            {' '}
+            {table.getState().pagination.pageIndex + 1}
+            {' '}
+            of
+            {' '}
             {table.getPageCount()}
           </p>
         </div>

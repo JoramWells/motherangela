@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useMemo } from 'react';
 
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import {
   Select,
   SelectContent,
@@ -8,9 +9,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useMemo } from "react";
+} from '@/components/ui/select';
 
 export interface DataItem {
   id: string;
@@ -29,9 +28,9 @@ export interface SelectProps {
   paramValue: string;
 }
 
-const SelectDropdownFilter = ({
-  label = "",
-  placeholder = "",
+function SelectDropdownFilter({
+  label = '',
+  placeholder = '',
   data = [],
   onChange,
   value,
@@ -39,12 +38,12 @@ const SelectDropdownFilter = ({
   name,
   defaultValue,
   paramValue,
-}: SelectProps) => {
+}: SelectProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const params = useMemo(
     () => new URLSearchParams(searchParams),
-    [searchParams]
+    [searchParams],
   );
 
   const pathname = usePathname();
@@ -86,6 +85,6 @@ const SelectDropdownFilter = ({
       </Select>
     </div>
   );
-};
+}
 
 export default SelectDropdownFilter;

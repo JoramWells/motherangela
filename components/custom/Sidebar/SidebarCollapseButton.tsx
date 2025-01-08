@@ -1,23 +1,25 @@
- 
- 
-"use client";
+/* eslint-disable max-len */
+/* eslint-disable import/prefer-default-export */
+
+'use client';
+
 // import "../../globals.css";
 // import Link from 'next/link'
-import React from "react";
-import { ChevronRight, ChevronDown } from "lucide-react";
-import { useMemo, useState } from "react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { type SideBarCollapseButtonProps } from "@/types";
-import { Button } from "@/components/ui/button";
-import { SidebarSubButton } from "./SidebarButton";
+import React from 'react';
+import { ChevronRight, ChevronDown } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { type SideBarCollapseButtonProps } from '@/types';
+import { Button } from '@/components/ui/button';
+import { SidebarSubButton } from './SidebarButton';
 
-export const SidebarCollapseButton = ({
-  label = "Dashboard",
+export function SidebarCollapseButton({
+  label = 'Dashboard',
   link,
   itemList,
   icon = <div />,
-}: SideBarCollapseButtonProps) => {
+}: SideBarCollapseButtonProps) {
   const [visible, setVisible] = useState(false);
   const pathname = usePathname();
   const isActive = useMemo(() => {
@@ -39,7 +41,7 @@ export const SidebarCollapseButton = ({
         onClick={onToggle}
         className={`flex items-center text-[12px]  pl-2 pr-4 justify-between text-[#F3FAFF]/[.8]  text-sm rounded-none w-full bg-transparent shadow-none
         overflow-y-auto hover:bg-sky-900 transition delay-150 ease-in-out hover:text-[#F3FAFF] ${
-          isActive && "bg-gradient-to-r from-sky-700 to-sky-950 text-white border-l-4 rounded-l-sm"
+          isActive && 'bg-gradient-to-r from-sky-700 to-sky-950 text-white border-l-4 rounded-l-sm'
         }
         `}
       >
@@ -49,10 +51,12 @@ export const SidebarCollapseButton = ({
           {link == null ? (
             <p
               className={`text-capitalize font-normal text-[12px] ${
-                isActive ? "text-sky-600" : "black"
+                isActive ? 'text-sky-600' : 'black'
               }`}
             >
-              {label} {isActive}
+              {label}
+              {' '}
+              {isActive}
             </p>
           ) : (
             <Link
@@ -66,16 +70,14 @@ export const SidebarCollapseButton = ({
 
         {/* ceck if item list is more tan 1 */}
         {itemList != null && itemList?.length > 0 && (
-          <>
-            {visible ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
-          </>
+          visible ? <ChevronDown size={16} /> : <ChevronRight size={16} />
         )}
       </Button>
 
       {itemList != null && itemList?.length > 0 && (
         <div
           className={`${
-            visible ? "inline" : "hidden"
+            visible ? 'inline' : 'hidden'
           } bg-gray-500 duration-100`}
         >
           {itemList?.map((item) => (
@@ -89,4 +91,4 @@ export const SidebarCollapseButton = ({
       )}
     </>
   );
-};
+}

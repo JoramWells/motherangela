@@ -1,13 +1,12 @@
-
-import React from 'react'
-import { pageNumber } from '@/utils/pageNumber'
-import { type Dispatch, type SetStateAction } from 'react'
-import SelectDropdownFilter, { DataItem } from '../forms/SelectDropdownFilter'
+import React from 'react';
+import { type Dispatch, type SetStateAction } from 'react';
+import { pageNumber } from '@/utils/pageNumber';
+import SelectDropdownFilter, { DataItem } from '../forms/SelectDropdownFilter';
 
 interface AppointmentFilterInputProps {
   insurance: string | null
   gender: string
-  total?: number | string
+  total: number
   pageSize: number
   setInsurance: Dispatch<SetStateAction<string>>
   setPageSize: Dispatch<SetStateAction<number>>
@@ -15,7 +14,7 @@ interface AppointmentFilterInputProps {
   insuranceOptions: DataItem[]
 }
 
-function AppointmentFilter ({
+function AppointmentFilter({
   insurance,
   setInsurance,
   pageSize,
@@ -23,7 +22,7 @@ function AppointmentFilter ({
   total,
   gender,
   setGender,
-  insuranceOptions
+  insuranceOptions,
 }: AppointmentFilterInputProps) {
   return (
     <div className="flex flex-row space-x-2 items-center">
@@ -42,7 +41,7 @@ function AppointmentFilter ({
         value={`${pageSize}`}
         data={Array.from(
           { length: pageNumber(total as number, 10) },
-          (_, index) => ({ id: `${index + 1}`, label: `${index + 1}` })
+          (_, index) => ({ id: `${index + 1}`, label: `${index + 1}` }),
         )}
         placeholder="Page"
       />
@@ -52,16 +51,16 @@ function AppointmentFilter ({
         onChange={setGender}
         value={gender}
         data={[{
-            id: 'male',
-            label: 'Male'
-        },{
-            id:'female',
-            label: 'Female'
+          id: 'male',
+          label: 'Male',
+        }, {
+          id: 'female',
+          label: 'Female',
         }]}
         placeholder="Gender"
       />
     </div>
-  )
+  );
 }
 
-export default AppointmentFilter
+export default AppointmentFilter;

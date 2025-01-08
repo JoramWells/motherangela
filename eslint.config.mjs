@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable import/no-extraneous-dependencies */
 import globals from 'globals';
 import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
@@ -31,7 +33,7 @@ export default [
       'linebreak-style': 0,
       'import/extensions': 0,
       'import/no-unresolved': 0,
-      'camelcase': 0
+      camelcase: 0,
     },
     settings: {
       'import/resolver': {

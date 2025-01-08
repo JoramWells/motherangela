@@ -1,9 +1,11 @@
-"use client";
+/* eslint-disable import/prefer-default-export */
 
-import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useMemo } from "react";
+'use client';
+
+import React, { useMemo } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
 // import "../../globals.css";
 
 interface SidebarSubButtonProps {
@@ -14,24 +16,22 @@ interface SidebarSubButtonProps {
   link: string;
 }
 
-export const SidebarSubButton = ({
+export function SidebarSubButton({
   //   icon,
   label,
   //   selected,
   //   onClick,
   link,
-}: SidebarSubButtonProps) => {
+}: SidebarSubButtonProps) {
   const pathname = usePathname();
-  const isActive = useMemo(() => {
-    return link === pathname;
-  }, [link, pathname]);
+  const isActive = useMemo(() => link === pathname, [link, pathname]);
   return (
     <div
       className={`flex h-10 items-center pl-4
     text-slate-500 text-md
     text-md ml-6 rounded-md
-    ${isActive && "bg-sky-50"}
-    ${isActive && "text-sky-500"}
+    ${isActive && 'bg-sky-50'}
+    ${isActive && 'text-sky-500'}
     `}
     >
       <Link href={link} className="text-[12px]">
@@ -39,4 +39,4 @@ export const SidebarSubButton = ({
       </Link>
     </div>
   );
-};
+}

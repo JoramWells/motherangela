@@ -1,5 +1,5 @@
-import React from "react";
-import { Slash } from "lucide-react";
+import React from 'react';
+import { Slash } from 'lucide-react';
 
 import {
   Breadcrumb,
@@ -8,14 +8,14 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from '@/components/ui/breadcrumb';
 
 export default function BreadcrumbNav() {
   return (
     <Breadcrumb
-    className="bg-white p-3 border-b border-slate-200 "
+      className="bg-white p-3 border-b border-slate-200 "
     >
-      <BreadcrumbList className="text-[12px]" >
+      <BreadcrumbList className="text-[12px]">
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Home</BreadcrumbLink>
         </BreadcrumbItem>

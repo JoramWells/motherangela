@@ -1,9 +1,10 @@
-"use client";
-import React from "react";
+'use client';
+
+import React from 'react';
 // import "../../globals.css";
 
-import { type ReactNode } from "react";
-import { SidebarCollapseButton } from "./SidebarCollapseButton";
+import { type ReactNode } from 'react';
+import { SidebarCollapseButton } from './SidebarCollapseButton';
 
 interface ItemListProps {
   id: string;
@@ -23,7 +24,7 @@ interface SidebarProps {
   dataList: SidebarListItemsProps[];
 }
 
-const SidebarListItemsComponent = ({ dataList }: SidebarProps) => {
+function SidebarListItemsComponent({ dataList }: SidebarProps) {
   return (
     <>
       {dataList.map((item) => (
@@ -37,7 +38,7 @@ const SidebarListItemsComponent = ({ dataList }: SidebarProps) => {
       ))}
     </>
   );
-};
+}
 
 export default SidebarListItemsComponent;
 
