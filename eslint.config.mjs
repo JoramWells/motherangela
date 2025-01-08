@@ -34,6 +34,7 @@ export default [
       'import/extensions': 0,
       'import/no-unresolved': 0,
       camelcase: 0,
+      'react/require-default-props': 0,
     },
     settings: {
       'import/resolver': {

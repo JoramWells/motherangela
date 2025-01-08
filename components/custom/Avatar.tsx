@@ -1,11 +1,11 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { generateRandomColors } from "@/utils/generateRandomColors";
-import React from "react";
 
-import { useMemo } from "react";
+import { useMemo } from 'react';
+import { generateRandomColors } from '@/utils/generateRandomColors';
 
-const Avatar = ({ name, h = 6, w = 6 }: {name: string, h?: number, w?: number}) => {
-  const fullName = name?.split(" ");
+function Avatar({ name, h = 6, w = 6 }: {name: string, h?: number, w?: number}) {
+  const fullName = name?.split(' ');
   const firstName = fullName ? fullName[0].charAt(0) : 'u';
   const secondName = fullName ? fullName[1]?.trim().charAt(0) : 'u';
   const randomColors = useMemo(() => generateRandomColors(), []);
@@ -22,6 +22,6 @@ const Avatar = ({ name, h = 6, w = 6 }: {name: string, h?: number, w?: number}) 
       {secondName}
     </div>
   );
-};
+}
 
 export default Avatar;

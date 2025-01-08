@@ -1,11 +1,14 @@
 /* eslint-disable import/prefer-default-export */
+
 'use client';
 
 // import { useSidebar } from "@/context/SidebarContext";
 // import { useSession } from "next-auth/react";
 import Image from 'next/image';
 // import { type UserInterface } from "otz-types";
-import { ReactNode, useCallback, useEffect, useState } from 'react';
+import {
+  ReactNode, useCallback, useEffect, useState,
+} from 'react';
 // import { UserProfile } from "../users/UserProfile";
 import { Loader2, Locate } from 'lucide-react';
 import { Button } from '@/components/ui/button';

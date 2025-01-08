@@ -5,7 +5,6 @@
 
 // import "../../globals.css";
 // import Link from 'next/link'
-import React from 'react';
 import { ChevronRight, ChevronDown } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { usePathname } from 'next/navigation';
