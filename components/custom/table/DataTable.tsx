@@ -13,15 +13,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import {  BookOpen, ChevronDown } from "lucide-react"
+import {  BookOpen } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+
 import {
   Table,
   TableBody,
@@ -31,11 +26,16 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import TableSearchInput from "./TableSearchInput"
 
 export interface DataTableInputProps<TData, TValue>{
   columns: Array<ColumnDef<TData, TValue>>
   data: TData[]
+  filter?: React.ReactNode
   total?:number
+  isSearch?: boolean
+  search?:string,
+  setSearch?: React.Dispatch<React.SetStateAction<string>>
 }
 
 
@@ -44,7 +44,14 @@ export interface DataTableInputProps<TData, TValue>{
 
 
 
-export function DataTable<TData, TValue>({columns, data, total}:DataTableInputProps<TData, TValue>) {
+export function DataTable<TData, TValue>({columns, data,
+  filter,
+  total,
+isSearch=false,
+search,
+setSearch
+
+}:DataTableInputProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -81,6 +88,14 @@ export function DataTable<TData, TValue>({columns, data, total}:DataTableInputPr
   const pageParams = useSearchParams();
   const page = pageParams.get("page");
 
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      if(setSearch){
+      setSearch(value);
+      }
+      // debounceSearch && debounceSearch(value)
+    };
+
     const updateQueryParams = React.useCallback(
       (newStep: number) => {
         const newPageParams = new URLSearchParams(pageParams);
@@ -102,40 +117,17 @@ export function DataTable<TData, TValue>({columns, data, total}:DataTableInputPr
   return (
     <>
       <div className="flex items-center p-2">
-        {/* <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        /> */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {isSearch && (
+          <TableSearchInput
+            columns={columns}
+            data={data}
+            handleSearch={handleSearch}
+            setSearch={setSearch}
+            table={table}
+            filter={filter}
+            search={search}
+          />
+        )}
       </div>
       <div className="rounded-md">
         <Table>

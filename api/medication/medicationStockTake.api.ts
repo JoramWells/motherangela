@@ -32,6 +32,9 @@ export const medicineStockTakeApi = createApi({
     getMedicineStockTake: builder.query({
       query: (id) => `detail/${id}`,
     }),
+    getMedicineStockTakeSeries: builder.query({
+      query: () => `stock-take-series`,
+    }),
     updateMedicineStockTake: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `update${id}`,
@@ -53,5 +56,5 @@ export const medicineStockTakeApi = createApi({
 export const {
   useGetAllMedicineStockTakeQuery, useAddMedicineStockTakeMutation,
   useGetMedicineStockTakeQuery,
-  useUpdateMedicineStockTakeMutation, useDeleteMedicineStockTakeMutation,
+  useUpdateMedicineStockTakeMutation, useDeleteMedicineStockTakeMutation, useGetMedicineStockTakeSeriesQuery
 } = medicineStockTakeApi;

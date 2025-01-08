@@ -6,8 +6,21 @@ export const appointmentApi = createApi({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/appointment-service/appointment`,
   }),
   endpoints: (builder) => ({
-    getAppointments: builder.query<AppointmentInterface[], void>({
-      query: () => "fetchAll",
+    getAppointments: builder.query<
+      PaginatedResponse<AppointmentInterface>,
+      { page: number; pageSize: number; searchQuery: string }
+    >({
+      query: (params) => {
+        if (params) {
+          const { page, pageSize, searchQuery } = params;
+          let queryString = "";
+          queryString += `page=${page}`;
+          queryString += `&pageSize=${pageSize}`;
+          queryString += `&searchQuery=${searchQuery}`;
+          return `/fetchAll/?${queryString}`;
+        }
+        return "fetchAll";
+      },
     }),
     addAppointment: builder.mutation({
       query: (newWard) => ({

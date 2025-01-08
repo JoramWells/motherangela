@@ -1,4 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
+import Avatar from "@/components/custom/Avatar";
 import { ColumnDef } from "@tanstack/react-table";
 import moment from 'moment'
 import Link from "next/link";
@@ -29,16 +30,21 @@ export const columns: ColumnDef<AppointmentInterface>[] = [
     accessorKey: "patient.first_name",
     header: "Name",
     cell: ({ row }) => (
-      <p className="capitalize">
-        {row.original.patient.first_name} {row.original.patient.middle_name}
-      </p>
+      <div className="flex-row flex space-x-2 items-center">
+        <Avatar
+          name={`${row.original.patient?.first_name} ${row.original.patient?.middle_name}`}
+        />
+        <p className="capitalize">
+          {row.original.patient.first_name} {row.original.patient.middle_name}
+        </p>
+      </div>
     ),
   },
   {
     accessorKey: "appointment_date",
     header: "Date",
     cell: ({ row }) => (
-      <div className="text-[12px] text-slate-500" >
+      <div className="text-[12px] text-slate-500">
         <p>{moment(row.original?.appointment_date).format("ll")}</p>
         <p>{row.original.appointment_time}</p>
       </div>
@@ -48,24 +54,29 @@ export const columns: ColumnDef<AppointmentInterface>[] = [
     accessorKey: "charges",
     header: "Charges",
     cell: ({ row }) => (
-      <div className="text-[12px] text-slate-500 ">{row.original?.charges ?? 0}</div>
+      <div className="text-[12px] text-slate-500 ">
+        {row.original?.charges ?? 0}
+      </div>
     ),
   },
   {
-    accessorKey:'insurance_detail.insurance_name',
-    header:'Insurance',
-    cell: ({row})=>(
-      <p
-      className="text-[12px] text-slate-500"
-      >{row.original.insurance_detail?.insurance_name ?? 'N/A'}</p>
-    )
+    accessorKey: "insurance_detail.insurance_name",
+    header: "Insurance",
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {row.original.insurance_detail?.insurance_name ?? "N/A"}
+      </p>
+    ),
   },
   {
-    accessorKey:'action',
-    cell:({row})=>(
+    accessorKey: "action",
+    cell: ({ row }) => (
       <Link
-      className="text-[12px]"
-      href={`/visits/${row.original.appointment_id}`}>View</Link>
-    )
-  }
+        className="text-[12px]"
+        href={`/visits/${row.original.appointment_id}`}
+      >
+        View
+      </Link>
+    ),
+  },
 ];
