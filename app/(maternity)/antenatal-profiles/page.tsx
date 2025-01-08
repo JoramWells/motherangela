@@ -1,14 +1,13 @@
-"use client";
+'use client';
 
-import { DataTable } from "@/components/custom/table/DataTable";
-import React from "react";
-import BreadcrumbNav from "@/components/custom/nav/BreadcrumbNav";
-import { maternityAntenatalProfileColumns } from "../column";
-import { useGetAllMaternityAntenatalProfileQuery } from "@/api/maternity/maternity-antenantal-profile.api";
+import React from 'react';
+import { DataTable } from '@/components/custom/table/DataTable';
+import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
+import { maternityAntenatalProfileColumns } from '../column';
+import { useGetAllMaternityAntenatalProfileQuery } from '@/api/maternity/maternity-antenantal-profile.api';
 
-const Patients = () => {
+function Patients() {
   const { data: profileData } = useGetAllMaternityAntenatalProfileQuery();
-  console.log(profileData)
   return (
     <>
       <BreadcrumbNav />
@@ -24,6 +23,6 @@ const Patients = () => {
       </div>
     </>
   );
-};
+}
 
 export default Patients;

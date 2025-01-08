@@ -1,7 +1,6 @@
-/* eslint-disable react/react-in-jsx-scope */
-import { ColumnDef } from "@tanstack/react-table";
-import moment from "moment";
-import Link from "next/link";
+import { ColumnDef } from '@tanstack/react-table';
+import moment from 'moment';
+import Link from 'next/link';
 
 export const medicineCategoryColumns: ColumnDef<MedicineCategoryInterface>[] = [
   // {
@@ -27,10 +26,10 @@ export const medicineCategoryColumns: ColumnDef<MedicineCategoryInterface>[] = [
   //   enableHiding: false,
   // },
   {
-    accessorKey: "category_name",
-    header: "Name",
+    accessorKey: 'category_name',
+    header: 'Name',
     cell: ({ row }) => {
-      const category_name = row.original.category_name;
+      const { category_name } = row.original;
       return (
         <p className="capitalize text-[12px]">
           {category_name.length > 25
@@ -64,7 +63,7 @@ export const medicineCategoryColumns: ColumnDef<MedicineCategoryInterface>[] = [
   // },
 ];
 
-// 
+//
 export const medicinePurchaseColumns: ColumnDef<MedicinePurchaseInterface>[] = [
   // {
   //   id: "select",
@@ -89,8 +88,8 @@ export const medicinePurchaseColumns: ColumnDef<MedicinePurchaseInterface>[] = [
   //   enableHiding: false,
   // },
   {
-    accessorKey: "medication.medication_name",
-    header: "Name",
+    accessorKey: 'medication.medication_name',
+    header: 'Name',
     cell: ({ row }) => (
       <div className="flex-row flex space-x-2 items-center">
         <p className="capitalize text-[12px]">
@@ -100,8 +99,8 @@ export const medicinePurchaseColumns: ColumnDef<MedicinePurchaseInterface>[] = [
     ),
   },
   {
-    accessorKey: "user.full_name",
-    header: "Ordered By",
+    accessorKey: 'user.full_name',
+    header: 'Ordered By',
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500">
         <p>{row.original.user.full_name}</p>
@@ -109,63 +108,57 @@ export const medicinePurchaseColumns: ColumnDef<MedicinePurchaseInterface>[] = [
     ),
   },
   {
-    accessorKey: "hospital_store.hospital_store_description",
-    header: "Store",
-    cell: ({ row }) => {
-      return (
-        <p className="text-[12px] text-slate-500">
-          {row.original.hospital_store.hospital_store_description}
-        </p>
-      );
-    },
+    accessorKey: 'hospital_store.hospital_store_description',
+    header: 'Store',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {row.original.hospital_store.hospital_store_description}
+      </p>
+    ),
   },
   {
     accessorKey:
-      "medication_purchase_type.medication_purchase_type_description",
-    header: "Type",
-    cell: ({ row }) => {
-      return (
-        <p className="text-[12px] text-slate-500">
-          {
+      'medication_purchase_type.medication_purchase_type_description',
+    header: 'Type',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {
             row.original.medication_purchase_type
               .medication_purchase_type_description
           }
-        </p>
-      );
-    },
+      </p>
+    ),
   },
   {
-    accessorKey: "supplier",
-    header: "Supplier",
-    cell: ({ row }) => {
-      return (
-        <p className="text-[12px] text-slate-500">
-          {row.original.supplier?.supplier_name}
-        </p>
-      );
-    },
+    accessorKey: 'supplier',
+    header: 'Supplier',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {row.original.supplier?.supplier_name}
+      </p>
+    ),
   },
   {
-    accessorKey: "date_of_receipt",
-    header: "Receipt Date",
+    accessorKey: 'date_of_receipt',
+    header: 'Receipt Date',
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500 ">
-        {moment(row.original?.date_of_receipt).format("ll")}
+        {moment(row.original?.date_of_receipt).format('ll')}
       </div>
     ),
   },
 
   {
-    accessorKey: "quantity",
-    header: "Quantity",
+    accessorKey: 'quantity',
+    header: 'Quantity',
     cell: ({ row }) => (
       <p className="text-[12px] text-slate-500">{row.original.quantity}</p>
     ),
   },
 
   {
-    accessorKey: "action",
-    header: "Action",
+    accessorKey: 'action',
+    header: 'Action',
     cell: ({ row }) => (
       <Link
         className="text-[12px]"
@@ -176,7 +169,6 @@ export const medicinePurchaseColumns: ColumnDef<MedicinePurchaseInterface>[] = [
     ),
   },
 ];
-
 
 export const medicineStockTakeColumns: ColumnDef<MedicationStockTakeInterface>[] = [
   // {
@@ -202,20 +194,20 @@ export const medicineStockTakeColumns: ColumnDef<MedicationStockTakeInterface>[]
   //   enableHiding: false,
   // },
   {
-    accessorKey: "medication_name",
-    header: "Name",
+    accessorKey: 'medication_name',
+    header: 'Name',
     cell: ({ row }) => {
-      const medication_name = row.original.medication_name
+      const { medication_name } = row.original;
       return (
-      <div className="flex-row flex space-x-2 items-center">
-        <p className="capitalize text-[12px]">{medication_name.length > 25 ? `${medication_name.substring(0,25)}...`: medication_name}</p>
-      </div>
-    )
-    }
+        <div className="flex-row flex space-x-2 items-center">
+          <p className="capitalize text-[12px]">{medication_name.length > 25 ? `${medication_name.substring(0, 25)}...` : medication_name}</p>
+        </div>
+      );
+    },
   },
   {
-    accessorKey: "medication_packaging_type_description",
-    header: "Package Type",
+    accessorKey: 'medication_packaging_type_description',
+    header: 'Package Type',
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500">
         <p>{row.original.medication_packaging_type_description}</p>
@@ -235,41 +227,37 @@ export const medicineStockTakeColumns: ColumnDef<MedicationStockTakeInterface>[]
   // },
 
   {
-    accessorKey: "unit_price",
-    header: "Price",
-    cell: ({ row }) => {
-      return (
-        <p className="text-[12px] text-slate-500">{row.original.unit_price}</p>
-      );
-    },
+    accessorKey: 'unit_price',
+    header: 'Price',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">{row.original.unit_price}</p>
+    ),
   },
   {
-    accessorKey: "date_of_stock_take",
-    header: "Stock Take Date",
+    accessorKey: 'date_of_stock_take',
+    header: 'Stock Take Date',
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500 ">
-        {moment(row.original?.date_of_stock_take).format("ll")}
+        {moment(row.original?.date_of_stock_take).format('ll')}
       </div>
     ),
   },
   {
     accessorKey:
-      "medication_purchase_type.medication_purchase_type_description",
-    header: "Initial Qty",
-    cell: ({ row }) => {
-      return (
-        <p className="text-[12px] text-slate-500">
-          {
+      'medication_purchase_type.medication_purchase_type_description',
+    header: 'Initial Qty',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {
             row.original.correct_quantity
-              
+
           }
-        </p>
-      );
-    },
+      </p>
+    ),
   },
   {
-    accessorKey: "current_quantity",
-    header: "Quantity",
+    accessorKey: 'current_quantity',
+    header: 'Quantity',
     cell: ({ row }) => (
       <p className="text-[12px] text-slate-500">
         {row.original.current_quantity}
@@ -278,8 +266,8 @@ export const medicineStockTakeColumns: ColumnDef<MedicationStockTakeInterface>[]
   },
 
   {
-    accessorKey: "action",
-    header: "Action",
+    accessorKey: 'action',
+    header: 'Action',
     cell: ({ row }) => (
       <Link
         className="text-[12px]"

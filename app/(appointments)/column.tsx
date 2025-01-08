@@ -1,8 +1,9 @@
-/* eslint-disable react/react-in-jsx-scope */
-import Avatar from "@/components/custom/Avatar";
-import { ColumnDef } from "@tanstack/react-table";
-import moment from 'moment'
-import Link from "next/link";
+/* eslint-disable import/prefer-default-export */
+import { ColumnDef } from '@tanstack/react-table';
+import moment from 'moment';
+import Link from 'next/link';
+import Avatar from '@/components/custom/Avatar';
+
 export const columns: ColumnDef<AppointmentInterface>[] = [
   // {
   //   id: "select",
@@ -27,32 +28,34 @@ export const columns: ColumnDef<AppointmentInterface>[] = [
   //   enableHiding: false,
   // },
   {
-    accessorKey: "patient.first_name",
-    header: "Name",
+    accessorKey: 'patient.first_name',
+    header: 'Name',
     cell: ({ row }) => (
       <div className="flex-row flex space-x-2 items-center">
         <Avatar
           name={`${row.original.patient?.first_name} ${row.original.patient?.middle_name}`}
         />
         <p className="capitalize text-[12px]">
-          {row.original.patient.first_name} {row.original.patient.middle_name}
+          {row.original.patient.first_name}
+          {' '}
+          {row.original.patient.middle_name}
         </p>
       </div>
     ),
   },
   {
-    accessorKey: "appointment_date",
-    header: "Date",
+    accessorKey: 'appointment_date',
+    header: 'Date',
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500">
-        <p>{moment(row.original?.appointment_date).format("ll")}</p>
+        <p>{moment(row.original?.appointment_date).format('ll')}</p>
         <p>{row.original.appointment_time}</p>
       </div>
     ),
   },
   {
-    accessorKey: "charges",
-    header: "Charges",
+    accessorKey: 'charges',
+    header: 'Charges',
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500 ">
         {row.original?.charges ?? 0}
@@ -60,17 +63,17 @@ export const columns: ColumnDef<AppointmentInterface>[] = [
     ),
   },
   {
-    accessorKey: "insurance_detail.insurance_name",
-    header: "Insurance",
+    accessorKey: 'insurance_detail.insurance_name',
+    header: 'Insurance',
     cell: ({ row }) => (
       <p className="text-[12px] text-slate-500">
-        {row.original.insurance_detail?.insurance_name ?? "N/A"}
+        {row.original.insurance_detail?.insurance_name ?? 'N/A'}
       </p>
     ),
   },
   {
-    accessorKey: "action",
-    header:'Action',
+    accessorKey: 'action',
+    header: 'Action',
     cell: ({ row }) => (
       <Link
         className="text-[12px]"

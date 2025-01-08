@@ -6,7 +6,7 @@ export const insuranceApi = createApi({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/root-server/insurance`,
   }),
   endpoints: (builder) => ({
-    getAllInsurances: builder.query({
+    getAllInsurances: builder.query<InsuranceInterface[], void>({
       query: () => "fetchAll",
     }),
     addInsurance: builder.mutation({

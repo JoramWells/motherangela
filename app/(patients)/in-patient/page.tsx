@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { DataTable } from "@/components/custom/table/DataTable";
-import React from "react";
-import BreadcrumbNav from "@/components/custom/nav/BreadcrumbNav";
-import { admissionColumn } from "../column";
-import { useGetAllAdmissionsQuery } from "@/api/admission/admissions.api";
+import React from 'react';
+import { DataTable } from '@/components/custom/table/DataTable';
+import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
+import { admissionColumn } from '../column';
+import { useGetAllAdmissionsQuery } from '@/api/admission/admissions.api';
 
-const Admission = () => {
+function Admission() {
   const { data: patientsData } = useGetAllAdmissionsQuery();
   console.log(patientsData);
   return (
@@ -24,6 +24,6 @@ const Admission = () => {
       </div>
     </>
   );
-};
+}
 
 export default Admission;

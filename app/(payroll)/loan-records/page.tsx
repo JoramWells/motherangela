@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { DataTable } from "@/components/custom/table/DataTable";
-import React from "react";
-import BreadcrumbNav from "@/components/custom/nav/BreadcrumbNav";
-import { useGetAllPayrollEmployeeRecordsQuery } from "@/api/payroll/payrollEmployeeRecords.api";
-import { employeeRecordsColumn } from "../column";
+import React from 'react';
+import { DataTable } from '@/components/custom/table/DataTable';
+import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
+import { useGetAllPayrollEmployeeRecordsQuery } from '@/api/payroll/payrollEmployeeRecords.api';
+import { employeeRecordsColumn } from '../column';
 
-const Patients = () => {
+function Patients() {
   const { data: profileData } = useGetAllPayrollEmployeeRecordsQuery();
   return (
     <>
@@ -23,6 +23,6 @@ const Patients = () => {
       </div>
     </>
   );
-};
+}
 
 export default Patients;

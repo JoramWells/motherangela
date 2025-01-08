@@ -1,14 +1,13 @@
-'use client'
+'use client';
 
+import React, { use } from 'react';
 import { useGetMaternityProfileQuery } from '@/api/maternity/maternity.api';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { Collapsible } from '@/components/custom/nav/Collapsible';
-import React, { use } from 'react'
 
-const MaternityDetail = ({params}:{params: any}) => {
-    const {id} = use(params)
-    const {data} = useGetMaternityProfileQuery(id)
-    console.log(data)
+function MaternityDetail({ params }:{params: any}) {
+  const { id } = use(params);
+  const { data } = useGetMaternityProfileQuery(id);
   return (
     <div>
       <BreadcrumbNav />
@@ -32,8 +31,6 @@ const MaternityDetail = ({params}:{params: any}) => {
             <p>Medical File</p>
           </div>
 
-
-
           <hr />
         </div> */}
         <div className="w-1/2 p-2 bg-white mt-2">
@@ -42,7 +39,7 @@ const MaternityDetail = ({params}:{params: any}) => {
               <div className="flex flex-row p-2 justify-between items-center text-[12px]">
                 <p className="text-zinc-500">Blood Transfusion</p>
                 <p className="font-semibold text-zinc-700">
-                  {data?.blood_transfusion ?? "No Transfusion"}
+                  {data?.blood_transfusion ?? 'No Transfusion'}
                 </p>
               </div>
 
@@ -53,7 +50,7 @@ const MaternityDetail = ({params}:{params: any}) => {
               <div className="flex flex-row p-2 justify-between items-center text-[12px]">
                 <p className="text-zinc-500">Diabetes</p>
                 <p className="font-semibold text-zinc-700">
-                  {data?.diabetes ?? "No Diabetes"}
+                  {data?.diabetes ?? 'No Diabetes'}
                 </p>
               </div>
 
@@ -63,7 +60,7 @@ const MaternityDetail = ({params}:{params: any}) => {
               <div className="flex flex-row p-2 justify-between items-center text-[12px]">
                 <p className="text-zinc-500">Drug Allergies</p>
                 <p className="font-semibold text-zinc-700">
-                  {data?.drug_allergies ?? "No Allergies"}
+                  {data?.drug_allergies ?? 'No Allergies'}
                 </p>
               </div>
 
@@ -111,4 +108,4 @@ const MaternityDetail = ({params}:{params: any}) => {
   );
 }
 
-export default MaternityDetail
+export default MaternityDetail;

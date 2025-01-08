@@ -6,7 +6,6 @@ declare interface MedicineCategory{
     category_name: string
 }
 
-
 declare interface MedicinePackageTypeInterface{
     package_description: string
 }

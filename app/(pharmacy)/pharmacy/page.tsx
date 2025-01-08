@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-const PharmacyPage = () => {
+function PharmacyPage() {
   return (
     <div>PharmacyPage</div>
-  )
+  );
 }
 
-export default PharmacyPage
+export default PharmacyPage;

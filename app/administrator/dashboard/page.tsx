@@ -1,14 +1,14 @@
-'use client'
+'use client';
 
+import React from 'react';
 import { useGetMedicineStockTakeSeriesQuery } from '@/api/medication/medicationStockTake.api';
-import React from 'react'
 
-const DashboardPage = () => {
-    const {data} = useGetMedicineStockTakeSeriesQuery();
-    console.log(data, 'koi')
+function DashboardPage() {
+  const { data } = useGetMedicineStockTakeSeriesQuery();
+  console.log(data, 'koi');
   return (
     <div>DashboardPage</div>
-  )
+  );
 }
 
-export default DashboardPage
+export default DashboardPage;
