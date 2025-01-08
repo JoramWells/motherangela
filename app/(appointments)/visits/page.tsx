@@ -17,7 +17,7 @@ function Patients() {
   const page = searchParams.get('page');
 
   const { data: appointmentData } = useGetAppointmentsQuery({
-    page: Number(page) ?? 1,
+    page: Number(page),
     pageSize: 10,
     searchQuery: search,
   });
@@ -30,10 +30,15 @@ function Patients() {
   const [insurance, setInsurance] = useState('');
   const [pageSize, setPageSize] = useState(1);
 
-  const { data: insuranceData } = useGetAllInsurancesQuery();
-  console.log(insuranceData, 'insData');
+  const { data: insuranceData } = useGetAllInsurancesQuery({
+    page: 1,
+    pageSize: 100,
+    searchQuery: '',
+  });
 
-  const insuranceOptions = useCallback(() => insuranceData?.map((insurance) => ({
+  const { data: processedInsData } = usePreprocessData(insuranceData);
+
+  const insuranceOptions = useCallback(() => processedInsData?.map((insurance) => ({
     id: insurance.insurance_name,
     label: insurance.insurance_name,
   })), [insuranceData])();

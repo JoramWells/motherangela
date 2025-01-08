@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const appointmentApi = createApi({
-  reducerPath: "appointmentsApi",
+  reducerPath: 'appointmentsApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/appointment-service/appointment`,
   }),
@@ -13,19 +13,19 @@ export const appointmentApi = createApi({
       query: (params) => {
         if (params) {
           const { page, pageSize, searchQuery } = params;
-          let queryString = "";
+          let queryString = '';
           queryString += `page=${page}`;
           queryString += `&pageSize=${pageSize}`;
           queryString += `&searchQuery=${searchQuery}`;
           return `/fetchAll/?${queryString}`;
         }
-        return "fetchAll";
+        return 'fetchAll';
       },
     }),
     addAppointment: builder.mutation({
       query: (newWard) => ({
-        url: "add",
-        method: "POST",
+        url: 'add',
+        method: 'POST',
         body: newWard,
       }),
     }),
@@ -38,7 +38,7 @@ export const appointmentApi = createApi({
     updateAppointment: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `edit/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: patch,
       }),
     }),
@@ -46,7 +46,7 @@ export const appointmentApi = createApi({
       query(id) {
         return {
           url: `delete/${id}`,
-          method: "DELETE",
+          method: 'DELETE',
         };
       },
     }),

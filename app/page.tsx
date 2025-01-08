@@ -9,6 +9,7 @@ export default function Home() {
         {[
           { id: useId(), link: '/administrator/pharmacy', label: 'Administrator' },
           { id: useId(), link: '/appointments', label: 'Appointments' },
+          { id: useId(), link: '/insurances', label: 'Insurances' },
           { id: useId(), link: '/maternity', label: 'Maternity' },
           { id: useId(), link: '/patients', label: 'Patients' },
           { id: useId(), link: '/payroll', label: 'Payroll' },

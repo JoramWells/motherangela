@@ -1,18 +1,31 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const insuranceApi = createApi({
-  reducerPath: "insuranceApi",
+  reducerPath: 'insuranceApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/root-server/insurance`,
   }),
   endpoints: (builder) => ({
-    getAllInsurances: builder.query<InsuranceInterface[], void>({
-      query: () => "fetchAll",
+    getAllInsurances: builder.query<PaginatedResponse<InsuranceInterface>,
+      { page: number; pageSize: number; searchQuery: string }
+
+    >({
+      query: (params) => {
+        if (params) {
+          const { page, pageSize, searchQuery } = params;
+          let queryString = '';
+          queryString += `page=${page}`;
+          queryString += `&pageSize=${pageSize}`;
+          queryString += `&searchQuery=${searchQuery}`;
+          return `/fetchAll/?${queryString}`;
+        }
+        return 'fetchAll';
+      },
     }),
     addInsurance: builder.mutation({
       query: (newUser) => ({
-        url: "add",
-        method: "POST",
+        url: 'add',
+        method: 'POST',
         body: newUser,
       }),
     }),
@@ -22,7 +35,7 @@ export const insuranceApi = createApi({
     updateInsurance: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `edit/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: patch,
       }),
     }),
@@ -30,7 +43,7 @@ export const insuranceApi = createApi({
       query(id) {
         return {
           url: `delete/${id}`,
-          method: "DELETE",
+          method: 'DELETE',
         };
       },
     }),
