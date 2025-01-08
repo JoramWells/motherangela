@@ -27,9 +27,9 @@ function AppointmentFilter({
   return (
     <div className="flex flex-row space-x-2 items-center">
       <SelectDropdownFilter
-        label="Age (years)"
+        label="Insurance"
         onChange={setInsurance}
-        paramValue="tab"
+        paramValue="insurance"
         value={insurance as string}
         data={insuranceOptions}
         placeholder="Insurance"
