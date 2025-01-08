@@ -9,6 +9,7 @@ import { useGetAppointmentsQuery } from "@/api/appointments/appointments.api";
 import { useSearchParams } from "next/navigation";
 import useSearch from "@/hooks/useSearch";
 import usePreprocessData from "@/hooks/usePreprocessData";
+import AppointmentFilter from "@/components/custom/filters/AppointementFilter";
 
 const Patients = () => {
     const [search, setSearch] = useState('')
@@ -25,6 +26,10 @@ const Patients = () => {
 
   const {data, total} = usePreprocessData(appointmentData)
 
+const [gender, setGender] = useState('male')
+  const [pageSize, setPageSize] = useState(1);
+
+
   return (
     <>
       <BreadcrumbNav />
@@ -40,6 +45,15 @@ const Patients = () => {
           isSearch={true}
           search={search}
           setSearch={setSearch}
+          filter={<AppointmentFilter
+            age={gender}
+            gender={gender}
+            pageSize={pageSize}
+            setAge={setGender}
+            setGender={setGender}
+            setPageSize={setPageSize}
+            total={total}
+            />}
           />
         </div>
       </div>

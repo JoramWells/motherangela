@@ -34,7 +34,7 @@ export const columns: ColumnDef<AppointmentInterface>[] = [
         <Avatar
           name={`${row.original.patient?.first_name} ${row.original.patient?.middle_name}`}
         />
-        <p className="capitalize">
+        <p className="capitalize text-[12px]">
           {row.original.patient.first_name} {row.original.patient.middle_name}
         </p>
       </div>
@@ -70,6 +70,7 @@ export const columns: ColumnDef<AppointmentInterface>[] = [
   },
   {
     accessorKey: "action",
+    header:'Action',
     cell: ({ row }) => (
       <Link
         className="text-[12px]"
