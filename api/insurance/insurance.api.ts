@@ -1,19 +1,18 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const insuranceApi = createApi({
-  reducerPath: 'insuranceApi',
+  reducerPath: "insuranceApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_API_URL}/api/root-server/insurance`,
-
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/root-server/insurance`,
   }),
   endpoints: (builder) => ({
-    getInsurances: builder.query({
-      query: () => 'fetchAll',
+    getAllInsurances: builder.query({
+      query: () => "fetchAll",
     }),
     addInsurance: builder.mutation({
       query: (newUser) => ({
-        url: 'add',
-        method: 'POST',
+        url: "add",
+        method: "POST",
         body: newUser,
       }),
     }),
@@ -23,7 +22,7 @@ export const insuranceApi = createApi({
     updateInsurance: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `edit/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body: patch,
       }),
     }),
@@ -31,7 +30,7 @@ export const insuranceApi = createApi({
       query(id) {
         return {
           url: `delete/${id}`,
-          method: 'DELETE',
+          method: "DELETE",
         };
       },
     }),
@@ -39,6 +38,6 @@ export const insuranceApi = createApi({
 });
 
 export const {
-  useGetInsurancesQuery, useUpdateInsuranceMutation,
+  useGetAllInsurancesQuery, useUpdateInsuranceMutation,
   useDeleteInsuranceMutation, useAddInsuranceMutation, useGetInsuranceQuery,
 } = insuranceApi;

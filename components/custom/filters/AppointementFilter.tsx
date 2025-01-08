@@ -2,57 +2,38 @@
 import React from 'react'
 import { pageNumber } from '@/utils/pageNumber'
 import { type Dispatch, type SetStateAction } from 'react'
-import SelectDropdownFilter from '../forms/SelectDropdownFilter'
+import SelectDropdownFilter, { DataItem } from '../forms/SelectDropdownFilter'
 
 interface AppointmentFilterInputProps {
-  age: string | null
+  insurance: string | null
   gender: string
   total?: number | string
   pageSize: number
-  setAge: Dispatch<SetStateAction<string | null>>
+  setInsurance: Dispatch<SetStateAction<string>>
   setPageSize: Dispatch<SetStateAction<number>>
   setGender: Dispatch<SetStateAction<string>>
+  insuranceOptions: DataItem[]
 }
 
 function AppointmentFilter ({
-  age,
-  setAge,
+  insurance,
+  setInsurance,
   pageSize,
   setPageSize,
   total,
   gender,
   setGender,
+  insuranceOptions
 }: AppointmentFilterInputProps) {
   return (
     <div className="flex flex-row space-x-2 items-center">
       <SelectDropdownFilter
         label="Age (years)"
-        onChange={setAge}
+        onChange={setInsurance}
         paramValue="tab"
-        value={age as string}
-        data={[
-          {
-            id: 'All',
-            label: 'All'
-          },
-          {
-            id: '0-9 years',
-            label: '01-09'
-          },
-          {
-            id: '10-14 years',
-            label: '10-14'
-          },
-          {
-            id: '15-20 years',
-            label: '15-19'
-          },
-          {
-            id: '20 years',
-            label: '20-24'
-          }
-        ]}
-        placeholder="Age"
+        value={insurance as string}
+        data={insuranceOptions}
+        placeholder="Insurance"
       />
       <SelectDropdownFilter
         label={`Page No :- ${pageNumber(total as number, 10)}`}

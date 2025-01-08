@@ -1,5 +1,6 @@
 import { admissionApi } from "@/api/admission/admissions.api";
 import { appointmentApi } from "@/api/appointments/appointments.api";
+import { insuranceApi } from "@/api/insurance/insurance.api";
 import { maternityAntenatalProfileApi } from "@/api/maternity/maternity-antenantal-profile.api";
 import { maternityProfileApi } from "@/api/maternity/maternity.api";
 import { medicineStockTakeApi } from "@/api/medication/medicationStockTake.api";
@@ -26,6 +27,7 @@ export const store = configureStore({
     [medicineCategoryApi.reducerPath]: medicineCategoryApi.reducer,
     [medicinePurchasesApi.reducerPath]: medicinePurchasesApi.reducer,
     [medicineStockTakeApi.reducerPath]: medicineStockTakeApi.reducer,
+    [insuranceApi.reducerPath]: insuranceApi.reducer,
   },
   middleware: (getDefaultMiddleWare) =>
     getDefaultMiddleWare({
@@ -42,5 +44,6 @@ export const store = configureStore({
       .concat(medicineApi.middleware)
       .concat(medicineCategoryApi.middleware)
       .concat(medicinePurchasesApi.middleware)
-      .concat(medicineStockTakeApi.middleware),
+      .concat(medicineStockTakeApi.middleware)
+      .concat(insuranceApi.middleware),
 });

@@ -2,7 +2,7 @@
 "use client";
 
 import { DataTable } from "@/components/custom/table/DataTable";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import BreadcrumbNav from "@/components/custom/nav/BreadcrumbNav";
 import { columns } from "../column";
 import { useGetAppointmentsQuery } from "@/api/appointments/appointments.api";
@@ -10,6 +10,7 @@ import { useSearchParams } from "next/navigation";
 import useSearch from "@/hooks/useSearch";
 import usePreprocessData from "@/hooks/usePreprocessData";
 import AppointmentFilter from "@/components/custom/filters/AppointementFilter";
+import { useGetAllInsurancesQuery } from "@/api/insurance/insurance.api";
 
 const Patients = () => {
     const [search, setSearch] = useState('')
@@ -27,8 +28,18 @@ const Patients = () => {
   const {data, total} = usePreprocessData(appointmentData)
 
 const [gender, setGender] = useState('male')
+const [insurance, setInsurance] = useState("");
   const [pageSize, setPageSize] = useState(1);
 
+const {data: insuranceData} = useGetAllInsurancesQuery();
+console.log(insuranceData, 'insData')
+
+const insuranceOptions = useCallback(()=>{
+  return insuranceData?.map((insurance) => ({
+    id: insurance.insurance_name,
+    label: insurance.insurance_name,
+  }));
+},[insuranceData])()
 
   return (
     <>
@@ -46,13 +57,14 @@ const [gender, setGender] = useState('male')
           search={search}
           setSearch={setSearch}
           filter={<AppointmentFilter
-            age={gender}
+            insurance={insurance}
             gender={gender}
             pageSize={pageSize}
-            setAge={setGender}
+            setInsurance={setInsurance}
             setGender={setGender}
             setPageSize={setPageSize}
             total={total}
+            insuranceOptions={insuranceOptions ?? []}
             />}
           />
         </div>
