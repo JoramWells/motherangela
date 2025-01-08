@@ -4,18 +4,17 @@ import React, { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { DataTable } from '@/components/custom/table/DataTable';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { insuranceColumns } from '../column';
-import { useGetAllInsurancesQuery } from '@/api/insurance/insurance.api';
+import { insuranceServiceCostMappingColumns } from '../column';
 import usePreprocessData from '@/hooks/usePreprocessData';
 import { Badge } from '@/components/ui/badge';
-import useSearch from '@/hooks/useSearch';
+import { useGetAllInsuranceServiceCostMappingQuery } from '@/api/insurance/insuranceServiceCostMapping.api';
 
 function Patients() {
   const [search, setSearch] = useState('');
   const searchParams = useSearchParams();
   const page = searchParams.get('page');
 
-  const { data: maternityData } = useGetAllInsurancesQuery(
+  const { data: dtx } = useGetAllInsuranceServiceCostMappingQuery(
     {
       page: Number(page),
       pageSize: 10,
@@ -23,8 +22,9 @@ function Patients() {
     },
   );
 
-  const { data, total } = usePreprocessData(maternityData);
-  useSearch({ search, setSearch });
+  const { data, total } = usePreprocessData(dtx);
+
+  console.log(data);
 
   return (
     <>
@@ -36,7 +36,7 @@ function Patients() {
           "
           >
             <h2 className="text-lg  text-slate-700">
-              Insurances
+              Service Cost Mapping
             </h2>
             <Badge
               className="bg-zinc-200 text-zinc-700 shadow-none"
@@ -45,7 +45,7 @@ function Patients() {
             </Badge>
           </div>
           <DataTable
-            columns={insuranceColumns}
+            columns={insuranceServiceCostMappingColumns}
             data={data ?? []}
             total={total}
           />

@@ -1,3 +1,7 @@
+declare interface InsuranceTypeInterface{
+  insurance_type_description: string
+}
+
 declare interface InsuranceInterface {
   box_address: string;
   discount_percentage: string;
@@ -6,6 +10,7 @@ declare interface InsuranceInterface {
   insurance_id: number;
   insurance_limit_type_id: string;
   insurance_name: string;
+  insurance_type: InsuranceTypeInterface
   insurance_type_id: string;
   maximum_billable_amount: string;
   nhif_rebate: string;
@@ -16,4 +21,22 @@ declare interface InsuranceInterface {
   revenue_expected: string
   status: string
   withholding_tax_application: string
+}
+
+declare interface ServiceTypeInterface{
+  service_type_description: string
+}
+
+interface InsuranceServiceCostMappingInterface{
+  copay_amount: string
+  cost: string
+  hospital_id: string
+  insurance_detail?:InsuranceInterface
+  insurance_id: string
+  percentage_discount: string
+  service_cost_mapping_id: number
+  service_id: string
+  service_type: ServiceTypeInterface
+  service_type_id: string
+  withholding_tax_percentage: string
 }

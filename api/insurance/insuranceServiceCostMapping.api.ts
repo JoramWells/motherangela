@@ -1,14 +1,29 @@
+/* eslint-disable max-len */
+/* eslint-disable no-undef */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const insuranceServiceCostMappingApi = createApi({
   reducerPath: 'insuranceServiceCostMappingApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_API_URL}/api/root-server/insurance-service-cost-mapping`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/root-server/insurance-service-cost-mapping`,
 
   }),
   endpoints: (builder) => ({
-    getAllInsuranceServiceCostMapping: builder.query({
-      query: () => 'fetchAll',
+    getAllInsuranceServiceCostMapping: builder.query<PaginatedResponse<InsuranceServiceCostMappingInterface>,
+      { page: number; pageSize: number; searchQuery: string }
+
+    >({
+      query: (params) => {
+        if (params) {
+          const { page, pageSize, searchQuery } = params;
+          let queryString = '';
+          queryString += `page=${page}`;
+          queryString += `&pageSize=${pageSize}`;
+          queryString += `&searchQuery=${searchQuery}`;
+          return `/fetchAll/?${queryString}`;
+        }
+        return 'fetchAll';
+      },
     }),
     addInsuranceServiceCostMapping: builder.mutation({
       query: (newMedication) => ({

@@ -30,14 +30,14 @@ const DL = [
   // },
   {
     id: '3',
-    label: 'Checklist',
-    link: '/checklist',
+    label: 'Insurances',
+    link: '/insurances',
     icon: <Check size={17} />,
   },
   {
     id: '4',
-    label: 'Diagnosis',
-    link: '/users/otz',
+    label: 'Service Cost Mapping',
+    link: '/service-cost-mapping',
     icon: <Users size={17} />,
   },
   {

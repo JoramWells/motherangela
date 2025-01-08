@@ -1,9 +1,10 @@
+/* eslint-disable max-len */
 import { ColumnDef } from '@tanstack/react-table';
 import moment from 'moment';
 import Link from 'next/link';
 import Avatar from '@/components/custom/Avatar';
 
-export const maternityProfileColumns: ColumnDef<InsuranceInterface>[] = [
+export const insuranceColumns: ColumnDef<InsuranceInterface>[] = [
   // {
   //   id: "select",
   //   header: ({ table }) => (
@@ -27,10 +28,19 @@ export const maternityProfileColumns: ColumnDef<InsuranceInterface>[] = [
   //   enableHiding: false,
   // },
   {
-    accessorKey: 'name_of_client',
+    accessorKey: 'insurance_name',
     header: 'Name',
     cell: ({ row }) => (
       <p className="capitalize text-[12px]">{row.original.insurance_name}</p>
+    ),
+  },
+  {
+    accessorKey: 'insurance_type',
+    header: 'Type',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {row.original.insurance_type.insurance_type_description}
+      </p>
     ),
   },
   {
@@ -62,23 +72,12 @@ export const maternityProfileColumns: ColumnDef<InsuranceInterface>[] = [
     ),
   },
   {
-    accessorKey: 'edd',
-    header: 'EDD',
-    cell: ({ row }) => {
-      const edd = row.original.edd as string;
-      return (
-        <p className="text-[12px] text-slate-500">
-          {(edd && edd?.length > 0) ? moment(row.original?.edd).format('ll') : 'Update'}
-        </p>
-      );
-    },
-  },
-  {
     accessorKey: 'action',
+    header: 'Action',
     cell: ({ row }) => (
       <Link
         className="text-[12px]"
-        href={`/maternity/${row.original.maternity_profile_id}`}
+        href={`/maternity/${row.original.insurance_id}`}
       >
         View
       </Link>
@@ -87,7 +86,7 @@ export const maternityProfileColumns: ColumnDef<InsuranceInterface>[] = [
 ];
 
 //
-export const maternityAntenatalProfileColumns: ColumnDef<AntenatalProfileInterface>[] = [
+export const insuranceServiceCostMappingColumns: ColumnDef<InsuranceServiceCostMappingInterface>[] = [
   // {
   //   id: "select",
   //   header: ({ table }) => (
@@ -111,34 +110,30 @@ export const maternityAntenatalProfileColumns: ColumnDef<AntenatalProfileInterfa
   //   enableHiding: false,
   // },
   {
-    accessorKey: 'name_of_client',
-    header: 'Name',
+    accessorKey: 'service_type.service_type_description',
+    header: 'Service Type',
     cell: ({ row }) => (
-      <div className="flex-row flex space-x-2 items-center">
-        <Avatar
-          name={row.original.maternity_profile?.name_of_client as string}
-        />
-        <p className="capitalize text-[12px]">
-          {row.original.maternity_profile?.name_of_client}
-        </p>
-      </div>
+
+      <p className="capitalize text-[12px]">
+        {row.original.service_type?.service_type_description}
+      </p>
     ),
   },
   {
-    accessorKey: 'blood_group',
-    header: 'Blood Group',
+    accessorKey: 'insurance_detail',
+    header: 'Insurance',
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500 ">
-        {row.original?.blood_group ?? 'N/A'}
+        {row.original?.insurance_detail?.insurance_name ?? 'N/A'}
       </div>
     ),
   },
   {
-    accessorKey: 'hb',
-    header: 'HP',
+    accessorKey: 'cost',
+    header: 'Cost',
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500">
-        <p>{row.original.hb}</p>
+        <p>{row.original.cost}</p>
       </div>
     ),
   },
