@@ -14,6 +14,7 @@ import { payrollEmployeeBenefitsApi } from '@/api/payroll/payrollEmployeeBenefit
 import { payrollEmployeeRecordsApi } from '@/api/payroll/payrollEmployeeRecords.api';
 import { insuranceServiceCostMappingApi } from '@/api/insurance/insuranceServiceCostMapping.api';
 import { insuranceMedicineMappingApi } from '@/api/insurance/insuranceMedicineMapping.api';
+import { payrollEmployeeDeductionsApi } from '@/api/payroll/payrollEmployeeDeductions';
 
 export const store = configureStore({
   reducer: {
@@ -33,6 +34,7 @@ export const store = configureStore({
     [insuranceApi.reducerPath]: insuranceApi.reducer,
     [insuranceServiceCostMappingApi.reducerPath]: insuranceServiceCostMappingApi.reducer,
     [insuranceMedicineMappingApi.reducerPath]: insuranceMedicineMappingApi.reducer,
+    [payrollEmployeeDeductionsApi.reducerPath]: payrollEmployeeDeductionsApi.reducer,
   },
   middleware: (getDefaultMiddleWare) => getDefaultMiddleWare({
     immutableCheck: false,
@@ -51,5 +53,6 @@ export const store = configureStore({
     .concat(medicineStockTakeApi.middleware)
     .concat(insuranceApi.middleware)
     .concat(insuranceServiceCostMappingApi.middleware)
-    .concat(insuranceMedicineMappingApi.middleware),
+    .concat(insuranceMedicineMappingApi.middleware)
+    .concat(payrollEmployeeDeductionsApi.middleware),
 });

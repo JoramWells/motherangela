@@ -109,19 +109,17 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <div className="flex items-center p-2">
-        {isSearch && (
-          <TableSearchInput
-            columns={columns}
-            data={data}
-            handleSearch={handleSearch}
-            setSearch={setSearch}
-            table={table}
-            filter={filter}
-            search={search}
-          />
-        )}
-      </div>
+      {isSearch && (
+      <TableSearchInput
+        columns={columns}
+        data={data}
+        handleSearch={handleSearch}
+        setSearch={setSearch}
+        table={table}
+        filter={filter}
+        search={search}
+      />
+      )}
       <div className="rounded-md">
         <Table>
           <TableHeader className="bg-zinc-50">

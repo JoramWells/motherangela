@@ -1,13 +1,14 @@
+/* eslint-disable max-len */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { PaginatedResponse, PayrollEmployeeRecordsInterface } from 'motherangela';
 
-export const payrollEmployeeRecordsApi = createApi({
-  reducerPath: 'payrollEmployeeRecordsApi',
+export const payrollEmployeeDeductionsApi = createApi({
+  reducerPath: 'payrollEmployeeDeductionsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/payroll-service/payroll-employee-records`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/payroll-service/payroll-employee-deductions`,
   }),
   endpoints: (builder) => ({
-    getAllPayrollEmployeeRecords: builder.query<PaginatedResponse<PayrollEmployeeRecordsInterface>,
+    getAllPayrollEmployeeDeductions: builder.query<PaginatedResponse<PayrollEmployeeRecordsInterface>,
       { page: number; pageSize: number; searchQuery: string }
 
     >({
@@ -23,24 +24,24 @@ export const payrollEmployeeRecordsApi = createApi({
         return 'fetchAll';
       },
     }),
-    addPayrollEmployeeRecord: builder.mutation({
+    addPayrollEmployeeDeductions: builder.mutation({
       query: (newUser) => ({
         url: 'add',
         method: 'POST',
         body: newUser,
       }),
     }),
-    getPayrollEmployeeRecord: builder.query({
+    getPayrollEmployeeDeductions: builder.query({
       query: (id) => `detail/${id}`,
     }),
-    updatePayrollEmployeeRecord: builder.mutation({
+    updatePayrollEmployeeDeductions: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `update${id}`,
         method: 'PUT',
         body: patch,
       }),
     }),
-    deletePayrollEmployeeRecord: builder.mutation({
+    deletePayrollEmployeeDeductions: builder.mutation({
       query(id) {
         return {
           url: `delete${id}`,
@@ -52,7 +53,7 @@ export const payrollEmployeeRecordsApi = createApi({
 });
 
 export const {
-  useGetAllPayrollEmployeeRecordsQuery,
-  useAddPayrollEmployeeRecordMutation, useGetPayrollEmployeeRecordQuery,
-  useUpdatePayrollEmployeeRecordMutation, useDeletePayrollEmployeeRecordMutation,
-} = payrollEmployeeRecordsApi;
+  useGetAllPayrollEmployeeDeductionsQuery,
+  useAddPayrollEmployeeDeductionsMutation, useGetPayrollEmployeeDeductionsQuery,
+  useUpdatePayrollEmployeeDeductionsMutation, useDeletePayrollEmployeeDeductionsMutation,
+} = payrollEmployeeDeductionsApi;

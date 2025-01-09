@@ -30,6 +30,12 @@ const DL = [
     icon: <ArrowRightLeft size={17} />,
   },
   {
+    id: '6',
+    label: 'Deductions',
+    link: '/deductions',
+    icon: <NotebookPen size={17} />,
+  },
+  {
     id: '2',
     label: 'Payroll',
     link: '/payroll',
@@ -47,12 +53,7 @@ const DL = [
     link: '/loan-records',
     icon: <HandCoins size={17} />,
   },
-  {
-    id: '6',
-    label: 'Queue',
-    link: '/queue',
-    icon: <NotebookPen size={17} />,
-  },
+
   {
     id: '7',
     label: 'Visits',

@@ -104,3 +104,70 @@ export const employeeBenefitsColumns: ColumnDef<PayrollEmployeeBenefitsFileInter
     ),
   },
 ];
+
+//
+export const payrollEmployeeDeductionsColumns: ColumnDef<PayrollEmployeeBenefitsFileInterface>[] = [
+  {
+    accessorKey: 'payroll_employee_record.fullname',
+    header: 'Name',
+    cell: ({ row }) => (
+      <div className="flex-row flex space-x-2 items-center">
+        <Avatar
+          name={row.original.payroll_employee_record?.full_name as string}
+        />
+        <p className="capitalize text-[12px]">
+          {row.original.payroll_employee_record?.full_name}
+        </p>
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'payroll_deduction.deduction_description',
+    header: 'Type',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {row.original?.payroll_deduction.deduction_description ?? 'N/A'}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'fixed_amount',
+    header: 'Amount',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {row.original?.fixed_amount ?? 'N/A'}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'fiscal_year',
+    header: 'Timeline',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        <p>
+          Year:
+          {' '}
+          {row.original?.fiscal_year ?? 'N/A'}
+        </p>
+
+        {/*  */}
+        <p>
+          Month:
+          {row.original?.fiscal_month ?? 'N/A'}
+        </p>
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'Action',
+    header: 'Action',
+    cell: ({ row }) => (
+      <Link
+        className="text-[12px]"
+        href={`/maternity/${row.original.employee_benefits_file_id}`}
+      >
+        View
+      </Link>
+    ),
+  },
+];
