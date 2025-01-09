@@ -1,18 +1,19 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { PatientInterface } from 'motherangela';
 
 export const patientsApi = createApi({
-  reducerPath: "patientsApi",
+  reducerPath: 'patientsApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/patient-service/patient`,
   }),
   endpoints: (builder) => ({
     getPatients: builder.query<PatientInterface[], void>({
-      query: () => "fetchAll",
+      query: () => 'fetchAll',
     }),
     addPatient: builder.mutation({
       query: (newUser) => ({
-        url: "add",
-        method: "POST",
+        url: 'add',
+        method: 'POST',
         body: newUser,
       }),
     }),
@@ -22,7 +23,7 @@ export const patientsApi = createApi({
     updatePatient: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `edit/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: patch,
       }),
     }),
@@ -30,7 +31,7 @@ export const patientsApi = createApi({
       query(id) {
         return {
           url: `delete/${id}`,
-          method: "DELETE",
+          method: 'DELETE',
         };
       },
     }),

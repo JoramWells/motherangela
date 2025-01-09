@@ -1,18 +1,18 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const payrollEmployeeRecordsApi = createApi({
-  reducerPath: "payrollEmployeeRecordsApi",
+  reducerPath: 'payrollEmployeeRecordsApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/payroll-service/payroll-employee-records`,
   }),
   endpoints: (builder) => ({
     getAllPayrollEmployeeRecords: builder.query({
-      query: () => "fetchAll",
+      query: () => 'fetchAll',
     }),
     addPayrollEmployeeRecord: builder.mutation({
       query: (newUser) => ({
-        url: "add",
-        method: "POST",
+        url: 'add',
+        method: 'POST',
         body: newUser,
       }),
     }),
@@ -22,7 +22,7 @@ export const payrollEmployeeRecordsApi = createApi({
     updatePayrollEmployeeRecord: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `update${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: patch,
       }),
     }),
@@ -30,7 +30,7 @@ export const payrollEmployeeRecordsApi = createApi({
       query(id) {
         return {
           url: `delete${id}`,
-          method: "DELETE",
+          method: 'DELETE',
         };
       },
     }),

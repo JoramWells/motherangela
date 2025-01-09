@@ -1,5 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
+import { PayrollEmployeeBenefitsFileInterface, PayrollEmployeeRecordsInterface } from 'motherangela';
 import Avatar from '@/components/custom/Avatar';
 
 export const employeeRecordsColumn: ColumnDef<PayrollEmployeeRecordsInterface>[] = [

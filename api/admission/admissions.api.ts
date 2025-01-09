@@ -1,18 +1,18 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const admissionApi = createApi({
-  reducerPath: "admissionApi",
+  reducerPath: 'admissionApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/admission-service/admission`,
   }),
   endpoints: (builder) => ({
     getAllAdmissions: builder.query({
-      query: () => "fetchAll",
+      query: () => 'fetchAll',
     }),
     addAdmission: builder.mutation({
       query: (newWard) => ({
-        url: "add",
-        method: "POST",
+        url: 'add',
+        method: 'POST',
         body: newWard,
       }),
     }),
@@ -25,7 +25,7 @@ export const admissionApi = createApi({
     updateAdmission: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `edit/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: patch,
       }),
     }),
@@ -33,7 +33,7 @@ export const admissionApi = createApi({
       query(id) {
         return {
           url: `delete/${id}`,
-          method: "DELETE",
+          method: 'DELETE',
         };
       },
     }),

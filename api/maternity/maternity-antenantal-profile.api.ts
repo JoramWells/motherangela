@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { AntenatalProfileInterface } from 'motherangela';
 
 export const maternityAntenatalProfileApi = createApi({
-  reducerPath: "maternityAntenatalProfileApi",
+  reducerPath: 'maternityAntenatalProfileApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/root-server/maternity-antenatal-profile`,
   }),
@@ -9,12 +10,12 @@ export const maternityAntenatalProfileApi = createApi({
 
     // Get Maternity Antenatal Profile
     getAllMaternityAntenatalProfile: builder.query<AntenatalProfileInterface[], void>({
-      query: () => "/fetchAll",
+      query: () => '/fetchAll',
     }),
     addMaternityAntenatalProfile: builder.mutation({
       query: (newMaternity) => ({
-        url: "add",
-        method: "POST",
+        url: 'add',
+        method: 'POST',
         body: newMaternity,
       }),
     }),

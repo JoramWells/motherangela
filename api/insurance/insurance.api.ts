@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { InsuranceInterface, PaginatedResponse } from 'motherangela';
 
 export const insuranceApi = createApi({
   reducerPath: 'insuranceApi',

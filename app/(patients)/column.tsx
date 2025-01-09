@@ -1,6 +1,7 @@
 import React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import moment from 'moment';
+import { AdmissionInterface, PatientInterface } from 'motherangela';
 import { Badge } from '@/components/ui/badge';
 
 export const columns: ColumnDef<PatientInterface>[] = [

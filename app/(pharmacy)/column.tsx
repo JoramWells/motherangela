@@ -1,5 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
+import { AntenatalProfileInterface, MedicineStockInterface } from 'motherangela';
 import Avatar from '@/components/custom/Avatar';
 
 export const medicineStockColumns: ColumnDef<MedicineStockInterface>[] = [

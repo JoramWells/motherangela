@@ -1,8 +1,7 @@
 /* eslint-disable max-len */
 import { ColumnDef } from '@tanstack/react-table';
-import moment from 'moment';
 import Link from 'next/link';
-import Avatar from '@/components/custom/Avatar';
+import { InsuranceInterface, InsuranceServiceCostMappingInterface } from 'motherangela';
 
 export const insuranceColumns: ColumnDef<InsuranceInterface>[] = [
   // {
@@ -137,44 +136,13 @@ export const insuranceServiceCostMappingColumns: ColumnDef<InsuranceServiceCostM
       </div>
     ),
   },
-
-  {
-    accessorKey: 'hiv',
-    header: 'HIV',
-    cell: ({ row }) => (
-      <p className="text-[12px] text-slate-500">{row.original.hiv}</p>
-    ),
-  },
-  {
-    accessorKey: 'rhesus',
-    header: 'Rhesus',
-    cell: ({ row }) => (
-      <p className="text-[12px] text-slate-500">{row.original.rhesus}</p>
-    ),
-  },
-  {
-    accessorKey: 'serology',
-    header: 'Serology',
-    cell: ({ row }) => (
-      <p className="text-[12px] text-slate-500">{row.original.serology}</p>
-    ),
-  },
-  {
-    accessorKey: 'tb_screening',
-    header: 'TB',
-    cell: ({ row }) => (
-      <p className="text-[12px] text-slate-500">
-        {row.original.tb_screening}
-      </p>
-    ),
-  },
   {
     accessorKey: 'action',
     header: 'Action',
     cell: ({ row }) => (
       <Link
         className="text-[12px]"
-        href={`/maternity/${row.original.maternity_profile_id}`}
+        href={`/maternity/${row.original.service_cost_mapping_id}`}
       >
         View
       </Link>

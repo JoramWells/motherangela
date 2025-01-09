@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
-/* eslint-disable no-undef */
+
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { InsuranceServiceCostMappingInterface, PaginatedResponse } from 'motherangela';
 
 export const insuranceServiceCostMappingApi = createApi({
   reducerPath: 'insuranceServiceCostMappingApi',

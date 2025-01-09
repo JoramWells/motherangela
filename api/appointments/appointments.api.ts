@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { PaginatedResponse, AppointmentInterface } from 'motherangela';
 
 export const appointmentApi = createApi({
   reducerPath: 'appointmentsApi',

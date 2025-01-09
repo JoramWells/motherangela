@@ -1,6 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table';
 import moment from 'moment';
 import Link from 'next/link';
+import { AntenatalProfileInterface, MaternityProfileInterface } from 'motherangela';
 import Avatar from '@/components/custom/Avatar';
 
 export const maternityProfileColumns: ColumnDef<MaternityProfileInterface>[] = [

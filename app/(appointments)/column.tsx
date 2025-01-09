@@ -2,6 +2,7 @@
 import { ColumnDef } from '@tanstack/react-table';
 import moment from 'moment';
 import Link from 'next/link';
+import { AppointmentInterface } from 'motherangela';
 import Avatar from '@/components/custom/Avatar';
 
 export const columns: ColumnDef<AppointmentInterface>[] = [

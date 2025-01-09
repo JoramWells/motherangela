@@ -1,18 +1,19 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { PayrollEmployeeBenefitsFileInterface } from 'motherangela';
 
 export const payrollEmployeeBenefitsApi = createApi({
-  reducerPath: "payrollEmployeeBenefitsApi",
+  reducerPath: 'payrollEmployeeBenefitsApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/payroll-service/payroll-employee-benefits-file`,
   }),
   endpoints: (builder) => ({
     getAllPayrollEmployeeBenefits: builder.query<PayrollEmployeeBenefitsFileInterface[], void>({
-      query: () => "fetchAll",
+      query: () => 'fetchAll',
     }),
     addPayrollEmployeeBenefits: builder.mutation({
       query: (newUser) => ({
-        url: "add",
-        method: "POST",
+        url: 'add',
+        method: 'POST',
         body: newUser,
       }),
     }),
@@ -22,7 +23,7 @@ export const payrollEmployeeBenefitsApi = createApi({
     updatePayrollEmployeeBenefit: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `update${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: patch,
       }),
     }),
@@ -30,7 +31,7 @@ export const payrollEmployeeBenefitsApi = createApi({
       query(id) {
         return {
           url: `delete${id}`,
-          method: "DELETE",
+          method: 'DELETE',
         };
       },
     }),
