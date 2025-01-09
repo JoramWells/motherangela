@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { DataTable } from '@/components/custom/table/DataTable';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { useGetAllPayrollEmployeeRecordsQuery } from '@/api/payroll/payrollEmployeeRecords.api';
-import { employeeRecordsColumn, payrollEmployeeDeductionsColumns } from '../column';
+import { payrollEmployeeDeductionsColumns } from '../column';
 import { useGetAllPayrollEmployeeDeductionsQuery } from '@/api/payroll/payrollEmployeeDeductions';
 import usePreprocessData from '@/hooks/usePreprocessData';
 import { Badge } from '@/components/ui/badge';
+import useSearch from '@/hooks/useSearch';
 
 function Patients() {
   const [search, setSearch] = useState('');
@@ -24,7 +24,7 @@ function Patients() {
 
   const { data, total } = usePreprocessData(profileData);
 
-  console.log(data, 'gh');
+  useSearch({ search, setSearch });
   return (
     <>
       <BreadcrumbNav />

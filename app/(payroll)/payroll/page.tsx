@@ -4,11 +4,13 @@ import React from 'react';
 import { DataTable } from '@/components/custom/table/DataTable';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 // import { maternityAntenatalProfileColumns } from "../column";
-import { useGetAllMaternityAntenatalProfileQuery } from '@/api/maternity/maternity-antenantal-profile.api';
+import { useGetAllPayrollPeriodsQuery } from '@/api/payroll/payrollPeriods';
+import { payrollColumns } from '../column';
+import usePreprocessData from '@/hooks/usePreprocessData';
 
 function Patients() {
-  const { data: profileData } = useGetAllMaternityAntenatalProfileQuery();
-  console.log(profileData);
+  const { data: profileData } = useGetAllPayrollPeriodsQuery();
+  const { data, total } = usePreprocessData(profileData);
   return (
     <>
       <BreadcrumbNav />
@@ -16,10 +18,14 @@ function Patients() {
         <div className="w-full bg-white rounded-lg border">
           <div className="p-2 bg-zinc-50 rounded-t-lg border-b border-slate-200">
             <h2 className="text-lg  text-slate-700">
-              Antenatal Profiles
+              Payrolls
             </h2>
           </div>
-          {/* <DataTable columns={maternityAntenatalProfileColumns} data={profileData ?? []} /> */}
+          <DataTable
+            columns={payrollColumns}
+            data={data ?? []}
+            total={total}
+          />
         </div>
       </div>
     </>
