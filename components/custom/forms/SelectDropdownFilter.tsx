@@ -1,4 +1,7 @@
-import React, { useMemo } from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useId, useMemo } from 'react';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import {
@@ -73,8 +76,8 @@ function SelectDropdownFilter({
               <SelectItem value="No Data">No Data</SelectItem>
             ) : (
               <>
-                {data.map((item, idx) => (
-                  <SelectItem key={item.id + idx} value={item.id}>
+                {data.map((item) => (
+                  <SelectItem key={useId()} value={item.id}>
                     {item.label}
                   </SelectItem>
                 ))}

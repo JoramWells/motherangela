@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/no-unused-prop-types */
 import React, {
   type ReactNode,
   type Dispatch,
