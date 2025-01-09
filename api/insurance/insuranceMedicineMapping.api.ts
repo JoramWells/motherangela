@@ -1,13 +1,29 @@
+/* eslint-disable max-len */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { InsuranceMedicineMappingInterface, PaginatedResponse } from 'motherangela';
 
-export const insuranceMedicationMappingApi = createApi({
-  reducerPath: 'insuranceMedicationMappingApi',
+export const insuranceMedicineMappingApi = createApi({
+  reducerPath: 'insuranceMedicineMappingApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5001/insurance-medication-mapping',
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/root-server/insurance-medication-mapping`,
+
   }),
   endpoints: (builder) => ({
-    getAllInsuranceMedicationMapping: builder.query({
-      query: () => 'fetchAll',
+    getAllInsuranceMedicationMapping: builder.query<PaginatedResponse<InsuranceMedicineMappingInterface>,
+      { page: number; pageSize: number; searchQuery: string }
+
+    >({
+      query: (params) => {
+        if (params) {
+          const { page, pageSize, searchQuery } = params;
+          let queryString = '';
+          queryString += `page=${page}`;
+          queryString += `&pageSize=${pageSize}`;
+          queryString += `&searchQuery=${searchQuery}`;
+          return `/fetchAll/?${queryString}`;
+        }
+        return 'fetchAll';
+      },
     }),
     addInsuranceMedicationMapping: builder.mutation({
       query: (newMedication) => ({
@@ -43,4 +59,4 @@ export const {
   useGetMedicationInsuranceMedicationMappingQuery,
   useUpdateInsuranceMedicationMappingMutation,
   useDeleteInsuranceMedicationMappingMutation,
-} = insuranceMedicationMappingApi;
+} = insuranceMedicineMappingApi;

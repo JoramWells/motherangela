@@ -13,6 +13,7 @@ import { patientsApi } from '@/api/patients/patients.api';
 import { payrollEmployeeBenefitsApi } from '@/api/payroll/payrollEmployeeBenefitsFile.api';
 import { payrollEmployeeRecordsApi } from '@/api/payroll/payrollEmployeeRecords.api';
 import { insuranceServiceCostMappingApi } from '@/api/insurance/insuranceServiceCostMapping.api';
+import { insuranceMedicineMappingApi } from '@/api/insurance/insuranceMedicineMapping.api';
 
 export const store = configureStore({
   reducer: {
@@ -31,6 +32,7 @@ export const store = configureStore({
     [medicineStockTakeApi.reducerPath]: medicineStockTakeApi.reducer,
     [insuranceApi.reducerPath]: insuranceApi.reducer,
     [insuranceServiceCostMappingApi.reducerPath]: insuranceServiceCostMappingApi.reducer,
+    [insuranceMedicineMappingApi.reducerPath]: insuranceMedicineMappingApi.reducer,
   },
   middleware: (getDefaultMiddleWare) => getDefaultMiddleWare({
     immutableCheck: false,
@@ -48,5 +50,6 @@ export const store = configureStore({
     .concat(medicinePurchasesApi.middleware)
     .concat(medicineStockTakeApi.middleware)
     .concat(insuranceApi.middleware)
-    .concat(insuranceServiceCostMappingApi.middleware),
+    .concat(insuranceServiceCostMappingApi.middleware)
+    .concat(insuranceMedicineMappingApi.middleware),
 });

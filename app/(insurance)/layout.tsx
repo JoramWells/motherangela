@@ -5,7 +5,6 @@ import {
   Check,
   History,
   LayoutDashboardIcon,
-  NotebookPen,
   Users,
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
@@ -42,27 +41,9 @@ const DL = [
   },
   {
     id: '5',
-    label: 'Discharged',
-    link: '/discharged',
+    label: 'Medicine Mapping',
+    link: '/medicine-mapping',
     icon: <ArrowRightLeft size={17} />,
-  },
-  {
-    id: '6',
-    label: 'Queue',
-    link: '/queue',
-    icon: <NotebookPen size={17} />,
-  },
-  {
-    id: '7',
-    label: 'Visits',
-    link: '/visits',
-    icon: <History size={17} />,
-  },
-  {
-    id: '8',
-    label: 'In-patient',
-    link: '/patients/reports',
-    icon: <History size={17} />,
   },
   {
     id: '9',
