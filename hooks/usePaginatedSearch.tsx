@@ -13,18 +13,24 @@ export interface UsePaginatedSearchResponseInterface<T>{
 }
 
 export interface UsePaginatedSearchInterface<T>{
-  fetchQuery: ({ page, pageSize, searchQuery }:{
+  id?:string
+  fetchQuery: ({
+    id, page, pageSize, searchQuery,
+  }:{
+    id?:string,
     page: number,
     pageSize: number, searchQuery: string,
   }) => { data?: PaginatedResponse<T> | undefined };
 }
 
-const usePaginatedSearch = <T = unknown > ({ fetchQuery }: UsePaginatedSearchInterface<T>):
+const usePaginatedSearch = <T = unknown > ({ fetchQuery, id }: UsePaginatedSearchInterface<T>):
      UsePaginatedSearchResponseInterface<T> => {
   const [search, setSearch] = useState('');
   const searchParams = useSearchParams();
   const page = searchParams.get('page');
   const { data: profileData } = fetchQuery({
+    // id,
+    id: id && id,
     page: Number(page),
     pageSize: 10,
     searchQuery: search,

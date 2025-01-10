@@ -1,7 +1,9 @@
 import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
 import {
-  PayrollEmployeeBenefitsFileInterface, PayrollEmployeeDeductionInterface, PayrollEmployeeLoanRecordsInterface, PayrollEmployeeMonthlyDeductionInterface, PayrollEmployeeRecordsInterface, PayrollPeriodsInterface,
+  PayrollEmployeeBenefitsFileInterface, PayrollEmployeeDeductionInterface,
+  PayrollEmployeeLoanRecordsInterface, PayrollEmployeeMonthlyDeductionInterface,
+  PayrollEmployeeRecordsInterface, PayrollPeriodsInterface,
 } from 'motherangela';
 import moment from 'moment';
 import Avatar from '@/components/custom/Avatar';
@@ -182,9 +184,12 @@ export const payrollColumns: ColumnDef<PayrollPeriodsInterface>[] = [
     header: 'Name',
     cell: ({ row }) => (
       <div className="flex-row flex space-x-2 items-center">
-        <p className="capitalize text-[12px]">
+        <Link
+          className="capitalize text-[12px] text-cyan-500 hover:underline"
+          href={`/payroll/${row.original.payroll_id}`}
+        >
           {row.original.payroll_description}
-        </p>
+        </Link>
       </div>
     ),
   },

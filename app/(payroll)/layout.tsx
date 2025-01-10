@@ -39,7 +39,7 @@ const DL = [
   },
   {
     id: '2',
-    label: 'Payroll',
+    label: 'Payrolls',
     link: '/payroll',
     icon: <HandCoins size={17} />,
   },

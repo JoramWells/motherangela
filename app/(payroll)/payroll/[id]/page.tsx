@@ -1,47 +1,69 @@
 'use client';
 
-import React, { use, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import React, { use, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import { useGetPayrollMonthlyDeductionByPayrollIDQuery } from '@/api/payroll/payrollMonthlyDeductions.api';
-import usePreprocessData from '@/hooks/usePreprocessData';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { DataTable } from '@/components/custom/table/DataTable';
 import { payrollMonthlyDeductionsColumns } from '../../column';
-import useSearch from '@/hooks/useSearch';
+import usePaginatedSearch from '@/hooks/usePaginatedSearch';
+import TableContainer from '@/components/custom/table/TableContainer';
+import { Button } from '@/components/ui/button';
+import { useGetPayrollPeriodQuery } from '@/api/payroll/payrollPeriods';
 
 function PayrollDetails({ params }:{params:any}) {
-  const [search, setSearch] = useState('');
-  const searchParams = useSearchParams();
-  const page = searchParams.get('page');
+  const router = useRouter();
   const { id } = use(params);
-  const { data: payrollMonthlyData } = useGetPayrollMonthlyDeductionByPayrollIDQuery({
-    id,
-    page: Number(page),
-    pageSize: 10,
-    searchQuery: search,
-  });
-  const { data, total } = usePreprocessData(payrollMonthlyData);
-  useSearch({ search, setSearch });
+  const { data: periodData } = useGetPayrollPeriodQuery(id);
+
+  const {
+    data, total, search, setSearch,
+  } = usePaginatedSearch({ fetchQuery: useGetPayrollMonthlyDeductionByPayrollIDQuery, id });
+
+  const listItems = useMemo(
+    () => [
+      {
+        id: '1',
+        label: 'home',
+        link: '/',
+      },
+      {
+        id: '2',
+        label: 'Payroll Records',
+        link: '/payroll',
+      },
+      {
+        id: '3',
+        label: `${periodData?.payroll_description}`,
+        link: '',
+      },
+    ],
+    [periodData],
+  );
 
   return (
     <div>
-      <BreadcrumbNav />
+      <BreadcrumbNav
+        listItems={listItems}
+      />
       <div className="p-2">
-        <div className="w-full bg-white rounded-lg border">
-          <div className="p-2 bg-zinc-50 rounded-t-lg border-b border-slate-200">
-            <h2 className="text-lg  text-slate-700">
-              Payrolls Deductions
-            </h2>
-          </div>
-          <DataTable
-            columns={payrollMonthlyDeductionsColumns}
-            data={data ?? []}
-            total={total}
-            search={search}
-            setSearch={setSearch}
-            isSearch
-          />
-        </div>
+        <TableContainer
+          title="Payrolls Deductions"
+          columns={payrollMonthlyDeductionsColumns}
+          data={data ?? []}
+          total={total as number}
+          search={search}
+          setSearch={setSearch}
+          rightLabel={(
+            <Button
+              size="sm"
+              className="shadow-none bg-emerald-600 hover:bg-emerald-700"
+              onClick={() => router.push(`/payroll/${id}/add-deduction`)}
+            >
+              NEW
+            </Button>
+          )}
+        />
+
       </div>
     </div>
   );
