@@ -6,7 +6,10 @@ import {
   PayrollEmployeeRecordsInterface, PayrollPeriodsInterface,
 } from 'motherangela';
 import moment from 'moment';
+import { MoveRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import Avatar from '@/components/custom/Avatar';
+import { Button } from '@/components/ui/button';
 
 export const employeeRecordsColumn: ColumnDef<PayrollEmployeeRecordsInterface>[] = [
 
@@ -165,15 +168,20 @@ export const payrollEmployeeDeductionsColumns: ColumnDef<PayrollEmployeeDeductio
   },
   {
     accessorKey: 'Action',
-    header: 'Action',
-    cell: ({ row }) => (
-      <Link
-        className="text-[12px]"
-        href={`/maternity/${row.original.employee_deduction_id}`}
-      >
-        View
-      </Link>
-    ),
+    header: 'View',
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <Button
+          size="sm"
+          variant="outline"
+          className="shadow-none"
+          onClick={() => router.push(`/deductions/${row.original.employee_deduction_id}`)}
+        >
+          <MoveRight />
+        </Button>
+      );
+    },
   },
 ];
 

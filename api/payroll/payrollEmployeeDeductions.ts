@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { PaginatedResponse, PayrollEmployeeRecordsInterface } from 'motherangela';
+import { PaginatedResponse, PayrollEmployeeDeductionInterface } from 'motherangela';
 
 export const payrollEmployeeDeductionsApi = createApi({
   reducerPath: 'payrollEmployeeDeductionsApi',
@@ -8,7 +8,7 @@ export const payrollEmployeeDeductionsApi = createApi({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/payroll-service/payroll-employee-deductions`,
   }),
   endpoints: (builder) => ({
-    getAllPayrollEmployeeDeductions: builder.query<PaginatedResponse<PayrollEmployeeRecordsInterface>,
+    getAllPayrollEmployeeDeductions: builder.query<PaginatedResponse<PayrollEmployeeDeductionInterface>,
       { page: number; pageSize: number; searchQuery: string }
 
     >({

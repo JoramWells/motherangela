@@ -58,18 +58,18 @@ function Patients() {
             isSearch
             search={search}
             setSearch={setSearch}
-            filter={(
-              <AppointmentFilter
-                insurance={insurance}
-                gender={gender}
-                pageSize={pageSize}
-                setInsurance={setInsurance}
-                setGender={setGender}
-                setPageSize={setPageSize}
-                total={total}
-                insuranceOptions={insuranceOptions ?? []}
-              />
-            )}
+            // filter={(
+            //   <AppointmentFilter
+            //     insurance={insurance}
+            //     gender={gender}
+            //     pageSize={pageSize}
+            //     setInsurance={setInsurance}
+            //     setGender={setGender}
+            //     setPageSize={setPageSize}
+            //     total={total}
+            //     insuranceOptions={insuranceOptions ?? []}
+            //   />
+            // )}
           />
         </div>
       </div>
