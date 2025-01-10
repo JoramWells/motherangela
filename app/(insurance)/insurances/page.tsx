@@ -1,58 +1,48 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { DataTable } from '@/components/custom/table/DataTable';
+import React from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { insuranceColumns } from '../column';
 import { useGetAllInsurancesQuery } from '@/api/insurance/insurance.api';
-import usePreprocessData from '@/hooks/usePreprocessData';
-import { Badge } from '@/components/ui/badge';
-import useSearch from '@/hooks/useSearch';
+import usePaginatedSearch from '@/hooks/usePaginatedSearch';
+import TableContainer from '@/components/custom/table/TableContainer';
 
-function Patients() {
-  const [search, setSearch] = useState('');
-  const searchParams = useSearchParams();
-  const page = searchParams.get('page');
+const listItems = [
+  {
+    id: '1',
+    label: 'home',
+    link: '/',
+  },
+  {
+    id: '2',
+    label: 'Service Cost Mapping',
+    link: '',
+  },
+];
 
-  const { data: maternityData } = useGetAllInsurancesQuery(
-    {
-      page: Number(page),
-      pageSize: 10,
-      searchQuery: search,
-    },
-  );
-
-  const { data, total } = usePreprocessData(maternityData);
-  useSearch({ search, setSearch });
+function InsurancePage() {
+  const {
+    data, total, search, setSearch,
+  } = usePaginatedSearch({ fetchQuery: useGetAllInsurancesQuery });
 
   return (
     <>
-      <BreadcrumbNav />
+      <BreadcrumbNav
+        listItems={listItems}
+      />
       <div className="p-2">
-        <div className="w-full bg-white rounded-lg border">
-          <div className="p-2 bg-slate-50 rounded-t-lg border-b border-slate-200
-          flex flex-row space-x-2 items-center
-          "
-          >
-            <h2 className="text-lg  text-slate-700">
-              Insurances
-            </h2>
-            <Badge
-              className="bg-zinc-200 text-zinc-700 shadow-none"
-            >
-              {total ?? 0}
-            </Badge>
-          </div>
-          <DataTable
-            columns={insuranceColumns}
-            data={data ?? []}
-            total={total}
-          />
-        </div>
+        <TableContainer
+          title="Insurances"
+          columns={insuranceColumns}
+          data={data ?? []}
+          total={total as number}
+          search={search}
+          setSearch={setSearch}
+        />
+
       </div>
     </>
   );
 }
 
-export default Patients;
+export default InsurancePage;

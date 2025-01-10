@@ -18,11 +18,13 @@ import { payrollEmployeeDeductionsApi } from '@/api/payroll/payrollEmployeeDeduc
 import { payrollPeriodsApi } from '@/api/payroll/payrollPeriods';
 import { payrollMonthlyDeductionsApi } from '@/api/payroll/payrollMonthlyDeductions.api';
 import { payrollEmployeeLoanRecordsApi } from '@/api/payroll/payrollEmployeeLoanRecords.api';
+import { appointmentDiagnosesApi } from '@/api/appointments/appointmentDiagnoses.api';
 
 export const store = configureStore({
   reducer: {
     [patientsApi.reducerPath]: patientsApi.reducer,
     [appointmentApi.reducerPath]: appointmentApi.reducer,
+    [appointmentDiagnosesApi.reducerPath]: appointmentDiagnosesApi.reducer,
     [admissionApi.reducerPath]: admissionApi.reducer,
     [maternityProfileApi.reducerPath]: maternityProfileApi.reducer,
     [maternityAntenatalProfileApi.reducerPath]:
@@ -48,6 +50,7 @@ export const store = configureStore({
   })
     .concat(patientsApi.middleware)
     .concat(appointmentApi.middleware)
+    .concat(appointmentDiagnosesApi.middleware)
     .concat(admissionApi.middleware)
     .concat(maternityAntenatalProfileApi.middleware)
     .concat(maternityProfileApi.middleware)

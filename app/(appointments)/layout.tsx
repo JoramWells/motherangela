@@ -2,11 +2,10 @@
 
 import {
   ArrowRightLeft,
-  Check,
   History,
   LayoutDashboardIcon,
-  NotebookPen,
-  Users,
+  ListTodo,
+  Syringe,
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
 import { Provider } from 'react-redux';
@@ -32,13 +31,13 @@ const DL = [
     id: '3',
     label: 'Checklist',
     link: '/checklist',
-    icon: <Check size={17} />,
+    icon: <ListTodo size={17} />,
   },
   {
     id: '4',
-    label: 'Diagnosis',
-    link: '/users/otz',
-    icon: <Users size={17} />,
+    label: 'Diagnoses',
+    link: '/diagnoses',
+    icon: <Syringe size={17} />,
   },
   {
     id: '5',
@@ -47,27 +46,9 @@ const DL = [
     icon: <ArrowRightLeft size={17} />,
   },
   {
-    id: '6',
-    label: 'Queue',
-    link: '/queue',
-    icon: <NotebookPen size={17} />,
-  },
-  {
     id: '7',
     label: 'Visits',
     link: '/visits',
-    icon: <History size={17} />,
-  },
-  {
-    id: '8',
-    label: 'In-patient',
-    link: '/patients/reports',
-    icon: <History size={17} />,
-  },
-  {
-    id: '9',
-    label: 'Reports',
-    link: '/patients/reports',
     icon: <History size={17} />,
   },
 ];
