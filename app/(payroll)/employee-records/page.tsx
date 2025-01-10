@@ -32,7 +32,7 @@ function Patients() {
           flex flex-row space-x-2 items-center
           "
           >
-            <h2 className="text-lg  text-slate-700">
+            <h2 className=" text-slate-900 font-[600] ">
               Employee Records
             </h2>
             <Badge

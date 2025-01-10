@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { PaginatedResponse } from 'motherangela';
+import { PaginatedResponse, PayrollPeriodsInterface } from 'motherangela';
 
 export const payrollPeriodsApi = createApi({
   reducerPath: 'payrollPeriodsApi',
@@ -7,7 +7,7 @@ export const payrollPeriodsApi = createApi({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/payroll-service/payroll-periods`,
   }),
   endpoints: (builder) => ({
-    getAllPayrollPeriods: builder.query<PaginatedResponse<unknown>,
+    getAllPayrollPeriods: builder.query<PaginatedResponse<PayrollPeriodsInterface>,
       { page: number; pageSize: number; searchQuery: string }
 
     >({

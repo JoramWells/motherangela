@@ -1,6 +1,8 @@
 import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
-import { PayrollEmployeeBenefitsFileInterface, PayrollEmployeeRecordsInterface } from 'motherangela';
+import {
+  PayrollEmployeeBenefitsFileInterface, PayrollEmployeeDeductionInterface, PayrollEmployeeMonthlyDeductionInterface, PayrollEmployeeRecordsInterface, PayrollPeriodsInterface,
+} from 'motherangela';
 import moment from 'moment';
 import Avatar from '@/components/custom/Avatar';
 
@@ -107,7 +109,7 @@ export const employeeBenefitsColumns: ColumnDef<PayrollEmployeeBenefitsFileInter
 ];
 
 //
-export const payrollEmployeeDeductionsColumns: ColumnDef<PayrollEmployeeBenefitsFileInterface>[] = [
+export const payrollEmployeeDeductionsColumns: ColumnDef<PayrollEmployeeDeductionInterface>[] = [
   {
     accessorKey: 'payroll_employee_record.fullname',
     header: 'Name',
@@ -165,7 +167,7 @@ export const payrollEmployeeDeductionsColumns: ColumnDef<PayrollEmployeeBenefits
     cell: ({ row }) => (
       <Link
         className="text-[12px]"
-        href={`/maternity/${row.original.employee_benefits_file_id}`}
+        href={`/maternity/${row.original.employee_deduction_id}`}
       >
         View
       </Link>
@@ -174,7 +176,7 @@ export const payrollEmployeeDeductionsColumns: ColumnDef<PayrollEmployeeBenefits
 ];
 
 //
-export const payrollColumns: ColumnDef<PayrollEmployeeBenefitsFileInterface>[] = [
+export const payrollColumns: ColumnDef<PayrollPeriodsInterface>[] = [
   {
     accessorKey: 'payroll_description',
     header: 'Name',
@@ -248,7 +250,8 @@ export const payrollColumns: ColumnDef<PayrollEmployeeBenefitsFileInterface>[] =
 ];
 
 //
-export const payrollMonthlyDeductionsColumns: ColumnDef<PayrollEmployeeBenefitsFileInterface>[] = [
+export const payrollMonthlyDeductionsColumns: ColumnDef<
+PayrollEmployeeMonthlyDeductionInterface>[] = [
   {
     accessorKey: 'payroll_employee_record.fullname',
     header: 'Name',
@@ -287,7 +290,7 @@ export const payrollMonthlyDeductionsColumns: ColumnDef<PayrollEmployeeBenefitsF
     cell: ({ row }) => (
       <Link
         className="text-[12px]"
-        href={`/maternity/${row.original.employee_benefits_file_id}`}
+        href={`/maternity/${row.original.monthly_deduction_id}`}
       >
         View
       </Link>

@@ -5,7 +5,6 @@ import {
   Check,
   HandCoins,
   HeartHandshake,
-  History,
   LayoutDashboardIcon,
   NotebookPen,
 } from 'lucide-react';
@@ -52,25 +51,6 @@ const DL = [
     label: 'Loan Records',
     link: '/loan-records',
     icon: <HandCoins size={17} />,
-  },
-
-  {
-    id: '7',
-    label: 'Visits',
-    link: '/visits',
-    icon: <History size={17} />,
-  },
-  {
-    id: '8',
-    label: 'In-patient',
-    link: '/patients/reports',
-    icon: <History size={17} />,
-  },
-  {
-    id: '9',
-    label: 'Reports',
-    link: '/patients/reports',
-    icon: <History size={17} />,
   },
 ];
 
