@@ -9,7 +9,7 @@ import { ChevronRight, ChevronDown } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { type SideBarCollapseButtonProps } from '@/types';
+import { type SideBarCollapseButtonProps } from '@/types/forms';
 import { Button } from '@/components/ui/button';
 import { SidebarSubButton } from './SidebarButton';
 

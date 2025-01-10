@@ -1,57 +1,60 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { DataTable } from '@/components/custom/table/DataTable';
+import React from 'react';
+import { useRouter } from 'next/navigation';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { useGetAllPayrollEmployeeRecordsQuery } from '@/api/payroll/payrollEmployeeRecords.api';
 import { employeeRecordsColumn } from '../column';
-import usePreprocessData from '@/hooks/usePreprocessData';
-import useSearch from '@/hooks/useSearch';
-import { Badge } from '@/components/ui/badge';
+import TableContainer from '@/components/custom/table/TableContainer';
+import usePaginatedSearch from '@/hooks/usePaginatedSearch';
+import { Button } from '@/components/ui/button';
+
+const listItems = [
+  {
+    id: '1',
+    label: 'home',
+    link: '/',
+  },
+  {
+    id: '2',
+    label: 'Employee Records',
+    link: '',
+  },
+];
 
 function Patients() {
-  const [search, setSearch] = useState('');
-  const searchParams = useSearchParams();
-  const page = searchParams.get('page');
-  const { data: profileData } = useGetAllPayrollEmployeeRecordsQuery({
-    page: Number(page),
-    pageSize: 10,
-    searchQuery: search,
-  });
+  const {
+    data, total, search, setSearch,
+  } = usePaginatedSearch({ fetchQuery: useGetAllPayrollEmployeeRecordsQuery });
 
-  const { data, total } = usePreprocessData(profileData);
-  useSearch({ search, setSearch });
+  const router = useRouter();
 
   return (
     <>
-      <BreadcrumbNav />
+      <BreadcrumbNav
+        listItems={listItems}
+      />
       <div className="p-2">
-        <div className="w-full bg-white rounded-lg border">
-          <div className="p-2 bg-zinc-50 rounded-t-lg border-b border-slate-200
-          flex flex-row space-x-2 items-center
-          "
-          >
-            <h2 className=" text-slate-900 font-[600] ">
-              Employee Records
-            </h2>
-            <Badge
-              className="bg-zinc-200 shadow-none text-zinc-700
-              hover:bg-zinc-200
-              "
+        <TableContainer
+          title="Employee Records"
+          columns={employeeRecordsColumn}
+          data={data ?? []}
+          total={total as number}
+          // isSearch
+          search={search}
+          setSearch={setSearch}
+          rightLabel={(
+            <Button
+              size="sm"
+              className="bg-emerald-600 hover:bg-emerald-700 shadow-none"
+              onClick={() => router.push('/employee-records/add')}
             >
-              {total}
-            </Badge>
-          </div>
-          <DataTable
-            columns={employeeRecordsColumn}
-            data={data ?? []}
-            total={total as number}
-            isSearch
-            search={search}
-            setSearch={setSearch}
-          />
-        </div>
+              NEW
+            </Button>
+          )}
+
+        />
+
       </div>
     </>
   );

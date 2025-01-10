@@ -1,25 +1,35 @@
 'use client';
 
-import React from 'react';
-import { useRouter } from 'next/navigation';
-import { DataTable } from '@/components/custom/table/DataTable';
+import React, { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { employeeRecordsColumn } from '../column';
+import { payrollEmployeeLoanRecordsColumns } from '../column';
 import { useGetAllPayrollEmployeeLoanRecordsQuery } from '@/api/payroll/payrollEmployeeLoanRecords.api';
 import { Button } from '@/components/ui/button';
+import TableContainer from '@/components/custom/table/TableContainer';
+import usePreprocessData from '@/hooks/usePreprocessData';
 
 function Patients() {
-  const { data: profileData } = useGetAllPayrollEmployeeLoanRecordsQuery();
+  const [search, setSearch] = useState('');
+  const searchParams = useSearchParams();
+  const page = searchParams.get('page');
+  const { data: profileData } = useGetAllPayrollEmployeeLoanRecordsQuery({
+    page: Number(page),
+    pageSize: 10,
+    searchQuery: search,
+  });
+  const { data, total } = usePreprocessData(profileData);
   const router = useRouter();
   return (
     <>
       <BreadcrumbNav />
       <div className="p-2">
-        <div className="w-full bg-white rounded-lg border">
-          <div className="p-1 pl-2 pr-2 bg-zinc-50 rounded-t-lg border-b border-slate-200 flex flex-row justify-between items-center">
-            <h2 className="text-lg  text-slate-700">
-              Loan Records
-            </h2>
+        <TableContainer
+          title="Loan Records"
+          columns={payrollEmployeeLoanRecordsColumns}
+          data={data}
+          total={total as number}
+          rightLabel={(
             <Button
               size="sm"
               className="shadow-none bg-green-700 hover:bg-green-800"
@@ -27,9 +37,9 @@ function Patients() {
             >
               NEW
             </Button>
-          </div>
-          <DataTable columns={employeeRecordsColumn} data={profileData ?? []} />
-        </div>
+          )}
+
+        />
       </div>
     </>
   );

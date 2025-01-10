@@ -5,8 +5,11 @@ import {
   Check,
   HandCoins,
   HeartHandshake,
+  Landmark,
   LayoutDashboardIcon,
   NotebookPen,
+  PiggyBank,
+  User,
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
 import { Provider } from 'react-redux';
@@ -26,7 +29,7 @@ const DL = [
     id: '5',
     label: 'Benefits',
     link: '/benefits',
-    icon: <ArrowRightLeft size={17} />,
+    icon: <PiggyBank size={17} />,
   },
   {
     id: '6',
@@ -38,19 +41,19 @@ const DL = [
     id: '2',
     label: 'Payroll',
     link: '/payroll',
-    icon: <HeartHandshake size={17} />,
+    icon: <HandCoins size={17} />,
   },
   {
     id: '3',
     label: 'Employee Records',
     link: '/employee-records',
-    icon: <Check size={17} />,
+    icon: <User size={17} />,
   },
   {
     id: '4',
     label: 'Loan Records',
     link: '/loan-records',
-    icon: <HandCoins size={17} />,
+    icon: <Landmark size={17} />,
   },
 ];
 

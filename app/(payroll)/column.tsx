@@ -1,7 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
 import {
-  PayrollEmployeeBenefitsFileInterface, PayrollEmployeeDeductionInterface, PayrollEmployeeMonthlyDeductionInterface, PayrollEmployeeRecordsInterface, PayrollPeriodsInterface,
+  PayrollEmployeeBenefitsFileInterface, PayrollEmployeeDeductionInterface, PayrollEmployeeLoanRecordsInterface, PayrollEmployeeMonthlyDeductionInterface, PayrollEmployeeRecordsInterface, PayrollPeriodsInterface,
 } from 'motherangela';
 import moment from 'moment';
 import Avatar from '@/components/custom/Avatar';
@@ -272,6 +272,55 @@ PayrollEmployeeMonthlyDeductionInterface>[] = [
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500 ">
         {row.original?.payroll_deduction.deduction_description ?? 'N/A'}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'amount',
+    header: 'Amount',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {row.original?.amount ?? 'N/A'}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'Action',
+    header: 'Action',
+    cell: ({ row }) => (
+      <Link
+        className="text-[12px]"
+        href={`/maternity/${row.original.monthly_deduction_id}`}
+      >
+        View
+      </Link>
+    ),
+  },
+];
+
+//
+export const payrollEmployeeLoanRecordsColumns: ColumnDef<
+PayrollEmployeeLoanRecordsInterface>[] = [
+  {
+    accessorKey: 'payroll_employee_record.fullname',
+    header: 'Name',
+    cell: ({ row }) => (
+      <div className="flex-row flex space-x-2 items-center">
+        <Avatar
+          name={row.original.payroll_employee_record?.full_name as string}
+        />
+        <p className="capitalize text-[12px]">
+          {row.original.payroll_employee_record?.full_name}
+        </p>
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'loan_description',
+    header: 'Description',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {row.original?.loan_description ?? 'N/A'}
       </div>
     ),
   },
