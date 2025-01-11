@@ -1,11 +1,146 @@
 import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
-import { AntenatalProfileInterface, InternalPharmacyRequestInterface, MedicineStockInterface } from 'motherangela';
+import {
+  InternalPharmacyRequestInterface, MedicationStockTakeInterface, MedicineInterface,
+} from 'motherangela';
 import moment from 'moment';
+import { useRouter } from 'next/navigation';
+import { MoveRight } from 'lucide-react';
 import Avatar from '@/components/custom/Avatar';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
-export const medicineStockColumns: ColumnDef<MedicineStockInterface>[] = [
+export const medicineStockColumns: ColumnDef<MedicationStockTakeInterface>[] = [
+  // {
+  //   id: "select",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={
+  //         table.getIsAllPageRowsSelected() ||
+  //         (table.getIsSomePageRowsSelected() && "indeterminate")
+  //       }
+  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+  //       aria-label="Select all"
+  //     />
+  //   ),
+  //   cell: ({ row }) => (
+  //     <Checkbox
+  //       checked={row.getIsSelected()}
+  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
+  //       aria-label="Select row"
+  //     />
+  //   ),
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
+  {
+    accessorKey: 'medication_name',
+    header: 'Name',
+    cell: ({ row }) => {
+      const { medication_name } = row.original;
+      return (
+        <p className="capitalize text-[12px]">{medication_name.length > 40 ? `${medication_name.substring(0, 25)}...` : medication_name}</p>
+      );
+    },
+  },
+  {
+    accessorKey: 'medication_packaging_type_description',
+    header: 'Category',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        <p>
+          {row.original?.medication_packaging_type_description}
+
+        </p>
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'current_quantity',
+    header: 'Current',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500">
+        <div className="flex flex-row space-x-2 items-center">
+          {/* <p>Price:</p> */}
+          <p>{row.original.current_quantity}</p>
+        </div>
+
+        {/*  */}
+        {/* <div className="flex flex-row space-x-2 items-center">
+          <p>Corporate:</p>
+          <p>{row.original.price_corporate}</p>
+        </div> */}
+
+        {/*  */}
+        {/* <div className="flex flex-row space-x-2 items-center">
+          <p>Foreigner:</p>
+          <p>{row.original.price_foreigner}</p>
+        </div> */}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'correct_quantity',
+    header: 'Counted',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500">
+        <div className="flex flex-row space-x-2 items-center">
+          {/* <p>Price:</p> */}
+          <p>{row.original.correct_quantity}</p>
+        </div>
+
+        {/*  */}
+        {/* <div className="flex flex-row space-x-2 items-center">
+          <p>Corporate:</p>
+          <p>{row.original.price_corporate}</p>
+        </div> */}
+
+        {/*  */}
+        {/* <div className="flex flex-row space-x-2 items-center">
+          <p>Foreigner:</p>
+          <p>{row.original.price_foreigner}</p>
+        </div> */}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'quantity_variance',
+    header: 'Qty. Variance',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {row.original.quantity_variance}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'date_of_stock_take',
+    header: 'Date',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {moment(row.original.date_of_stock_take).format('ll')}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'action',
+    header: 'Details',
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <Button
+          className="text-[12px] shadow-none"
+          variant="outline"
+          size="sm"
+          onClick={() => router.push(`/medicine-stock-take/${row.original.medication_stock_take_id}?medicine_id=${row.original.medication_id}`)}
+        >
+          <MoveRight />
+        </Button>
+      );
+    },
+  },
+];
+
+export const medicineColumns: ColumnDef<MedicineInterface>[] = [
   // {
   //   id: "select",
   //   header: ({ table }) => (
@@ -100,107 +235,6 @@ export const medicineStockColumns: ColumnDef<MedicineStockInterface>[] = [
 ];
 
 //
-export const maternityAntenatalProfileColumns: ColumnDef<AntenatalProfileInterface>[] = [
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
-  {
-    accessorKey: 'name_of_client',
-    header: 'Name',
-    cell: ({ row }) => (
-      <div className="flex-row flex space-x-2 items-center">
-        <Avatar
-          name={row.original.maternity_profile?.name_of_client as string}
-        />
-        <p className="capitalize text-[12px]">
-          {row.original.maternity_profile?.name_of_client}
-        </p>
-      </div>
-    ),
-  },
-  {
-    accessorKey: 'blood_group',
-    header: 'Blood Group',
-    cell: ({ row }) => (
-      <div className="text-[12px] text-slate-500 ">
-        {row.original?.blood_group ?? 'N/A'}
-      </div>
-    ),
-  },
-  {
-    accessorKey: 'hb',
-    header: 'HP',
-    cell: ({ row }) => (
-      <div className="text-[12px] text-slate-500">
-        <p>{row.original.hb}</p>
-      </div>
-    ),
-  },
-
-  {
-    accessorKey: 'hiv',
-    header: 'HIV',
-    cell: ({ row }) => (
-      <p className="text-[12px] text-slate-500">{row.original.hiv}</p>
-    ),
-  },
-  {
-    accessorKey: 'rhesus',
-    header: 'Rhesus',
-    cell: ({ row }) => (
-      <p className="text-[12px] text-slate-500">{row.original.rhesus}</p>
-    ),
-  },
-  {
-    accessorKey: 'serology',
-    header: 'Serology',
-    cell: ({ row }) => (
-      <p className="text-[12px] text-slate-500">{row.original.serology}</p>
-    ),
-  },
-  {
-    accessorKey: 'tb_screening',
-    header: 'TB',
-    cell: ({ row }) => (
-      <p className="text-[12px] text-slate-500">
-        {row.original.tb_screening}
-      </p>
-    ),
-  },
-  {
-    accessorKey: 'action',
-    header: 'Action',
-    cell: ({ row }) => (
-      <Link
-        className="text-[12px]"
-        href={`/maternity/${row.original.maternity_profile_id}`}
-      >
-        View
-      </Link>
-    ),
-  },
-];
-
-//
 export const internalPharmacyRequestColumns: ColumnDef<InternalPharmacyRequestInterface>[] = [
   // {
   //   id: "select",
@@ -287,7 +321,7 @@ export const internalPharmacyRequestColumns: ColumnDef<InternalPharmacyRequestIn
     accessorKey: 'delivery_status',
     header: 'Delivery Status',
     cell: ({ row }) => (
-      row.original.delivery_status === 1 ? (
+      row.original?.delivery_status === 1 ? (
         <Badge
           className="bg-emerald-50 hover:bg-emerald-100 text-emerald-500 shadow-none"
         >
