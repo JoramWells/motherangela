@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { MedicinePurchaseInterface, PaginatedResponse } from 'motherangela';
 
 export const medicinePurchasesApi = createApi({
-  reducerPath: "medicinePurchasesApi",
+  reducerPath: 'medicinePurchasesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/root-server/medication-purchase`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/pharmacy-service/medication-purchase`,
   }),
   endpoints: (builder) => ({
     getAllMedicinePurchases: builder.query<
@@ -17,19 +18,19 @@ export const medicinePurchasesApi = createApi({
             pageSize,
             searchQuery,
           } = params;
-          let queryString = "";
+          let queryString = '';
           queryString += `page=${page}`;
           queryString += `&pageSize=${pageSize}`;
           queryString += `&searchQuery=${searchQuery}`;
           return `/fetchAll/?${queryString}`;
         }
-        return "fetchAll";
+        return 'fetchAll';
       },
     }),
     addMedicinePurchases: builder.mutation({
       query: (newMedicine) => ({
-        url: "add",
-        method: "POST",
+        url: 'add',
+        method: 'POST',
         body: newMedicine,
       }),
     }),
@@ -39,7 +40,7 @@ export const medicinePurchasesApi = createApi({
     updateMedicinePurchases: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `update${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: patch,
       }),
     }),
@@ -47,7 +48,7 @@ export const medicinePurchasesApi = createApi({
       query(id) {
         return {
           url: `delete${id}`,
-          method: "DELETE",
+          method: 'DELETE',
         };
       },
     }),

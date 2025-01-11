@@ -3,9 +3,10 @@
 import React from 'react';
 import { useGetAllMedicationQuery } from '@/api/medication/medicine.api';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { medicineStockColumns } from '../column';
+import { internalPharmacyRequestColumns, medicineStockColumns } from '../column';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
+import { useGetAllInternalPharmacyRequestsQuery } from '@/api/medication/internalPharmacyRequest.api';
 
 const listItems = [
   {
@@ -15,16 +16,15 @@ const listItems = [
   },
   {
     id: '2',
-    label: 'Medicine Stock',
+    label: 'Medicine Requests',
     link: '',
   },
 ];
 
-function MedicinesStockPage() {
+function InternalPharmacyRequests() {
   const {
     data, total, search, setSearch,
-  } = usePaginatedSearch({ fetchQuery: useGetAllMedicationQuery });
-
+  } = usePaginatedSearch({ fetchQuery: useGetAllInternalPharmacyRequestsQuery });
   return (
     <>
       <BreadcrumbNav
@@ -33,8 +33,8 @@ function MedicinesStockPage() {
       <div className="p-2">
 
         <TableContainer
-          title="Medicine Stock"
-          columns={medicineStockColumns}
+          title="Medicine Requests"
+          columns={internalPharmacyRequestColumns}
           data={data ?? []}
           total={total as number}
           search={search}
@@ -46,4 +46,4 @@ function MedicinesStockPage() {
   );
 }
 
-export default MedicinesStockPage;
+export default InternalPharmacyRequests;

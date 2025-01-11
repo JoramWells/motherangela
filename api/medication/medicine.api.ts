@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { MedicineStockInterface, PaginatedResponse } from 'motherangela';
 
 export const medicineApi = createApi({
-  reducerPath: "medicineApi",
+  reducerPath: 'medicineApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/root-server/medication`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/pharmacy-service/medication`,
   }),
   endpoints: (builder) => ({
     getAllMedication: builder.query<
@@ -13,19 +14,19 @@ export const medicineApi = createApi({
       query: (params) => {
         if (params) {
           const { page, pageSize, searchQuery } = params;
-          let queryString = "";
+          let queryString = '';
           queryString += `page=${page}`;
           queryString += `&pageSize=${pageSize}`;
           queryString += `&searchQuery=${searchQuery}`;
           return `/fetchAll/?${queryString}`;
         }
-        return "fetchAll";
+        return 'fetchAll';
       },
     }),
     addMedication: builder.mutation({
       query: (newMedication) => ({
-        url: "add",
-        method: "POST",
+        url: 'add',
+        method: 'POST',
         body: newMedication,
       }),
     }),
@@ -35,7 +36,7 @@ export const medicineApi = createApi({
     updateMedication: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `update${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: patch,
       }),
     }),
@@ -43,7 +44,7 @@ export const medicineApi = createApi({
       query(id) {
         return {
           url: `delete${id}`,
-          method: "DELETE",
+          method: 'DELETE',
         };
       },
     }),

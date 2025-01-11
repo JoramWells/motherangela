@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { MedicineStockInterface, PaginatedResponse } from 'motherangela';
 
-export const medicineStockTakeApi = createApi({
-  reducerPath: 'medicineStockTakeApi',
+export const internalPharmacyRequestsApi = createApi({
+  reducerPath: 'internalPharmacyRequestsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/pharmacy-service/medication-stock-take`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/pharmacy-service/internal-pharmacy-requests`,
   }),
   endpoints: (builder) => ({
-    getAllMedicineStockTake: builder.query<
+    getAllInternalPharmacyRequests: builder.query<
       PaginatedResponse<MedicineStockInterface>,
       { page: number; pageSize: number; searchQuery: string }
     >({
@@ -23,27 +23,27 @@ export const medicineStockTakeApi = createApi({
         return 'fetchAll';
       },
     }),
-    addMedicineStockTake: builder.mutation({
+    addInternalPharmacyRequest: builder.mutation({
       query: (newMedicine) => ({
         url: 'add',
         method: 'POST',
         body: newMedicine,
       }),
     }),
-    getMedicineStockTake: builder.query({
+    getInternalPharmacyRequest: builder.query({
       query: (id) => `detail/${id}`,
     }),
-    getMedicineStockTakeSeries: builder.query({
+    getInternalPharmacyRequestSeries: builder.query({
       query: () => 'stock-take-series',
     }),
-    updateMedicineStockTake: builder.mutation({
+    updateInternalPharmacyRequest: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `update${id}`,
         method: 'PUT',
         body: patch,
       }),
     }),
-    deleteMedicineStockTake: builder.mutation({
+    deleteInternalPharmacyRequest: builder.mutation({
       query(id) {
         return {
           url: `delete${id}`,
@@ -55,8 +55,8 @@ export const medicineStockTakeApi = createApi({
 });
 
 export const {
-  useGetAllMedicineStockTakeQuery, useAddMedicineStockTakeMutation,
-  useGetMedicineStockTakeQuery,
-  useUpdateMedicineStockTakeMutation, useDeleteMedicineStockTakeMutation,
-  useGetMedicineStockTakeSeriesQuery,
-} = medicineStockTakeApi;
+  useGetAllInternalPharmacyRequestsQuery, useAddInternalPharmacyRequestMutation,
+  useGetInternalPharmacyRequestQuery,
+  useUpdateInternalPharmacyRequestMutation, useDeleteInternalPharmacyRequestMutation,
+  useGetInternalPharmacyRequestSeriesQuery,
+} = internalPharmacyRequestsApi;

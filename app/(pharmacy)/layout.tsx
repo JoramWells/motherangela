@@ -2,8 +2,10 @@
 
 import {
   ArrowRightLeft,
+  BookOpenCheck,
   Check,
   LayoutDashboardIcon,
+  Tablets,
   Users,
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
@@ -30,18 +32,18 @@ const DL = [
     id: '3',
     label: 'Pharmacy',
     link: '/pharmacy',
-    icon: <Check size={17} />,
+    icon: <Tablets size={17} />,
   },
   {
     id: '4',
     label: 'Medicine Stock Take',
     link: '/medicine-stock-take',
-    icon: <Users size={17} />,
+    icon: <BookOpenCheck size={17} />,
   },
   {
     id: '5',
-    label: 'Discharged',
-    link: '/discharged',
+    label: 'Requests',
+    link: '/requests',
     icon: <ArrowRightLeft size={17} />,
   },
 ];
