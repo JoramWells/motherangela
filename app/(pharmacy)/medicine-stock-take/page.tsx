@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { useGetAllMedicationQuery } from '@/api/medication/medicine.api';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { medicineStockColumns } from '../column';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';

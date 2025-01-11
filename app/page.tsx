@@ -8,6 +8,7 @@ export default function Home() {
       <div className="flex flex-row space-x-2">
         {[
           { id: useId(), link: '/administrator/pharmacy', label: 'Administrator' },
+          { id: useId(), link: '/accounts', label: 'Accounts' },
           { id: useId(), link: '/appointments', label: 'Appointments' },
           { id: useId(), link: '/insurances', label: 'Insurances' },
           { id: useId(), link: '/maternity', label: 'Maternity' },

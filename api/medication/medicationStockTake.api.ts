@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { MedicineStockInterface, PaginatedResponse } from 'motherangela';
+import { MedicationStockTakeInterface, MedicineStockInterface, PaginatedResponse } from 'motherangela';
 
 export const medicineStockTakeApi = createApi({
   reducerPath: 'medicineStockTakeApi',
@@ -30,10 +30,10 @@ export const medicineStockTakeApi = createApi({
         body: newMedicine,
       }),
     }),
-    getMedicineStockTake: builder.query({
+    getMedicineStockTake: builder.query<MedicationStockTakeInterface, string>({
       query: (id) => `detail/${id}`,
     }),
-    getMedicineStockTakeDetails: builder.query({
+    getMedicineStockTakeDetails: builder.query<MedicationStockTakeInterface[], string>({
       query: (id) => `details/${id}`,
     }),
     getMedicineStockTakeSeries: builder.query({

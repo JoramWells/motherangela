@@ -3,10 +3,9 @@
 import {
   ArrowRightLeft,
   BookOpenCheck,
-  Check,
+  HandCoins,
   LayoutDashboardIcon,
   Tablets,
-  Users,
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
 import { Provider } from 'react-redux';
@@ -33,6 +32,12 @@ const DL = [
     label: 'Pharmacy',
     link: '/pharmacy',
     icon: <Tablets size={17} />,
+  },
+  {
+    id: '2',
+    label: 'Purchases',
+    link: '/purchases',
+    icon: <HandCoins size={17} />,
   },
   {
     id: '4',

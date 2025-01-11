@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { MedicineStockInterface, PaginatedResponse } from 'motherangela';
+import { InternalPharmacyRequestInterface, PaginatedResponse } from 'motherangela';
 
 export const internalPharmacyRequestsApi = createApi({
   reducerPath: 'internalPharmacyRequestsApi',
@@ -8,7 +8,7 @@ export const internalPharmacyRequestsApi = createApi({
   }),
   endpoints: (builder) => ({
     getAllInternalPharmacyRequests: builder.query<
-      PaginatedResponse<MedicineStockInterface>,
+      PaginatedResponse<InternalPharmacyRequestInterface>,
       { page: number; pageSize: number; searchQuery: string }
     >({
       query: (params) => {

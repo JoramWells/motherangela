@@ -2,10 +2,10 @@
 
 import React from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { internalPharmacyRequestColumns } from '../column';
+import { medicinePurchaseColumns } from '../column';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
-import { useGetAllInternalPharmacyRequestsQuery } from '@/api/medication/internalPharmacyRequest.api';
+import { useGetAllMedicinePurchasesQuery } from '@/api/medication/medicinePurchases.api';
 
 const listItems = [
   {
@@ -15,7 +15,7 @@ const listItems = [
   },
   {
     id: '2',
-    label: 'Medicine Requests',
+    label: 'Medicine Purchases',
     link: '',
   },
 ];
@@ -23,7 +23,8 @@ const listItems = [
 function InternalPharmacyRequests() {
   const {
     data, total, search, setSearch,
-  } = usePaginatedSearch({ fetchQuery: useGetAllInternalPharmacyRequestsQuery });
+  } = usePaginatedSearch({ fetchQuery: useGetAllMedicinePurchasesQuery });
+  console.log(data);
   return (
     <>
       <BreadcrumbNav
@@ -33,7 +34,7 @@ function InternalPharmacyRequests() {
 
         <TableContainer
           title="Medicine Requests"
-          columns={internalPharmacyRequestColumns}
+          columns={medicinePurchaseColumns}
           data={data ?? []}
           total={total as number}
           search={search}

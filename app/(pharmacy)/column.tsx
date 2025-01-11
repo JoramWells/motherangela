@@ -2,6 +2,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
 import {
   InternalPharmacyRequestInterface, MedicationStockTakeInterface, MedicineInterface,
+  MedicinePurchaseInterface,
 } from 'motherangela';
 import moment from 'moment';
 import { useRouter } from 'next/navigation';
@@ -11,28 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 export const medicineStockColumns: ColumnDef<MedicationStockTakeInterface>[] = [
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
+
   {
     accessorKey: 'medication_name',
     header: 'Name',
@@ -113,11 +93,11 @@ export const medicineStockColumns: ColumnDef<MedicationStockTakeInterface>[] = [
     ),
   },
   {
-    accessorKey: 'date_of_stock_take',
+    accessorKey: 'latestStockTakeDate',
     header: 'Date',
     cell: ({ row }) => (
       <p className="text-[12px] text-slate-500">
-        {moment(row.original.date_of_stock_take).format('ll')}
+        {moment(row.original.latestStockTakeDate).format('ll')}
       </p>
     ),
   },
@@ -141,28 +121,7 @@ export const medicineStockColumns: ColumnDef<MedicationStockTakeInterface>[] = [
 ];
 
 export const medicineColumns: ColumnDef<MedicineInterface>[] = [
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
+
   {
     accessorKey: 'medication_name',
     header: 'Name',
@@ -236,28 +195,7 @@ export const medicineColumns: ColumnDef<MedicineInterface>[] = [
 
 //
 export const internalPharmacyRequestColumns: ColumnDef<InternalPharmacyRequestInterface>[] = [
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
+
   {
     accessorKey: 'patient_detail?.first_name',
     header: 'Patient Name',
@@ -362,6 +300,98 @@ export const internalPharmacyRequestColumns: ColumnDef<InternalPharmacyRequestIn
       <Link
         className="text-[12px]"
         href={`/maternity/${row.original.maternity_profile_id}`}
+      >
+        View
+      </Link>
+    ),
+  },
+];
+
+//
+export const medicinePurchaseColumns: ColumnDef<MedicinePurchaseInterface>[] = [
+
+  {
+    accessorKey: 'medication.medication_name',
+    header: 'Medicine',
+    cell: ({ row }) => {
+      const medication_name = row.original.medication?.medication_name.substring(0, 20);
+      return (
+        <p className="text-[12px] text-slate-500">
+          { medication_name?.length > 20 ? `${`${medication_name?.substring(0, 20)}..`}` : medication_name}
+        </p>
+      );
+    },
+  },
+  {
+    accessorKey: 'user.full_name',
+    header: 'Ordered By',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {row.original?.user?.full_name ?? 'N/A'}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'hospital_store.hospital_store_description',
+    header: 'Store',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500">
+        {row.original.hospital_store.hospital_store_description}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'medication_purchase_type.medication_purchase_type_description',
+    header: 'Type',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500">
+        {row.original.medication_purchase_type.medication_purchase_type_description}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'real_quantity',
+    header: 'Quantity',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500">
+        <p>
+          Qty:
+          {row.original.quantity}
+
+        </p>
+        <p>
+          Real Qty:
+          {row.original.real_quantity}
+
+        </p>
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'price',
+    header: 'Price',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500">
+        {row.original.price}
+
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'date_of_receipt',
+    header: 'Date of Receipt',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">{moment(row.original.date_of_receipt).format('ll')}</p>
+    ),
+  },
+
+  {
+    accessorKey: 'action',
+    header: 'Action',
+    cell: ({ row }) => (
+      <Link
+        className="text-[12px]"
+        href={`/maternity/${row.original.purchase_id}`}
       >
         View
       </Link>

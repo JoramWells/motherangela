@@ -1,18 +1,9 @@
 'use client';
 
-import { TrendingUp } from 'lucide-react';
 import {
   CartesianGrid, Line, LineChart, XAxis,
 } from 'recharts';
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
 import {
   ChartConfig,
   ChartContainer,
@@ -36,7 +27,7 @@ export default function TimeSeriesChart({ data }:{data:any[]}) {
 
     <ChartContainer
       config={chartConfig}
-      className="h-[250px] w-full bg-white"
+      className="h-[250px] w-full bg-white rounded-lg"
     >
       <LineChart
         accessibilityLayer
