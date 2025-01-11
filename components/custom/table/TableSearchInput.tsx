@@ -68,7 +68,7 @@ function TableSearchInput<TData, TValue>({
         {filter && filter}
       </div>
 
-      <div className="flex flex-row space-x-4 items-center">
+      <div className="flex flex-row space-x-4 items-center mr-2">
         {/* <CSVLink data={data as object[]}> */}
         <Button
           className="bg-slate-100 text-slate-600 hover:bg-slate-200
@@ -76,7 +76,7 @@ function TableSearchInput<TData, TValue>({
                 "
           size="sm"
         >
-          <FileDown size={15} className="mr-2" />
+          <FileDown size={15} className="" />
           Export
         </Button>
         {/* </CSVLink> */}
@@ -86,7 +86,7 @@ function TableSearchInput<TData, TValue>({
             <Button variant="ghost" className="ml-auto shadow-none" size="sm">
               Columns
               {' '}
-              <ChevronDownIcon className="ml-2 h-4 w-4" />
+              <ChevronDownIcon className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">

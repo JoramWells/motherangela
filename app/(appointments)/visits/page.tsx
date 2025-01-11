@@ -45,6 +45,8 @@ function Patients() {
   //   label: insurance.insurance_name,
   // })), [insuranceData])();
 
+  console.log(data);
+
   return (
     <>
       <BreadcrumbNav

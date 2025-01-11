@@ -16,7 +16,7 @@ function AppointmentDetail({ params }:{params:{id: string}}) {
           <div
             className="p-2 border-b border-slate-200"
           >
-            <p>{`${data?.patient.first_name} ${data?.patient.middle_name}`}</p>
+            <p>{`${data?.patient_detail?.first_name} ${data?.patient_detail?.middle_name}`}</p>
           </div>
           {/*  */}
           <div className="flex flex-row justify-between p-2 text-[14px]">

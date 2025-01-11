@@ -2,13 +2,12 @@
 
 import React, { useState } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { columns } from '../column';
-import { useGetAppointmentsQuery } from '@/api/appointments/appointments.api';
-import usePreprocessData from '@/hooks/usePreprocessData';
+import { diagnosesColumns } from '../column';
 import AppointmentFilter from '@/components/custom/filters/AppointementFilter';
 import { useGetAllInsurancesQuery } from '@/api/insurance/insurance.api';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
+import { useGetAppointmentDiagnosesDiagnosesQuery } from '@/api/appointments/appointmentDiagnoses.api';
 
 const listItems = [
   {
@@ -18,15 +17,15 @@ const listItems = [
   },
   {
     id: '2',
-    label: 'Payroll Records',
+    label: 'Diagnoses',
     link: '',
   },
 ];
 
-function Patients() {
+function DiagnosesPage() {
   const {
     data, total, search, setSearch,
-  } = usePaginatedSearch({ fetchQuery: useGetAppointmentsQuery });
+  } = usePaginatedSearch({ fetchQuery: useGetAppointmentDiagnosesDiagnosesQuery });
 
   const [gender, setGender] = useState('male');
   const [insurance, setInsurance] = useState('');
@@ -38,13 +37,7 @@ function Patients() {
     searchQuery: '',
   });
 
-  const { data: processedInsData } = usePreprocessData(insuranceData);
-
-  // const insuranceOptions = useCallback(() => processedInsData?.map((insurance) => ({
-  //   id: insurance.insurance_name,
-  //   label: insurance.insurance_name,
-  // })), [insuranceData])();
-
+  console.log(data, 'dtx');
   return (
     <>
       <BreadcrumbNav
@@ -53,8 +46,8 @@ function Patients() {
       <div className="p-2">
 
         <TableContainer
-          title="Patient History"
-          columns={columns}
+          title="Patient Diagnoses"
+          columns={diagnosesColumns}
           data={data ?? []}
           total={total as number}
           search={search}
@@ -78,4 +71,4 @@ function Patients() {
   );
 }
 
-export default Patients;
+export default DiagnosesPage;

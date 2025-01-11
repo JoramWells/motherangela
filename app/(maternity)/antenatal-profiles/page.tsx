@@ -5,21 +5,41 @@ import { DataTable } from '@/components/custom/table/DataTable';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { maternityAntenatalProfileColumns } from '../column';
 import { useGetAllMaternityAntenatalProfileQuery } from '@/api/maternity/maternity-antenantal-profile.api';
+import usePaginatedSearch from '@/hooks/usePaginatedSearch';
+import TableContainer from '@/components/custom/table/TableContainer';
+
+const listItems = [
+  {
+    id: '1',
+    label: 'home',
+    link: '/',
+  },
+  {
+    id: '2',
+    label: 'Maternity',
+    link: '',
+  },
+];
 
 function Patients() {
-  const { data: profileData } = useGetAllMaternityAntenatalProfileQuery();
+  const {
+    data, total, search, setSearch,
+  } = usePaginatedSearch({ fetchQuery: useGetAllMaternityAntenatalProfileQuery });
   return (
     <>
-      <BreadcrumbNav />
+      <BreadcrumbNav
+        listItems={listItems}
+      />
       <div className="p-2">
-        <div className="w-full bg-white rounded-lg border">
-          <div className="p-2 bg-zinc-50 rounded-t-lg border-b border-slate-200">
-            <h2 className="text-lg  text-slate-700">
-              Antenatal Profiles
-            </h2>
-          </div>
-          <DataTable columns={maternityAntenatalProfileColumns} data={profileData ?? []} />
-        </div>
+        <TableContainer
+          title="Antenatal Profiles"
+          columns={maternityAntenatalProfileColumns}
+          data={data ?? []}
+          search={search}
+          setSearch={setSearch}
+          total={total as number}
+        />
+
       </div>
     </>
   );

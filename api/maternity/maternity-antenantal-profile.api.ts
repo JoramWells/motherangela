@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { AntenatalProfileInterface } from 'motherangela';
+import { AntenatalProfileInterface, PaginatedResponse } from 'motherangela';
 
 export const maternityAntenatalProfileApi = createApi({
   reducerPath: 'maternityAntenatalProfileApi',
@@ -9,8 +9,21 @@ export const maternityAntenatalProfileApi = createApi({
   endpoints: (builder) => ({
 
     // Get Maternity Antenatal Profile
-    getAllMaternityAntenatalProfile: builder.query<AntenatalProfileInterface[], void>({
-      query: () => '/fetchAll',
+    getAllMaternityAntenatalProfile: builder.query<PaginatedResponse<AntenatalProfileInterface>[],
+      { page: number; pageSize: number; searchQuery: string }
+
+    >({
+      query: (params) => {
+        if (params) {
+          const { page, pageSize, searchQuery } = params;
+          let queryString = '';
+          queryString += `page=${page}`;
+          queryString += `&pageSize=${pageSize}`;
+          queryString += `&searchQuery=${searchQuery}`;
+          return `/fetchAll/?${queryString}`;
+        }
+        return 'fetchAll';
+      },
     }),
     addMaternityAntenatalProfile: builder.mutation({
       query: (newMaternity) => ({
