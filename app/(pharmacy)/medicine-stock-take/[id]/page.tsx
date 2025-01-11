@@ -12,7 +12,7 @@ function StockDetailPage({ params }:{params:Usable<{id: string}>}) {
   const medicine_id = searchParams.get('medicine_id');
   const { id } = use(params);
 
-  const { data } = useGetMedicineStockTakeDetailsQuery(medicine_id, {
+  const { data } = useGetMedicineStockTakeDetailsQuery(medicine_id as string, {
     skip: !medicine_id,
   });
 
@@ -41,12 +41,10 @@ function StockDetailPage({ params }:{params:Usable<{id: string}>}) {
     [medicineDetail],
   );
 
-  console.log(medicineDetail);
+  const dates = data?.map((item) => new Date(item.date_of_stock_take as string)) ?? [new Date()];
 
-  const dates = data?.map((item) => new Date(item.date_of_stock_take as string)) ?? [];
-
-  const maxDate = new Date(Math.max(...dates));
-  const minDate = new Date(Math.min(...dates));
+  const maxDate = new Date(Math.max(...dates.map((date) => date.getTime())));
+  const minDate = new Date(Math.min(...dates.map((date) => date.getTime())));
 
   return (
     <div>

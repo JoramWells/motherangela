@@ -26,7 +26,6 @@ function MedicinesStockPage() {
   const {
     data, total, search, setSearch,
   } = usePaginatedSearch({ fetchQuery: useGetAllMedicineStockTakeQuery });
-  console.log(data);
   const router = useRouter();
   return (
     <>
