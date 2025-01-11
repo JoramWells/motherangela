@@ -1,7 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table';
 import moment from 'moment';
 import Link from 'next/link';
-import { AntenatalProfileInterface, MaternityProfileInterface } from 'motherangela';
+import { AntenatalProfileInterface, MaternityDeliveryInterface, MaternityProfileInterface } from 'motherangela';
 import Avatar from '@/components/custom/Avatar';
 
 export const maternityProfileColumns: ColumnDef<MaternityProfileInterface>[] = [
@@ -184,6 +184,84 @@ export const maternityAntenatalProfileColumns: ColumnDef<AntenatalProfileInterfa
       <Link
         className="text-[12px]"
         href={`/maternity/${row.original.maternity_profile_id}`}
+      >
+        View
+      </Link>
+    ),
+  },
+];
+
+//
+export const maternityDeliveriesColumns: ColumnDef<MaternityDeliveryInterface>[] = [
+  // {
+  //   id: "select",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={
+  //         table.getIsAllPageRowsSelected() ||
+  //         (table.getIsSomePageRowsSelected() && "indeterminate")
+  //       }
+  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+  //       aria-label="Select all"
+  //     />
+  //   ),
+  //   cell: ({ row }) => (
+  //     <Checkbox
+  //       checked={row.getIsSelected()}
+  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
+  //       aria-label="Select row"
+  //     />
+  //   ),
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
+  {
+    accessorKey: 'name_of_client',
+    header: 'Name',
+    cell: ({ row }) => (
+      <div className="flex-row flex space-x-2 items-center">
+        <Avatar
+          name={row.original.maternity_profile?.name_of_client as string}
+        />
+        <p className="capitalize text-[12px]">
+          {row.original.maternity_profile?.name_of_client}
+        </p>
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'duration_of_pregnancy',
+    header: 'Duration of Pregnancy',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {row.original?.duration_of_pregnancy ?? 'N/A'}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'date_of_delivery',
+    header: 'Date of Delivery',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500">
+        <p>{moment(row.original.date_of_delivery).format('ll')}</p>
+      </div>
+    ),
+  },
+
+  {
+    accessorKey: 'mode_of_delivery',
+    header: 'Mode',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">{row.original.mode_of_delivery}</p>
+    ),
+  },
+  {
+    accessorKey: 'action',
+    header: 'Details',
+    cell: ({ row }) => (
+      <Link
+        className="text-[12px]"
+        href={`/maternity/${row.original.maternity_delivery_id}`}
       >
         View
       </Link>

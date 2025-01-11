@@ -1,12 +1,11 @@
 'use client';
 
 import React from 'react';
-import { AntenatalProfileInterface } from 'motherangela';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { maternityAntenatalProfileColumns } from '../column';
-import { useGetAllMaternityAntenatalProfileQuery } from '@/api/maternity/maternity-antenantal-profile.api';
+import { maternityDeliveriesColumns } from '../column';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
+import { useGetAllMaternityDeliveriesQuery } from '@/api/maternity/maternity-deliveries.api';
 
 const listItems = [
   {
@@ -16,18 +15,16 @@ const listItems = [
   },
   {
     id: '2',
-    label: 'Antenatal Profile',
+    label: 'Maternity Delivery',
     link: '',
   },
 ];
 
-function Patients() {
+function DeliveryPage() {
   const {
     data, total, search, setSearch,
-  } = usePaginatedSearch<AntenatalProfileInterface>({
-    fetchQuery:
-    useGetAllMaternityAntenatalProfileQuery,
-  });
+  } = usePaginatedSearch({ fetchQuery: useGetAllMaternityDeliveriesQuery });
+  console.log(data);
   return (
     <>
       <BreadcrumbNav
@@ -35,8 +32,8 @@ function Patients() {
       />
       <div className="p-2">
         <TableContainer
-          title="Antenatal Profiles"
-          columns={maternityAntenatalProfileColumns}
+          title="Maternity Deliveries"
+          columns={maternityDeliveriesColumns}
           data={data ?? []}
           search={search}
           setSearch={setSearch}
@@ -48,4 +45,4 @@ function Patients() {
   );
 }
 
-export default Patients;
+export default DeliveryPage;
