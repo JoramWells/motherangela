@@ -1,23 +1,100 @@
 import React, { useId } from 'react';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Home() {
   return (
     <div className="p-2">
-      <div className="flex flex-row space-x-2">
+      <div className="grid grid-cols-4 gap-4">
         {[
-          { id: useId(), link: '/administrator/pharmacy', label: 'Administrator' },
-          { id: useId(), link: '/accounts', label: 'Accounts' },
-          { id: useId(), link: '/appointments', label: 'Appointments' },
-          { id: useId(), link: '/insurances', label: 'Insurances' },
-          { id: useId(), link: '/maternity', label: 'Maternity' },
-          { id: useId(), link: '/patients', label: 'Patients' },
-          { id: useId(), link: '/payroll', label: 'Payroll' },
-          { id: useId(), link: '/pharmacy', label: 'Pharmacy' },
+          {
+            id: useId(),
+            link: '/administrator/pharmacy',
+            label: 'Administrator',
+            url: '/assets/img/cash.png',
+            description: 'Lorem Ipsum dolet Mwat!!',
+
+          },
+          {
+            id: useId(),
+            link: '/accounts',
+            label: 'Accounts',
+            url: '/assets/img/cash.png',
+            description: 'Lorem ipsum dolet Mwat!!',
+
+          },
+          {
+            id: useId(),
+            link: '/appointments',
+            label: 'Appointments',
+            url: '/assets/img/calendar.png',
+            description: 'Lorem ipsum dolet Mwat!!',
+
+          },
+          {
+            id: useId(),
+            link: '/insurances',
+            label: 'Insurances',
+            url: '/assets/img/sha.png',
+            description: 'Lorem Ipsum dolet Mwat!!',
+
+          },
+          {
+            id: useId(),
+            link: '/maternity',
+            label: 'Maternity',
+            url: '/assets/img/maternity.png',
+            description: 'Lorem Ipsum dolet Mwat!!',
+
+          },
+          {
+            id: useId(),
+            link: '/patients',
+            label: 'Patients',
+            url: '/assets/img/patient.png',
+            description: 'Lorem Ipsum dolet Mwat!!',
+
+          },
+          {
+            id: useId(),
+            link: '/payroll',
+            label: 'Payroll',
+            url: '/assets/img/payroll.png',
+            description: 'Lorem Ipsum dolet Mwat!!',
+
+          },
+          {
+            id: useId(),
+            link: '/pharmacy',
+            label: 'Pharmacy',
+            url: '/assets/img/pharmacy.png',
+            description: 'Lorem Ipsum dolet Mwat!!',
+
+          },
         ].map((item) => (
-          <div className="flex-1 border rounded-lg p-2 h-[100px]" key={item.id}>
-            <Link href={item.link}>{item.label}</Link>
+          <div className="flex-1 border rounded-lg p-2 h-[100px] flex flex-row space-x-2 items-center" key={item.id}>
+            <div className="bg-white p-2 rounded-full ">
+              <Image
+                src={`${item.url}`}
+                alt="img"
+                width={30}
+                height={30}
+                style={{
+                  width: '30px',
+                  height: '30px',
+                  objectFit: 'contain',
+                }}
+              />
+            </div>
+            <div>
+              <Link href={item.link}>{item.label}</Link>
+              <p
+                className="text-[12px] text-slate-500 "
+              >
+                {item.description}
+              </p>
+            </div>
           </div>
         ))}
       </div>
