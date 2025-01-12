@@ -97,7 +97,7 @@ export const medicineStockColumns: ColumnDef<MedicationStockTakeInterface>[] = [
     header: 'Date',
     cell: ({ row }) => (
       <p className="text-[12px] text-slate-500">
-        {moment(row.original.latestStockTakeDate).format('ll')}
+        {moment(row.original.latest_stock_take_date).format('ll')}
       </p>
     ),
   },
@@ -232,7 +232,7 @@ export const internalPharmacyRequestColumns: ColumnDef<InternalPharmacyRequestIn
       const medication_name = row.original.medication?.medication_name.substring(0, 20);
       return (
         <p className="text-[12px] text-slate-500">
-          { medication_name?.length > 20 ? `${`${medication_name?.substring(0, 20)}..`}` : medication_name}
+          {(medication_name && medication_name?.length > 20) ? `${`${medication_name?.substring(0, 20)}..`}` : medication_name}
         </p>
       );
     },
@@ -242,7 +242,7 @@ export const internalPharmacyRequestColumns: ColumnDef<InternalPharmacyRequestIn
     header: 'Appointment Date',
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500">
-        <p>{moment(row.original.appointment.appointment_date).format('ll')}</p>
+        <p>{moment(row.original?.appointment?.appointment_date).format('ll')}</p>
       </div>
     ),
   },
@@ -299,7 +299,7 @@ export const internalPharmacyRequestColumns: ColumnDef<InternalPharmacyRequestIn
     cell: ({ row }) => (
       <Link
         className="text-[12px]"
-        href={`/maternity/${row.original.maternity_profile_id}`}
+        href={`/maternity/${row.original.pharmacy_request_id}`}
       >
         View
       </Link>

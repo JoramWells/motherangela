@@ -206,7 +206,7 @@ export const payrollColumns: ColumnDef<PayrollPeriodsInterface>[] = [
     header: 'Category',
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500 ">
-        {row.original?.payroll_employee_category.employee_category_description ?? 'N/A'}
+        {row.original?.payroll_employee_category?.employee_category_description ?? 'N/A'}
       </div>
     ),
   },
@@ -342,7 +342,7 @@ PayrollEmployeeLoanRecordsInterface>[] = [
     header: 'Amount',
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500 ">
-        {row.original?.amount ?? 'N/A'}
+        {row.original?.loan_amount ?? 'N/A'}
       </div>
     ),
   },
@@ -352,7 +352,7 @@ PayrollEmployeeLoanRecordsInterface>[] = [
     cell: ({ row }) => (
       <Link
         className="text-[12px]"
-        href={`/maternity/${row.original.monthly_deduction_id}`}
+        href={`/maternity/${row.original.loan_id}`}
       >
         View
       </Link>

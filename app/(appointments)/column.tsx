@@ -162,7 +162,7 @@ export const diagnosesColumns: ColumnDef<AppointmentDiagnosisInterface>[] = [
     accessorKey: 'charges',
     header: 'Status',
     cell: ({ row }) => {
-      const status = row.original.appointment.appointment_status;
+      const status = row.original?.appointment?.appointment_status;
       return (
         <div className="text-[12px] text-slate-500 ">
           {status ? (
