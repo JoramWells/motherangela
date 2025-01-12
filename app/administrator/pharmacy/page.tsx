@@ -2,7 +2,7 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { DataTable } from '@/components/custom/table/DataTable';
@@ -160,4 +160,10 @@ function MedicinesStockPage() {
   );
 }
 
-export default MedicinesStockPage;
+export default function WrappedMedicinesStockPage() {
+  return (
+    <Suspense>
+      <MedicinesStockPage />
+    </Suspense>
+  );
+}
