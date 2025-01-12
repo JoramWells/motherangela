@@ -6,12 +6,22 @@
 // import "../../globals.css";
 // import Link from 'next/link'
 import { ChevronRight, ChevronDown } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { ReactNode, useMemo, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { type SideBarCollapseButtonProps } from '@/types/forms';
 import { Button } from '@/components/ui/button';
 import { SidebarSubButton } from './SidebarButton';
+
+interface SideBarCollapseButtonProps {
+  icon?: ReactNode
+  label: string
+  link?: string
+  itemList?: Array<{
+    id?: string
+    link: string
+    label: string
+  }>
+}
 
 export function SidebarCollapseButton({
   label = 'Dashboard',
