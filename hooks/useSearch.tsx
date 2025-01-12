@@ -1,18 +1,20 @@
-import { type Dispatch, type SetStateAction, useEffect, useMemo } from "react";
-import debounce from "lodash/debounce";
+import {
+  type Dispatch, type SetStateAction, useEffect, useMemo,
+} from 'react';
+import debounce from 'lodash/debounce';
+
 interface UseSearchInputProps {
   search: string;
   setSearch: Dispatch<SetStateAction<string>>;
 }
 
 const useSearch = ({ search, setSearch }: UseSearchInputProps) => {
-  const debounceSearch = useMemo(() => {
-    // setSearch(value)
-
-    return debounce(async (value: string) => {
+  const debounceSearch = useMemo(
+    () => debounce(async (value: string) => {
       setSearch(value);
-    }, 500);
-  }, [setSearch]);
+    }, 500),
+    [setSearch],
+  );
 
   useEffect(() => {
     debounceSearch?.(search);
