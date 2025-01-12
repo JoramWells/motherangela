@@ -33,7 +33,7 @@ function Admission() {
 
       <div className="p-2">
         <TableContainer
-          title="Patient History"
+          title="In-Patient (Admitted)"
           columns={admissionColumn}
           data={data ?? []}
           total={total as number}

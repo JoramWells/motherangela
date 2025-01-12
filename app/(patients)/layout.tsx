@@ -1,7 +1,7 @@
 'use client';
 
 import {
-  ArrowRightLeft, History, LayoutDashboardIcon, UserCheck, Users,
+  ArrowRightLeft, Bed, LayoutDashboardIcon, UserCheck, Users,
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
 import { Provider } from 'react-redux';
@@ -43,9 +43,9 @@ const DL = [
   },
   {
     id: '8',
-    label: 'In-patient',
+    label: 'In-patient (Admitted)',
     link: '/in-patient',
-    icon: <History size={17} />,
+    icon: <Bed size={17} />,
   },
 ];
 

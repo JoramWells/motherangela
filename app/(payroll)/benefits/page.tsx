@@ -11,6 +11,19 @@ import usePreprocessData from '@/hooks/usePreprocessData';
 import useSearch from '@/hooks/useSearch';
 import { Badge } from '@/components/ui/badge';
 
+const listItems = [
+  {
+    id: '1',
+    label: 'home',
+    link: '/',
+  },
+  {
+    id: '2',
+    label: 'In Patient',
+    link: '',
+  },
+];
+
 function Patients() {
   const [search, setSearch] = useState('');
   const searchParams = useSearchParams();
@@ -26,7 +39,9 @@ function Patients() {
 
   return (
     <>
-      <BreadcrumbNav />
+      <BreadcrumbNav
+        listItems={listItems}
+      />
       <div className="p-2">
         <div className="w-full bg-white rounded-lg border">
           <div className="p-2 bg-zinc-50 rounded-t-lg border-b border-slate-200
