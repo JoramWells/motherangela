@@ -1,26 +1,46 @@
 'use client';
 
 import React from 'react';
-import { DataTable } from '@/components/custom/table/DataTable';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { admissionColumn } from '../column';
 import { useGetAllAdmissionsQuery } from '@/api/admission/admissions.api';
+import usePaginatedSearch from '@/hooks/usePaginatedSearch';
+import TableContainer from '@/components/custom/table/TableContainer';
+
+const listItems = [
+  {
+    id: '1',
+    label: 'home',
+    link: '/',
+  },
+  {
+    id: '2',
+    label: 'In Patient',
+    link: '',
+  },
+];
 
 function Admission() {
-  const { data: patientsData } = useGetAllAdmissionsQuery();
-  console.log(patientsData);
+  const {
+    data, total, search, setSearch,
+  } = usePaginatedSearch({ fetchQuery: useGetAllAdmissionsQuery });
+  console.log(data);
   return (
     <>
-      <BreadcrumbNav />
+      <BreadcrumbNav
+        listItems={listItems}
+      />
+
       <div className="p-2">
-        <div className="w-full bg-white rounded-lg border">
-          <div className="p-2 border-b bg-slate-50 rounded-t-lg">
-            <h2 className="text-lg text-slate-700">
-              Patient History
-            </h2>
-          </div>
-          <DataTable columns={admissionColumn} data={patientsData ?? []} />
-        </div>
+        <TableContainer
+          title="Patient History"
+          columns={admissionColumn}
+          data={data ?? []}
+          total={total as number}
+          search={search}
+          setSearch={setSearch}
+        />
+
       </div>
     </>
   );

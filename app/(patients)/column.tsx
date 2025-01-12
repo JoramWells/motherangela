@@ -3,6 +3,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import moment from 'moment';
 import { AdmissionInterface, PatientInterface } from 'motherangela';
 import { Badge } from '@/components/ui/badge';
+import Avatar from '@/components/custom/Avatar';
 
 export const columns: ColumnDef<PatientInterface>[] = [
   // {
@@ -31,11 +32,16 @@ export const columns: ColumnDef<PatientInterface>[] = [
     accessorKey: 'first_name',
     header: 'Name',
     cell: ({ row }) => (
-      <p>
-        {row.original.first_name}
-        {' '}
-        {row.original.middle_name}
-      </p>
+      <div className="flex-row flex space-x-2 items-center">
+        <Avatar
+          name={`${row.original.first_name} ${row.original.middle_name}`}
+        />
+        <p className="capitalize text-[12px]">
+          {row.original.first_name}
+          {' '}
+          {row.original.middle_name}
+        </p>
+      </div>
     ),
   },
   {
@@ -84,11 +90,16 @@ export const admissionColumn: ColumnDef<AdmissionInterface>[] = [
     accessorKey: 'first_name',
     header: 'Name',
     cell: ({ row }) => (
-      <p className="text-[12px]">
-        {row.original.patient_detail?.first_name}
-        {' '}
-        {row.original.patient_detail.middle_name}
-      </p>
+      <div className="flex-row flex space-x-2 items-center">
+        <Avatar
+          name={`${row.original.patient_detail?.first_name} ${row.original.patient_detail?.middle_name}`}
+        />
+        <p className="capitalize text-[12px]">
+          {row.original.patient_detail?.first_name}
+          {' '}
+          {row.original.patient_detail?.middle_name}
+        </p>
+      </div>
     ),
   },
   {

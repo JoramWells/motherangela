@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { AdmissionInterface, PaginatedResponse } from 'motherangela';
 
 export const admissionApi = createApi({
   reducerPath: 'admissionApi',
@@ -6,8 +7,21 @@ export const admissionApi = createApi({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/admission-service/admission`,
   }),
   endpoints: (builder) => ({
-    getAllAdmissions: builder.query({
-      query: () => 'fetchAll',
+    getAllAdmissions: builder.query<PaginatedResponse<AdmissionInterface>,
+      { page: number; pageSize: number; searchQuery: string }
+
+    >({
+      query: (params) => {
+        if (params) {
+          const { page, pageSize, searchQuery } = params;
+          let queryString = '';
+          queryString += `page=${page}`;
+          queryString += `&pageSize=${pageSize}`;
+          queryString += `&searchQuery=${searchQuery}`;
+          return `/fetchAll/?${queryString}`;
+        }
+        return 'fetchAll';
+      },
     }),
     addAdmission: builder.mutation({
       query: (newWard) => ({

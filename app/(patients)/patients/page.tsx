@@ -2,29 +2,44 @@
 
 import React from 'react';
 import { useGetPatientsQuery } from '@/api/patients/patients.api';
-import { DataTable } from '@/components/custom/table/DataTable';
 import { columns } from '../column';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
+import usePaginatedSearch from '@/hooks/usePaginatedSearch';
+import TableContainer from '@/components/custom/table/TableContainer';
+
+const listItems = [
+  {
+    id: '1',
+    label: 'home',
+    link: '/',
+  },
+  {
+    id: '2',
+    label: 'Payroll Records',
+    link: '',
+  },
+];
 
 function Patients() {
-  const { data: patientsData } = useGetPatientsQuery();
+  const {
+    data, search, setSearch, total,
+  } = usePaginatedSearch({ fetchQuery: useGetPatientsQuery });
   // console.log(patientsData);
   return (
     <>
-      <BreadcrumbNav />
+      <BreadcrumbNav
+        listItems={listItems}
+      />
       <div className="p-2">
-        <div className="w-full bg-white rounded-lg border">
-          <div
-            className="pl-2 pt-2"
-          >
-            <h2
-              className="text-lg font-semibold text-zinc-500"
-            >
-              Patient History
-            </h2>
-          </div>
-          <DataTable columns={columns} data={patientsData ?? []} />
-        </div>
+        <TableContainer
+          title="Patient History"
+          columns={columns}
+          data={data ?? []}
+          total={total as number}
+          search={search}
+          setSearch={setSearch}
+        />
+
       </div>
     </>
   );
