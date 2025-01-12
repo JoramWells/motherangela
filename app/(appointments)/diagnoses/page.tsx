@@ -74,11 +74,10 @@ function DiagnosesPage() {
   );
 }
 
-export default function WrappedDiagnosesPage(props: JSX.IntrinsicAttributes & { children:
-   React.ReactNode }) {
-     <Suspense
-       fallback={<div>Loading..</div>}
-     >
-       <DiagnosesPage {...props} />
-     </Suspense>;
+export default function WrappedDiagnosesPage(props: JSX.IntrinsicAttributes) {
+  <Suspense
+    fallback={<div>Loading..</div>}
+  >
+    <DiagnosesPage {...props} />
+  </Suspense>;
 }
