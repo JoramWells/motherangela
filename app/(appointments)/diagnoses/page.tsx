@@ -1,9 +1,10 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 'use client';
 
-import React, { Suspense, useState } from 'react';
+import React, { JSX, Suspense, useState } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { diagnosesColumns } from '../column';
 // import AppointmentFilter from '@/components/custom/filters/AppointementFilter';
@@ -41,7 +42,7 @@ function DiagnosesPage() {
   });
 
   return (
-    <Suspense>
+    <>
       <BreadcrumbNav
         listItems={listItems}
       />
@@ -69,8 +70,15 @@ function DiagnosesPage() {
         />
 
       </div>
-    </Suspense>
+    </>
   );
 }
 
-export default DiagnosesPage;
+export default function WrappedDiagnosesPage(props: JSX.IntrinsicAttributes & { children:
+   React.ReactNode }) {
+     <Suspense
+       fallback={<div>Loading..</div>}
+     >
+       <DiagnosesPage {...props} />
+     </Suspense>;
+}
