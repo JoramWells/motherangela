@@ -6,7 +6,7 @@
 import React, { Suspense, useState } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { diagnosesColumns } from '../column';
-import AppointmentFilter from '@/components/custom/filters/AppointementFilter';
+// import AppointmentFilter from '@/components/custom/filters/AppointementFilter';
 import { useGetAllInsurancesQuery } from '@/api/insurance/insurance.api';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
