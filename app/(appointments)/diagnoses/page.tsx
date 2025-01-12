@@ -3,7 +3,7 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { diagnosesColumns } from '../column';
 import AppointmentFilter from '@/components/custom/filters/AppointementFilter';
@@ -40,9 +40,8 @@ function DiagnosesPage() {
     searchQuery: '',
   });
 
-  console.log(data, 'dtx');
   return (
-    <>
+    <Suspense>
       <BreadcrumbNav
         listItems={listItems}
       />
@@ -70,7 +69,7 @@ function DiagnosesPage() {
         />
 
       </div>
-    </>
+    </Suspense>
   );
 }
 
