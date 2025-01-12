@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { insuranceServiceCostMappingColumns } from '../column';
 import { useGetAllInsuranceServiceCostMappingQuery } from '@/api/insurance/insuranceServiceCostMapping.api';
@@ -47,5 +47,9 @@ function ServiceCostMappingPage() {
 }
 
 export default function WrappedServiceCostMappingPage() {
-  return <ServiceCostMappingPage />;
+  return (
+    <Suspense>
+      <ServiceCostMappingPage />
+    </Suspense>
+  );
 }
