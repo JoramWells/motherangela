@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
@@ -74,12 +73,12 @@ function DiagnosesPage() {
   );
 }
 
-export default function WrappedDiagnosesPage(props: JSX.IntrinsicAttributes) {
+export default function WrappedDiagnosesPage() {
   return (
     <Suspense
       fallback={<div>Loading..</div>}
     >
-      <DiagnosesPage {...props} />
+      <DiagnosesPage />
     </Suspense>
   );
 }
