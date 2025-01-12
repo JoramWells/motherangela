@@ -15,6 +15,19 @@ import useSearch from '@/hooks/useSearch';
 import usePreprocessData from '@/hooks/usePreprocessData';
 import { useGetAllMedicineStockTakeQuery } from '@/api/medication/medicationStockTake.api';
 
+const listItems = [
+  {
+    id: '1',
+    label: 'home',
+    link: '/',
+  },
+  {
+    id: '2',
+    label: 'In Patient',
+    link: '',
+  },
+];
+
 function MedicinesStockPage() {
   const [search, setSearch] = useState('');
   const searchParams = useSearchParams();
@@ -51,7 +64,9 @@ function MedicinesStockPage() {
 
   return (
     <div>
-      <BreadcrumbNav />
+      <BreadcrumbNav
+        listItems={listItems}
+      />
       <CustomTab
         categoryList={[
           {
