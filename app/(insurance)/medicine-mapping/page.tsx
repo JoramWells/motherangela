@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Suspense } from 'react';
+import React from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { medicineMappingColumns } from '../column';
 import { useGetAllInsuranceMedicationMappingQuery } from '@/api/insurance/insuranceMedicineMapping.api';
@@ -26,7 +26,7 @@ function MedicineMapping() {
   } = usePaginatedSearch({ fetchQuery: useGetAllInsuranceMedicationMappingQuery });
 
   return (
-    <Suspense fallback={<div>loading..</div>}>
+    <>
       <BreadcrumbNav
         listItems={listItems}
       />
@@ -41,7 +41,7 @@ function MedicineMapping() {
         />
 
       </div>
-    </Suspense>
+    </>
   );
 }
 
