@@ -1,6 +1,6 @@
 'use client';
 
-import React, { use, useMemo } from 'react';
+import React, { Usable, use, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { useGetPayrollMonthlyDeductionByPayrollIDQuery } from '@/api/payroll/payrollMonthlyDeductions.api';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
@@ -10,7 +10,7 @@ import TableContainer from '@/components/custom/table/TableContainer';
 import { Button } from '@/components/ui/button';
 import { useGetPayrollPeriodQuery } from '@/api/payroll/payrollPeriods';
 
-function PayrollDetails({ params }:{params:any}) {
+function PayrollDetails({ params }:{params:Usable<{id:string}>}) {
   const router = useRouter();
   const { id } = use(params);
   const { data: periodData } = useGetPayrollPeriodQuery(id);

@@ -1,10 +1,10 @@
 'use client';
 
-import React, { use, useMemo } from 'react';
+import React, { Usable, use, useMemo } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { useGetPayrollPeriodQuery } from '@/api/payroll/payrollPeriods';
 
-function AddPayrollPage({ params }:{params:any}) {
+function AddPayrollPage({ params }:{params:Usable<{id: string}>}) {
   const { id } = use(params);
   const { data } = useGetPayrollPeriodQuery(id);
 

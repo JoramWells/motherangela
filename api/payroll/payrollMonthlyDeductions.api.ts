@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { PaginatedResponse, PayrollEmployeeMonthlyDeductionInterface } from 'motherangela';
 
 export const payrollMonthlyDeductionsApi = createApi({
   reducerPath: 'payrollMonthlyDeductionsApi',
@@ -20,7 +21,11 @@ export const payrollMonthlyDeductionsApi = createApi({
     getPayrollMonthlyDeduction: builder.query({
       query: (id) => `detail/${id}`,
     }),
-    getPayrollMonthlyDeductionByPayrollID: builder.query({
+    getPayrollMonthlyDeductionByPayrollID:
+    builder.query<PaginatedResponse<PayrollEmployeeMonthlyDeductionInterface>,
+      {id?: string, page: number; pageSize: number; searchQuery: string }
+
+    >({
       query: (params) => {
         if (params) {
           const {

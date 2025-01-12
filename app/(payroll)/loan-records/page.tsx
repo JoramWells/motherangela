@@ -1,34 +1,47 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import React from 'react';
+import { useRouter } from 'next/navigation';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { payrollEmployeeLoanRecordsColumns } from '../column';
 import { useGetAllPayrollEmployeeLoanRecordsQuery } from '@/api/payroll/payrollEmployeeLoanRecords.api';
 import { Button } from '@/components/ui/button';
 import TableContainer from '@/components/custom/table/TableContainer';
-import usePreprocessData from '@/hooks/usePreprocessData';
+import usePaginatedSearch from '@/hooks/usePaginatedSearch';
+
+const listItems = [
+  {
+    id: '1',
+    label: 'home',
+    link: '/',
+  },
+  {
+    id: '2',
+    label: 'Maternity Delivery',
+    link: '',
+  },
+];
 
 function Patients() {
-  const [search, setSearch] = useState('');
-  const searchParams = useSearchParams();
-  const page = searchParams.get('page');
-  const { data: profileData } = useGetAllPayrollEmployeeLoanRecordsQuery({
-    page: Number(page),
-    pageSize: 10,
-    searchQuery: search,
+  const {
+    data, total, search, setSearch,
+  } = usePaginatedSearch({
+    fetchQuery: useGetAllPayrollEmployeeLoanRecordsQuery,
   });
-  const { data, total } = usePreprocessData(profileData);
   const router = useRouter();
   return (
     <>
-      <BreadcrumbNav />
+      <BreadcrumbNav
+        listItems={listItems}
+      />
       <div className="p-2">
         <TableContainer
           title="Loan Records"
           columns={payrollEmployeeLoanRecordsColumns}
           data={data}
           total={total as number}
+          search={search}
+          setSearch={setSearch}
           rightLabel={(
             <Button
               size="sm"

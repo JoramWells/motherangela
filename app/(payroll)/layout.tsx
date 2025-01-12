@@ -1,10 +1,7 @@
 'use client';
 
 import {
-  ArrowRightLeft,
-  Check,
   HandCoins,
-  HeartHandshake,
   Landmark,
   LayoutDashboardIcon,
   NotebookPen,
