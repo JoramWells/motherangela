@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 'use client';
 
 import React, { useState } from 'react';
@@ -44,8 +47,6 @@ function Patients() {
   //   id: insurance.insurance_name,
   //   label: insurance.insurance_name,
   // })), [insuranceData])();
-
-  console.log(data);
 
   return (
     <>

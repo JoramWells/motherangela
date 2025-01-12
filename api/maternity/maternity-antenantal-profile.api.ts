@@ -9,7 +9,7 @@ export const maternityAntenatalProfileApi = createApi({
   endpoints: (builder) => ({
 
     // Get Maternity Antenatal Profile
-    getAllMaternityAntenatalProfile: builder.query<PaginatedResponse<AntenatalProfileInterface>[],
+    getAllMaternityAntenatalProfile: builder.query<PaginatedResponse<AntenatalProfileInterface>,
       { page: number; pageSize: number; searchQuery: string }
 
     >({

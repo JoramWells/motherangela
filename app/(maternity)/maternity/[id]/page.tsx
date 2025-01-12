@@ -1,16 +1,32 @@
 'use client';
 
-import React, { use } from 'react';
+import React, { Usable, use } from 'react';
+import moment from 'moment';
 import { useGetMaternityProfileQuery } from '@/api/maternity/maternity.api';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { Collapsible } from '@/components/custom/nav/Collapsible';
 
-function MaternityDetail({ params }:{params: any}) {
+const listItems = [
+  {
+    id: '1',
+    label: 'home',
+    link: '/',
+  },
+  {
+    id: '2',
+    label: 'Payroll Records',
+    link: '',
+  },
+];
+
+function MaternityDetail({ params }:{params: Usable<{id: string}>}) {
   const { id } = use(params);
   const { data } = useGetMaternityProfileQuery(id);
   return (
-    <div>
-      <BreadcrumbNav />
+    <>
+      <BreadcrumbNav
+        listItems={listItems}
+      />
       <div className="p-2">
         <div className="border w-1/2 rounded-lg flex  flex-col space-y-1">
           <div className="p-2">
@@ -68,7 +84,7 @@ function MaternityDetail({ params }:{params: any}) {
               {/*  */}
               <div className="flex flex-row p-2 justify-between items-center text-[12px]">
                 <p className="text-zinc-500">Expected Date of Delivery</p>
-                <p className="font-semibold text-zinc-700">{data?.edd}</p>
+                <p className="font-semibold text-zinc-700">{moment(data?.edd).format('ll')}</p>
               </div>
 
               {/*  */}
@@ -90,7 +106,7 @@ function MaternityDetail({ params }:{params: any}) {
               {/*  */}
               <div className="flex flex-row p-2 justify-between items-center text-[12px]">
                 <p className="text-zinc-500">Last Monthly Period (lmp)</p>
-                <p className="font-semibold text-zinc-700">{data?.lmp}</p>
+                <p className="font-semibold text-zinc-700">{moment(data?.lmp).format('ll')}</p>
               </div>
 
               {/*  */}
@@ -104,7 +120,7 @@ function MaternityDetail({ params }:{params: any}) {
           </Collapsible>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

@@ -24,7 +24,6 @@ function DeliveryPage() {
   const {
     data, total, search, setSearch,
   } = usePaginatedSearch({ fetchQuery: useGetAllMaternityDeliveriesQuery });
-  console.log(data);
   return (
     <>
       <BreadcrumbNav
