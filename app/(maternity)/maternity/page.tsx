@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { DataTable } from '@/components/custom/table/DataTable';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { useGetAllMaternityProfilesQuery } from '@/api/maternity/maternity.api';
 import { maternityProfileColumns } from '../column';

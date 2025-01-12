@@ -4,6 +4,7 @@ import {
   CartesianGrid, Line, LineChart, XAxis,
 } from 'recharts';
 
+import { MedicationStockTakeInterface } from 'motherangela';
 import {
   ChartConfig,
   ChartContainer,
@@ -18,7 +19,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function TimeSeriesChart({ data }:{data:any[]}) {
+export default function TimeSeriesChart({ data }:{data:MedicationStockTakeInterface[]}) {
   const chartData = data?.map((item) => ({
     desktop: Number(item.current_quantity),
     date: item.date_of_stock_take,
