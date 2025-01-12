@@ -1,13 +1,13 @@
 'use client';
 
-import React, { Usable, use, useMemo } from 'react';
+import React, { use, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import moment from 'moment';
 import { useGetMedicineStockTakeDetailsQuery, useGetMedicineStockTakeQuery } from '@/api/medication/medicationStockTake.api';
 import TimeSeriesChart from '@/components/custom/charts/TimeSeriesChart';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 
-function StockDetailPage({ params }:{params:Usable<{id: string}>}) {
+function StockDetailPage({ params }:{params:Promise<{id: string}>}) {
   const searchParams = useSearchParams();
   const medicine_id = searchParams.get('medicine_id');
   const { id } = use(params);

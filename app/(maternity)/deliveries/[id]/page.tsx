@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Usable, use } from 'react';
+import React, { use } from 'react';
 import { useGetMaternityProfileQuery } from '@/api/maternity/maternity.api';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { Collapsible } from '@/components/custom/nav/Collapsible';
@@ -18,7 +18,7 @@ const listItems = [
   },
 ];
 
-function MaternityDetail({ params }:{params: Usable<{id: string}>}) {
+function MaternityDetail({ params }:{params: Promise<{id: string}>}) {
   const { id } = use(params);
   const { data } = useGetMaternityProfileQuery(id);
   return (

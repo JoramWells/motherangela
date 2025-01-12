@@ -1,7 +1,7 @@
 'use client';
 
 import moment from 'moment';
-import React, { Usable } from 'react';
+import React from 'react';
 import { useGetAppointmentQuery } from '@/api/appointments/appointments.api';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 
@@ -18,7 +18,7 @@ const listItems = [
   },
 ];
 
-function AppointmentDetail({ params }:{params:Usable<{id: string}>}) {
+function AppointmentDetail({ params }:{params:Promise<{id: string}>}) {
   const { id } = React.use(params);
   const { data } = useGetAppointmentQuery(id);
   return (
