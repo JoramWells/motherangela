@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useGetPatientsQuery } from '@/api/patients/patients.api';
 import { columns } from '../column';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
@@ -45,4 +45,10 @@ function Patients() {
   );
 }
 
-export default Patients;
+export default function WrappedPatients() {
+  return (
+    <Suspense>
+      <Patients />
+    </Suspense>
+  );
+}

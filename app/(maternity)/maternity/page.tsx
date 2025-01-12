@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { useGetAllMaternityProfilesQuery } from '@/api/maternity/maternity.api';
 import { maternityProfileColumns } from '../column';
@@ -20,7 +20,7 @@ const listItems = [
   },
 ];
 
-function Patients() {
+function MaternityPage() {
   const {
     data, total, search, setSearch,
   } = usePaginatedSearch({ fetchQuery: useGetAllMaternityProfilesQuery });
@@ -44,4 +44,10 @@ function Patients() {
   );
 }
 
-export default Patients;
+export default function WrappedMaternityPage() {
+  return (
+    <Suspense>
+      <MaternityPage />
+    </Suspense>
+  );
+}

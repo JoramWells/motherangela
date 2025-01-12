@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useGetAllMedicationQuery } from '@/api/medication/medicine.api';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { medicineColumns } from '../column';
@@ -20,7 +20,7 @@ const listItems = [
   },
 ];
 
-function MedicinesStockPage() {
+function PharmacyPage() {
   const {
     data, total, search, setSearch,
   } = usePaginatedSearch({ fetchQuery: useGetAllMedicationQuery });
@@ -46,4 +46,10 @@ function MedicinesStockPage() {
   );
 }
 
-export default MedicinesStockPage;
+export default function WrappedPharmacyPage() {
+  return (
+    <Suspense>
+      <PharmacyPage />
+    </Suspense>
+  );
+}

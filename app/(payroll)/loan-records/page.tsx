@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { payrollEmployeeLoanRecordsColumns } from '../column';
@@ -22,7 +22,7 @@ const listItems = [
   },
 ];
 
-function Patients() {
+function LoanRecords() {
   const {
     data, total, search, setSearch,
   } = usePaginatedSearch({
@@ -58,4 +58,10 @@ function Patients() {
   );
 }
 
-export default Patients;
+export default function WrappedLoanRecords() {
+  return (
+    <Suspense>
+      <LoanRecords />
+    </Suspense>
+  );
+}

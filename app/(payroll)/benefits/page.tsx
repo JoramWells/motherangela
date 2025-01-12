@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { PayrollEmployeeBenefitsFileInterface } from 'motherangela';
 import { DataTable } from '@/components/custom/table/DataTable';
@@ -24,7 +24,7 @@ const listItems = [
   },
 ];
 
-function Patients() {
+function Benefits() {
   const [search, setSearch] = useState('');
   const searchParams = useSearchParams();
   const page = searchParams.get('page');
@@ -71,4 +71,10 @@ function Patients() {
   );
 }
 
-export default Patients;
+export default function WrappedBenefits() {
+  return (
+    <Suspense>
+      <Benefits />
+    </Suspense>
+  );
+}

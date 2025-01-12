@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 // import { maternityAntenatalProfileColumns } from "../column";
 import { useGetAllPayrollPeriodsQuery } from '@/api/payroll/payrollPeriods';
@@ -22,7 +22,7 @@ const listItems = [
   },
 ];
 
-function Patients() {
+function PayrollPage() {
   const {
     data, total, search, setSearch,
   } = usePaginatedSearch({ fetchQuery: useGetAllPayrollPeriodsQuery });
@@ -55,4 +55,10 @@ function Patients() {
   );
 }
 
-export default Patients;
+export default function WrappedPayrollPage() {
+  return (
+    <Suspense>
+      <PayrollPage />
+    </Suspense>
+  );
+}

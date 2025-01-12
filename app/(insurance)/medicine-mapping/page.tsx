@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { medicineMappingColumns } from '../column';
 import { useGetAllInsuranceMedicationMappingQuery } from '@/api/insurance/insuranceMedicineMapping.api';
@@ -45,4 +45,10 @@ function MedicineMapping() {
   );
 }
 
-export default MedicineMapping;
+export default function WrappedMedicineMapping() {
+  return (
+    <Suspense>
+      <MedicineMapping />
+    </Suspense>
+  );
+}

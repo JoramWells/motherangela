@@ -46,4 +46,6 @@ function ServiceCostMappingPage() {
   );
 }
 
-export default ServiceCostMappingPage;
+export default function WrappedServiceCostMappingPage() {
+  return <ServiceCostMappingPage />;
+}

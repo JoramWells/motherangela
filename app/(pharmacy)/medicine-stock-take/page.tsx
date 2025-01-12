@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { medicineStockColumns } from '../column';
@@ -57,4 +57,10 @@ function MedicinesStockPage() {
   );
 }
 
-export default MedicinesStockPage;
+export default function WrappedMedicinesStockPage() {
+  return (
+    <Suspense>
+      <MedicinesStockPage />
+    </Suspense>
+  );
+}

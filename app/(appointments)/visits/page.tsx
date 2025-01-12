@@ -3,7 +3,7 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { columns } from '../column';
 import { useGetAppointmentsQuery } from '@/api/appointments/appointments.api';
@@ -80,4 +80,10 @@ function Patients() {
   );
 }
 
-export default Patients;
+export default function WrappedPatientsPage() {
+  return (
+    <Suspense>
+      <Patients />
+    </Suspense>
+  );
+}

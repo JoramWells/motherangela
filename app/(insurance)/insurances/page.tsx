@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { insuranceColumns } from '../column';
 import { useGetAllInsurancesQuery } from '@/api/insurance/insurance.api';
@@ -45,4 +45,10 @@ function InsurancePage() {
   );
 }
 
-export default InsurancePage;
+export default function WrappedInsurancePage() {
+  return (
+    <Suspense>
+      <InsurancePage />
+    </Suspense>
+  );
+}

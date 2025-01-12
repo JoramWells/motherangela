@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { internalPharmacyRequestColumns } from '../column';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
@@ -45,4 +45,10 @@ function InternalPharmacyRequests() {
   );
 }
 
-export default InternalPharmacyRequests;
+export default function WrappedInternalPharmacyRequests() {
+  return (
+    <Suspense>
+      <InternalPharmacyRequests />
+    </Suspense>
+  );
+}

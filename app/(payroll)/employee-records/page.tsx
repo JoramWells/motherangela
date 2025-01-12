@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { useGetAllPayrollEmployeeRecordsQuery } from '@/api/payroll/payrollEmployeeRecords.api';
@@ -22,7 +22,7 @@ const listItems = [
   },
 ];
 
-function Patients() {
+function EmployeeRecords() {
   const {
     data, total, search, setSearch,
   } = usePaginatedSearch({ fetchQuery: useGetAllPayrollEmployeeRecordsQuery });
@@ -60,4 +60,10 @@ function Patients() {
   );
 }
 
-export default Patients;
+export default function WrappedEmployeeRecords() {
+  return (
+    <Suspense>
+      <EmployeeRecords />
+    </Suspense>
+  );
+}

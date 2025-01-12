@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { AntenatalProfileInterface } from 'motherangela';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { maternityAntenatalProfileColumns } from '../column';
@@ -48,4 +48,8 @@ function Patients() {
   );
 }
 
-export default Patients;
+export default function WrappedPatients() {
+  <Suspense>
+    <Patients />
+  </Suspense>;
+}

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { admissionColumn } from '../column';
 import { useGetAllAdmissionsQuery } from '@/api/admission/admissions.api';
@@ -46,4 +46,10 @@ function Admission() {
   );
 }
 
-export default Admission;
+export default function WrappedAdmission() {
+  return (
+    <Suspense>
+      <Admission />
+    </Suspense>
+  );
+}

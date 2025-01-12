@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { medicinePurchaseColumns } from '../column';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
@@ -20,7 +20,7 @@ const listItems = [
   },
 ];
 
-function InternalPharmacyRequests() {
+function PurchasesPage() {
   const {
     data, total, search, setSearch,
   } = usePaginatedSearch({ fetchQuery: useGetAllMedicinePurchasesQuery });
@@ -46,4 +46,10 @@ function InternalPharmacyRequests() {
   );
 }
 
-export default InternalPharmacyRequests;
+export default function WrappedPurchasesPage() {
+  return (
+    <Suspense>
+      <PurchasesPage />
+    </Suspense>
+  );
+}

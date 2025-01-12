@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { maternityDeliveriesColumns } from '../column';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
@@ -44,4 +44,10 @@ function DeliveryPage() {
   );
 }
 
-export default DeliveryPage;
+export default function WrappedDeliveryPage() {
+  return (
+    <Suspense>
+      <DeliveryPage />
+    </Suspense>
+  );
+}
