@@ -15,7 +15,7 @@ const listItems = [
   },
   {
     id: '2',
-    label: 'Service Cost Mapping',
+    label: 'Insurances',
     link: '',
   },
 ];

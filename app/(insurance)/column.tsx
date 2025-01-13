@@ -2,7 +2,10 @@
 import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
 import { InsuranceInterface, InsuranceMedicineMappingInterface, InsuranceServiceCostMappingInterface } from 'motherangela';
+import { useRouter } from 'next/navigation';
+import { MoveRight } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 export const insuranceColumns: ColumnDef<InsuranceInterface>[] = [
   // {
@@ -74,14 +77,19 @@ export const insuranceColumns: ColumnDef<InsuranceInterface>[] = [
   {
     accessorKey: 'action',
     header: 'Action',
-    cell: ({ row }) => (
-      <Link
-        className="text-[12px]"
-        href={`/maternity/${row.original.insurance_id}`}
-      >
-        View
-      </Link>
-    ),
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <Button
+          size="sm"
+          className="shadow-none"
+          variant="outline"
+          onClick={() => router.push(`/insurances/${row.original.insurance_id}`)}
+        >
+          <MoveRight />
+        </Button>
+      );
+    },
   },
 ];
 

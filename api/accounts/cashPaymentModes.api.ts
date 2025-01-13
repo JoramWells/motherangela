@@ -1,13 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { InsuranceInterface, PaginatedResponse } from 'motherangela';
+import { PaginatedResponse, CashPaymentModesInterface } from 'motherangela';
 
-export const insuranceApi = createApi({
-  reducerPath: 'insuranceApi',
+export const cashPaymentModesApi = createApi({
+  reducerPath: 'cashPaymentModesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/root-server/insurance`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/accounts-service/cash-payment-modes`,
+
   }),
   endpoints: (builder) => ({
-    getAllInsurances: builder.query<PaginatedResponse<InsuranceInterface>,
+    getAllCashPaymentModes:
+    builder.query<PaginatedResponse<CashPaymentModesInterface>,
       { page: number; pageSize: number; searchQuery: string }
 
     >({
@@ -23,27 +25,27 @@ export const insuranceApi = createApi({
         return 'fetchAll';
       },
     }),
-    addInsurance: builder.mutation({
+    addCashPaymentMode: builder.mutation({
       query: (newUser) => ({
         url: 'add',
         method: 'POST',
         body: newUser,
       }),
     }),
-    getInsurance: builder.query<InsuranceInterface, string>({
+    getCashPaymentMode: builder.query({
       query: (id) => `detail/${id}`,
     }),
-    updateInsurance: builder.mutation({
+    updateCashPaymentMode: builder.mutation({
       query: ({ id, ...patch }) => ({
-        url: `edit/${id}`,
+        url: `update${id}`,
         method: 'PUT',
         body: patch,
       }),
     }),
-    deleteInsurance: builder.mutation({
+    deleteCashPaymentMode: builder.mutation({
       query(id) {
         return {
-          url: `delete/${id}`,
+          url: `delete${id}`,
           method: 'DELETE',
         };
       },
@@ -52,6 +54,7 @@ export const insuranceApi = createApi({
 });
 
 export const {
-  useGetAllInsurancesQuery, useUpdateInsuranceMutation,
-  useDeleteInsuranceMutation, useAddInsuranceMutation, useGetInsuranceQuery,
-} = insuranceApi;
+  useGetAllCashPaymentModesQuery, useAddCashPaymentModeMutation,
+  useGetCashPaymentModeQuery,
+  useUpdateCashPaymentModeMutation, useDeleteCashPaymentModeMutation,
+} = cashPaymentModesApi;

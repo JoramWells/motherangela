@@ -25,6 +25,8 @@ import { accountingAccountDetailsApi } from '@/api/accounts/accountingAccountDet
 import { accountingAssetApi } from '@/api/accounts/accounting_assets/accountingAsset.api';
 import { accountingDocumentsApi } from '@/api/accounts/accountingDocuments.api';
 import { accountingDepartmentApi } from '@/api/accounts/accountingDepartment.api';
+import { accountingBankAccountApi } from '@/api/accounts/bank/accountingBankAccounts.api';
+import { cashPaymentModesApi } from '@/api/accounts/cashPaymentModes.api';
 
 export const store = configureStore({
   reducer: {
@@ -34,8 +36,10 @@ export const store = configureStore({
     [accountingDocumentsApi.reducerPath]: accountingDocumentsApi.reducer,
     [accountingAssetApi.reducerPath]: accountingAssetApi.reducer,
     [accountingDepartmentApi.reducerPath]: accountingDepartmentApi.reducer,
+    [accountingBankAccountApi.reducerPath]: accountingBankAccountApi.reducer,
     [appointmentDiagnosesApi.reducerPath]: appointmentDiagnosesApi.reducer,
     [admissionApi.reducerPath]: admissionApi.reducer,
+    [cashPaymentModesApi.reducerPath]: cashPaymentModesApi.reducer,
     [maternityProfileApi.reducerPath]: maternityProfileApi.reducer,
     [maternityAntenatalProfileApi.reducerPath]:
       maternityAntenatalProfileApi.reducer,
@@ -67,7 +71,9 @@ export const store = configureStore({
     .concat(accountingDocumentsApi.middleware)
     .concat(accountingDepartmentApi.middleware)
     .concat(appointmentDiagnosesApi.middleware)
+    .concat(accountingBankAccountApi.middleware)
     .concat(admissionApi.middleware)
+    .concat(cashPaymentModesApi.middleware)
     .concat(maternityAntenatalProfileApi.middleware)
     .concat(maternityProfileApi.middleware)
     .concat(maternityDeliveriesApi.middleware)

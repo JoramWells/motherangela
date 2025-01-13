@@ -1,13 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { AccountingBankAccountsInterface } from 'motherangela';
 
 export const accountingBankAccountApi = createApi({
   reducerPath: 'accountingBankAccountApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_API_URL}/api/accounts-service/accounting-bank-accounts`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/accounts-service/accounting-bank-accounts`,
 
   }),
   endpoints: (builder) => ({
-    getAllAccountingBankAccounts: builder.query({
+    getAllAccountingBankAccounts: builder.query<AccountingBankAccountsInterface[], void>({
       query: () => 'fetchAll',
     }),
     addAccountingBankAccount: builder.mutation({
