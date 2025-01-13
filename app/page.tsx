@@ -12,7 +12,7 @@ export default function Home() {
             id: useId(),
             link: '/administrator/pharmacy',
             label: 'Administrator',
-            url: '/assets/img/cash.png',
+            url: '/assets/img/admin.png',
             description: 'Lorem Ipsum dolet Mwat!!',
 
           },

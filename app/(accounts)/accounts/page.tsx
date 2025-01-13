@@ -1,0 +1,55 @@
+'use client';
+
+import React, { Suspense } from 'react';
+import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
+import { accountsColumns } from '../column';
+import usePaginatedSearch from '@/hooks/usePaginatedSearch';
+import TableContainer from '@/components/custom/table/TableContainer';
+import { useGetAllAccountingAccountDetailsQuery } from '@/api/accounts/accountingAccountDetails.api';
+
+const listItems = [
+  {
+    id: '1',
+    label: 'home',
+    link: '/',
+  },
+  {
+    id: '2',
+    label: 'Service Cost Mapping',
+    link: '',
+  },
+];
+
+function InsurancePage() {
+  const {
+    data, total, search, setSearch,
+  } = usePaginatedSearch({ fetchQuery: useGetAllAccountingAccountDetailsQuery });
+  console.log(data);
+
+  return (
+    <>
+      <BreadcrumbNav
+        listItems={listItems}
+      />
+      <div className="p-2">
+        <TableContainer
+          title="Account Details"
+          columns={accountsColumns}
+          data={data ?? []}
+          total={total as number}
+          search={search}
+          setSearch={setSearch}
+        />
+
+      </div>
+    </>
+  );
+}
+
+export default function WrappedInsurancePage() {
+  return (
+    <Suspense>
+      <InsurancePage />
+    </Suspense>
+  );
+}

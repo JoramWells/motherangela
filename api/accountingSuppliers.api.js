@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const accountingSupplierApi = createApi({
   reducerPath: 'accountingSupplierApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_API_URL}/api/accounts-service/accounting-suppliers`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/accounts-service/accounting-suppliers`,
 
   }),
   endpoints: (builder) => ({

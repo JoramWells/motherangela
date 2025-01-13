@@ -1,14 +1,28 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { PaginatedResponse, AccountingAssetsInterface } from 'motherangela';
 
 export const accountingAssetApi = createApi({
   reducerPath: 'accountingAssetApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_API_URL}/api/accounts-service/accounting-asset`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/accounts-service/accounting-asset`,
 
   }),
   endpoints: (builder) => ({
-    getAllAccountingAsset: builder.query({
-      query: () => 'fetchAll',
+    getAllAccountingAsset: builder.query<PaginatedResponse<AccountingAssetsInterface>,
+      { page: number; pageSize: number; searchQuery: string }
+
+    >({
+      query: (params) => {
+        if (params) {
+          const { page, pageSize, searchQuery } = params;
+          let queryString = '';
+          queryString += `page=${page}`;
+          queryString += `&pageSize=${pageSize}`;
+          queryString += `&searchQuery=${searchQuery}`;
+          return `/fetchAll/?${queryString}`;
+        }
+        return 'fetchAll';
+      },
     }),
     addAccountingAsset: builder.mutation({
       query: (newUser) => ({
