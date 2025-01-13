@@ -30,7 +30,7 @@ export const patientsApi = createApi({
         body: newUser,
       }),
     }),
-    getPatient: builder.query({
+    getPatient: builder.query<PatientInterface, string>({
       query: (id) => `detail/${id}`,
     }),
     updatePatient: builder.mutation({

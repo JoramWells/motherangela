@@ -2,8 +2,12 @@ import React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import moment from 'moment';
 import { AdmissionInterface, PatientInterface } from 'motherangela';
+import { useRouter } from 'next/navigation';
+import { MoveRight } from 'lucide-react';
+import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import Avatar from '@/components/custom/Avatar';
+import { Button } from '@/components/ui/button';
 
 export const columns: ColumnDef<PatientInterface>[] = [
   // {
@@ -36,11 +40,11 @@ export const columns: ColumnDef<PatientInterface>[] = [
         <Avatar
           name={`${row.original.first_name} ${row.original.middle_name}`}
         />
-        <p className="capitalize text-[12px]">
+        <Link href={`/patients/${row.original.patient_id}`} className="capitalize text-[12px] text-cyan-500 hover:underline ">
           {row.original.first_name}
           {' '}
           {row.original.middle_name}
-        </p>
+        </Link>
       </div>
     ),
   },
@@ -59,6 +63,23 @@ export const columns: ColumnDef<PatientInterface>[] = [
     cell: ({ row }) => (
       <div className="lowercase">{row.original?.cell_phone}</div>
     ),
+  },
+  {
+    accessorKey: 'action',
+    header: 'Actions',
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <Button
+          size="sm"
+          className="shadow-none"
+          variant="outline"
+          onClick={() => router.push(`/patients/${row.original.patient_id}`)}
+        >
+          <MoveRight />
+        </Button>
+      );
+    },
   },
 ];
 
