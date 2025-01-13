@@ -2,10 +2,10 @@
 
 import React, { Suspense } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { accountingAssetsColumns } from '../column';
+import { accountingDepartmentsColumns } from '../column';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
-import { useGetAllAccountingAssetQuery } from '@/api/accounts/accounting_assets/accountingAsset.api';
+import { useGetAllAccountingDepartmentsQuery } from '@/api/accounts/accountingDepartment.api';
 
 const listItems = [
   {
@@ -23,7 +23,7 @@ const listItems = [
 function MedicineMapping() {
   const {
     data, total, search, setSearch,
-  } = usePaginatedSearch({ fetchQuery: useGetAllAccountingAssetQuery });
+  } = usePaginatedSearch({ fetchQuery: useGetAllAccountingDepartmentsQuery });
   console.log(data);
   return (
     <>
@@ -32,8 +32,8 @@ function MedicineMapping() {
       />
       <div className="p-2">
         <TableContainer
-          title="Accounting Assets"
-          columns={accountingAssetsColumns}
+          title="Departments"
+          columns={accountingDepartmentsColumns}
           data={data ?? []}
           total={total as number}
           search={search}

@@ -1,34 +1,14 @@
 import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
 import {
-  AccountDetailsInterface, AccountingAssetsInterface, AccountingDocumentsInterface, InsuranceMedicineMappingInterface,
+  AccountDetailsInterface,
+  AccountingAssetsInterface, AccountingDepartmentInterface, AccountingDocumentsInterface,
 } from 'motherangela';
 import moment from 'moment';
 import { Badge } from '@/components/ui/badge';
 
 export const accountsColumns: ColumnDef<AccountDetailsInterface>[] = [
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
+
   {
     accessorKey: 'account_name',
     header: 'Account Name',
@@ -70,28 +50,7 @@ export const accountsColumns: ColumnDef<AccountDetailsInterface>[] = [
 
 //
 export const accountingAssetsColumns: ColumnDef<AccountingAssetsInterface>[] = [
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
+
   {
     accessorKey: 'asset_description',
     header: 'Name',
@@ -154,28 +113,7 @@ export const accountingAssetsColumns: ColumnDef<AccountingAssetsInterface>[] = [
 
 //
 export const accountingDocumentsColumns: ColumnDef<AccountingDocumentsInterface>[] = [
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
+
   {
     accessorKey: 'item_description',
     header: 'Name',
@@ -304,6 +242,46 @@ export const accountingDocumentsColumns: ColumnDef<AccountingDocumentsInterface>
       <Link
         className="text-[12px]"
         href={`/maternity/${row.original.document_id}`}
+      >
+        View
+      </Link>
+    ),
+  },
+];
+
+//
+export const accountingDepartmentsColumns: ColumnDef<AccountingDepartmentInterface>[] = [
+
+  {
+    accessorKey: 'department_name',
+    header: 'Name',
+    cell: ({ row }) => {
+      const med_name = row.original.department_name;
+      return (
+
+        <p className="capitalize text-[12px]">
+          { med_name.length > 20 ? `${med_name.substring(0, 20)}...` : med_name}
+        </p>
+      );
+    },
+  },
+  {
+    accessorKey: 'hospital_store',
+    header: 'Store',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {row.original?.hospital_store?.hospital_store_description ?? 'N/A'}
+      </div>
+    ),
+  },
+
+  {
+    accessorKey: 'action',
+    header: 'Action',
+    cell: ({ row }) => (
+      <Link
+        className="text-[12px]"
+        href={`/maternity/${row.original.department_id}`}
       >
         View
       </Link>

@@ -24,6 +24,7 @@ import { internalPharmacyRequestsApi } from '@/api/medication/internalPharmacyRe
 import { accountingAccountDetailsApi } from '@/api/accounts/accountingAccountDetails.api';
 import { accountingAssetApi } from '@/api/accounts/accounting_assets/accountingAsset.api';
 import { accountingDocumentsApi } from '@/api/accounts/accountingDocuments.api';
+import { accountingDepartmentApi } from '@/api/accounts/accountingDepartment.api';
 
 export const store = configureStore({
   reducer: {
@@ -32,6 +33,7 @@ export const store = configureStore({
     [accountingAccountDetailsApi.reducerPath]: accountingAccountDetailsApi.reducer,
     [accountingDocumentsApi.reducerPath]: accountingDocumentsApi.reducer,
     [accountingAssetApi.reducerPath]: accountingAssetApi.reducer,
+    [accountingDepartmentApi.reducerPath]: accountingDepartmentApi.reducer,
     [appointmentDiagnosesApi.reducerPath]: appointmentDiagnosesApi.reducer,
     [admissionApi.reducerPath]: admissionApi.reducer,
     [maternityProfileApi.reducerPath]: maternityProfileApi.reducer,
@@ -63,6 +65,7 @@ export const store = configureStore({
     .concat(accountingAccountDetailsApi.middleware)
     .concat(accountingAssetApi.middleware)
     .concat(accountingDocumentsApi.middleware)
+    .concat(accountingDepartmentApi.middleware)
     .concat(appointmentDiagnosesApi.middleware)
     .concat(admissionApi.middleware)
     .concat(maternityAntenatalProfileApi.middleware)
