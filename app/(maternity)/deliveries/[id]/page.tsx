@@ -6,7 +6,6 @@ import Link from 'next/link';
 import moment from 'moment';
 import { ArrowRight } from 'lucide-react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { Collapsible } from '@/components/custom/nav/Collapsible';
 import { useGetMaternityDeliveryQuery } from '@/api/maternity/maternity-deliveries.api';
 import { Button } from '@/components/ui/button';
 
