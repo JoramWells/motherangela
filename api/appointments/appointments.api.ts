@@ -33,6 +33,24 @@ export const appointmentApi = createApi({
     getAppointment: builder.query<AppointmentInterface, string>({
       query: (id) => `detail/${id}`,
     }),
+    getAppointmentsByPatientID: builder.query<PaginatedResponse<AppointmentInterface>,
+      {id?: string, page: number; pageSize: number; searchQuery: string }
+
+    >({
+      query: (params) => {
+        if (params) {
+          const {
+            id, page, pageSize, searchQuery,
+          } = params;
+          let queryString = '';
+          queryString += `page=${page}`;
+          queryString += `&pageSize=${pageSize}`;
+          queryString += `&searchQuery=${searchQuery}`;
+          return `/details/${id}/?${queryString}`;
+        }
+        return 'details';
+      },
+    }),
     getAppointmentDetailByID: builder.query({
       query: (id) => `detailAll/${id}`,
     }),
@@ -58,4 +76,5 @@ export const {
   useGetAppointmentsQuery, useAddAppointmentMutation,
   useGetAppointmentQuery, useUpdateAppointmentMutation,
   useDeleteAppointmentMutation, useGetAppointmentDetailByIDQuery,
+  useGetAppointmentsByPatientIDQuery,
 } = appointmentApi;

@@ -2,6 +2,7 @@
 
 import React, { use, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { useGetPatientQuery } from '@/api/patients/patients.api';
 import { Button } from '@/components/ui/button';
@@ -70,12 +71,38 @@ function PatientDetailsPage({ params }:{params:Promise<{id: string}>}) {
           className="p-4 bg-white rounded-lg w-1/4 relative"
         >
           <p>Book Appointment Now</p>
+          <Link
+            href={`/patients/${data?.patient_id}/appointments`}
+            className="text-[12px] text-cyan-500 hover:underline"
+          >
+            View All Appointments
+          </Link>
           <Button
             className="shadow-none absolute bottom-4 right-4"
             size="sm"
             onClick={() => router.push(`/patients/${data?.patient_id}/appointments/add`)}
           >
             Book Now
+          </Button>
+        </div>
+
+        {/*  */}
+        <div
+          className="p-4 bg-white rounded-lg w-1/4 relative"
+        >
+          <p>Book Admission Now</p>
+          <Link
+            href={`/patients/${data?.patient_id}/admissions`}
+            className="text-[12px] text-cyan-500 hover:underline"
+          >
+            View All Admissions
+          </Link>
+          <Button
+            className="shadow-none absolute bottom-4 right-4"
+            size="sm"
+            onClick={() => router.push(`/patients/${data?.patient_id}/admissions/add`)}
+          >
+            Admit
           </Button>
         </div>
       </div>

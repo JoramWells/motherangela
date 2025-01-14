@@ -33,9 +33,25 @@ export const admissionApi = createApi({
     getAdmission: builder.query({
       query: (id) => `detail/${id}`,
     }),
-    getAdmissionDetailByID: builder.query({
-      query: (id) => `detailAll/${id}`,
-    }),
+
+    getAdmissionsByPatientID: builder.query<PaginatedResponse<AdmissionInterface>,
+         {id?: string, page: number; pageSize: number; searchQuery: string }
+
+       >({
+         query: (params) => {
+           if (params) {
+             const {
+               id, page, pageSize, searchQuery,
+             } = params;
+             let queryString = '';
+             queryString += `page=${page}`;
+             queryString += `&pageSize=${pageSize}`;
+             queryString += `&searchQuery=${searchQuery}`;
+             return `/details/${id}/?${queryString}`;
+           }
+           return 'details';
+         },
+       }),
     updateAdmission: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `edit/${id}`,
@@ -57,5 +73,5 @@ export const admissionApi = createApi({
 export const {
   useGetAllAdmissionsQuery, useAddAdmissionMutation,
   useGetAdmissionQuery, useUpdateAdmissionMutation,
-  useDeleteAdmissionMutation, useGetAdmissionDetailByIDQuery,
+  useDeleteAdmissionMutation, useGetAdmissionsByPatientIDQuery,
 } = admissionApi;

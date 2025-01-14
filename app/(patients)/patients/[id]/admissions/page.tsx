@@ -2,21 +2,18 @@
 
 import React, { use, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { useGetAppointmentsByPatientIDQuery } from '@/api/appointments/appointments.api';
-import usePaginatedSearch from '@/hooks/usePaginatedSearch';
-import TableContainer from '@/components/custom/table/TableContainer';
-import { appointmentDetailColumns } from '@/app/(patients)/column';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
+import usePaginatedSearch from '@/hooks/usePaginatedSearch';
+import { useGetAdmissionsByPatientIDQuery } from '@/api/admission/admissions.api';
+import TableContainer from '@/components/custom/table/TableContainer';
+import { admissionDetailColumns } from '@/app/(patients)/column';
 import { Button } from '@/components/ui/button';
 
-function AppointmentDetailsPage({ params }:{params:Promise<{id: string}>}) {
+function AdmissionsPages({ params }:{params:Promise<{id:string}>}) {
   const { id } = use(params);
-
   const {
-    data, total, search, setSearch,
-  } = usePaginatedSearch({
-    fetchQuery: useGetAppointmentsByPatientIDQuery, id,
-  });
+    data, search, setSearch, total,
+  } = usePaginatedSearch({ fetchQuery: useGetAdmissionsByPatientIDQuery, id });
   const listItems = useMemo(() => [
     {
       id: '1',
@@ -35,43 +32,44 @@ function AppointmentDetailsPage({ params }:{params:Promise<{id: string}>}) {
     },
     {
       id: '4',
-      label: 'Appointments',
-      link: `/patients/${id}/appointments`,
+      label: 'Admission',
+      link: `/patients/${id}/admission`,
 
     },
 
   ], [data]);
-
   const router = useRouter();
+
+  console.log(data);
 
   return (
     <div>
       <BreadcrumbNav
         listItems={listItems}
       />
-      <div
-        className="p-2"
-      >
+      <div className="p-2">
         <TableContainer
-          title={` ${data[0]?.patient_detail.first_name} Appointments`}
-          columns={appointmentDetailColumns}
+          title="In-Patient (Admitted)"
+          columns={admissionDetailColumns}
           data={data ?? []}
           total={total as number}
           search={search}
           setSearch={setSearch}
           rightLabel={(
             <Button
+              className="bg-emerald-600 shadow-none hover:bg-emerald-700"
               size="sm"
-              className="shadow-none bg-emerald-600 hover:bg-emerald-700"
-              onClick={() => router.push(`/patients/${data?.[0]?.patient_id}/appointments/add`)}
+              onClick={() => router.push(`/patients/${id}/admissions/add`)}
+
             >
               NEW
             </Button>
           )}
         />
+
       </div>
     </div>
   );
 }
 
-export default AppointmentDetailsPage;
+export default AdmissionsPages;
