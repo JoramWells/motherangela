@@ -177,7 +177,7 @@ function InpatientDetail() {
             <hr />
             <div className=" p-2 text-[12px] flex flex-row justify-between">
               <p className="text-zinc-500">Bed Billing Type :</p>
-              <p>{data?.admission_bed_billing_type?.bed_billing_description}</p>
+              <p>{data?.admission_bed_billing_type?.bed_billing_type_description}</p>
             </div>
           </div>
         </div>
