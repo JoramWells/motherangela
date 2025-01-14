@@ -5,8 +5,9 @@ import moment from 'moment';
 import { TriangleAlert } from 'lucide-react';
 import { useGetMaternityProfileQuery } from '@/api/maternity/maternity.api';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { Collapsible } from '@/components/custom/nav/Collapsible';
 import { useGetAntenatalMaternityProfileByMaternityIDQuery } from '@/api/maternity/maternity-antenantal-profile.api';
+import { Button } from '@/components/ui/button';
+import { useGetMaternityDeliveryByMaternityIDQuery } from '@/api/maternity/maternity-deliveries.api';
 
 function MaternityDetail({ params }:{params: Promise<{id: string}>}) {
   const { id } = use(params);
@@ -33,13 +34,68 @@ function MaternityDetail({ params }:{params: Promise<{id: string}>}) {
     skip: !id,
   });
 
-  console.log(antenatalProfileData);
+  const { data: deliveryData } = useGetMaternityDeliveryByMaternityIDQuery(id, {
+    skip: !id,
+  });
+
+  console.log(deliveryData);
 
   return (
     <>
       <BreadcrumbNav
         listItems={listItems}
       />
+      <div className="mt-2 mb-2">
+        <div
+          className="bg-white p-2 flex flex-row justify-between items-center"
+        >
+          <p>Maternity Profile</p>
+          <div
+            className="flex flex-row space-x-2"
+          >
+            {(data?.edd === null || data?.edd?.toString()?.toString()?.length as number < 0)
+              ? (
+                <Button
+                  className="shadow-none bg-sky-600 hover:bg-sky-700"
+                  size="sm"
+                >
+                  Update EDD
+                </Button>
+              )
+              : (
+                <div>
+
+                  {moment(data?.edd, 'DD/MM/YYYY').isBefore(moment(), 'day') && !deliveryData
+                    ? (
+                      <div
+                        className="flex flex-row items-center space-x-2"
+                      >
+                        <TriangleAlert size={16} />
+                        <p
+                          className="text-[12px]"
+                        >
+                          Expected Delivery Date:
+                          {' '}
+                          {moment(data?.edd, 'DD/MM/YYYY').format('ll')}
+                        </p>
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                        >
+                          Deliver
+                        </Button>
+                      </div>
+                    )
+                    : (
+                      <p>
+                        {moment(data?.edd?.toString().trim(), 'DD/MM/YYYY').format('ll')}
+                      </p>
+                    )}
+                </div>
+              )}
+          </div>
+        </div>
+      </div>
       <div className="p-2 flex flex-row space-x-2 items-start">
         <div
           className="w-1/4 bg-white rounded-lg border border-zinc-100"

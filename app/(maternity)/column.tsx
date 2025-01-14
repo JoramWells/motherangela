@@ -54,7 +54,7 @@ export const maternityProfileColumns: ColumnDef<MaternityProfileInterface>[] = [
       const edd = row.original.edd as string;
       return (
         <p className="text-[12px] text-slate-500">
-          {(edd && edd?.length > 0) ? moment(row.original?.edd).format('ll') : 'Update'}
+          {(edd && edd?.length > 0) ? moment(row.original?.edd, 'DD/MM/YYYY').format('ll') : 'Update'}
         </p>
       );
     },
@@ -189,7 +189,14 @@ export const maternityDeliveriesColumns: ColumnDef<MaternityDeliveryInterface>[]
     header: 'Date of Delivery',
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500">
-        <p>{moment(row.original.date_of_delivery).format('ll')}</p>
+        <p>
+          {
+        row.original.date_of_delivery
+          ? moment(row.original.date_of_delivery).format('ll')
+          : 'Update'
+      }
+        </p>
+
       </div>
     ),
   },
@@ -204,13 +211,18 @@ export const maternityDeliveriesColumns: ColumnDef<MaternityDeliveryInterface>[]
   {
     accessorKey: 'action',
     header: 'Details',
-    cell: ({ row }) => (
-      <Link
-        className="text-[12px]"
-        href={`/maternity/${row.original.maternity_delivery_id}`}
-      >
-        View
-      </Link>
-    ),
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <Button
+          size="sm"
+          className="shadow-none text-sky-600 border-sky-200"
+          variant="outline"
+          onClick={() => router.push(`/deliveries/${row.original.maternity_delivery_id}`)}
+        >
+          <MoveRight />
+        </Button>
+      );
+    },
   },
 ];

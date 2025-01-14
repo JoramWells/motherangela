@@ -34,10 +34,14 @@ export const maternityDeliveriesApi = createApi({
     getMaternityDelivery: builder.query<MaternityDeliveryInterface, string>({
       query: (id) => `/detail/${id}`,
     }),
+    getMaternityDeliveryByMaternityID: builder.query<MaternityDeliveryInterface, string>({
+      query: (id) => `/by-maternity-id/${id}`,
+    }),
   }),
 });
 
 export const {
   useGetAllMaternityDeliveriesQuery,
   useAddMaternityDeliveryMutation, useGetMaternityDeliveryQuery,
+  useGetMaternityDeliveryByMaternityIDQuery,
 } = maternityDeliveriesApi;
