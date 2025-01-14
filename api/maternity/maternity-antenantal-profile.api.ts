@@ -35,10 +35,13 @@ export const maternityAntenatalProfileApi = createApi({
     getAntenatalMaternityProfile: builder.query({
       query: (id) => `/detail/${id}`,
     }),
+    getAntenatalMaternityProfileByMaternityID: builder.query<AntenatalProfileInterface, string>({
+      query: (id) => `/by-maternity-id/${id}`,
+    }),
   }),
 });
 
 export const {
-  useGetAllMaternityAntenatalProfileQuery,
+  useGetAllMaternityAntenatalProfileQuery, useGetAntenatalMaternityProfileByMaternityIDQuery,
   useAddMaternityAntenatalProfileMutation, useGetAntenatalMaternityProfileQuery,
 } = maternityAntenatalProfileApi;

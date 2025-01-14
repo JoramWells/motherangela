@@ -10,28 +10,7 @@ import Avatar from '@/components/custom/Avatar';
 import { Button } from '@/components/ui/button';
 
 export const columns: ColumnDef<PatientInterface>[] = [
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
+
   {
     accessorKey: 'first_name',
     header: 'Name',
@@ -85,28 +64,7 @@ export const columns: ColumnDef<PatientInterface>[] = [
 
 //
 export const admissionColumn: ColumnDef<AdmissionInterface>[] = [
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
+
   {
     accessorKey: 'first_name',
     header: 'Name',
@@ -124,8 +82,15 @@ export const admissionColumn: ColumnDef<AdmissionInterface>[] = [
     ),
   },
   {
+    accessorKey: 'user.full_name',
+    header: 'Admitted By',
+    cell: ({ row }) => (
+      <div className=" text-[12px] capitalize text-slate-500">{row.original?.user?.full_name}</div>
+    ),
+  },
+  {
     accessorKey: 'admission_date',
-    header: 'Date',
+    header: 'Admitted',
     cell: ({ row }) => (
       <div
         className="text-[12px] text-slate-500"
@@ -169,31 +134,64 @@ export const admissionColumn: ColumnDef<AdmissionInterface>[] = [
       </div>
     ),
   },
+  {
+    accessorKey: 'diagnosis',
+    header: 'Diagnosis',
+    cell: ({ row }) => (
+      <div className="lowercase">
+        {row.original.diagnosis}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'discharge_date',
+    header: 'Discharged',
+    cell: ({ row }) => {
+      const { discharge_date } = row.original;
+      return (
+        <div
+          className="text-[12px] text-slate-500"
+        >
+          {discharge_date
+            ? (
+              <div>
+                <p>{moment(row.original.discharge_date).format('ll')}</p>
+                <p>{row.original.discharge_time}</p>
+              </div>
+            )
+            : (
+              <Badge
+                className="shadow-none text-orange-500 border-orange-200"
+                variant="outline"
+              >
+                Not Discharged
+              </Badge>
+            )}
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: 'action',
+    header: 'Details',
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <Button
+          size="sm"
+          className="shadow-none"
+          variant="outline"
+          onClick={() => router.push(`/in-patient/${row.original.patient_id}?admission_id=${row.original.admission_id}`)}
+        >
+          <MoveRight />
+        </Button>
+      );
+    },
+  },
 ];
 
 export const appointmentDetailColumns: ColumnDef<AppointmentInterface>[] = [
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
+
   {
     accessorKey: 'user.full_name',
     header: 'Attended By',
@@ -257,28 +255,7 @@ export const appointmentDetailColumns: ColumnDef<AppointmentInterface>[] = [
 
 //
 export const admissionDetailColumns: ColumnDef<AdmissionInterface>[] = [
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
+
   // {
   //   accessorKey: 'first_name',
   //   header: 'Name',

@@ -35,7 +35,7 @@ const DL = [
   {
     id: '4',
     label: 'Antenatal Profiles',
-    link: '/antenatal-profiles',
+    link: '/antenatal',
     icon: <Users size={17} />,
   },
   {

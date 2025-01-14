@@ -1,11 +1,13 @@
 'use client';
 
 import React, { Suspense } from 'react';
+import { useRouter } from 'next/navigation';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { admissionColumn } from '../column';
 import { useGetAllAdmissionsQuery } from '@/api/admission/admissions.api';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
+import { Button } from '@/components/ui/button';
 
 const listItems = [
   {
@@ -24,7 +26,7 @@ function Admission() {
   const {
     data, total, search, setSearch,
   } = usePaginatedSearch({ fetchQuery: useGetAllAdmissionsQuery });
-  console.log(data);
+  const router = useRouter();
   return (
     <>
       <BreadcrumbNav
@@ -39,6 +41,15 @@ function Admission() {
           total={total as number}
           search={search}
           setSearch={setSearch}
+          rightLabel={(
+            <Button
+              className="bg-emerald-600 shadow-none hover:bg-emerald-700"
+              size="sm"
+              onClick={() => router.push('/in-patient/add')}
+            >
+              NEW
+            </Button>
+          )}
         />
 
       </div>

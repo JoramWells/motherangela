@@ -17,7 +17,7 @@ const listItems = [
   },
   {
     id: '2',
-    label: 'Payroll Records',
+    label: 'Patients',
     link: '',
   },
 ];

@@ -30,7 +30,7 @@ export const admissionApi = createApi({
         body: newWard,
       }),
     }),
-    getAdmission: builder.query({
+    getAdmission: builder.query<AdmissionInterface, string>({
       query: (id) => `detail/${id}`,
     }),
 

@@ -21,7 +21,7 @@ const listItems = [
   },
 ];
 
-function Patients() {
+function AntenatalProfilePage() {
   const {
     data, total, search, setSearch,
   } = usePaginatedSearch<AntenatalProfileInterface>({
@@ -49,7 +49,9 @@ function Patients() {
 }
 
 export default function WrappedPatients() {
-  <Suspense>
-    <Patients />
-  </Suspense>;
+  return (
+    <Suspense fallback={<div>loading..</div>}>
+      <AntenatalProfilePage />
+    </Suspense>
+  );
 }

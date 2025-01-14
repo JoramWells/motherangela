@@ -2,31 +2,13 @@ import { ColumnDef } from '@tanstack/react-table';
 import moment from 'moment';
 import Link from 'next/link';
 import { AntenatalProfileInterface, MaternityDeliveryInterface, MaternityProfileInterface } from 'motherangela';
+import { useRouter } from 'next/navigation';
+import { MoveRight } from 'lucide-react';
 import Avatar from '@/components/custom/Avatar';
+import { Button } from '@/components/ui/button';
 
 export const maternityProfileColumns: ColumnDef<MaternityProfileInterface>[] = [
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
+
   {
     accessorKey: 'name_of_client',
     header: 'Name',
@@ -79,41 +61,26 @@ export const maternityProfileColumns: ColumnDef<MaternityProfileInterface>[] = [
   },
   {
     accessorKey: 'action',
-    cell: ({ row }) => (
-      <Link
-        className="text-[12px]"
-        href={`/maternity/${row.original.maternity_profile_id}`}
-      >
-        View
-      </Link>
-    ),
+    header: 'Details',
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <Button
+          size="sm"
+          className="shadow-none text-sky-600 border-sky-200"
+          variant="outline"
+          onClick={() => router.push(`/maternity/${row.original.maternity_profile_id}`)}
+        >
+          <MoveRight />
+        </Button>
+      );
+    },
   },
 ];
 
 //
 export const maternityAntenatalProfileColumns: ColumnDef<AntenatalProfileInterface>[] = [
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
+
   {
     accessorKey: 'name_of_client',
     header: 'Name',
@@ -193,28 +160,7 @@ export const maternityAntenatalProfileColumns: ColumnDef<AntenatalProfileInterfa
 
 //
 export const maternityDeliveriesColumns: ColumnDef<MaternityDeliveryInterface>[] = [
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
+
   {
     accessorKey: 'name_of_client',
     header: 'Name',
