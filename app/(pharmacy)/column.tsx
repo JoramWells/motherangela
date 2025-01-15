@@ -248,62 +248,52 @@ export const internalPharmacyRequestColumns: ColumnDef<InternalPharmacyRequestIn
   },
 
   {
-    accessorKey: 'date_of_request',
-    header: 'Date of Request',
+    accessorKey: 'prescription_term',
+    header: 'Term',
     cell: ({ row }) => (
-      <p className="text-[12px] text-slate-500">{moment(row.original.date_of_request).format('ll')}</p>
+      <p className="text-[12px] text-slate-500">{row.original.prescription_term}</p>
     ),
   },
 
   {
-    accessorKey: 'delivery_status',
-    header: 'Delivery Status',
+    accessorKey: 'medication?.price',
+    header: 'Price',
     cell: ({ row }) => (
-      row.original?.delivery_status === 1 ? (
-        <Badge
-          className="bg-emerald-50 hover:bg-emerald-100 text-emerald-500 shadow-none"
-        >
-          Yes
-        </Badge>
-      ) : (
-        <Badge
-          className="bg-red-50 hover:bg-red-100 text-red-500 shadow-none"
-        >
-          No
-        </Badge>
-      )
-    ),
-  },
-  {
-    accessorKey: 'pay_status',
-    header: 'Pay Status',
-    cell: ({ row }) => (
-      row.original.pay_status ? (
-        <Badge
-          className="bg-emerald-50 hover:bg-emerald-100 text-emerald-500 shadow-none"
-        >
-          Paid
-        </Badge>
-      ) : (
-        <Badge
-          className="bg-red-50 hover:bg-red-100 text-red-500 shadow-none"
-        >
-          Unpaid
-        </Badge>
-      )
+      <p
+        className="text-[12px] text-slate-700 font-semibold"
+      >
+        {row.original.medication?.price}
+      </p>
     ),
   },
   {
     accessorKey: 'action',
     header: 'Action',
-    cell: ({ row }) => (
-      <Link
-        className="text-[12px]"
-        href={`/maternity/${row.original.pharmacy_request_id}`}
-      >
-        View
-      </Link>
-    ),
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <div
+          className="flex flex-row items-center space-x-2"
+        >
+          {!row.original.pay_status && (
+          <Button
+            size="sm"
+            className="shadow-none bg-emerald-600 hover:bg-emerald-700 "
+          >
+            Confirm
+          </Button>
+          )}
+          <Button
+            className="text-[12px] shadow-none"
+            variant="outline"
+            size="sm"
+            onClick={() => router.push(`/requests/${row.original.pharmacy_request_id}`)}
+          >
+            <MoveRight />
+          </Button>
+        </div>
+      );
+    },
   },
 ];
 

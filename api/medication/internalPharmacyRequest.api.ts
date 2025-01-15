@@ -30,7 +30,7 @@ export const internalPharmacyRequestsApi = createApi({
         body: newMedicine,
       }),
     }),
-    getInternalPharmacyRequest: builder.query({
+    getInternalPharmacyRequest: builder.query<InternalPharmacyRequestInterface, string>({
       query: (id) => `detail/${id}`,
     }),
     getInternalPharmacyRequestSeries: builder.query({

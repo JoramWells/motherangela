@@ -46,6 +46,12 @@ const DL = [
     icon: <BookOpenCheck size={17} />,
   },
   {
+    id: '6',
+    label: 'OTC',
+    link: '/otc',
+    icon: <BookOpenCheck size={17} />,
+  },
+  {
     id: '5',
     label: 'Requests',
     link: '/requests',

@@ -33,6 +33,20 @@ export const patientsApi = createApi({
     getPatient: builder.query<PatientInterface, string>({
       query: (id) => `detail/${id}`,
     }),
+    searchPatient: builder.query<PatientInterface[],
+      { searchQuery: string }
+
+    >({
+      query: (params) => {
+        if (params) {
+          const { searchQuery } = params;
+          let queryString = '';
+          queryString += `searchQuery=${searchQuery}`;
+          return `/search/?${queryString}`;
+        }
+        return 'search';
+      },
+    }),
     updatePatient: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `edit/${id}`,
@@ -52,6 +66,6 @@ export const patientsApi = createApi({
 });
 
 export const {
-  useGetPatientsQuery, useUpdatePatientMutation,
+  useGetPatientsQuery, useUpdatePatientMutation, useSearchPatientQuery,
   useDeletePatientMutation, useAddPatientMutation, useGetPatientQuery,
 } = patientsApi;
