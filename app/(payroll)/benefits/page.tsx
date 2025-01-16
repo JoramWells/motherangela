@@ -37,6 +37,7 @@ function Benefits() {
   const { data, total } = usePreprocessData<PayrollEmployeeBenefitsFileInterface>(profileData);
   useSearch({ search, setSearch });
 
+  console.log(data);
   return (
     <>
       <BreadcrumbNav

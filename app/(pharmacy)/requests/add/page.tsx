@@ -1,10 +1,15 @@
 'use client';
 
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import SearchInputDropDown, { SelectInputProps } from './SearchInputDropDown';
 import { useSearchPatientQuery } from '@/api/patients/patients.api';
 import { Button } from '@/components/ui/button';
+import { DataTable } from '@/components/custom/table/DataTable';
+import { medicineSelectColumns } from '../../column';
+import { useGetAllMedicationQuery } from '@/api/medication/medicine.api';
+import usePaginatedSearch from '@/hooks/usePaginatedSearch';
+import { DataTableSelect } from '@/components/custom/table/DataTableSelect';
 
 const listItems = [
   {
@@ -39,16 +44,28 @@ function AddOTC() {
     [data],
   );
 
-  console.log(search);
+  const {
+    data: medData, total, search: searchMed, setSearch: setSearchMed,
+  } = usePaginatedSearch({ fetchQuery: useGetAllMedicationQuery, pageSize: 5 });
+
+  const formatData = useMemo(
+    () => medData?.map((item) => ({
+      ...item,
+      id: item.medication_id, // Ensures id is consistent
+    })) ?? [],
+    [medData],
+  );
+
+  console.log(formatData);
 
   return (
-    <div>
+    <>
       <BreadcrumbNav
         listItems={listItems}
       />
       <div className="p-2">
         <div
-          className="w-1/3 bg-white p-4 rounded-lg"
+          className="w-1/2 bg-white p-4 rounded-lg"
         >
           <SearchInputDropDown
             search={search}
@@ -65,12 +82,26 @@ function AddOTC() {
                   Select Text
                 </Button>
 
+                <DataTable />
+
               </div>
             )
-            : <div>Select a user</div>}
+            : (
+              <div>
+                <DataTableSelect
+                  columns={medicineSelectColumns}
+                  data={formatData ?? []}
+                  total={total as number}
+                  isSearch
+                  search={searchMed}
+                  setSearch={setSearchMed}
+                />
+
+              </div>
+            )}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

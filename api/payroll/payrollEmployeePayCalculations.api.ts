@@ -1,14 +1,14 @@
 /* eslint-disable max-len */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { PaginatedResponse, PayrollEmployeeBenefitsFileInterface } from 'motherangela';
+import { PaginatedResponse, PayrollPeriodEmployeePayCalculationsInterface } from 'motherangela';
 
-export const payrollEmployeeBenefitsApi = createApi({
-  reducerPath: 'payrollEmployeeBenefitsApi',
+export const payrollEmployeePayCalculationsApi = createApi({
+  reducerPath: 'payrollEmployeePayCalculationsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/payroll-service/payroll-employee-benefits-file`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/payroll-service/payroll-employee-pay-calculations`,
   }),
   endpoints: (builder) => ({
-    getAllPayrollEmployeeBenefits: builder.query<PaginatedResponse<PayrollEmployeeBenefitsFileInterface>,
+    getAllPayrollEmployeePayCalculations: builder.query<PaginatedResponse<PayrollPeriodEmployeePayCalculationsInterface>,
       { page: number; pageSize: number; searchQuery: string }
 
     >({
@@ -24,46 +24,42 @@ export const payrollEmployeeBenefitsApi = createApi({
         return 'fetchAll';
       },
     }),
-    addPayrollEmployeeBenefits: builder.mutation({
+    addPayrollEmployeePayCalculations: builder.mutation({
       query: (newUser) => ({
         url: 'add',
         method: 'POST',
         body: newUser,
       }),
     }),
-    getPayrollEmployeeBenefit: builder.query({
+    getPayrollEmployeePayCalculations: builder.query<PayrollPeriodEmployeePayCalculationsInterface, string>({
       query: (id) => `detail/${id}`,
     }),
-    getAllPayrollEmployeeBenefitsFileByPayrollID: builder.query<PaginatedResponse<PayrollEmployeeBenefitsFileInterface>,
-      {id?: string, page: number; pageSize: number; searchQuery: string,
-        employee_id?: string
-
-       }
+    getAllPayrollEmployeePayCalculationByPayrollID: builder.query<PaginatedResponse<PayrollPeriodEmployeePayCalculationsInterface>,
+      {id?: string, page: number; pageSize: number; searchQuery: string }
 
     >({
       query: (params) => {
         if (params) {
           const {
-            id, page, pageSize, searchQuery, employee_id,
+            id, page, pageSize, searchQuery,
           } = params;
           let queryString = '';
           queryString += `page=${page}`;
           queryString += `&pageSize=${pageSize}`;
-          queryString += `&employee_id=${employee_id}`;
           queryString += `&searchQuery=${searchQuery}`;
           return `/by-payroll-id/${id}/?${queryString}`;
         }
         return 'by-payroll-id';
       },
     }),
-    updatePayrollEmployeeBenefit: builder.mutation({
+    updatePayrollEmployeePayCalculations: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `update${id}`,
         method: 'PUT',
         body: patch,
       }),
     }),
-    deletePayrollEmployeeBenefit: builder.mutation({
+    deletePayrollEmployeePayCalculations: builder.mutation({
       query(id) {
         return {
           url: `delete${id}`,
@@ -75,7 +71,7 @@ export const payrollEmployeeBenefitsApi = createApi({
 });
 
 export const {
-  useGetAllPayrollEmployeeBenefitsQuery, useAddPayrollEmployeeBenefitsMutation,
-  useGetPayrollEmployeeBenefitQuery, useGetAllPayrollEmployeeBenefitsFileByPayrollIDQuery,
-  useUpdatePayrollEmployeeBenefitMutation, useDeletePayrollEmployeeBenefitMutation,
-} = payrollEmployeeBenefitsApi;
+  useGetAllPayrollEmployeePayCalculationsQuery, useAddPayrollEmployeePayCalculationsMutation,
+  useGetPayrollEmployeePayCalculationsQuery, useGetAllPayrollEmployeePayCalculationByPayrollIDQuery,
+  useUpdatePayrollEmployeePayCalculationsMutation, useDeletePayrollEmployeePayCalculationsMutation,
+} = payrollEmployeePayCalculationsApi;

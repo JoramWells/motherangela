@@ -27,6 +27,9 @@ import { accountingDocumentsApi } from '@/api/accounts/accountingDocuments.api';
 import { accountingDepartmentApi } from '@/api/accounts/accountingDepartment.api';
 import { accountingBankAccountApi } from '@/api/accounts/bank/accountingBankAccounts.api';
 import { cashPaymentModesApi } from '@/api/accounts/cashPaymentModes.api';
+import { payrollEmployeePayCalculationsApi } from '@/api/payroll/payrollEmployeePayCalculations.api';
+import { payrollEmployeeMonthlyDeductionsFileApi } from '@/api/payroll/payrollEmployeeMonthlyDeducationsFile.api';
+import { payrollEmployeePayrollDeductionsApi } from '@/api/payroll/payrollEmployeePayrollDeductions.api';
 
 export const store = configureStore({
   reducer: {
@@ -47,6 +50,10 @@ export const store = configureStore({
     [payrollEmployeeRecordsApi.reducerPath]: payrollEmployeeRecordsApi.reducer,
     [payrollEmployeeBenefitsApi.reducerPath]:
       payrollEmployeeBenefitsApi.reducer,
+    [payrollEmployeeMonthlyDeductionsFileApi.reducerPath]:
+      payrollEmployeeMonthlyDeductionsFileApi.reducer,
+    [payrollEmployeePayrollDeductionsApi.reducerPath]:
+      payrollEmployeePayrollDeductionsApi.reducer,
     [medicineApi.reducerPath]: medicineApi.reducer,
     [medicineCategoryApi.reducerPath]: medicineCategoryApi.reducer,
     [medicinePurchasesApi.reducerPath]: medicinePurchasesApi.reducer,
@@ -59,6 +66,7 @@ export const store = configureStore({
     [payrollPeriodsApi.reducerPath]: payrollPeriodsApi.reducer,
     [payrollMonthlyDeductionsApi.reducerPath]: payrollMonthlyDeductionsApi.reducer,
     [payrollEmployeeLoanRecordsApi.reducerPath]: payrollEmployeeLoanRecordsApi.reducer,
+    [payrollEmployeePayCalculationsApi.reducerPath]: payrollEmployeePayCalculationsApi.reducer,
   },
   middleware: (getDefaultMiddleWare) => getDefaultMiddleWare({
     immutableCheck: false,
@@ -90,5 +98,8 @@ export const store = configureStore({
     .concat(payrollEmployeeDeductionsApi.middleware)
     .concat(payrollPeriodsApi.middleware)
     .concat(payrollMonthlyDeductionsApi.middleware)
-    .concat(payrollEmployeeLoanRecordsApi.middleware),
+    .concat(payrollEmployeeLoanRecordsApi.middleware)
+    .concat(payrollEmployeePayCalculationsApi.middleware)
+    .concat(payrollEmployeeMonthlyDeductionsFileApi.middleware)
+    .concat(payrollEmployeePayrollDeductionsApi.middleware),
 });

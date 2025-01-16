@@ -10,6 +10,7 @@ import { MoveRight } from 'lucide-react';
 import Avatar from '@/components/custom/Avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 
 export const medicineStockColumns: ColumnDef<MedicationStockTakeInterface>[] = [
 
@@ -387,4 +388,75 @@ export const medicinePurchaseColumns: ColumnDef<MedicinePurchaseInterface>[] = [
       </Link>
     ),
   },
+];
+
+//
+export const medicineSelectColumns: ColumnDef<MedicineInterface>[] = [
+  {
+    id: 'select',
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected()
+          || (table.getIsSomePageRowsSelected() && 'indeterminate')
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: 'medication_name',
+    header: 'Name',
+    cell: ({ row }) => {
+      const { medication_name } = row.original;
+      return (
+        <p className="capitalize text-[12px]">{medication_name.length > 15 ? `${medication_name.substring(0, 15)}...` : medication_name}</p>
+      );
+    },
+  },
+  {
+    accessorKey: 'price',
+    header: 'Price',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500">
+        <div className="flex flex-row space-x-2 items-center">
+          {/* <p>Price:</p> */}
+          <p>{row.original.price}</p>
+        </div>
+
+        {/*  */}
+        {/* <div className="flex flex-row space-x-2 items-center">
+          <p>Corporate:</p>
+          <p>{row.original.price_corporate}</p>
+        </div> */}
+
+        {/*  */}
+        {/* <div className="flex flex-row space-x-2 items-center">
+          <p>Foreigner:</p>
+          <p>{row.original.price_foreigner}</p>
+        </div> */}
+      </div>
+    ),
+  },
+
+  {
+    accessorKey: 'quantity',
+    header: 'Quantity',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {row.original.quantity}
+      </p>
+    ),
+  },
+
 ];

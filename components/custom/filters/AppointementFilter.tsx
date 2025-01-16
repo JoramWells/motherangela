@@ -1,6 +1,6 @@
 import React from 'react';
 import { type Dispatch, type SetStateAction } from 'react';
-import { pageNumber } from '@/utils/pageNumber';
+import { pageNumber } from '@/utils/number';
 import SelectDropdownFilter, { DataItem } from '../forms/SelectDropdownFilter';
 
 interface AppointmentFilterInputProps {
