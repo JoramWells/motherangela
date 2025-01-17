@@ -1,15 +1,13 @@
 'use client';
 
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { TriangleAlert } from 'lucide-react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import SearchInputDropDown, { SelectInputProps } from './SearchInputDropDown';
 import { useSearchPatientQuery } from '@/api/patients/patients.api';
 import { Button } from '@/components/ui/button';
-import { DataTable } from '@/components/custom/table/DataTable';
-import { medicineSelectColumns } from '../../column';
-import { useGetAllMedicationQuery } from '@/api/medication/medicine.api';
-import usePaginatedSearch from '@/hooks/usePaginatedSearch';
-import { DataTableSelect } from '@/components/custom/table/DataTableSelect';
+import { useSearchMedicineQuery } from '@/api/medication/medicine.api';
+import SearchInputDropDown, { SelectInputProps } from '@/components/custom/forms/SearchInputDropDown';
+import { formatCurrency } from '@/utils/number';
 
 const listItems = [
   {
@@ -30,12 +28,22 @@ const listItems = [
 ];
 function AddOTC() {
   const [search, setSearch] = useState<SelectInputProps>({ id: '', label: '' });
+  const [searchMedicine, setSearchMedicine] = useState<SelectInputProps>({ id: '', label: '' });
   const { data } = useSearchPatientQuery({
     searchQuery: search?.label as string,
   }, {
     skip: !search?.label || search?.label?.length as number < 0,
   });
-  //   useSearch({ search, setSearch });
+
+  const { data: medicineData } = useSearchMedicineQuery(
+    {
+      searchQuery: searchMedicine.label as string,
+    },
+    {
+      skip: !searchMedicine?.label || searchMedicine?.label?.length as number < 0,
+
+    },
+  );
   const searchOptions = useCallback(
     () => data?.map((item) => ({
       id: item?.patient_id as unknown as string,
@@ -44,19 +52,12 @@ function AddOTC() {
     [data],
   );
 
-  const {
-    data: medData, total, search: searchMed, setSearch: setSearchMed,
-  } = usePaginatedSearch({ fetchQuery: useGetAllMedicationQuery, pageSize: 5 });
+  const searchMedicineOptions = useCallback(() => medicineData?.map((item) => ({
+    id: item.medication_id,
+    label: item.medication_name,
+  })), [medicineData]);
 
-  const formatData = useMemo(
-    () => medData?.map((item) => ({
-      ...item,
-      id: item.medication_id, // Ensures id is consistent
-    })) ?? [],
-    [medData],
-  );
-
-  console.log(formatData);
+  console.log(medicineData);
 
   return (
     <>
@@ -76,26 +77,63 @@ function AddOTC() {
           {search.id
             ? (
               <div>
-                <Button
-                  size="sm"
-                >
-                  Select Text
-                </Button>
+                <SearchInputDropDown
+                  search={searchMedicine}
+                  setSearch={setSearchMedicine}
+                  data={searchMedicineOptions() ?? []}
+                />
 
-                <DataTable />
+                {searchMedicine.id ? (
+                  <div>
+                    <div
+                      className="w-1/2 p-2 flex flex-col space-y-2 border ml-2 rounded-lg bg-zinc-50"
+                    >
+                      <div
+                        className="flex flex-row justify-between items-center text-[12px] text-zinc-500"
+                      >
+                        <p>Price</p>
+                        <p>
+                          {medicineData && formatCurrency(medicineData[0]?.price)}
+                          {' '}
+                          /=
+                        </p>
+                      </div>
+
+                      <div
+                        className="flex flex-row justify-between items-center text-[12px] text-slate-500"
+                      >
+                        <p>Quantity</p>
+                        <p>
+                          {medicineData && medicineData[0].quantity}
+                        </p>
+                      </div>
+
+                    </div>
+
+                    {medicineData[0]?.quantity <= 0
+                      ? (
+                        <div
+                          className="ml-2 mt-2 flex flex-row items-center space-x-2 text-[12px] bg-red-50 w-1/2 p-2 rounded-lg text-red-500 font-semibold border border-red-200"
+                        >
+                          <TriangleAlert size={14} />
+                          <p>Medicine Out of Stock</p>
+                        </div>
+                      )
+                      : (
+                        <div>
+                          <p>Prescribe</p>
+                        </div>
+                      )}
+
+                  </div>
+                )
+                  : <div>Select Medicine</div>}
 
               </div>
             )
             : (
               <div>
-                <DataTableSelect
-                  columns={medicineSelectColumns}
-                  data={formatData ?? []}
-                  total={total as number}
-                  isSearch
-                  search={searchMed}
-                  setSearch={setSearchMed}
-                />
+                <p>Select Patient</p>
 
               </div>
             )}

@@ -47,8 +47,6 @@ function AppointmentDetail({ params }:{params:Promise<{id: string}>}) {
     [first_name],
   );
 
-  console.log(data, 'dtx');
-
   return (
     <>
       <BreadcrumbNav

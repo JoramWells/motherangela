@@ -25,7 +25,7 @@ const listItems = [
   },
 ];
 
-function Patients() {
+function AppointmentVisitsPage() {
   const {
     data, total, search, setSearch,
   } = usePaginatedSearch({ fetchQuery: useGetAppointmentsQuery });
@@ -83,7 +83,7 @@ function Patients() {
 export default function WrappedPatientsPage() {
   return (
     <Suspense>
-      <Patients />
+      <AppointmentVisitsPage />
     </Suspense>
   );
 }

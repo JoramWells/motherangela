@@ -181,7 +181,7 @@ export const admissionColumn: ColumnDef<AdmissionInterface>[] = [
           size="sm"
           className="shadow-none"
           variant="outline"
-          onClick={() => router.push(`/in-patient/${row.original.patient_id}?admission_id=${row.original.admission_id}`)}
+          onClick={() => router.push(`/in-patient/${row.original.admission_id}?patient_id=${row.original.patient_id}`)}
         >
           <MoveRight />
         </Button>

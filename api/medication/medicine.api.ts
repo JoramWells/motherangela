@@ -30,9 +30,23 @@ export const medicineApi = createApi({
         body: newMedication,
       }),
     }),
-    getMedication: builder.query({
+    getMedication: builder.query<MedicineInterface, string>({
       query: (id) => `detail/${id}`,
     }),
+    searchMedicine: builder.query<MedicineInterface[],
+          { searchQuery: string }
+
+        >({
+          query: (params) => {
+            if (params) {
+              const { searchQuery } = params;
+              let queryString = '';
+              queryString += `searchQuery=${searchQuery}`;
+              return `/search/?${queryString}`;
+            }
+            return 'search';
+          },
+        }),
     updateMedication: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `update${id}`,
@@ -53,5 +67,5 @@ export const medicineApi = createApi({
 
 export const {
   useGetAllMedicationQuery, useAddMedicationMutation, useGetMedicationQuery,
-  useUpdateMedicationMutation, useDeleteMedicationMutation,
+  useUpdateMedicationMutation, useDeleteMedicationMutation, useSearchMedicineQuery,
 } = medicineApi;

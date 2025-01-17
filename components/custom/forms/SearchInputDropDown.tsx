@@ -8,7 +8,7 @@ import React, {
   useState,
 } from 'react';
 import debounce from 'lodash/debounce';
-import { Search, XIcon } from 'lucide-react';
+import { ChevronsUpDown } from 'lucide-react';
 
 export interface SelectInputProps {
   id?: string
@@ -76,9 +76,6 @@ function SearchInputDropDown({
           focus-within:ring focus-within:ring-slate-50 mt-1
           "
         >
-          <Search
-            size={16}
-          />
           <input
             id="searchInput"
             placeholder="Identify client..."
@@ -87,7 +84,7 @@ function SearchInputDropDown({
             onChange={handleSearch}
             onFocus={() => setIsOpen(true)}
           />
-          { search.label && search?.label?.length > 0
+          {/* { search.label && search?.label?.length > 0
           && (
           <XIcon
             size={16}
@@ -96,7 +93,11 @@ function SearchInputDropDown({
               // data = [];
             }}
           />
-          )}
+          )} */}
+          <ChevronsUpDown
+            className=""
+            size={16}
+          />
         </div>
         {isOpen && (
           <div className="absolute bg-white shadow-lg left-0 right-4 rounded-lg border max-h-[200px] overflow-y-auto border-slate-200 flex-1 w-full mt-1">

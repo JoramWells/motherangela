@@ -1,21 +1,28 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import React, { useMemo } from 'react';
+import React, { use, useMemo } from 'react';
 import moment from 'moment';
 import { ArrowRight } from 'lucide-react';
 import { useGetAdmissionQuery } from '@/api/admission/admissions.api';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { Button } from '@/components/ui/button';
+import { useGetPatientQuery } from '@/api/patients/patients.api';
+import PatientSideProfile from '@/components/custom/patient/PatientSideProfile';
 
-function InpatientDetail() {
-  // const { id } = use(params);
+function InpatientDetail({ params }:{params:Promise<{id: string}>}) {
+  const { id } = use(params);
   const pageParams = useSearchParams();
-  const admission_id = pageParams.get('admission_id');
+  const patient_id = pageParams.get('patient_id');
 
-  const { data } = useGetAdmissionQuery(admission_id as string, {
-    skip: !admission_id,
+  const { data } = useGetAdmissionQuery(id as string, {
+    skip: !id,
   });
+
+  const { data: patientData } = useGetPatientQuery(patient_id as string, {
+    skip: !patient_id,
+  });
+
   const listItems = useMemo(() => [
     {
       id: '1',
@@ -34,48 +41,23 @@ function InpatientDetail() {
     },
   ], [data]);
 
-  console.log(data);
+  const {
+    cell_phone, dob, first_name, in_patient_file_no, middle_name, out_patient_file_no,
+  } = patientData || {};
   return (
     <div>
       <BreadcrumbNav
         listItems={listItems}
       />
       <div className="p-2 flex flex-row space-x-2 items-start">
-        <div
-          className="flex-1 bg-white rounded-lg border border-zinc-100"
-        >
-          <div
-            className="p-2 bg-zinc-50 rounded-t-lg border-b border-zinc-200"
-          >
-            <p
-              className="text-[14px] font-semibold text-zinc-700"
-            >
-              Personal Details
-            </p>
-          </div>
-          <div className="">
-            <div className=" p-2 text-[12px] flex flex-row justify-between">
-              <p className="text-zinc-500">Patient Name :</p>
-              <p
-                className="font-semibold text-zinc-700"
-              >
-                {`${data?.patient_detail?.first_name} ${data?.patient_detail?.middle_name}`}
-
-              </p>
-            </div>
-            <hr />
-            <div className=" p-2 text-[12px] flex flex-row justify-between">
-              <p className="text-zinc-500">Gender :</p>
-              <div>{data?.patient_detail?.patient_gender === '0' ? <p>Male</p> : <p>Female</p>}</div>
-            </div>
-            <hr />
-
-            <div className=" p-2 text-[12px] flex flex-row justify-between">
-              <p className="text-zinc-500">Phone No. :</p>
-              <p>{data?.patient_detail?.cell_phone}</p>
-            </div>
-          </div>
-        </div>
+        <PatientSideProfile
+          cell_phone={cell_phone!}
+          dob={dob!}
+          first_name={first_name!}
+          in_patient_file_no={in_patient_file_no!}
+          middle_name={middle_name!}
+          out_patient_file_no={out_patient_file_no!}
+        />
 
         {/*  */}
         <div
