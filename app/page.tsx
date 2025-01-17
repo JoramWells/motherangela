@@ -34,6 +34,14 @@ export default function Home() {
           },
           {
             id: useId(),
+            link: '/treatment-chart',
+            label: 'Inpatient',
+            url: '/assets/img/hospital.png',
+            description: 'Lorem ipsum dolet Mwat!!',
+
+          },
+          {
+            id: useId(),
             link: '/notes',
             label: 'Doctors',
             url: '/assets/img/doctor.png',

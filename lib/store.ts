@@ -31,6 +31,7 @@ import { payrollEmployeePayCalculationsApi } from '@/api/payroll/payrollEmployee
 import { payrollEmployeeMonthlyDeductionsFileApi } from '@/api/payroll/payrollEmployeeMonthlyDeducationsFile.api';
 import { payrollEmployeePayrollDeductionsApi } from '@/api/payroll/payrollEmployeePayrollDeductions.api';
 import { doctorNotesApi } from '@/api/doctor/doctor-notes.api';
+import { inpatientTreatmentChartApi } from '@/api/admission/inpatient.api';
 
 export const store = configureStore({
   reducer: {
@@ -69,6 +70,7 @@ export const store = configureStore({
     [payrollMonthlyDeductionsApi.reducerPath]: payrollMonthlyDeductionsApi.reducer,
     [payrollEmployeeLoanRecordsApi.reducerPath]: payrollEmployeeLoanRecordsApi.reducer,
     [payrollEmployeePayCalculationsApi.reducerPath]: payrollEmployeePayCalculationsApi.reducer,
+    [inpatientTreatmentChartApi.reducerPath]: inpatientTreatmentChartApi.reducer,
   },
   middleware: (getDefaultMiddleWare) => getDefaultMiddleWare({
     immutableCheck: false,
@@ -104,5 +106,6 @@ export const store = configureStore({
     .concat(payrollEmployeeLoanRecordsApi.middleware)
     .concat(payrollEmployeePayCalculationsApi.middleware)
     .concat(payrollEmployeeMonthlyDeductionsFileApi.middleware)
-    .concat(payrollEmployeePayrollDeductionsApi.middleware),
+    .concat(payrollEmployeePayrollDeductionsApi.middleware)
+    .concat(inpatientTreatmentChartApi.middleware),
 });

@@ -4,7 +4,6 @@ import React, { useCallback, useState } from 'react';
 import { TriangleAlert } from 'lucide-react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { useSearchPatientQuery } from '@/api/patients/patients.api';
-import { Button } from '@/components/ui/button';
 import { useSearchMedicineQuery } from '@/api/medication/medicine.api';
 import SearchInputDropDown, { SelectInputProps } from '@/components/custom/forms/SearchInputDropDown';
 import { formatCurrency } from '@/utils/number';
@@ -18,11 +17,11 @@ const listItems = [
   {
     id: '2',
     label: 'Over The Counter Request',
-    link: '',
+    link: '/requests',
   },
   {
     id: '3',
-    label: 'Over The Counter Request',
+    label: 'Add',
     link: '',
   },
 ];
@@ -56,8 +55,6 @@ function AddOTC() {
     id: item.medication_id,
     label: item.medication_name,
   })), [medicineData]);
-
-  console.log(medicineData);
 
   return (
     <>
