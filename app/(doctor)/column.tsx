@@ -90,7 +90,7 @@ export const doctorNotesColumns: ColumnDef<DoctorNotesInterface>[] = [
           size="sm"
           className="shadow-none"
           variant="outline"
-          onClick={() => router.push(`/notes/${row.original.note_id}`)}
+          onClick={() => router.push(`/notes/${row.original.note_id}?patient_id=${row.original.patient_id}`)}
         >
           <MoveRight />
         </Button>

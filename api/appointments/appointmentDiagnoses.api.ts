@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { PaginatedResponse, AppointmentInterface, AppointmentDiagnosisInterface } from 'motherangela';
+import { PaginatedResponse, AppointmentDiagnosisInterface } from 'motherangela';
 
 export const appointmentDiagnosesApi = createApi({
   reducerPath: 'appointmentDiagnosesApi',
@@ -30,7 +30,7 @@ export const appointmentDiagnosesApi = createApi({
         body: newWard,
       }),
     }),
-    getAppointmentDiagnoses: builder.query<AppointmentInterface, string>({
+    getAppointmentDiagnoses: builder.query<AppointmentDiagnosisInterface, string>({
       query: (id) => `detail/${id}`,
     }),
     getAppointmentDiagnosesDetailByID: builder.query({

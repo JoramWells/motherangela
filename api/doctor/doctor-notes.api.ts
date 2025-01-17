@@ -32,16 +32,16 @@ export const doctorNotesApi = createApi({
         body: newMaternity,
       }),
     }),
-    getAntenatalMaternityProfile: builder.query({
+    getDoctorNotes: builder.query<DoctorNotesInterface, string>({
       query: (id) => `/detail/${id}`,
     }),
-    getAntenatalMaternityProfileByMaternityID: builder.query<DoctorNotesInterface, string>({
+    getDoctorNotesByMaternityID: builder.query<DoctorNotesInterface, string>({
       query: (id) => `/by-maternity-id/${id}`,
     }),
   }),
 });
 
 export const {
-  useGetAllDoctorNotesQuery, useGetAntenatalMaternityProfileByMaternityIDQuery,
-  useAddDoctorNotesMutation, useGetAntenatalMaternityProfileQuery,
+  useGetAllDoctorNotesQuery, useGetDoctorNotesByMaternityIDQuery,
+  useAddDoctorNotesMutation, useGetDoctorNotesQuery,
 } = doctorNotesApi;

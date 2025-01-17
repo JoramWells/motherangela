@@ -1,12 +1,13 @@
 import { ColumnDef } from '@tanstack/react-table';
 import moment from 'moment';
-import Link from 'next/link';
 import { AppointmentDiagnosisInterface, AppointmentInterface } from 'motherangela';
 import { MoveRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import Avatar from '@/components/custom/Avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { formatCurrency } from '@/utils/number';
 
 export const columns: ColumnDef<AppointmentInterface>[] = [
   // {
@@ -33,19 +34,23 @@ export const columns: ColumnDef<AppointmentInterface>[] = [
   // },
   {
     accessorKey: 'patient_detail.first_name',
-    header: 'Name',
-    cell: ({ row }) => (
-      <div className="flex-row flex space-x-2 items-center">
-        <Avatar
-          name={`${row.original.patient_detail?.first_name} ${row.original.patient_detail?.middle_name}`}
-        />
-        <p className="capitalize text-[12px]">
-          {row.original.patient_detail?.first_name}
-          {' '}
-          {row.original.patient_detail?.middle_name}
-        </p>
-      </div>
-    ),
+    header: 'Patient Name',
+    cell: ({ row }) => {
+      const first_name = row.original?.patient_detail?.first_name;
+      const middle_name = row.original?.patient_detail?.middle_name;
+      return (
+        <div className="flex-row flex space-x-2 items-center">
+          <Avatar
+            name={`${first_name} ${middle_name}`}
+          />
+          <Link href={`/patients/${row.original?.patient_id}`} className="capitalize text-[12px] text-cyan-500 hover:underline ">
+            {first_name}
+            {' '}
+            {middle_name}
+          </Link>
+        </div>
+      );
+    },
   },
   {
     accessorKey: 'user.full_name',
@@ -62,7 +67,7 @@ export const columns: ColumnDef<AppointmentInterface>[] = [
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500">
         <p>{moment(row.original?.appointment_date).format('ll')}</p>
-        <p>{row.original.appointment_time}</p>
+        {/* <p>{row.original.appointment_time}</p> */}
       </div>
     ),
   },
@@ -71,7 +76,7 @@ export const columns: ColumnDef<AppointmentInterface>[] = [
     header: 'Charges',
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500 ">
-        {row.original?.charges ?? 0}
+        {formatCurrency(row.original?.charges) ?? 0}
       </div>
     ),
   },
@@ -94,7 +99,7 @@ export const columns: ColumnDef<AppointmentInterface>[] = [
           size="sm"
           className="shadow-none"
           variant="outline"
-          onClick={() => router.push(`/visits/${row.original.appointment_id}`)}
+          onClick={() => router.push(`/visits/${row.original.appointment_id}?patient_id=${row.original.patient_id}`)}
         >
           <MoveRight />
         </Button>
@@ -138,12 +143,11 @@ export const diagnosesColumns: ColumnDef<AppointmentDiagnosisInterface>[] = [
           <Avatar
             name={`${first_name} ${middle_name}`}
           />
-          <p className="capitalize text-[12px]">
+          <Link href={`/patients/${row.original.appointment?.patient_id}`} className="capitalize text-[12px] text-cyan-500 hover:underline ">
             {first_name}
             {' '}
             {middle_name}
-          </p>
-
+          </Link>
         </div>
       );
     },
@@ -165,17 +169,17 @@ export const diagnosesColumns: ColumnDef<AppointmentDiagnosisInterface>[] = [
       const status = row.original?.appointment?.appointment_status;
       return (
         <div className="text-[12px] text-slate-500 ">
-          {status ? (
+          {status === 'Seen' ? (
             <Badge
               className="shadow-none bg-emerald-50 text-emerald-500 hover:bg-emerald-50 "
             >
-              Seen
+              {status}
             </Badge>
           ) : (
             <Badge
               className="shadow-none bg-red-50 text-red-500 hover:bg-red-50 "
             >
-              Not Seen
+              {status}
             </Badge>
           )}
         </div>
@@ -194,13 +198,18 @@ export const diagnosesColumns: ColumnDef<AppointmentDiagnosisInterface>[] = [
   {
     accessorKey: 'action',
     header: 'Action',
-    cell: ({ row }) => (
-      <Link
-        className="text-[12px]"
-        href={`/visits/${row.original.appointment_id}`}
-      >
-        View
-      </Link>
-    ),
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <Button
+          size="sm"
+          className="shadow-none"
+          variant="outline"
+          onClick={() => router.push(`/diagnoses/${row.original.appointment_id}?patient_id=${row.original.appointment?.patient_id}`)}
+        >
+          <MoveRight />
+        </Button>
+      );
+    },
   },
 ];

@@ -40,6 +40,8 @@ function DiagnosesPage() {
     searchQuery: '',
   });
 
+  console.log(data);
+
   return (
     <>
       <BreadcrumbNav

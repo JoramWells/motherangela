@@ -15,7 +15,7 @@ const listItems = [
   },
   {
     id: '2',
-    label: 'Insurances',
+    label: 'Doctor Notes',
     link: '',
   },
 ];
