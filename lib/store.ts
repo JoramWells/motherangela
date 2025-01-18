@@ -31,7 +31,10 @@ import { payrollEmployeePayCalculationsApi } from '@/api/payroll/payrollEmployee
 import { payrollEmployeeMonthlyDeductionsFileApi } from '@/api/payroll/payrollEmployeeMonthlyDeducationsFile.api';
 import { payrollEmployeePayrollDeductionsApi } from '@/api/payroll/payrollEmployeePayrollDeductions.api';
 import { doctorNotesApi } from '@/api/doctor/doctor-notes.api';
-import { inpatientTreatmentChartApi } from '@/api/admission/inpatient.api';
+import { inpatientTreatmentChartApi } from '@/api/admission/inpatient-treatment-chart.api';
+import { inpatientDoctorVisitsApi } from '@/api/admission/inpatient-doctor-visits.api';
+import { inpatientNurseVisitsApi } from '@/api/admission/inpatient-nurse-visits.api';
+import { inpatientPhysiotherapistVisitsApi } from '@/api/admission/inpatient-physiotherapist-visits.api';
 
 export const store = configureStore({
   reducer: {
@@ -71,6 +74,10 @@ export const store = configureStore({
     [payrollEmployeeLoanRecordsApi.reducerPath]: payrollEmployeeLoanRecordsApi.reducer,
     [payrollEmployeePayCalculationsApi.reducerPath]: payrollEmployeePayCalculationsApi.reducer,
     [inpatientTreatmentChartApi.reducerPath]: inpatientTreatmentChartApi.reducer,
+    [inpatientDoctorVisitsApi.reducerPath]: inpatientDoctorVisitsApi.reducer,
+    [inpatientNurseVisitsApi.reducerPath]: inpatientNurseVisitsApi.reducer,
+    [inpatientPhysiotherapistVisitsApi.reducerPath]: inpatientPhysiotherapistVisitsApi.reducer,
+
   },
   middleware: (getDefaultMiddleWare) => getDefaultMiddleWare({
     immutableCheck: false,
@@ -107,5 +114,8 @@ export const store = configureStore({
     .concat(payrollEmployeePayCalculationsApi.middleware)
     .concat(payrollEmployeeMonthlyDeductionsFileApi.middleware)
     .concat(payrollEmployeePayrollDeductionsApi.middleware)
-    .concat(inpatientTreatmentChartApi.middleware),
+    .concat(inpatientTreatmentChartApi.middleware)
+    .concat(inpatientDoctorVisitsApi.middleware)
+    .concat(inpatientNurseVisitsApi.middleware)
+    .concat(inpatientPhysiotherapistVisitsApi.middleware),
 });

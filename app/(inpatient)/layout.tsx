@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  Bed,
   HandCoins,
   Landmark,
   LayoutDashboardIcon,

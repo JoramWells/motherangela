@@ -3,11 +3,11 @@
 import React, { Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { admissionColumn } from '../column';
 import { useGetAllAdmissionsQuery } from '@/api/admission/admissions.api';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
 import { Button } from '@/components/ui/button';
+import { admissionColumn } from '../column';
 
 const listItems = [
   {

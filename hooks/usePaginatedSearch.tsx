@@ -15,11 +15,13 @@ export interface UsePaginatedSearchResponseInterface<T>{
 export interface UsePaginatedSearchInterface<T>{
   id?:string
   employee_id?:string
+  patient_id?:string
   fetchQuery: ({
-    id, page, pageSize, searchQuery, employee_id,
+    id, page, pageSize, searchQuery, employee_id, patient_id,
   }:{
     id?:string,
     employee_id?:string,
+    patient_id?:string,
     page: number,
     pageSize: number, searchQuery: string,
   }) => { data?: PaginatedResponse<T> | undefined };
@@ -28,7 +30,7 @@ export interface UsePaginatedSearchInterface<T>{
 
 const usePaginatedSearch = <T = unknown > (
   {
-    fetchQuery, id, pageSize = 10, employee_id,
+    fetchQuery, id, pageSize = 10, employee_id, patient_id,
   }: UsePaginatedSearchInterface<T>):
      UsePaginatedSearchResponseInterface<T> => {
   const [search, setSearch] = useState('');
@@ -41,6 +43,7 @@ const usePaginatedSearch = <T = unknown > (
     pageSize,
     searchQuery: search,
     employee_id,
+    patient_id,
   });
   const { data, total } = usePreprocessData<T>(profileData);
   useSearch({ search, setSearch });

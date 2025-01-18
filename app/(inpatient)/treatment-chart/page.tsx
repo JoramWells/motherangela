@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
-import { useGetAllInpatientTreatmentChartsQuery } from '@/api/admission/inpatient.api';
+import { useGetAllInpatientTreatmentChartsQuery } from '@/api/admission/inpatient-treatment-chart.api';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { inpatientTreatmentChartColumn } from './column';
+import { inpatientTreatmentChartColumn } from '../column';
 
 const listItems = [
   {
