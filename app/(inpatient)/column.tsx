@@ -2,7 +2,7 @@
 import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
 import {
-  AdmissionInterface, InpatientTreatmentChartInterface, InsuranceMedicineMappingInterface, InsuranceServiceCostMappingInterface,
+  AdmissionInterface, InpatientDoctorVisitsDoctor, InpatientNurseVisitsInterface, InpatientTreatmentChartInterface, InsuranceMedicineMappingInterface, InsuranceServiceCostMappingInterface,
 } from 'motherangela';
 import { useRouter } from 'next/navigation';
 import { MoveRight } from 'lucide-react';
@@ -10,6 +10,7 @@ import moment from 'moment';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Avatar from '@/components/custom/Avatar';
+import { formatCurrency } from '@/utils/number';
 
 export const inpatientTreatmentChartColumn: ColumnDef<InpatientTreatmentChartInterface>[] = [
   // {
@@ -452,6 +453,151 @@ export const inpatientTreatmentDetailChartColumn: ColumnDef<InpatientTreatmentCh
     cell: ({ row }) => (
       <p className="text-[12px] text-slate-500">
         {moment(row.original.date_of_treatment).format('ll') ?? 'No date'}
+      </p>
+    ),
+  },
+];
+
+//
+export const inpatientDoctorVisitColumns: ColumnDef<InpatientDoctorVisitsDoctor>[] = [
+  // {
+  //   id: "select",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={
+  //         table.getIsAllPageRowsSelected() ||
+  //         (table.getIsSomePageRowsSelected() && "indeterminate")
+  //       }
+  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+  //       aria-label="Select all"
+  //     />
+  //   ),
+  //   cell: ({ row }) => (
+  //     <Checkbox
+  //       checked={row.getIsSelected()}
+  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
+  //       aria-label="Select row"
+  //     />
+  //   ),
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
+  {
+    accessorKey: 'user.full_name',
+    header: 'Doctor',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {row.original.user.full_name}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'cost_of_visit',
+    header: 'Cost',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500">
+        <p>{formatCurrency(row.original.cost_of_visit)}</p>
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'doctor_notes',
+    header: 'Notes',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500">
+        <p>{row.original.doctor_notes}</p>
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'admission.admission_date',
+    header: 'Admitted',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {moment(row.original.admission?.admission_date).format('ll') ?? 'No date'}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'date_of_visit',
+    header: 'Visited',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {moment(row.original.date_of_visit).format('ll') ?? 'No date'}
+      </p>
+    ),
+  },
+];
+
+//
+export const inpatientNurseVisitColumns: ColumnDef<InpatientNurseVisitsInterface>[] = [
+  // {
+  //   id: "select",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={
+  //         table.getIsAllPageRowsSelected() ||
+  //         (table.getIsSomePageRowsSelected() && "indeterminate")
+  //       }
+  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+  //       aria-label="Select all"
+  //     />
+  //   ),
+  //   cell: ({ row }) => (
+  //     <Checkbox
+  //       checked={row.getIsSelected()}
+  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
+  //       aria-label="Select row"
+  //     />
+  //   ),
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
+  {
+    accessorKey: 'user.full_name',
+    header: 'Doctor',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {row.original?.user?.full_name}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'cost_of_visit',
+    header: 'Cost',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500">
+        <p>{formatCurrency(row.original.cost_of_visit)}</p>
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'nurse_notes',
+    header: 'Notes',
+    cell: ({ row }) => {
+      const { nurse_notes } = row.original;
+      return (
+        <div className="text-[12px] text-slate-500">
+          <p>{nurse_notes.length > 25 ? `${nurse_notes.substring(0, 25)}..` : nurse_notes }</p>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: 'admission.admission_date',
+    header: 'Admitted',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {moment(row.original.admission?.admission_date).format('ll') ?? 'No date'}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'date_of_visit',
+    header: 'Visited',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {moment(row.original.date_of_visit).format('ll') ?? 'No date'}
       </p>
     ),
   },

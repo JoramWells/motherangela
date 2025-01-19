@@ -33,7 +33,9 @@ export const admissionApi = createApi({
     getAdmission: builder.query<AdmissionInterface, string>({
       query: (id) => `detail/${id}`,
     }),
-
+    getAdmissionWards: builder.query<AdmissionInterface, string>({
+      query: () => 'ward-category',
+    }),
     getAdmissionsByPatientID: builder.query<PaginatedResponse<AdmissionInterface>,
          {id?: string, page: number; pageSize: number; searchQuery: string }
 
@@ -72,6 +74,6 @@ export const admissionApi = createApi({
 
 export const {
   useGetAllAdmissionsQuery, useAddAdmissionMutation,
-  useGetAdmissionQuery, useUpdateAdmissionMutation,
+  useGetAdmissionQuery, useUpdateAdmissionMutation, useGetAdmissionWardsQuery,
   useDeleteAdmissionMutation, useGetAdmissionsByPatientIDQuery,
 } = admissionApi;

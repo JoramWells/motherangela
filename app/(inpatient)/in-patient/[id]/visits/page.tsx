@@ -1,7 +1,8 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { use, useMemo, useState } from 'react';
+import { PackageOpen } from 'lucide-react';
 import { useGetAdmissionQuery } from '@/api/admission/admissions.api';
 import { useGetPatientQuery } from '@/api/patients/patients.api';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
@@ -9,6 +10,9 @@ import PatientSideProfile from '@/components/custom/patient/PatientSideProfile';
 import { Button } from '@/components/ui/button';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import { useGetInpatientDoctorVisitsByPatientIDQuery } from '@/api/admission/inpatient-doctor-visits.api';
+import TableContainer from '@/components/custom/table/TableContainer';
+import { inpatientDoctorVisitColumns, inpatientNurseVisitColumns } from '@/app/(inpatient)/column';
+import { useGetInpatientNurseVisitsByPatientIDQuery } from '@/api/admission/inpatient-nurse-visits.api';
 
 function InpatientVisits({ params }:{params:Promise<{id: string}>}) {
   const { id } = use(params);
@@ -51,13 +55,24 @@ function InpatientVisits({ params }:{params:Promise<{id: string}>}) {
 
   const [value, setValue] = useState('doctor');
 
-  const { data: doctorVisits } = usePaginatedSearch({
+  const {
+    data: doctorVisits, search: searchDoctor, setSearch: setSearchDoctor,
+    total: doctorTotal,
+  } = usePaginatedSearch({
     fetchQuery: useGetInpatientDoctorVisitsByPatientIDQuery,
     patient_id,
     id,
   });
 
-  console.log(doctorVisits);
+  const { data: nurseData, total: nurseTotal } = usePaginatedSearch({
+    fetchQuery: useGetInpatientNurseVisitsByPatientIDQuery,
+    patient_id,
+    id,
+  });
+
+  console.log(nurseData);
+
+  const router = useRouter();
 
   return (
     <div>
@@ -108,6 +123,106 @@ function InpatientVisits({ params }:{params:Promise<{id: string}>}) {
                 </Button>
               ))}
             </div>
+
+            {/*  */}
+            <div className="p-2">
+              {value === 'doctor'
+&& (
+<div>
+    {
+        doctorVisits.length > 0
+          ? (
+            <TableContainer
+              title="Doctor Visits"
+              columns={inpatientDoctorVisitColumns}
+              data={doctorVisits}
+              search={searchDoctor}
+              total={doctorTotal as number}
+              setSearch={setSearchDoctor}
+              rightLabel={(
+                <Button
+                  className="shadow-none bg-emerald-600 hover:bg-emerald-700"
+                  size="sm"
+                  onClick={() => router.push(`/in-patient/${id}/visits/add-doctor-visit`)}
+                >
+                  NEW
+                </Button>
+                  )}
+            />
+          )
+          : (
+            <div
+              className="border p-4 rounded-lg flex flex-col justify-center items-center text-zinc-500 space-y-1 bg-white border-zinc-100"
+            >
+              <PackageOpen size={28} />
+              <p
+                className="text-[14px] font-semibold"
+              >
+                No Doctor Visits
+              </p>
+              <Button
+                className="shadow-none bg-emerald-600 hover:bg-emerald-700"
+                size="sm"
+                onClick={() => router.push(`/in-patient/${id}/visits/add-doctor-visit`)}
+              >
+                NEW
+              </Button>
+            </div>
+          )
+    }
+</div>
+)}
+
+              {/*  */}
+              {value === 'nurse'
+&& (
+<div>
+    {
+        nurseData.length > 0
+          ? (
+            <TableContainer
+              title="Nurse Visits"
+              columns={inpatientNurseVisitColumns}
+              data={nurseData}
+              search={searchDoctor}
+              total={nurseTotal as number}
+              setSearch={setSearchDoctor}
+              rightLabel={(
+                <Button
+                  className="shadow-none bg-emerald-600 hover:bg-emerald-700"
+                  size="sm"
+                  onClick={() => router.push(`/in-patient/${id}/visits/add-doctor-visit`)}
+                >
+                  NEW
+                </Button>
+                  )}
+            />
+          )
+          : (
+            <div
+              className="border p-4 rounded-lg flex flex-col justify-center items-center text-zinc-500 space-y-1 bg-white border-zinc-100"
+            >
+              <PackageOpen size={28} />
+              <p
+                className="text-[14px] font-semibold"
+              >
+                No Nurse Visits !!
+              </p>
+              <Button
+                className="shadow-none bg-emerald-600 hover:bg-emerald-700"
+                size="sm"
+                onClick={() => router.push(`/in-patient/${id}/visits/add-doctor-visit`)}
+              >
+                NEW
+              </Button>
+            </div>
+          )
+    }
+</div>
+)}
+
+            </div>
+
           </div>
         </div>
       </div>

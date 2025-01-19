@@ -2,11 +2,9 @@
 
 import {
   Bed,
-  HandCoins,
   Landmark,
   LayoutDashboardIcon,
   NotebookPen,
-  PiggyBank,
   User,
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
@@ -20,14 +18,8 @@ const DL = [
   {
     id: '1',
     label: 'Dashboard',
-    link: '/users/dashboard',
+    link: '/inpatient-dashboard',
     icon: <LayoutDashboardIcon size={17} />,
-  },
-  {
-    id: '5',
-    label: 'Benefits',
-    link: '/benefits',
-    icon: <PiggyBank size={17} />,
   },
   {
     id: '6',
