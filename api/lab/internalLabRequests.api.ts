@@ -1,14 +1,28 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { LabInterface, PaginatedResponse } from 'motherangela';
 
 export const internalLabRequestsApi = createApi({
   reducerPath: 'internalLabRequestsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_API_URL}/api/lab-service/internal-lab-requests`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/lab-service/internal-lab-requests`,
 
   }),
   endpoints: (builder) => ({
-    getAllInternalLabRequests: builder.query({
-      query: () => 'fetchAll',
+    getAllInternalLabRequests: builder.query<
+      PaginatedResponse<LabInterface>,
+      { page: number; pageSize: number; searchQuery: string }
+    >({
+      query: (params) => {
+        if (params) {
+          const { page, pageSize, searchQuery } = params;
+          let queryString = '';
+          queryString += `page=${page}`;
+          queryString += `&pageSize=${pageSize}`;
+          queryString += `&searchQuery=${searchQuery}`;
+          return `/fetchAll/?${queryString}`;
+        }
+        return 'fetchAll';
+      },
     }),
     addInternalLabRequest: builder.mutation({
       query: (newWard) => ({

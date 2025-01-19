@@ -35,6 +35,7 @@ import { inpatientTreatmentChartApi } from '@/api/admission/inpatient-treatment-
 import { inpatientDoctorVisitsApi } from '@/api/admission/inpatient-doctor-visits.api';
 import { inpatientNurseVisitsApi } from '@/api/admission/inpatient-nurse-visits.api';
 import { inpatientPhysiotherapistVisitsApi } from '@/api/admission/inpatient-physiotherapist-visits.api';
+import { internalLabRequestsApi } from '@/api/lab/internalLabRequests.api';
 
 export const store = configureStore({
   reducer: {
@@ -77,6 +78,7 @@ export const store = configureStore({
     [inpatientDoctorVisitsApi.reducerPath]: inpatientDoctorVisitsApi.reducer,
     [inpatientNurseVisitsApi.reducerPath]: inpatientNurseVisitsApi.reducer,
     [inpatientPhysiotherapistVisitsApi.reducerPath]: inpatientPhysiotherapistVisitsApi.reducer,
+    [internalLabRequestsApi.reducerPath]: internalLabRequestsApi.reducer,
 
   },
   middleware: (getDefaultMiddleWare) => getDefaultMiddleWare({
@@ -117,5 +119,6 @@ export const store = configureStore({
     .concat(inpatientTreatmentChartApi.middleware)
     .concat(inpatientDoctorVisitsApi.middleware)
     .concat(inpatientNurseVisitsApi.middleware)
-    .concat(inpatientPhysiotherapistVisitsApi.middleware),
+    .concat(inpatientPhysiotherapistVisitsApi.middleware)
+    .concat(internalLabRequestsApi.middleware),
 });

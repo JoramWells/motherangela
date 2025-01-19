@@ -66,6 +66,14 @@ export default function Home() {
           },
           {
             id: useId(),
+            link: '/internal-lab-requests',
+            label: 'Laboratory',
+            url: '/assets/img/lab.png',
+            description: 'Lorem Ipsum dolet Mwat!!',
+
+          },
+          {
+            id: useId(),
             link: '/patients',
             label: 'Patients',
             url: '/assets/img/patient.png',

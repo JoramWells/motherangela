@@ -1,13 +1,7 @@
 'use client';
 
 import {
-  BookA,
-  BookCopy,
-  DollarSign,
-  House,
-  LayoutDashboardIcon,
-  PiggyBank,
-
+  Bed, FlaskRound, LayoutDashboardIcon, TestTubeDiagonal,
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
 import { Provider } from 'react-redux';
@@ -31,37 +25,25 @@ const DL = [
   // },
   {
     id: '3',
-    label: 'Accounts',
-    link: '/accounts',
-    icon: <PiggyBank size={17} />,
+    label: 'Internal Requests',
+    link: '/internal-lab-requests',
+    icon: <TestTubeDiagonal size={17} />,
   },
   {
     id: '4',
-    label: 'Assets',
-    link: '/assets',
-    icon: <BookA size={17} />,
+    label: 'Procedures',
+    link: '/procedures',
+    icon: <FlaskRound size={17} />,
   },
   {
-    id: '5',
-    label: 'Departments',
-    link: '/departments',
-    icon: <House size={17} />,
-  },
-  {
-    id: '6',
-    label: 'Documents',
-    link: '/documents',
-    icon: <BookCopy size={17} />,
-  },
-  {
-    id: '9',
-    label: 'Invoice Payments',
-    link: '/invoice-payments',
-    icon: <DollarSign size={17} />,
+    id: '8',
+    label: 'In-patient (Admitted)',
+    link: '/in-patient',
+    icon: <Bed size={17} />,
   },
 ];
 
-const layout = ({ children }: { children: ReactNode }) => (
+const layout = ({ children }:{children: ReactNode}) => (
   <Provider store={store}>
     <div className="flex flex-row">
       <Sidebar>
