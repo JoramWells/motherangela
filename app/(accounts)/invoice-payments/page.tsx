@@ -5,6 +5,20 @@ import { useGetAllInvoicePaymentQuery } from '@/api/accounts/invoice/invoicePaym
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
 import { invoicePaymentsColumns } from '../column';
+import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
+
+const listItems = [
+  {
+    id: '1',
+    label: 'home',
+    link: '/',
+  },
+  {
+    id: '2',
+    label: 'Invoice Payment',
+    link: '',
+  },
+];
 
 function InvoicePayments() {
   const {
@@ -15,6 +29,9 @@ function InvoicePayments() {
   console.log(data);
   return (
     <div>
+      <BreadcrumbNav
+        listItems={listItems}
+      />
       <div className="p-2">
         <TableContainer
           title="Invoice Payments"

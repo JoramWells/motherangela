@@ -37,7 +37,12 @@ import { inpatientNurseVisitsApi } from '@/api/admission/inpatient-nurse-visits.
 import { inpatientPhysiotherapistVisitsApi } from '@/api/admission/inpatient-physiotherapist-visits.api';
 import { internalLabRequestsApi } from '@/api/lab/internalLabRequests.api';
 import { invoicePaymentsApi } from '@/api/accounts/invoice/invoicePayments.api';
-import { personalAccountChargeApi } from '@/api/accounts/personalAccountCharges.api';
+import { personalAccountChargeApi } from '@/api/accounts/charges/personalAccountCharges.api';
+import { personalChargesPaymentApi } from '@/api/accounts/charges/personalChargesPayment.api';
+import { consultationTypeApi } from '@/api/consultation/consultationType.api';
+import { consultationTypeGroupApi } from '@/api/consultation/consultationTypeGroup.api';
+import { consultationTypeSubGroupApi } from '@/api/consultation/consultationTypeSubGroup.api';
+import { consultationTypesWithCreditAccountsApi } from '@/api/consultation/consultationTypesWithCreditAccounts.api';
 
 export const store = configureStore({
   reducer: {
@@ -52,6 +57,11 @@ export const store = configureStore({
     [admissionApi.reducerPath]: admissionApi.reducer,
     [doctorNotesApi.reducerPath]: doctorNotesApi.reducer,
     [cashPaymentModesApi.reducerPath]: cashPaymentModesApi.reducer,
+    [consultationTypeApi.reducerPath]: consultationTypeApi.reducer,
+    [consultationTypeGroupApi.reducerPath]: consultationTypeGroupApi.reducer,
+    [consultationTypeSubGroupApi.reducerPath]: consultationTypeSubGroupApi.reducer,
+    [consultationTypesWithCreditAccountsApi.reducerPath]:
+    consultationTypesWithCreditAccountsApi.reducer,
     [maternityProfileApi.reducerPath]: maternityProfileApi.reducer,
     [maternityAntenatalProfileApi.reducerPath]:
       maternityAntenatalProfileApi.reducer,
@@ -83,6 +93,7 @@ export const store = configureStore({
     [internalLabRequestsApi.reducerPath]: internalLabRequestsApi.reducer,
     [invoicePaymentsApi.reducerPath]: invoicePaymentsApi.reducer,
     [personalAccountChargeApi.reducerPath]: personalAccountChargeApi.reducer,
+    [personalChargesPaymentApi.reducerPath]: personalChargesPaymentApi.reducer,
 
   },
   middleware: (getDefaultMiddleWare) => getDefaultMiddleWare({
@@ -126,5 +137,10 @@ export const store = configureStore({
     .concat(inpatientPhysiotherapistVisitsApi.middleware)
     .concat(internalLabRequestsApi.middleware)
     .concat(invoicePaymentsApi.middleware)
-    .concat(personalAccountChargeApi.middleware),
+    .concat(personalAccountChargeApi.middleware)
+    .concat(personalChargesPaymentApi.middleware)
+    .concat(consultationTypeApi.middleware)
+    .concat(consultationTypeGroupApi.middleware)
+    .concat(consultationTypeSubGroupApi.middleware)
+    .concat(consultationTypesWithCreditAccountsApi.middleware),
 });

@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { use, useMemo } from 'react';
 import moment from 'moment';
-import { ArrowRight, PackageOpen } from 'lucide-react';
+import { ArrowRight, PackageOpen, PlusIcon } from 'lucide-react';
 import { useGetAdmissionQuery } from '@/api/admission/admissions.api';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { Button } from '@/components/ui/button';
@@ -80,8 +80,8 @@ function InpatientDetail({ params }:{params:Promise<{id: string}>}) {
         <div
           className="flex-1"
         >
-          <div className="bg-white mb-2 p-2 flex justify-between items-center">
-            <p>Admission Details</p>
+          <div className="bg-white mb-2 p-2 flex justify-between items-center rounded-lg">
+            <p className="text-zinc-700">Admission Details</p>
             <div
               className="flex space-x-2"
             >
@@ -92,12 +92,25 @@ function InpatientDetail({ params }:{params:Promise<{id: string}>}) {
               >
                 Visits
               </Button>
-              <Button
-                size="sm"
-                className="shadow-none bg-emerald-600 hover:bg-emerald-700"
-              >
-                Discharge
-              </Button>
+              <div>
+                {data?.discharge_date
+                  ? (
+                    <p>
+                      {moment(data.discharge_date).format('ll')}
+                    </p>
+                  )
+
+                  : (
+                    <Button
+                      className="shadow-none text-orange-500 border-orange-500 hover:bg-orange-50 hover:text-orange-500"
+                      size="sm"
+                      variant="outline"
+                    >
+                      Discharge
+                      <ArrowRight />
+                    </Button>
+                  )}
+              </div>
             </div>
           </div>
           <div
@@ -121,45 +134,27 @@ function InpatientDetail({ params }:{params:Promise<{id: string}>}) {
                   <p className="text-zinc-500">Type:</p>
                   <p>{data?.admission_type?.admission_type_description}</p>
                 </div>
-                <hr />
+                <hr className="border-zinc-100" />
                 <div className=" p-2 text-[12px] flex flex-row justify-between">
                   <p className="text-zinc-500">Category:</p>
                   <p>{data?.admission_category?.admission_category_description}</p>
                 </div>
-                <hr />
+                <hr className="border-zinc-100" />
                 <div className=" p-2 text-[12px] flex flex-row justify-between">
                   <p className="text-zinc-500">Admitted By:</p>
                   <p>{data?.user?.full_name}</p>
                 </div>
-                <hr />
+                <hr className="border-zinc-100" />
                 <div className=" p-2 text-[12px] flex flex-row justify-between">
                   <p className="text-zinc-500">Admission Date :</p>
                   <div className="text-zinc-500">
                     <p>{moment(data?.admission_date).format('ll')}</p>
                   </div>
                 </div>
-                <hr />
+                <hr className="border-zinc-100" />
                 <div className=" p-2 text-[12px] flex flex-row justify-between items-center">
-                  <p className="text-zinc-500">Discharge Date :</p>
-                  <div>
-                    {data?.discharge_date
-                      ? (
-                        <p>
-                          {moment(data.discharge_date).format('ll')}
-                        </p>
-                      )
+                  <p className="text-zinc-500">No of Days :</p>
 
-                      : (
-                        <Button
-                          className="shadow-none text-sky-500 border-sky-500"
-                          size="sm"
-                          variant="outline"
-                        >
-                          Discharge
-                          <ArrowRight />
-                        </Button>
-                      )}
-                  </div>
                 </div>
               </div>
             </div>
@@ -183,23 +178,23 @@ function InpatientDetail({ params }:{params:Promise<{id: string}>}) {
                   <p>{data?.admission_type?.admission_type_description}</p>
                 </div>
 
-                <hr />
+                <hr className="border-zinc-100" />
                 <div className=" p-2 text-[12px] flex flex-row justify-between">
                   <p className="text-zinc-500">Ward :</p>
                   <p>{data?.ward?.ward_description}</p>
                 </div>
-                <hr />
+                <hr className="border-zinc-100" />
                 <div className=" p-2 text-[12px] flex flex-row justify-between">
                   <p className="text-zinc-500">Bed No. :</p>
                   <p>{data?.ward_bed?.bed_number}</p>
                 </div>
-                <hr />
+                <hr className="border-zinc-100" />
                 <div className=" p-2 text-[12px] flex flex-row justify-between">
                   <p className="text-zinc-500">Daily Bed Rate :</p>
                   <p>{data?.daily_bed_rate}</p>
                 </div>
 
-                <hr />
+                <hr className="border-zinc-100" />
                 <div className=" p-2 text-[12px] flex flex-row justify-between">
                   <p className="text-zinc-500">Bed Billing Type :</p>
                   <p>{data?.admission_bed_billing_type?.bed_billing_type_description}</p>
@@ -244,10 +239,11 @@ function InpatientDetail({ params }:{params:Promise<{id: string}>}) {
                     </p>
                     <Button
                       size="sm"
-                      className="bg-emerald-600 shadow-none hover:bg-emerald-600"
+                      className="shadow-none hover:bg-blue-50 text-blue-500 border-blue-200 hover:text-blue-500"
+                      variant="outline"
                     >
+                      <PlusIcon />
                       NEW
-                      <ArrowRight />
                     </Button>
                   </div>
                 </div>

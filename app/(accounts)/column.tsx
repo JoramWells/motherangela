@@ -4,10 +4,16 @@ import {
   AccountDetailsInterface,
   AccountingAssetsInterface, AccountingDepartmentInterface, AccountingDocumentsInterface,
   InvoicePaymentInterface,
+  PersonalAccountChargeInterface,
+  PersonalChargesPaymentsInterface,
 } from 'motherangela';
 import moment from 'moment';
+import { useRouter } from 'next/navigation';
+import { MoveRight } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { formatCurrency } from '@/utils/number';
+import Avatar from '@/components/custom/Avatar';
+import { Button } from '@/components/ui/button';
 
 export const accountsColumns: ColumnDef<AccountDetailsInterface>[] = [
 
@@ -396,5 +402,107 @@ export const invoicePaymentsColumns: ColumnDef<InvoicePaymentInterface>[] = [
         View
       </Link>
     ),
+  },
+];
+
+//
+
+export const personalAccountColumns: ColumnDef<PersonalChargesPaymentsInterface>[] = [
+  // {
+  //   id: "select",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={
+  //         table.getIsAllPageRowsSelected() ||
+  //         (table.getIsSomePageRowsSelected() && "indeterminate")
+  //       }
+  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+  //       aria-label="Select all"
+  //     />
+  //   ),
+  //   cell: ({ row }) => (
+  //     <Checkbox
+  //       checked={row.getIsSelected()}
+  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
+  //       aria-label="Select row"
+  //     />
+  //   ),
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
+  {
+    accessorKey: 'patient_detail.first_name',
+    header: 'Patient Name',
+    cell: ({ row }) => {
+      const first_name = row.original?.patient_detail?.first_name;
+      const middle_name = row.original?.patient_detail?.middle_name;
+      return (
+        <div className="flex-row flex space-x-2 items-center">
+          <Avatar
+            name={`${first_name} ${middle_name}`}
+          />
+          <Link href={`/patients/${row.original?.patient_id_personal_charge_payments}`} className="capitalize text-[12px] text-cyan-500 hover:underline ">
+            {first_name}
+            {' '}
+            {middle_name}
+          </Link>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: 'user?.fullname',
+    header: 'By',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {row.original?.user?.full_name ?? 'N/A'}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'service_desc',
+    header: 'Service',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {row.original.service_desc ?? 'N/A'}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'date_of_payment',
+    header: 'Date',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500">
+        <p>{moment(row.original?.date_of_payment).format('ll')}</p>
+        {/* <p>{row.original.appointment_time}</p> */}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'amount',
+    header: 'Amount',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {formatCurrency(row.original?.amount) ?? 0}
+      </div>
+    ),
+  },
+
+  {
+    accessorKey: 'action',
+    header: 'Details',
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <Button
+          size="sm"
+          className="shadow-none"
+          variant="outline"
+          onClick={() => router.push(`/visits/${row.original.charge_payment_id}?patient_id=${row.original.patient_id_personal_charge_payments}`)}
+        >
+          <MoveRight />
+        </Button>
+      );
+    },
   },
 ];

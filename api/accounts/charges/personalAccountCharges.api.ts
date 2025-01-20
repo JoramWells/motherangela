@@ -1,14 +1,29 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { PaginatedResponse, PersonalAccountChargeInterface } from 'motherangela';
 
 export const personalAccountChargeApi = createApi({
   reducerPath: 'personalAccountChargeApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/accounts-service/personal-account-charge`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/patient-service/personal-account-charge`,
 
   }),
   endpoints: (builder) => ({
-    getAllPersonalAccountCharges: builder.query({
-      query: () => 'fetchAll',
+    getAllPersonalAccountCharges:
+    builder.query<PaginatedResponse<PersonalAccountChargeInterface>,
+      { page: number; pageSize: number; searchQuery: string }
+
+    >({
+      query: (params) => {
+        if (params) {
+          const { page, pageSize, searchQuery } = params;
+          let queryString = '';
+          queryString += `page=${page}`;
+          queryString += `&pageSize=${pageSize}`;
+          queryString += `&searchQuery=${searchQuery}`;
+          return `/fetchAll/?${queryString}`;
+        }
+        return 'fetchAll';
+      },
     }),
     addPersonalAccountCharge: builder.mutation({
       query: (newUser) => ({

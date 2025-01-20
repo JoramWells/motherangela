@@ -1,15 +1,29 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { ConsultationTypeInterface, PaginatedResponse } from 'motherangela';
 
 export const consultationTypeApi = createApi({
   reducerPath: 'consultationTypeApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_API_URL}/api/accounts-service/consultation-type`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/accounts-service/consultation-type`,
 
   }),
   endpoints: (builder) => ({
-    getAllConsultationTypes: builder.query({
-      query: () => 'fetchAll',
-    }),
+    getAllConsultationTypes: builder.query<
+              PaginatedResponse<ConsultationTypeInterface>,
+              { page: number; pageSize: number; searchQuery: string }
+            >({
+              query: (params) => {
+                if (params) {
+                  const { page, pageSize, searchQuery } = params;
+                  let queryString = '';
+                  queryString += `page=${page}`;
+                  queryString += `&pageSize=${pageSize}`;
+                  queryString += `&searchQuery=${searchQuery}`;
+                  return `/fetchAll/?${queryString}`;
+                }
+                return 'fetchAll';
+              },
+            }),
     addConsultationType: builder.mutation({
       query: (newUser) => ({
         url: 'add',

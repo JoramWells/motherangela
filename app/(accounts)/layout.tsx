@@ -62,7 +62,7 @@ const DL = [
   },
   {
     id: '10',
-    label: 'Personal Account Charges',
+    label: 'Personal Account',
     link: '/personal-account-charges',
     icon: <Wallet size={17} />,
   },
