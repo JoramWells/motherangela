@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const personalAccountChargeApi = createApi({
   reducerPath: 'personalAccountChargeApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_API_URL}/api/charges-service/personal-account-charge`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/accounts-service/personal-account-charge`,
 
   }),
   endpoints: (builder) => ({

@@ -7,6 +7,7 @@ import {
   House,
   LayoutDashboardIcon,
   PiggyBank,
+  Wallet,
 
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
@@ -58,6 +59,12 @@ const DL = [
     label: 'Invoice Payments',
     link: '/invoice-payments',
     icon: <DollarSign size={17} />,
+  },
+  {
+    id: '10',
+    label: 'Personal Account Charges',
+    link: '/personal-account-charges',
+    icon: <Wallet size={17} />,
   },
 ];
 

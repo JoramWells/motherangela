@@ -36,6 +36,8 @@ import { inpatientDoctorVisitsApi } from '@/api/admission/inpatient-doctor-visit
 import { inpatientNurseVisitsApi } from '@/api/admission/inpatient-nurse-visits.api';
 import { inpatientPhysiotherapistVisitsApi } from '@/api/admission/inpatient-physiotherapist-visits.api';
 import { internalLabRequestsApi } from '@/api/lab/internalLabRequests.api';
+import { invoicePaymentsApi } from '@/api/accounts/invoice/invoicePayments.api';
+import { personalAccountChargeApi } from '@/api/accounts/personalAccountCharges.api';
 
 export const store = configureStore({
   reducer: {
@@ -79,6 +81,8 @@ export const store = configureStore({
     [inpatientNurseVisitsApi.reducerPath]: inpatientNurseVisitsApi.reducer,
     [inpatientPhysiotherapistVisitsApi.reducerPath]: inpatientPhysiotherapistVisitsApi.reducer,
     [internalLabRequestsApi.reducerPath]: internalLabRequestsApi.reducer,
+    [invoicePaymentsApi.reducerPath]: invoicePaymentsApi.reducer,
+    [personalAccountChargeApi.reducerPath]: personalAccountChargeApi.reducer,
 
   },
   middleware: (getDefaultMiddleWare) => getDefaultMiddleWare({
@@ -120,5 +124,7 @@ export const store = configureStore({
     .concat(inpatientDoctorVisitsApi.middleware)
     .concat(inpatientNurseVisitsApi.middleware)
     .concat(inpatientPhysiotherapistVisitsApi.middleware)
-    .concat(internalLabRequestsApi.middleware),
+    .concat(internalLabRequestsApi.middleware)
+    .concat(invoicePaymentsApi.middleware)
+    .concat(personalAccountChargeApi.middleware),
 });

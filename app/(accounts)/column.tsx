@@ -3,9 +3,11 @@ import Link from 'next/link';
 import {
   AccountDetailsInterface,
   AccountingAssetsInterface, AccountingDepartmentInterface, AccountingDocumentsInterface,
+  InvoicePaymentInterface,
 } from 'motherangela';
 import moment from 'moment';
 import { Badge } from '@/components/ui/badge';
+import { formatCurrency } from '@/utils/number';
 
 export const accountsColumns: ColumnDef<AccountDetailsInterface>[] = [
 
@@ -282,6 +284,114 @@ export const accountingDepartmentsColumns: ColumnDef<AccountingDepartmentInterfa
       <Link
         className="text-[12px]"
         href={`/maternity/${row.original.department_id}`}
+      >
+        View
+      </Link>
+    ),
+  },
+];
+
+//
+export const invoicePaymentsColumns: ColumnDef<InvoicePaymentInterface>[] = [
+
+  {
+    accessorKey: 'item_description',
+    header: 'Name',
+    cell: ({ row }) => {
+      const med_name = row.original.service_desc;
+      return (
+
+        <p className="capitalize text-[12px]">
+          { med_name.length > 20 ? `${med_name.substring(0, 20)}...` : med_name}
+        </p>
+      );
+    },
+  },
+  {
+    accessorKey: 'insurance_name_invoice_payments',
+    header: 'Invoice Name',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {row.original?.insurance_name_invoice_payments ?? 'N/A'}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'user?.full_name',
+    header: 'By',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {row.original?.user?.full_name ?? 'N/A'}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'amount',
+    header: 'Amount',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {formatCurrency(row.original?.amount) ?? 'N/A'}
+      </div>
+    ),
+  },
+  // {
+  //   accessorKey: 'date_authorized',
+  //   header: 'Authorized',
+  //   cell: ({ row }) => {
+  //     const authorized = row.original.date_authorized;
+  //     return (
+  //       <div className="text-[12px] text-slate-500 ">
+  //         {authorized.toString().length > 0
+  //           ? moment(row.original?.date_authorized).format('ll')
+  //           : (
+  //             <Badge
+  //               className="shadow-none"
+  //               variant="outline"
+  //             >
+  //               Not Authorized
+  //             </Badge>
+  //           )}
+  //       </div>
+  //     );
+  //   },
+  // },
+  // {
+  //   accessorKey: 'date_approved',
+  //   header: 'Approved',
+  //   cell: ({ row }) => {
+  //     const approved = row.original.date_approved;
+  //     return (
+  //       <div className="text-[12px] text-slate-500 ">
+  //         {approved.toString().length > 0
+  //           ? moment(row.original?.date_approved).format('ll')
+  //           : (
+  //             <Badge
+  //               className="shadow-none"
+  //               variant="outline"
+  //             >
+  //               Not approved
+  //             </Badge>
+  //           )}
+  //       </div>
+  //     );
+  //   },
+  // },
+  {
+    accessorKey: 'date_of_payment',
+    header: 'Payment',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {moment(row.original?.date_of_payment).format('ll')}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'action',
+    header: 'Action',
+    cell: ({ row }) => (
+      <Link
+        className="text-[12px]"
+        href={`/maternity/${row.original.invoice_payment_id}`}
       >
         View
       </Link>
