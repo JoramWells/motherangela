@@ -1,15 +1,30 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { AccountingDocumentsInterface, PaginatedResponse } from 'motherangela';
 
 export const accountTypeApi = createApi({
   reducerPath: 'accountTypeApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_API_URL}/api/accounts-service/account-type`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/accounts-service/account-type`,
 
   }),
   endpoints: (builder) => ({
-    getAllAccountTypes: builder.query({
-      query: () => 'fetchAll',
-    }),
+
+    getAllAccountTypes: builder.query<PaginatedResponse<AccountingDocumentsInterface>,
+          { page: number; pageSize: number; searchQuery: string }
+
+        >({
+          query: (params) => {
+            if (params) {
+              const { page, pageSize, searchQuery } = params;
+              let queryString = '';
+              queryString += `page=${page}`;
+              queryString += `&pageSize=${pageSize}`;
+              queryString += `&searchQuery=${searchQuery}`;
+              return `/fetchAll/?${queryString}`;
+            }
+            return 'fetchAll';
+          },
+        }),
     addAccountType: builder.mutation({
       query: (newUser) => ({
         url: 'add',

@@ -43,12 +43,15 @@ import { consultationTypeApi } from '@/api/consultation/consultationType.api';
 import { consultationTypeGroupApi } from '@/api/consultation/consultationTypeGroup.api';
 import { consultationTypeSubGroupApi } from '@/api/consultation/consultationTypeSubGroup.api';
 import { consultationTypesWithCreditAccountsApi } from '@/api/consultation/consultationTypesWithCreditAccounts.api';
+import { accountTypeApi } from '@/api/accounts/accountType.api';
+import { companyApi } from '@/api/insurance/company.api';
 
 export const store = configureStore({
   reducer: {
     [patientsApi.reducerPath]: patientsApi.reducer,
     [appointmentApi.reducerPath]: appointmentApi.reducer,
     [accountingAccountDetailsApi.reducerPath]: accountingAccountDetailsApi.reducer,
+    [accountTypeApi.reducerPath]: accountTypeApi.reducer,
     [accountingDocumentsApi.reducerPath]: accountingDocumentsApi.reducer,
     [accountingAssetApi.reducerPath]: accountingAssetApi.reducer,
     [accountingDepartmentApi.reducerPath]: accountingDepartmentApi.reducer,
@@ -65,6 +68,7 @@ export const store = configureStore({
     [maternityProfileApi.reducerPath]: maternityProfileApi.reducer,
     [maternityAntenatalProfileApi.reducerPath]:
       maternityAntenatalProfileApi.reducer,
+    [companyApi.reducerPath]: companyApi.reducer,
     [maternityDeliveriesApi.reducerPath]: maternityDeliveriesApi.reducer,
     [payrollEmployeeRecordsApi.reducerPath]: payrollEmployeeRecordsApi.reducer,
     [payrollEmployeeBenefitsApi.reducerPath]:
@@ -104,12 +108,14 @@ export const store = configureStore({
     .concat(appointmentApi.middleware)
     .concat(accountingAccountDetailsApi.middleware)
     .concat(accountingAssetApi.middleware)
+    .concat(accountTypeApi.middleware)
     .concat(accountingDocumentsApi.middleware)
     .concat(accountingDepartmentApi.middleware)
     .concat(appointmentDiagnosesApi.middleware)
     .concat(accountingBankAccountApi.middleware)
     .concat(admissionApi.middleware)
     .concat(cashPaymentModesApi.middleware)
+    .concat(companyApi.middleware)
     .concat(doctorNotesApi.middleware)
     .concat(maternityAntenatalProfileApi.middleware)
     .concat(maternityProfileApi.middleware)

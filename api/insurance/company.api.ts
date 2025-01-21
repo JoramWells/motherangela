@@ -1,14 +1,30 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { InsuranceInterface, PaginatedResponse } from 'motherangela';
 
 export const companyApi = createApi({
   reducerPath: 'companyApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/company',
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/root-server/company`,
+
   }),
   endpoints: (builder) => ({
-    getAllCompanies: builder.query({
-      query: () => 'fetchAll',
-    }),
+
+    getAllCompanies: builder.query<PaginatedResponse<InsuranceInterface>,
+          { page: number; pageSize: number; searchQuery: string }
+
+        >({
+          query: (params) => {
+            if (params) {
+              const { page, pageSize, searchQuery } = params;
+              let queryString = '';
+              queryString += `page=${page}`;
+              queryString += `&pageSize=${pageSize}`;
+              queryString += `&searchQuery=${searchQuery}`;
+              return `/fetchAll/?${queryString}`;
+            }
+            return 'fetchAll';
+          },
+        }),
     addCompany: builder.mutation({
       query: (newUser) => ({
         url: 'add',
