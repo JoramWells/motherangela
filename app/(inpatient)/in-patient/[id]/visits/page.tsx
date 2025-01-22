@@ -60,13 +60,14 @@ function InpatientVisits({ params }:{params:Promise<{id: string}>}) {
     total: doctorTotal,
   } = usePaginatedSearch({
     fetchQuery: useGetInpatientDoctorVisitsByPatientIDQuery,
-    patient_id,
+    patient_id: patient_id as string,
     id,
   });
 
   const { data: nurseData, total: nurseTotal } = usePaginatedSearch({
     fetchQuery: useGetInpatientNurseVisitsByPatientIDQuery,
-    patient_id,
+    patient_id: patient_id as string,
+
     id,
   });
 

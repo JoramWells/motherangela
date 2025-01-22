@@ -37,7 +37,7 @@ export const inpatientNurseVisitsApi = createApi({
 
     getInpatientNurseVisitsByPatientID: builder.query<PaginatedResponse<
     InpatientNurseVisitsInterface>,
-         {id?: string, patient_id: string, page: number; pageSize: number; searchQuery: string }
+         {id?: string, patient_id?: string, page: number; pageSize: number; searchQuery: string }
 
        >({
          query: (params) => {
