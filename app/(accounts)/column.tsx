@@ -4,7 +4,6 @@ import {
   AccountDetailsInterface,
   AccountingAssetsInterface, AccountingDepartmentInterface, AccountingDocumentsInterface,
   InvoicePaymentInterface,
-  PersonalAccountChargeInterface,
   PersonalChargesPaymentsInterface,
 } from 'motherangela';
 import moment from 'moment';
