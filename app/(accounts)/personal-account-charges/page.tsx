@@ -1,11 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
 import { personalAccountColumns } from '../column';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { useGetAllPersonalChargePaymentsQuery } from '@/api/accounts/charges/personalChargesPayment.api';
+import PersonalAccountFilter from '@/components/custom/filters/PersonalAccountFilter';
+import { pageNumber } from '@/utils/number';
 
 const listItems = [
   {
@@ -21,12 +23,16 @@ const listItems = [
 ];
 
 function PersonalAccountPage() {
+  const [cleared, setCleared] = useState('cleared');
+  const [pageSize, setPageSize] = useState(1);
+
   const {
     data, total, search, setSearch,
   } = usePaginatedSearch({
     fetchQuery: useGetAllPersonalChargePaymentsQuery,
+    status: cleared || '',
   });
-  console.log(data);
+  console.log(data, pageNumber(total, 10));
   return (
     <div>
       <BreadcrumbNav
@@ -40,6 +46,15 @@ function PersonalAccountPage() {
           total={total as number}
           search={search}
           setSearch={setSearch}
+          filter={(
+            <PersonalAccountFilter
+              cleared={cleared}
+              setCleared={setCleared}
+              pageSize={pageSize}
+              setPageSize={setPageSize}
+              total={total}
+            />
+)}
         />
 
       </div>

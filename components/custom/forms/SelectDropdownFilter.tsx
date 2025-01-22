@@ -76,8 +76,8 @@ function SelectDropdownFilter({
               <SelectItem value="No Data">No Data</SelectItem>
             ) : (
               <>
-                {data.map((item) => (
-                  <SelectItem key={useId()} value={item.id}>
+                {data.map((item, idx) => (
+                  <SelectItem key={idx} value={item.id}>
                     {item.label}
                   </SelectItem>
                 ))}

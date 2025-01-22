@@ -432,7 +432,7 @@ export const personalAccountColumns: ColumnDef<PersonalChargesPaymentsInterface>
   // },
   {
     accessorKey: 'patient_detail.first_name',
-    header: 'Patient Name',
+    header: 'Personal Account Name',
     cell: ({ row }) => {
       const first_name = row.original?.patient_detail?.first_name;
       const middle_name = row.original?.patient_detail?.middle_name;
@@ -480,7 +480,7 @@ export const personalAccountColumns: ColumnDef<PersonalChargesPaymentsInterface>
   },
   {
     accessorKey: 'amount',
-    header: 'Amount',
+    header: 'Charge Amount',
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500 ">
         {formatCurrency(row.original?.amount) ?? 0}
