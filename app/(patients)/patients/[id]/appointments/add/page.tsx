@@ -116,7 +116,9 @@ function AddAppointmentPage({ params }:{params:Promise<{id:string}>}) {
     }
   }, [accountTypeOptions?.length, accountType]);
 
-  console.log(companiesData);
+  const [insuranceNo, setInsuranceNo] = useState('');
+  const [staffNo, setStaffNo] = useState('');
+  const [principalMembershipNo, setPrincipalMembershipNo] = useState('');
 
   return (
     <div>
@@ -191,13 +193,19 @@ function AddAppointmentPage({ params }:{params:Promise<{id:string}>}) {
               />
               <InputText
                 label="Staff Number"
+                value={staffNo}
+                onChange={setStaffNo}
               />
 
               <InputText
                 label="Insurance Membership Number *"
+                value={insuranceNo}
+                onChange={setInsuranceNo}
               />
               <InputText
                 label="Principal Member Number *"
+                value={principalMembershipNo}
+                onChange={setPrincipalMembershipNo}
               />
             </div>
             )}

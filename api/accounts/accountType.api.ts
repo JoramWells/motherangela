@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { AccountingDocumentsInterface, PaginatedResponse } from 'motherangela';
+import { AccountTypeInterface, PaginatedResponse } from 'motherangela';
 
 export const accountTypeApi = createApi({
   reducerPath: 'accountTypeApi',
@@ -9,7 +9,7 @@ export const accountTypeApi = createApi({
   }),
   endpoints: (builder) => ({
 
-    getAllAccountTypes: builder.query<PaginatedResponse<AccountingDocumentsInterface>,
+    getAllAccountTypes: builder.query<PaginatedResponse<AccountTypeInterface>,
           { page: number; pageSize: number; searchQuery: string }
 
         >({

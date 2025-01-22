@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { InsuranceInterface, PaginatedResponse } from 'motherangela';
+import { CompanyDetailsInterface, PaginatedResponse } from 'motherangela';
 
 export const companyApi = createApi({
   reducerPath: 'companyApi',
@@ -9,7 +9,7 @@ export const companyApi = createApi({
   }),
   endpoints: (builder) => ({
 
-    getAllCompanies: builder.query<PaginatedResponse<InsuranceInterface>,
+    getAllCompanies: builder.query<PaginatedResponse<CompanyDetailsInterface>,
           { page: number; pageSize: number; searchQuery: string }
 
         >({
