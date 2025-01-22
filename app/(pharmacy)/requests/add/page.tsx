@@ -90,7 +90,7 @@ function AddOTC() {
                       >
                         <p>Price</p>
                         <p>
-                          {medicineData && formatCurrency(medicineData[0]?.price)}
+                          {medicineData && formatCurrency(Number(medicineData[0]?.price))}
                           {' '}
                           /=
                         </p>
@@ -107,7 +107,7 @@ function AddOTC() {
 
                     </div>
 
-                    {medicineData[0]?.quantity <= 0
+                    {medicineData && Number(medicineData[0]?.quantity) <= 0
                       ? (
                         <div
                           className="ml-2 mt-2 flex flex-row items-center space-x-2 text-[12px] bg-red-50 w-1/2 p-2 rounded-lg text-red-500 font-semibold border border-red-200"
