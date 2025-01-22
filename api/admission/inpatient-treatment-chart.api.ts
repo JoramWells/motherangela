@@ -37,7 +37,7 @@ export const inpatientTreatmentChartApi = createApi({
 
     getInpatientTreatmentChartsByPatientID: builder.query<PaginatedResponse<
     InpatientTreatmentChartInterface>,
-         {id?: string, patient_id: string, page: number; pageSize: number; searchQuery: string }
+         {id?: string, patient_id?: string, page: number; pageSize: number; searchQuery: string }
 
        >({
          query: (params) => {

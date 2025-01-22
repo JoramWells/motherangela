@@ -45,7 +45,7 @@ const usePaginatedSearch = <T = unknown > (
     pageSize,
     searchQuery: search,
     employee_id,
-    patient_id,
+    patient_id: patient_id as string,
     status: status ?? '',
   });
   const { data, total } = usePreprocessData<T>(profileData);

@@ -53,7 +53,7 @@ function InpatientDetail({ params }:{params:Promise<{id: string}>}) {
     data: treatmentData, search, setSearch, total,
   } = usePaginatedSearch({
     fetchQuery: useGetInpatientTreatmentChartsByPatientIDQuery,
-    patient_id,
+    patient_id: patient_id as string,
     id,
 
   });
