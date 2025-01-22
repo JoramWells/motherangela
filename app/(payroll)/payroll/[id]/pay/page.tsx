@@ -166,13 +166,13 @@ function PayrollPayPage({ params }:{params:Promise<{id: string}>}) {
                       className="flex justify-between items-center text-[12px] text-zinc-500"
                     >
                       <p>
-                        {item.payroll_other_income_and_allowance.other_income_description}
+                        {item?.payroll_other_income_and_allowance?.other_income_description}
                       </p>
                       <p
                         className="text-emerald-500 font-semibold"
                       >
                         +
-                        {formatCurrency(item.amount)}
+                        {formatCurrency(Number(item.amount))}
                       </p>
                     </div>
                     {benefitsData.length - 1 !== idx
@@ -267,7 +267,7 @@ function PayrollPayPage({ params }:{params:Promise<{id: string}>}) {
             <p className="font-bold text-zinc-700">
               KSH
               {' '}
-              {formatCurrency(data?.net_pay)}
+              {formatCurrency(Number(data?.net_pay))}
               {' '}
               /=
 
