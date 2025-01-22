@@ -7,7 +7,6 @@ import { personalAccountColumns } from '../column';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { useGetAllPersonalChargePaymentsQuery } from '@/api/accounts/charges/personalChargesPayment.api';
 import PersonalAccountFilter from '@/components/custom/filters/PersonalAccountFilter';
-import { pageNumber } from '@/utils/number';
 
 const listItems = [
   {
@@ -24,7 +23,6 @@ const listItems = [
 
 function PersonalAccountPage() {
   const [cleared, setCleared] = useState('cleared');
-  const [pageSize, setPageSize] = useState(1);
 
   const {
     data, total, search, setSearch,
@@ -32,7 +30,6 @@ function PersonalAccountPage() {
     fetchQuery: useGetAllPersonalChargePaymentsQuery,
     status: cleared || '',
   });
-  console.log(data, pageNumber(total, 10));
   return (
     <div>
       <BreadcrumbNav
@@ -50,9 +47,6 @@ function PersonalAccountPage() {
             <PersonalAccountFilter
               cleared={cleared}
               setCleared={setCleared}
-              pageSize={pageSize}
-              setPageSize={setPageSize}
-              total={total}
             />
 )}
         />

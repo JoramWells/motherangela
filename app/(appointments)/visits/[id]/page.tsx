@@ -118,7 +118,7 @@ function AppointmentDetail({ params }:{params:Promise<{id: string}>}) {
                 <p
                   className="text-zinc-700 font-semibold"
                 >
-                  {formatCurrency(data?.charges!)}
+                  {formatCurrency(data?.charges ?? 0)}
                   {' '}
                   /=
                 </p>

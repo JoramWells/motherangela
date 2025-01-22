@@ -2,7 +2,8 @@ import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
 import {
   PayrollEmployeeBenefitsFileInterface, PayrollEmployeeDeductionInterface,
-  PayrollEmployeeLoanRecordsInterface, PayrollEmployeeMonthlyDeductionFileInterface, PayrollEmployeeMonthlyDeductionInterface,
+  PayrollEmployeeLoanRecordsInterface, PayrollEmployeeMonthlyDeductionFileInterface,
+  PayrollEmployeeMonthlyDeductionInterface,
   PayrollEmployeeRecordsInterface,
   PayrollPeriodEmployeePayCalculationsInterface, PayrollPeriodsInterface,
 } from 'motherangela';
@@ -459,7 +460,7 @@ PayrollEmployeeMonthlyDeductionFileInterface>[] = [
     cell: ({ row }) => (
       <Link
         className="text-[12px]"
-        href={`/maternity/${row.original.monthly_deduction_id}`}
+        href={`/maternity/${row.original.monthly_deduction_file_id}`}
       >
         View
       </Link>

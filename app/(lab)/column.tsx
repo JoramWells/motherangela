@@ -2,7 +2,7 @@ import React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import moment from 'moment';
 import {
-  AdmissionInterface, AppointmentInterface, LabInterface, PatientInterface,
+  AdmissionInterface, AppointmentInterface, InternalLabRequestInterface,
 } from 'motherangela';
 import { useRouter } from 'next/navigation';
 import { MoveRight } from 'lucide-react';
@@ -12,7 +12,7 @@ import Avatar from '@/components/custom/Avatar';
 import { Button } from '@/components/ui/button';
 import { formatCurrency } from '@/utils/number';
 
-export const internalLabRequestColumns: ColumnDef<LabInterface>[] = [
+export const internalLabRequestColumns: ColumnDef<InternalLabRequestInterface>[] = [
 
   {
     accessorKey: 'first_name',
@@ -59,7 +59,7 @@ export const internalLabRequestColumns: ColumnDef<LabInterface>[] = [
       const { procedure_name } = row.original.procedure_detail || {};
       return (
         <p className="text-[12px] text-zinc-500">
-          {procedure_name?.length > 25 ? `${procedure_name.substring(0, 25)}..` : procedure_name}
+          {procedure_name && procedure_name?.length > 25 ? `${procedure_name.substring(0, 25)}..` : procedure_name}
         </p>
       );
     },

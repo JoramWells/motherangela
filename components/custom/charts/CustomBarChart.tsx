@@ -25,7 +25,7 @@ let colorIndex = 0;
 
 const getNextColor = () => {
   const nextColor = colorSet[colorIndex % colorSet.length];
-  colorIndex++;
+  colorIndex += 1;
   return `hsl(var(--chart-${nextColor}))`;
 };
 

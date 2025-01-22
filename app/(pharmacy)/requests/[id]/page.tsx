@@ -141,7 +141,7 @@ function RequestDetails({ params }:{params:Promise<{id: string}>}) {
             >
               Total:
               {' '}
-              {data?.quantity * data?.cost}
+              {Number(data?.quantity) * Number(data?.cost)}
             </p>
             <Button
               size="sm"
