@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { PaginatedResponse, PayrollEmployeeLoanDeductionInterface } from 'motherangela';
+import { PaginatedResponse, PayrollEmployeeLoanDeductionsInterface } from 'motherangela';
 
 export const payrollEmployeePayrollDeductionsApi = createApi({
   reducerPath: 'payrollEmployeePayrollDeductionsApi',
@@ -8,7 +8,7 @@ export const payrollEmployeePayrollDeductionsApi = createApi({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/payroll-service/payroll-employee-loan-deductions`,
   }),
   endpoints: (builder) => ({
-    getAllPayrollEmployeeLoanDeductions: builder.query<PaginatedResponse<PayrollEmployeeLoanDeductionInterface>,
+    getAllPayrollEmployeeLoanDeductions: builder.query<PaginatedResponse<PayrollEmployeeLoanDeductionsInterface>,
       { page: number; pageSize: number; searchQuery: string }
 
     >({
@@ -34,7 +34,7 @@ export const payrollEmployeePayrollDeductionsApi = createApi({
     getPayrollEmployeeLoanDeductions: builder.query({
       query: (id) => `detail/${id}`,
     }),
-    getAllPayrollEmployeeLoanDeductionByPayrollID: builder.query<PaginatedResponse<PayrollEmployeeLoanDeductionInterface>,
+    getAllPayrollEmployeeLoanDeductionByPayrollID: builder.query<PaginatedResponse<PayrollEmployeeLoanDeductionsInterface>,
       {id?: string, page: number; pageSize: number; searchQuery: string,
         employee_id?: string
 
