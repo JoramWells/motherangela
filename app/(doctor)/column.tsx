@@ -2,6 +2,7 @@
 import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
 import {
+  AppointmentInterface,
   DoctorNotesInterface, InsuranceMedicineMappingInterface, InsuranceServiceCostMappingInterface,
 } from 'motherangela';
 import { useRouter } from 'next/navigation';
@@ -243,5 +244,104 @@ export const medicineMappingColumns: ColumnDef<InsuranceMedicineMappingInterface
         View
       </Link>
     ),
+  },
+];
+
+export const queueColumns: ColumnDef<AppointmentInterface>[] = [
+  // {
+  //   id: "select",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={
+  //         table.getIsAllPageRowsSelected() ||
+  //         (table.getIsSomePageRowsSelected() && "indeterminate")
+  //       }
+  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+  //       aria-label="Select all"
+  //     />
+  //   ),
+  //   cell: ({ row }) => (
+  //     <Checkbox
+  //       checked={row.getIsSelected()}
+  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
+  //       aria-label="Select row"
+  //     />
+  //   ),
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
+  {
+    accessorKey: 'patient_detail.first_name',
+    header: 'Patient Name',
+    cell: ({ row }) => {
+      const first_name = row.original?.patient_detail?.first_name;
+      const middle_name = row.original?.patient_detail?.middle_name;
+      return (
+        <div className="flex-row flex space-x-2 items-center">
+          <Avatar
+            name={`${first_name} ${middle_name}`}
+          />
+          <Link href={`/patients/${row.original?.patient_id}`} className="capitalize text-[12px] text-cyan-500 hover:underline ">
+            {first_name}
+            {' '}
+            {middle_name}
+          </Link>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: 'user.full_name',
+    header: 'Attended By',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500">
+        <p>{row.original.user?.full_name}</p>
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'appointment_date',
+    header: 'Date',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500">
+        <p>{moment(row.original?.appointment_date).format('ll')}</p>
+        {/* <p>{row.original.appointment_time}</p> */}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'charges',
+    header: 'Charges',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {/* {formatCurrency(row.original?.charges) ?? 0} */}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'insurance_detail.insurance_name',
+    header: 'Insurance',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {row.original.insurance_detail?.insurance_name ?? 'N/A'}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'action',
+    header: 'Details',
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <Button
+          size="sm"
+          className="shadow-none"
+          variant="outline"
+          onClick={() => router.push(`/queue/${row.original.appointment_id}?patient_id=${row.original.patient_id}`)}
+        >
+          <MoveRight />
+        </Button>
+      );
+    },
   },
 ];

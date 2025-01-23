@@ -4,6 +4,7 @@ import {
   ArrowRightLeft,
   History,
   LayoutDashboardIcon,
+  ListStart,
   ListTodo,
   Syringe,
 } from 'lucide-react';
@@ -50,6 +51,12 @@ const DL = [
     label: 'Visits',
     link: '/visits',
     icon: <History size={17} />,
+  },
+  {
+    id: '8',
+    label: 'Queue',
+    link: '/queue',
+    icon: <ListStart size={17} />,
   },
 ];
 

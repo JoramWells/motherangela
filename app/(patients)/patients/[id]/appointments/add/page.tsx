@@ -3,7 +3,8 @@
 import React, {
   use, useCallback, useEffect, useMemo, useState,
 } from 'react';
-import { ArrowRight, X } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
+import moment from 'moment';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { useGetPatientQuery } from '@/api/patients/patients.api';
 import InputSelect from '@/components/custom/forms/InputSelect';
@@ -14,13 +15,19 @@ import { useGetAllConsultationTypesWithCreditAccountsQuery } from '@/api/consult
 import { useGetAllAccountTypesQuery } from '@/api/accounts/accountType.api';
 import { useGetAllInsurancesQuery } from '@/api/insurance/insurance.api';
 import { useGetAllCompaniesQuery } from '@/api/insurance/company.api';
-import InputText from '@/components/custom/forms/InputText';
+import { useGetAllReferralTypesQuery } from '@/api/appointments/referralType.api';
+import PatientSideProfile from '@/components/custom/patient/PatientSideProfile';
+import { useAddAppointmentMutation } from '@/api/appointments/appointments.api';
 
 function AddAppointmentPage({ params }:{params:Promise<{id:string}>}) {
   const { id } = use(params);
-  const { data } = useGetPatientQuery(id, {
+  const { data: patientData } = useGetPatientQuery(id, {
     skip: !id,
   });
+
+  const {
+    cell_phone, dob, first_name, in_patient_file_no, middle_name, out_patient_file_no,
+  } = patientData || {};
 
   const listItems = useMemo(() => [
     {
@@ -35,7 +42,7 @@ function AddAppointmentPage({ params }:{params:Promise<{id:string}>}) {
     },
     {
       id: '3',
-      label: `${data?.first_name} ${data?.middle_name}`,
+      label: `${first_name} ${middle_name}`,
       link: `/patients/${id}`,
     },
     {
@@ -49,13 +56,15 @@ function AddAppointmentPage({ params }:{params:Promise<{id:string}>}) {
       label: 'Add',
       link: '/patients',
     },
-  ], [data]);
+  ], [first_name, middle_name]);
 
   const [category, setCategory] = useState('');
   const [consultation_type, setConsultationType] = useState('');
   const [consultation_category, setConsultationCategory] = useState('');
   const [accountType, setAccountType] = useState('');
   const [insurance, setInsurance] = useState('');
+  const [referralType, setReferralType] = useState('');
+  const [company_id, setCompany] = useState('');
 
   const { data: accountTypeData } = usePaginatedSearch({
     fetchQuery: useGetAllAccountTypesQuery,
@@ -82,6 +91,11 @@ function AddAppointmentPage({ params }:{params:Promise<{id:string}>}) {
     pageSize: 1000,
   });
 
+  const { data: referralTypeData } = usePaginatedSearch({
+    fetchQuery: useGetAllReferralTypesQuery,
+    pageSize: 1000,
+  });
+
   const consultationTypeOptions = useCallback(() => consultationTypeData?.map((item) => ({
     id: item.consultation_type_id as unknown as string,
     label: item.consultation_type_description,
@@ -90,7 +104,7 @@ function AddAppointmentPage({ params }:{params:Promise<{id:string}>}) {
   const consultationGroupOptions = useCallback(() => consultationGroupData?.map((item) => ({
     id: item.consultation_group_id as unknown as string,
     label: item.consultation_group_description,
-  })), [consultationTypeData])();
+  })), [consultationGroupData])();
 
   const accountTypeOptions = useCallback(() => accountTypeData?.map((item) => ({
     id: item.account_type_id as unknown as string,
@@ -109,6 +123,11 @@ function AddAppointmentPage({ params }:{params:Promise<{id:string}>}) {
     label: item.company_name,
   })), [companiesData])();
 
+  const referralTypeOptions = useCallback(() => referralTypeData?.map((item) => ({
+    id: item.referral_type_id as unknown as string,
+    label: item.referral_type_description,
+  })), [referralTypeData])();
+
   useEffect(() => {
     if (accountTypeOptions?.length > 0) {
       const filteredAccountType = accountTypeOptions?.filter((item) => (item.id === accountType));
@@ -116,28 +135,44 @@ function AddAppointmentPage({ params }:{params:Promise<{id:string}>}) {
     }
   }, [accountTypeOptions?.length, accountType]);
 
-  const [insuranceNo, setInsuranceNo] = useState('');
-  const [staffNo, setStaffNo] = useState('');
-  const [principalMembershipNo, setPrincipalMembershipNo] = useState('');
+  const inputValues = {
+    account_type_id: accountType,
+    consultation_type,
+    company_id,
+    referral_type_id: referralType,
+    clinic_id: 1,
+    consultation_group_id: consultation_category,
+    appointment_date: moment().format('YYYY-MM-DD'),
+  };
+
+  const [addAppointment, { isLoading }] = useAddAppointmentMutation();
+
+  const handleSave = useCallback(async () => {
+    await addAppointment({ ...inputValues, ...patientData });
+  }, [inputValues, patientData]);
 
   return (
     <div>
       <BreadcrumbNav
         listItems={listItems}
       />
-      <div className="p-2">
+      <div className="p-2 flex flex-row items-start space-x-2">
+        <PatientSideProfile
+          cell_phone={cell_phone!}
+          dob={dob!}
+          first_name={first_name!}
+          in_patient_file_no={in_patient_file_no!}
+          middle_name={middle_name!}
+          out_patient_file_no={out_patient_file_no!}
+        />
+        <div className="h-[75vh] border-l" />
         <div className=" border border-zinc-200 bg-white w-1/2 rounded-lg flex flex-col space-y-2">
           <div
-            className="p-2 bg-zinc-50 border-b border-zinc-200 rounded-t-lg"
+            className="p-2 bg-zinc-50 rounded-t-lg border-b"
           >
-            <p
-              className="text-[14px] font-semibold text-zinc-700 "
-            >
-              { `${data?.first_name} ${data?.middle_name}`}
-
-            </p>
+            <p>Create New Appointment</p>
           </div>
-          <div className=" p-2 flex flex-col space-y-2">
+          <div className=" p-4 flex flex-col space-y-4">
             <InputSelect
               data={[{
                 id: '1',
@@ -161,12 +196,9 @@ function AddAppointmentPage({ params }:{params:Promise<{id:string}>}) {
             />
             <InputSelect
               label="Select Referral Type"
-              data={[{
-                id: '1',
-                label: 'data',
-              }]}
-              value={category}
-              onChange={setCategory}
+              data={referralTypeOptions}
+              value={referralType}
+              onChange={setReferralType}
             />
             <InputSelect
               label="Account Type"
@@ -188,43 +220,21 @@ function AddAppointmentPage({ params }:{params:Promise<{id:string}>}) {
               <InputSelect
                 label="Company (name)"
                 data={companiesOptions}
-                value={insurance}
-                onChange={setInsurance}
-              />
-              <InputText
-                label="Staff Number"
-                value={staffNo}
-                onChange={setStaffNo}
-              />
-
-              <InputText
-                label="Insurance Membership Number *"
-                value={insuranceNo}
-                onChange={setInsuranceNo}
-              />
-              <InputText
-                label="Principal Member Number *"
-                value={principalMembershipNo}
-                onChange={setPrincipalMembershipNo}
+                value={company_id}
+                onChange={setCompany}
               />
             </div>
             )}
             <div className="pt-4 flex justify-end flex-row space-x-4">
-              <Button
-                size="sm"
-                variant="outline"
-                className="shadow-none"
-              >
-                Cancel
-                <X />
 
-              </Button>
               <Button
                 size="sm"
                 className="shadow-none bg-sky-600 hover:bg-sky-700"
+                onClick={() => handleSave()}
+                disabled={isLoading}
               >
-                Payment
-                <ArrowRight />
+                {isLoading && <Loader2 className="animate-spin mr-2" size={16} /> }
+                Save
               </Button>
             </div>
           </div>

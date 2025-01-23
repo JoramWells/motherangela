@@ -45,6 +45,7 @@ import { consultationTypeSubGroupApi } from '@/api/consultation/consultationType
 import { consultationTypesWithCreditAccountsApi } from '@/api/consultation/consultationTypesWithCreditAccounts.api';
 import { accountTypeApi } from '@/api/accounts/accountType.api';
 import { companyApi } from '@/api/insurance/company.api';
+import { referralTypeApi } from '@/api/appointments/referralType.api';
 
 export const store = configureStore({
   reducer: {
@@ -98,6 +99,7 @@ export const store = configureStore({
     [invoicePaymentsApi.reducerPath]: invoicePaymentsApi.reducer,
     [personalAccountChargeApi.reducerPath]: personalAccountChargeApi.reducer,
     [personalChargesPaymentApi.reducerPath]: personalChargesPaymentApi.reducer,
+    [referralTypeApi.reducerPath]: referralTypeApi.reducer,
 
   },
   middleware: (getDefaultMiddleWare) => getDefaultMiddleWare({
@@ -145,6 +147,7 @@ export const store = configureStore({
     .concat(invoicePaymentsApi.middleware)
     .concat(personalAccountChargeApi.middleware)
     .concat(personalChargesPaymentApi.middleware)
+    .concat(referralTypeApi.middleware)
     .concat(consultationTypeApi.middleware)
     .concat(consultationTypeGroupApi.middleware)
     .concat(consultationTypeSubGroupApi.middleware)

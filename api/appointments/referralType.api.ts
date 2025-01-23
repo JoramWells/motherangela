@@ -1,14 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { PaginatedResponse, AppointmentInterface } from 'motherangela';
+import { PaginatedResponse, ReferralTypeInterface } from 'motherangela';
 
-export const appointmentApi = createApi({
-  reducerPath: 'appointmentsApi',
+export const referralTypeApi = createApi({
+  reducerPath: 'referralTypeApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/appointment-service/appointment`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/appointment-service/referral-types`,
   }),
   endpoints: (builder) => ({
-    getAppointments: builder.query<
-      PaginatedResponse<AppointmentInterface>,
+    getAllReferralTypes: builder.query<
+      PaginatedResponse<ReferralTypeInterface>,
       { page: number; pageSize: number; searchQuery: string }
     >({
       query: (params) => {
@@ -23,33 +23,17 @@ export const appointmentApi = createApi({
         return 'fetchAll';
       },
     }),
-    getAppointmentPatientQueue: builder.query<
-      PaginatedResponse<AppointmentInterface>,
-      { page: number; pageSize: number; searchQuery: string }
-    >({
-      query: (params) => {
-        if (params) {
-          const { page, pageSize, searchQuery } = params;
-          let queryString = '';
-          queryString += `page=${page}`;
-          queryString += `&pageSize=${pageSize}`;
-          queryString += `&searchQuery=${searchQuery}`;
-          return `/queue/?${queryString}`;
-        }
-        return 'queue';
-      },
-    }),
-    addAppointment: builder.mutation({
+    addReferralType: builder.mutation({
       query: (newWard) => ({
         url: 'add',
         method: 'POST',
         body: newWard,
       }),
     }),
-    getAppointment: builder.query<AppointmentInterface, string>({
+    getReferralType: builder.query<ReferralTypeInterface, string>({
       query: (id) => `detail/${id}`,
     }),
-    getAppointmentsByPatientID: builder.query<PaginatedResponse<AppointmentInterface>,
+    getReferralTypesByPatientID: builder.query<PaginatedResponse<ReferralTypeInterface>,
       {id?: string, page: number; pageSize: number; searchQuery: string }
 
     >({
@@ -67,17 +51,17 @@ export const appointmentApi = createApi({
         return 'details';
       },
     }),
-    getAppointmentDetailByID: builder.query({
+    getReferralTypeDetailByID: builder.query({
       query: (id) => `detailAll/${id}`,
     }),
-    updateAppointment: builder.mutation({
+    updateReferralType: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `edit/${id}`,
         method: 'PUT',
         body: patch,
       }),
     }),
-    deleteAppointment: builder.mutation({
+    deleteReferralType: builder.mutation({
       query(id) {
         return {
           url: `delete/${id}`,
@@ -89,8 +73,8 @@ export const appointmentApi = createApi({
 });
 
 export const {
-  useGetAppointmentsQuery, useAddAppointmentMutation, useGetAppointmentPatientQueueQuery,
-  useGetAppointmentQuery, useUpdateAppointmentMutation,
-  useDeleteAppointmentMutation, useGetAppointmentDetailByIDQuery,
-  useGetAppointmentsByPatientIDQuery,
-} = appointmentApi;
+  useGetAllReferralTypesQuery, useAddReferralTypeMutation,
+  useGetReferralTypeQuery, useUpdateReferralTypeMutation,
+  useDeleteReferralTypeMutation, useGetReferralTypeDetailByIDQuery,
+  useGetReferralTypesByPatientIDQuery,
+} = referralTypeApi;

@@ -3,6 +3,7 @@
 import {
   History,
   LayoutDashboardIcon,
+  ListStart,
   NotebookPen,
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
@@ -36,6 +37,12 @@ const DL = [
     label: 'Reports',
     link: '/patients/reports',
     icon: <History size={17} />,
+  },
+  {
+    id: '8',
+    label: 'Queue',
+    link: '/queue',
+    icon: <ListStart size={17} />,
   },
 ];
 
