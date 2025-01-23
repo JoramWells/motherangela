@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useGetAllInvoicePaymentQuery } from '@/api/accounts/invoice/invoicePayments.api';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
@@ -47,4 +47,10 @@ function InvoicePayments() {
   );
 }
 
-export default InvoicePayments;
+export default function WrappedInvoicePayments() {
+  return (
+    <Suspense>
+      <InvoicePayments />
+    </Suspense>
+  );
+}
