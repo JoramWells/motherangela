@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
 import { personalAccountColumns } from '../column';
@@ -56,4 +56,8 @@ function PersonalAccountPage() {
   );
 }
 
-export default PersonalAccountPage;
+export default function WrappedPersonalAccountPage() {
+  <Suspense>
+    <PersonalAccountPage />
+  </Suspense>;
+}
