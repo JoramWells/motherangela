@@ -57,7 +57,9 @@ function PersonalAccountPage() {
 }
 
 export default function WrappedPersonalAccountPage() {
-  <Suspense>
-    <PersonalAccountPage />
-  </Suspense>;
+  return (
+    <Suspense>
+      <PersonalAccountPage />
+    </Suspense>
+  );
 }

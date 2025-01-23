@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useGetAllInpatientTreatmentChartsQuery } from '@/api/admission/inpatient-treatment-chart.api';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
@@ -45,4 +45,10 @@ function TreatmentChartPage() {
   );
 }
 
-export default TreatmentChartPage;
+export default function WrappedTreatmentChartPage() {
+  return (
+    <Suspense>
+      <TreatmentChartPage />
+    </Suspense>
+  );
+}
