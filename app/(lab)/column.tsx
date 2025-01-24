@@ -126,7 +126,7 @@ export const internalLabRequestColumns: ColumnDef<InternalLabRequestInterface>[]
 ];
 
 //
-export const admissionColumn: ColumnDef<AdmissionInterface>[] = [
+export const recentLabRequestColumn: ColumnDef<InternalLabRequestInterface>[] = [
 
   {
     accessorKey: 'first_name',
@@ -134,100 +134,86 @@ export const admissionColumn: ColumnDef<AdmissionInterface>[] = [
     cell: ({ row }) => (
       <div className="flex-row flex space-x-2 items-center">
         <Avatar
-          name={`${row.original.patient_detail?.first_name} ${row.original.patient_detail?.middle_name}`}
+          name={`${row.original?.patient_detail?.first_name} ${row.original?.patient_detail?.middle_name}`}
         />
-        <p className="capitalize text-[12px]">
-          {row.original.patient_detail?.first_name}
+        <Link href={`/patients/${row.original.patient_id}`} className="capitalize text-[12px] text-cyan-500 hover:underline ">
+          {row.original?.patient_detail?.first_name}
           {' '}
-          {row.original.patient_detail?.middle_name}
-        </p>
+          {row.original?.patient_detail?.middle_name}
+        </Link>
       </div>
     ),
   },
   {
     accessorKey: 'user.full_name',
-    header: 'Admitted By',
+    header: 'Performed By',
     cell: ({ row }) => (
-      <div className=" text-[12px] capitalize text-slate-500">{row.original?.user?.full_name}</div>
-    ),
-  },
-  {
-    accessorKey: 'admission_date',
-    header: 'Admitted',
-    cell: ({ row }) => (
-      <div
-        className="text-[12px] text-slate-500"
+      <p
+        className="text-[12px] text-zinc-500"
       >
-        <p>{moment(row.original.admission_date).format('ll')}</p>
-        <p>{row.original.admission_time}</p>
-      </div>
+        {row.original?.user?.full_name}
+      </p>
     ),
   },
   {
-    accessorKey: 'ward.ward_description',
-    header: 'Ward',
+    accessorKey: 'appointment.appointment_date',
+    header: 'DOB',
     cell: ({ row }) => (
-      <div className="text-[12px] capitalize text-slate-500 ">
-        <p>{row.original?.ward.ward_description.replace('WARD', '').trim().toLowerCase()}</p>
-        <p />
-      </div>
+      <p
+        className="text-[12px] text-zinc-500"
+      >
+        {moment(row.original?.appointment?.appointment_date).format('ll')}
+      </p>
     ),
   },
   {
-    accessorKey: 'ward_bed.bed_number',
-    header: 'Bed Number',
-    cell: ({ row }) => (
-      <div className="lowercase text-[12px]">{row.original?.ward_bed.bed_number}</div>
-    ),
-  },
-  {
-    accessorKey: 'payment_status',
-    header: 'Payment Status',
-    cell: ({ row }) => (
-      <div className="lowercase">
-        {row.original.pay_status === 0 ? (
-          <Badge
-            className="capitalize bg-red-50 hover:bg-red-50 shadow-none text-red-500"
-          >
-            Not Paid
-          </Badge>
-        ) : (
-          <Badge className="capitalize bg-emerald-50 text-emerald-500 shadow-none hover:bg-emerald-50">Paid</Badge>
-        )}
-      </div>
-    ),
-  },
-  {
-    accessorKey: 'diagnosis',
-    header: 'Diagnosis',
-    cell: ({ row }) => (
-      <div className="lowercase">
-        {row.original.diagnosis}
-      </div>
-    ),
-  },
-  {
-    accessorKey: 'discharge_date',
-    header: 'Discharged',
+    accessorKey: 'procedure_detail.procedure_name',
+    header: 'Procedure',
     cell: ({ row }) => {
-      const { discharge_date } = row.original;
+      const { procedure_name } = row.original.procedure_detail || {};
       return (
-        <div
-          className="text-[12px] text-slate-500"
-        >
-          {discharge_date
+        <p className="text-[12px] text-zinc-500">
+          {procedure_name && procedure_name?.length > 25 ? `${procedure_name.substring(0, 25)}..` : procedure_name}
+        </p>
+      );
+    },
+  },
+  {
+    accessorKey: 'cost',
+    header: 'Cost',
+    cell: ({ row }) => (
+      <div className="lowercase text-[12px] text-zinc-500 font-semibold">{formatCurrency(row.original?.cost)}</div>
+    ),
+  },
+  {
+    accessorKey: 'results',
+    header: 'Results',
+    cell: ({ row }) => {
+      const { results } = row.original;
+      return (
+        <div className="lowercase text-[12px] text-zinc-500">{results?.length > 25 ? `${results.substring(0, 25)}..` : results}</div>
+      );
+    },
+  },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ row }) => {
+      const { status } = row.original;
+      return (
+        <div className="lowercase">
+          {status === 1
             ? (
-              <div>
-                <p>{moment(row.original.discharge_date).format('ll')}</p>
-                <p>{row.original.discharge_time}</p>
-              </div>
-            )
-            : (
               <Badge
-                className="shadow-none text-orange-500 border-orange-200"
-                variant="outline"
+                className="bg-emerald-50 text-emerald-500 hover:bg-emerald-100 shadow-none"
               >
-                Not Discharged
+                Completed
+              </Badge>
+            ) : (
+              <Badge
+                className="bg-orange-50 text-orange-500 hover:bg-orange-100 shadow-none"
+              >
+                Pending
               </Badge>
             )}
         </div>
@@ -236,7 +222,7 @@ export const admissionColumn: ColumnDef<AdmissionInterface>[] = [
   },
   {
     accessorKey: 'action',
-    header: 'Details',
+    header: 'Actions',
     cell: ({ row }) => {
       const router = useRouter();
       return (
@@ -244,7 +230,7 @@ export const admissionColumn: ColumnDef<AdmissionInterface>[] = [
           size="sm"
           className="shadow-none"
           variant="outline"
-          onClick={() => router.push(`/in-patient/${row.original.admission_id}?patient_id=${row.original.patient_id}`)}
+          onClick={() => router.push(`/internal-lab-requests/${row.original.lab_request_id}?patient_id=${row.original.patient_id}`)}
         >
           <MoveRight />
         </Button>

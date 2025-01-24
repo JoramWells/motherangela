@@ -1,7 +1,8 @@
 'use client';
 
 import {
-  Bed, FlaskRound, LayoutDashboardIcon, TestTubeDiagonal,
+  ArrowRightLeft,
+  FlaskRound, LayoutDashboardIcon, TestTubeDiagonal,
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
 import { Provider } from 'react-redux';
@@ -25,8 +26,8 @@ const DL = [
   // },
   {
     id: '3',
-    label: 'Internal Requests',
-    link: '/internal-lab-requests',
+    label: 'All Tests',
+    link: '/all-tests',
     icon: <TestTubeDiagonal size={17} />,
   },
   {
@@ -36,10 +37,10 @@ const DL = [
     icon: <FlaskRound size={17} />,
   },
   {
-    id: '8',
-    label: 'In-patient (Admitted)',
-    link: '/in-patient',
-    icon: <Bed size={17} />,
+    id: '5',
+    label: 'Internal Requests',
+    link: '/internal-lab-requests',
+    icon: <ArrowRightLeft size={17} />,
   },
 ];
 

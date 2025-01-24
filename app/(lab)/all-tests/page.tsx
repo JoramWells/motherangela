@@ -6,8 +6,8 @@ import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
 import { Button } from '@/components/ui/button';
-import { recentLabRequestColumn } from '../column';
-import { useGetAllRecentInternalLabRequestsQuery } from '@/api/lab/internalLabRequests.api';
+import { internalLabRequestColumns } from '../column';
+import { useGetAllInternalLabRequestsQuery } from '@/api/lab/internalLabRequests.api';
 
 const listItems = [
   {
@@ -25,7 +25,7 @@ const listItems = [
 function Patients() {
   const {
     data, search, setSearch, total,
-  } = usePaginatedSearch({ fetchQuery: useGetAllRecentInternalLabRequestsQuery });
+  } = usePaginatedSearch({ fetchQuery: useGetAllInternalLabRequestsQuery });
   // console.log(patientsData);
   const router = useRouter();
 
@@ -37,7 +37,7 @@ function Patients() {
       <div className="p-2">
         <TableContainer
           title="Internal Lab Requests"
-          columns={recentLabRequestColumn}
+          columns={internalLabRequestColumns}
           data={data ?? []}
           total={total as number}
           search={search}

@@ -47,6 +47,8 @@ import { accountTypeApi } from '@/api/accounts/accountType.api';
 import { companyApi } from '@/api/insurance/company.api';
 import { referralTypeApi } from '@/api/appointments/referralType.api';
 import { procedureApi } from '@/api/lab/procedure/procedureDetails.api';
+import { specimenTypeApi } from '@/api/lab/specimenType.api';
+import { resultStatusApi } from '@/api/lab/resultStatus.api';
 
 export const store = configureStore({
   reducer: {
@@ -102,6 +104,8 @@ export const store = configureStore({
     [personalChargesPaymentApi.reducerPath]: personalChargesPaymentApi.reducer,
     [procedureApi.reducerPath]: procedureApi.reducer,
     [referralTypeApi.reducerPath]: referralTypeApi.reducer,
+    [resultStatusApi.reducerPath]: resultStatusApi.reducer,
+    [specimenTypeApi.reducerPath]: specimenTypeApi.reducer,
 
   },
   middleware: (getDefaultMiddleWare) => getDefaultMiddleWare({
@@ -150,9 +154,12 @@ export const store = configureStore({
     .concat(personalAccountChargeApi.middleware)
     .concat(personalChargesPaymentApi.middleware)
     .concat(procedureApi.middleware)
-    .concat(referralTypeApi.middleware)
     .concat(consultationTypeApi.middleware)
     .concat(consultationTypeGroupApi.middleware)
     .concat(consultationTypeSubGroupApi.middleware)
-    .concat(consultationTypesWithCreditAccountsApi.middleware),
+    .concat(consultationTypesWithCreditAccountsApi.middleware)
+    .concat(referralTypeApi.middleware)
+    .concat(resultStatusApi.middleware)
+    .concat(specimenTypeApi.middleware),
+
 });

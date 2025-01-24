@@ -1,15 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { InternalLabRequestInterface, PaginatedResponse } from 'motherangela';
+import { ResultStatusInterface, PaginatedResponse } from 'motherangela';
 
-export const internalLabRequestsApi = createApi({
-  reducerPath: 'internalLabRequestsApi',
+export const resultStatusApi = createApi({
+  reducerPath: 'resultStatusApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/lab-service/internal-lab-requests`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/lab-service/result-status`,
 
   }),
   endpoints: (builder) => ({
-    getAllInternalLabRequests: builder.query<
-      PaginatedResponse<InternalLabRequestInterface>,
+    getAllResultStatus: builder.query<
+      PaginatedResponse<ResultStatusInterface>,
       { page: number; pageSize: number; searchQuery: string }
     >({
       query: (params) => {
@@ -24,8 +24,8 @@ export const internalLabRequestsApi = createApi({
         return 'fetchAll';
       },
     }),
-    getAllRecentInternalLabRequests: builder.query<
-      PaginatedResponse<InternalLabRequestInterface>,
+    getAllRecentResultStatus: builder.query<
+      PaginatedResponse<ResultStatusInterface>,
       { page: number; pageSize: number; searchQuery: string }
     >({
       query: (params) => {
@@ -40,24 +40,24 @@ export const internalLabRequestsApi = createApi({
         return 'requests';
       },
     }),
-    addInternalLabRequest: builder.mutation({
+    addResultStatus: builder.mutation({
       query: (newWard) => ({
         url: 'add',
         method: 'POST',
         body: newWard,
       }),
     }),
-    getInternalLabRequest: builder.query<InternalLabRequestInterface, string>({
+    getResultStatus: builder.query<ResultStatusInterface, string>({
       query: (id) => `detail/${id}`,
     }),
-    updateInternalLabRequest: builder.mutation({
+    updateResultStatus: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `edit/${id}`,
         method: 'PUT',
         body: patch,
       }),
     }),
-    deleteInternalLabRequest: builder.mutation({
+    deleteResultStatus: builder.mutation({
       query(id) {
         return {
           url: `delete/${id}`,
@@ -69,7 +69,7 @@ export const internalLabRequestsApi = createApi({
 });
 
 export const {
-  useGetAllInternalLabRequestsQuery, useAddInternalLabRequestMutation,
-  useGetInternalLabRequestQuery, useUpdateInternalLabRequestMutation,
-  useDeleteInternalLabRequestMutation, useGetAllRecentInternalLabRequestsQuery,
-} = internalLabRequestsApi;
+  useGetAllResultStatusQuery, useAddResultStatusMutation,
+  useGetResultStatusQuery, useUpdateResultStatusMutation,
+  useDeleteResultStatusMutation, useGetAllRecentResultStatusQuery,
+} = resultStatusApi;

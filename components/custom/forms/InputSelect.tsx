@@ -7,7 +7,7 @@ import {
 
 export interface DataItem {
   id: string
-  label: string
+  label: string | number
 }
 
 export interface SelectProps {
@@ -32,7 +32,7 @@ function InputSelect({
   defaultValue,
 }: SelectProps) {
   return (
-    <div className="w-full flex space-y-2 flex-col">
+    <div className="w-full flex space-y-1 flex-col">
       <div>
         {label && (
           <p className="font-semibold text-slate-700 capitalize text-[14px] ">{label}</p>
