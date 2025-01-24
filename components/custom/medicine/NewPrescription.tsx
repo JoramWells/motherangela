@@ -1,32 +1,16 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+
 'use client';
 
 import React, { useCallback, useState } from 'react';
 import { TriangleAlert } from 'lucide-react';
 import moment from 'moment';
-import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { useSearchPatientQuery } from '@/api/patients/patients.api';
 import { useSearchMedicineQuery } from '@/api/medication/medicine.api';
 import SearchInputDropDown, { SelectInputProps } from '@/components/custom/forms/SearchInputDropDown';
-import { formatCurrency } from '@/utils/number';
 import InputText from '@/components/custom/forms/InputText';
+import { Button } from '@/components/ui/button';
 
-const listItems = [
-  {
-    id: '1',
-    label: 'home',
-    link: '/',
-  },
-  {
-    id: '2',
-    label: 'Over The Counter Request',
-    link: '/requests',
-  },
-  {
-    id: '3',
-    label: 'Add',
-    link: '',
-  },
-];
 function NewPrescription() {
   const [search, setSearch] = useState<SelectInputProps>({ id: '', label: '' });
   const [searchMedicine, setSearchMedicine] = useState<SelectInputProps>({ id: '', label: '' });
@@ -35,6 +19,8 @@ function NewPrescription() {
   }, {
     skip: !search?.label || search?.label?.length as number < 0,
   });
+
+  // useSearch({ search, setSearch });
 
   const { data: medicineData } = useSearchMedicineQuery(
     {
@@ -75,7 +61,7 @@ function NewPrescription() {
 
   return (
     <div
-      className="p-4 bg-white rounded-lg h-screen"
+      className=" bg-white rounded-lg min-h-[350px] "
     >
       <div>
         <SearchInputDropDown
@@ -86,7 +72,7 @@ function NewPrescription() {
 
         {searchMedicine.id ? (
           <div>
-            <div
+            {/* <div
               className="w-1/2 p-2 flex flex-col space-y-2 border ml-2 rounded-lg bg-zinc-50"
             >
               <div
@@ -109,7 +95,7 @@ function NewPrescription() {
                 </p>
               </div>
 
-            </div>
+            </div> */}
 
             {medicineData && Number(medicineData[0]?.quantity) !== 0
               ? (
@@ -122,7 +108,7 @@ function NewPrescription() {
               )
               : (
                 <div className="flex flex-col space-y-2 mt-2">
-                  <InputText
+                  {/* <InputText
                     label="Measuring Unit"
                     value={measuringUnit}
                     onChange={setMeasuringUnit}
@@ -132,7 +118,7 @@ function NewPrescription() {
                     label="No. of MU"
                     value={measuringUnit}
                     onChange={setMeasuringUnit}
-                  />
+                  /> */}
                   <InputText
                     label="Frequency"
                     value={frq}
@@ -145,17 +131,49 @@ function NewPrescription() {
                     onChange={setNumberOfDays}
                   />
                   <InputText
-                    label="Instructions"
-                    type="textarea"
-                    value={instructions}
-                    onChange={setInstructions}
-                  />
-                  <InputText
                     label="Quantity"
                     placeholder="Quantity"
                     value={quantity}
                     onChange={setQuantity}
                   />
+
+                  <div
+                    className="flex flex-col space-y-1"
+                  >
+                    <label
+                      htmlFor=""
+                      className="font-semibold text-zinc-700 text-[14px]
+                      "
+                    >
+                      Instructions
+                    </label>
+                    <textarea
+                      value={instructions}
+                      onChange={(e) => setInstructions(e.target.value)}
+                      placeholder="Enter Instructions"
+                      className="p-2 border border-slate-200 focus:bg-slate-50  rounded-lg flex-grow text-[12px] focus:border-slate-200 active:border-slate-200
+        focus-within:ring-1 focus-within:ring-slate-200 outline-none
+        "
+                    />
+                  </div>
+
+                  <div
+                    className="pt-2 flex flex-row items-center justify-end space-x-2"
+                  >
+                    <Button
+                      size="sm"
+                      className="shadow-none"
+                      variant="outline"
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      size="sm"
+                      className="shadow-none"
+                    >
+                      Save
+                    </Button>
+                  </div>
 
                 </div>
               )}

@@ -24,7 +24,7 @@ function InputText({
     <div className="w-full flex flex-col space-y-1 relative">
       <div>
         {label && (
-          <p className="text-slate-800 font-semibold text-[14px] capitalize">
+          <p className="text-zinc-700 font-semibold text-[14px] capitalize">
             {label}
           </p>
         )}

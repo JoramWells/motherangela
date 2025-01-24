@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const procedureItemApi = createApi({
   reducerPath: 'procedureItemApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_API_URL}/api/procedure-service/procedure-items`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/procedure-service/procedure-items`,
   }),
   endpoints: (builder) => ({
     getProcedureItems: builder.query({

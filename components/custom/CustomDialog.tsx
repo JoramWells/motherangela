@@ -29,10 +29,8 @@ export default function CustomDialog({
           {label}
         </Button>
       </DialogTrigger>
-      <DialogContent className={`${width != null && `max-w-[${width}]`} p-0  max-h-[80vh] overflow-hidden overflow-y-auto `}>
-        <DialogHeader
-          className="pt-4 pl-4"
-        >
+      <DialogContent className={`${width != null && `max-w-[${width}]`}  overflow-hidden overflow-y-auto `}>
+        <DialogHeader>
           <DialogTitle>{description}</DialogTitle>
         </DialogHeader>
         {children}

@@ -8,6 +8,7 @@ import PatientSideProfile from '@/components/custom/patient/PatientSideProfile';
 import { Button } from '@/components/ui/button';
 import CustomDialog from '@/components/custom/CustomDialog';
 import NewPrescription from '@/components/custom/medicine/NewPrescription';
+import InternalLabRequest from '@/components/custom/lab/InternalLabRequest';
 
 const listItems = [
   {
@@ -42,7 +43,7 @@ function DoctorPage({ params }:{params:Promise<{id: string}>}) {
         listItems={listItems}
       />
       <div
-        className="p-2 flex flex-row space-x-2"
+        className="p-2 flex flex-row space-x-2 items-start"
       >
         <PatientSideProfile
           cell_phone={cell_phone!}
@@ -102,6 +103,7 @@ function DoctorPage({ params }:{params:Promise<{id: string}>}) {
                     </p>
                     <CustomDialog
                       label="NEW"
+                      description="Add New Prescription"
                     >
                       <NewPrescription />
 
@@ -118,6 +120,35 @@ function DoctorPage({ params }:{params:Promise<{id: string}>}) {
                 </div>
                 )}
 
+              {/*  */}
+              {tabValue === 'Lab'
+                && (
+                <div>
+                  <div className="flex justify-between items-center bg-zinc-50 p-1 pl-2 pr-2 rounded-t-lg ">
+                    <p className="text-[14px] font-semibold">
+                      Internal Lab Request
+                    </p>
+                    <CustomDialog
+                      label="NEW"
+                      description="Add New Lab Request"
+                    >
+                      <InternalLabRequest
+                        appointment_id={id}
+                        patient_id={patient_id!}
+                      />
+
+                    </CustomDialog>
+
+                  </div>
+                  <div
+                    className="p-2"
+                  >
+                    <p>
+                      No Pharmacy Requests
+                    </p>
+                  </div>
+                </div>
+                )}
             </div>
           </div>
           <div>footer</div>
