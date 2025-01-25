@@ -57,6 +57,13 @@ export const internalLabRequestsApi = createApi({
         body: patch,
       }),
     }),
+    updateInternalLabRequestCollectSample: builder.mutation({
+      query: ({ id, ...patch }) => ({
+        url: `update-collected-sample/${id}`,
+        method: 'PUT',
+        body: patch,
+      }),
+    }),
     deleteInternalLabRequest: builder.mutation({
       query(id) {
         return {
@@ -72,4 +79,5 @@ export const {
   useGetAllInternalLabRequestsQuery, useAddInternalLabRequestMutation,
   useGetInternalLabRequestQuery, useUpdateInternalLabRequestMutation,
   useDeleteInternalLabRequestMutation, useGetAllRecentInternalLabRequestsQuery,
+  useUpdateInternalLabRequestCollectSampleMutation,
 } = internalLabRequestsApi;
