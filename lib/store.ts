@@ -49,6 +49,8 @@ import { referralTypeApi } from '@/api/appointments/referralType.api';
 import { procedureApi } from '@/api/lab/procedure/procedureDetails.api';
 import { specimenTypeApi } from '@/api/lab/specimenType.api';
 import { resultStatusApi } from '@/api/lab/resultStatus.api';
+import { hospitalApi } from '@/api/patients/hospital/hospital.api';
+import { userApi } from '@/api/users/users.api';
 
 export const store = configureStore({
   reducer: {
@@ -69,6 +71,7 @@ export const store = configureStore({
     [consultationTypeSubGroupApi.reducerPath]: consultationTypeSubGroupApi.reducer,
     [consultationTypesWithCreditAccountsApi.reducerPath]:
     consultationTypesWithCreditAccountsApi.reducer,
+    [hospitalApi.reducerPath]: hospitalApi.reducer,
     [maternityProfileApi.reducerPath]: maternityProfileApi.reducer,
     [maternityAntenatalProfileApi.reducerPath]:
       maternityAntenatalProfileApi.reducer,
@@ -106,6 +109,7 @@ export const store = configureStore({
     [referralTypeApi.reducerPath]: referralTypeApi.reducer,
     [resultStatusApi.reducerPath]: resultStatusApi.reducer,
     [specimenTypeApi.reducerPath]: specimenTypeApi.reducer,
+    [userApi.reducerPath]: userApi.reducer,
 
   },
   middleware: (getDefaultMiddleWare) => getDefaultMiddleWare({
@@ -125,6 +129,7 @@ export const store = configureStore({
     .concat(cashPaymentModesApi.middleware)
     .concat(companyApi.middleware)
     .concat(doctorNotesApi.middleware)
+    .concat(hospitalApi.middleware)
     .concat(maternityAntenatalProfileApi.middleware)
     .concat(maternityProfileApi.middleware)
     .concat(maternityDeliveriesApi.middleware)
@@ -160,6 +165,7 @@ export const store = configureStore({
     .concat(consultationTypesWithCreditAccountsApi.middleware)
     .concat(referralTypeApi.middleware)
     .concat(resultStatusApi.middleware)
-    .concat(specimenTypeApi.middleware),
+    .concat(specimenTypeApi.middleware)
+    .concat(userApi.middleware),
 
 });

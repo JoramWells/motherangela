@@ -20,12 +20,12 @@ const DL = [
     link: '/administrator/dashboard',
     icon: <LayoutDashboardIcon size={17} />,
   },
-  // {
-  //   id: '2',
-  //   label: 'Caregivers',
-  //   link: '/users/caregivers',
-  //   icon: <HeartHandshake size={17} />
-  // },
+  {
+    id: '2',
+    label: 'Users',
+    link: '/administrator/users',
+    icon: <Users size={17} />,
+  },
   {
     id: '3',
     label: 'Pharmacy',
