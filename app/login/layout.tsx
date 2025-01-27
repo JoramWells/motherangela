@@ -12,7 +12,7 @@ function PatientLayout({ children }: { children: React.ReactNode }) {
     <Provider
       store={store}
     >
-      <>{children}</>
+      {children}
     </Provider>
   );
 }

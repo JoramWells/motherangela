@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import axios from 'axios';
@@ -23,6 +24,7 @@ const handler = NextAuth({
             hospitalID: credentials?.hospitalID,
           },
         );
+        console.log(req);
         if (response) {
           return response.data;
         }

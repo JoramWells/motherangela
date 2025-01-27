@@ -6,7 +6,6 @@ import {
   type FormEvent, useCallback, useEffect, useState,
 } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 import { Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 // import InputText from '@/app/_components/forms/InputText'
@@ -74,7 +73,7 @@ function LoginPage() {
   });
 
   const hospitalOptions = useCallback(() => hospitalsData?.map((item) => ({
-    id: item?.hospital_id,
+    id: item?.hospital_id as unknown as string,
     label: item?.hospital_name,
   })), [hospitalsData]);
   return (

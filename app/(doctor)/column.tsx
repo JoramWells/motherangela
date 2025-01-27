@@ -309,15 +309,15 @@ export const queueColumns: ColumnDef<AppointmentInterface>[] = [
       </div>
     ),
   },
-  {
-    accessorKey: 'charges',
-    header: 'Charges',
-    cell: ({ row }) => (
-      <div className="text-[12px] text-slate-500 ">
-        {/* {formatCurrency(row.original?.charges) ?? 0} */}
-      </div>
-    ),
-  },
+  // {
+  //   accessorKey: 'charges',
+  //   header: 'Charges',
+  //   cell: ({ row }) => (
+  //     <div className="text-[12px] text-slate-500 ">
+  //       {/* {formatCurrency(row.original?.charges) ?? 0} */}
+  //     </div>
+  //   ),
+  // },
   {
     accessorKey: 'insurance_detail.insurance_name',
     header: 'Insurance',

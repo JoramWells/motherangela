@@ -9,7 +9,6 @@ import React, {
 } from 'react';
 import debounce from 'lodash/debounce';
 import { ChevronsUpDown } from 'lucide-react';
-import { ScrollArea } from '@/components/ui/scroll-area';
 
 export interface SelectInputProps {
   id?: string
@@ -102,7 +101,8 @@ function SearchInputDropDown({
         </div>
         {isOpen && (
           <div className="absolute bg-white shadow-lg left-0 right-4 rounded-lg border max-h-[200px] overflow-y-auto border-slate-200 flex-1 w-full mt-1
-          z-50">
+          z-50"
+          >
             {data?.length > 0 ? (
               data?.map((item) => (
                 <div
