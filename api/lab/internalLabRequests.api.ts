@@ -24,6 +24,24 @@ export const internalLabRequestsApi = createApi({
         return 'fetchAll';
       },
     }),
+    getAllInternalLabRequestsByAppointmentID: builder.query<
+      PaginatedResponse<InternalLabRequestInterface>,
+      {id?:string, page: number; pageSize: number; searchQuery: string }
+    >({
+      query: (params) => {
+        if (params) {
+          const {
+            id, page, pageSize, searchQuery,
+          } = params;
+          let queryString = '';
+          queryString += `page=${page}`;
+          queryString += `&pageSize=${pageSize}`;
+          queryString += `&searchQuery=${searchQuery}`;
+          return `/by-appointment-id/${id}?${queryString}`;
+        }
+        return 'by-appointment-id';
+      },
+    }),
     getAllRecentInternalLabRequests: builder.query<
       PaginatedResponse<InternalLabRequestInterface>,
       { page: number; pageSize: number; searchQuery: string }
@@ -80,4 +98,5 @@ export const {
   useGetInternalLabRequestQuery, useUpdateInternalLabRequestMutation,
   useDeleteInternalLabRequestMutation, useGetAllRecentInternalLabRequestsQuery,
   useUpdateInternalLabRequestCollectSampleMutation,
+  useGetAllInternalLabRequestsByAppointmentIDQuery,
 } = internalLabRequestsApi;

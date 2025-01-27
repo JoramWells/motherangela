@@ -376,3 +376,83 @@ export const admissionDetailColumns: ColumnDef<AdmissionInterface>[] = [
     ),
   },
 ];
+
+//
+export const internalLabRequestDetailColumns: ColumnDef<InternalLabRequestInterface>[] = [
+  {
+    accessorKey: 'user.full_name',
+    header: 'Performed By',
+    cell: ({ row }) => (
+      <p
+        className="text-[12px] text-zinc-500"
+      >
+        {row.original?.user?.full_name}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'appointment.appointment_date',
+    header: 'DOB',
+    cell: ({ row }) => (
+      <p
+        className="text-[12px] text-zinc-500"
+      >
+        {moment(row.original?.appointment?.appointment_date).format('ll')}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'procedure_detail.procedure_name',
+    header: 'Procedure',
+    cell: ({ row }) => {
+      const { procedure_name } = row.original.procedure_detail || {};
+      return (
+        <p className="text-[12px] text-zinc-500">
+          {procedure_name && procedure_name?.length > 25 ? `${procedure_name.substring(0, 25)}..` : procedure_name}
+        </p>
+      );
+    },
+  },
+  {
+    accessorKey: 'cost',
+    header: 'Cost',
+    cell: ({ row }) => (
+      <div className="lowercase text-[12px] text-zinc-500 font-semibold">{formatCurrency(row.original?.cost)}</div>
+    ),
+  },
+  {
+    accessorKey: 'results',
+    header: 'Results',
+    cell: ({ row }) => {
+      const { results } = row.original;
+      return (
+        <div className="lowercase text-[12px] text-zinc-500">{results?.length > 25 ? `${results.substring(0, 25)}..` : results}</div>
+      );
+    },
+  },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ row }) => {
+      const { status } = row.original;
+      return (
+        <div className="lowercase">
+          {status === 1
+            ? (
+              <Badge
+                className="bg-emerald-50 text-emerald-500 hover:bg-emerald-100 shadow-none"
+              >
+                Completed
+              </Badge>
+            ) : (
+              <Badge
+                className="bg-orange-50 text-orange-500 hover:bg-orange-100 shadow-none"
+              >
+                Pending
+              </Badge>
+            )}
+        </div>
+      );
+    },
+  },
+];

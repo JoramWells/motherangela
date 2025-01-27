@@ -91,10 +91,8 @@ function DoctorPage({ params }:{params:Promise<{id: string}>}) {
                 </Button>
               ))}
             </div>
-            <div
-              className="border rounded-lg mt-2 bg-white"
-            >
-              {tabValue === 'Pharmacy'
+
+            {tabValue === 'Pharmacy'
                 && (
                 <div>
                   <div className="flex justify-between items-center bg-zinc-50 p-1 pl-2 pr-2 rounded-t-lg ">
@@ -120,36 +118,16 @@ function DoctorPage({ params }:{params:Promise<{id: string}>}) {
                 </div>
                 )}
 
-              {/*  */}
-              {tabValue === 'Lab'
+            {/*  */}
+            {tabValue === 'Lab'
                 && (
-                <div>
-                  <div className="flex justify-between items-center bg-zinc-50 p-1 pl-2 pr-2 rounded-t-lg ">
-                    <p className="text-[14px] font-semibold">
-                      Internal Lab Request
-                    </p>
-                    <CustomDialog
-                      label="NEW"
-                      description="Add New Lab Request"
-                    >
-                      <InternalLabRequest
-                        appointment_id={id}
-                        patient_id={patient_id!}
-                      />
 
-                    </CustomDialog>
+                <InternalLabRequest
+                  appointment_id={id}
+                  patient_id={patient_id!}
+                />
 
-                  </div>
-                  <div
-                    className="p-2"
-                  >
-                    <p>
-                      No Pharmacy Requests
-                    </p>
-                  </div>
-                </div>
                 )}
-            </div>
           </div>
           <div>footer</div>
 

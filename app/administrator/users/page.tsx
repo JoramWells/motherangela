@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import { useGetAllUsersQuery } from '@/api/users/users.api';
@@ -55,4 +55,10 @@ function UsersPage() {
   );
 }
 
-export default UsersPage;
+export default function WrappedUsersPage() {
+  return (
+    <Suspense>
+      <UsersPage />
+    </Suspense>
+  );
+}
