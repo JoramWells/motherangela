@@ -21,12 +21,12 @@ function CollectLabSample({ request_id }:{request_id: string}) {
   });
 
   const specimenTypeOptions = useCallback(() => data?.map((type) => ({
-    id: type.specimen_type_id,
+    id: type.specimen_type_id as unknown as string,
     label: type.specimen_type_description,
   })), [data])();
 
   const resultStatusOptions = useCallback(() => resultStatusData?.map((type) => ({
-    id: type.results_status_id!,
+    id: type.results_status_id as unknown as string,
     label: type.results_status_description,
   })), [resultStatusData])();
 

@@ -3,16 +3,23 @@
 import React, { use, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
+import moment from 'moment';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { useGetPatientQuery } from '@/api/patients/patients.api';
 import { Button } from '@/components/ui/button';
+import PatientSideProfile from '@/components/custom/patient/PatientSideProfile';
+import { useGetAppointmentByPatientIDQuery } from '@/api/appointments/appointments.api';
+import { Badge } from '@/components/ui/badge';
 
 function PatientDetailsPage({ params }:{params:Promise<{id: string}>}) {
   const { id } = use(params);
   const { data } = useGetPatientQuery(id, {
     skip: !id,
   });
+
+  const {
+    cell_phone, dob, first_name, in_patient_file_no, middle_name, out_patient_file_no,
+  } = data || {};
 
   const listItems = useMemo(() => [
     {
@@ -27,12 +34,16 @@ function PatientDetailsPage({ params }:{params:Promise<{id: string}>}) {
     },
     {
       id: '3',
-      label: `${data?.first_name} ${data?.middle_name}`,
+      label: `${first_name} ${middle_name}`,
       link: '',
     },
-  ], [data]);
+  ], [first_name, middle_name]);
 
-  console.log(data);
+  const { data: appointmentData } = useGetAppointmentByPatientIDQuery(id, {
+    skip: !id,
+  });
+
+  console.log(appointmentData);
 
   const router = useRouter();
 
@@ -44,70 +55,30 @@ function PatientDetailsPage({ params }:{params:Promise<{id: string}>}) {
       <div
         className="p-2 flex flex-row space-x-2 items-start"
       >
-        <div className="w-1/5 bg-white p-4 rounded-lg flex flex-col items-center space-y-2">
-          <Image
-            src="/assets/img/profile.png"
-            alt="profile"
-            width={50}
-            height={50}
-            className="rounded-full"
-            style={{
-              width: '50px',
-              height: '50px',
-              objectFit: 'contain',
-            }}
-          />
-
-          <div className="flex flex-col items-center justify-center w-full">
-            {data
-
-              ? (
-                <div className="flex flex-col items-center justify-center space-y-1">
-                  <p
-                    className="text-[14px] text-zinc-700"
-                  >
-                    {`${data?.first_name} ${data?.middle_name}`}
-                  </p>
-
-                  <div className="flex flex-row justify-between text-[12px] space-x-2 text-zinc-500">
-                    <p>Phone :</p>
-                    <p>{data?.cell_phone}</p>
-                  </div>
-
-                  <div className="flex flex-row justify-between text-[12px] text-zinc-500">
-                    <p>In-patient File No.</p>
-                    <p>{data?.in_patient_file_no}</p>
-                  </div>
-
-                  <div className="flex flex-row justify-between text-[12px] space-x-2 text-zinc-500">
-                    <p>Out-patient File No.</p>
-                    <p>{data?.out_patient_file_no}</p>
-                  </div>
-                  <p
-                    className="text-[12px] text-zinc-500"
-                  >
-                    DOB:
-                    {' '}
-                    {data.dob}
-                  </p>
-                </div>
-              )
-              : (
-                <Link
-                  href="/"
-                  className="text-[12px] text-sky-600 underline hover:text-sky-700 "
-                >
-                  Update Patient profile
-                </Link>
-              )}
-          </div>
-        </div>
+        <PatientSideProfile
+          cell_phone={cell_phone!}
+          dob={dob!}
+          first_name={first_name!}
+          in_patient_file_no={in_patient_file_no!}
+          middle_name={middle_name!}
+          out_patient_file_no={out_patient_file_no!}
+        />
         <div className="border-l h-[50vh]" />
         {/*  */}
         <div
-          className="p-4 bg-white rounded-lg w-1/4 relative"
+          className="p-4 bg-white rounded-lg w-1/4 relative h-[100px]"
         >
-          <p>Book Appointment Now</p>
+          <p>Recent Appointment</p>
+          <p>
+            {appointmentData?.consultation_types_group?.consultation_type_group_description}
+          </p>
+          <p>{moment(appointmentData?.appointment_date).format('ll')}</p>
+          <div
+            className="flex items-center space-x-1"
+          >
+            <p>Status</p>
+            <Badge>{appointmentData?.appointment_status}</Badge>
+          </div>
           <Link
             href={`/patients/${data?.patient_id}/appointments`}
             className="text-[12px] text-cyan-500 hover:underline"

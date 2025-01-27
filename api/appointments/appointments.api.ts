@@ -49,6 +49,9 @@ export const appointmentApi = createApi({
     getAppointment: builder.query<AppointmentInterface, string>({
       query: (id) => `detail/${id}`,
     }),
+    getAppointmentByPatientID: builder.query<AppointmentInterface, string>({
+      query: (id) => `detail/${id}`,
+    }),
     getAppointmentsByPatientID: builder.query<PaginatedResponse<AppointmentInterface>,
       {id?: string, page: number; pageSize: number; searchQuery: string }
 
@@ -90,7 +93,7 @@ export const appointmentApi = createApi({
 
 export const {
   useGetAppointmentsQuery, useAddAppointmentMutation, useGetAppointmentPatientQueueQuery,
-  useGetAppointmentQuery, useUpdateAppointmentMutation,
+  useGetAppointmentQuery, useUpdateAppointmentMutation, useGetAppointmentByPatientIDQuery,
   useDeleteAppointmentMutation, useGetAppointmentDetailByIDQuery,
   useGetAppointmentsByPatientIDQuery,
 } = appointmentApi;
