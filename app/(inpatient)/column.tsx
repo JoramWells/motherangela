@@ -102,7 +102,7 @@ export const inpatientTreatmentChartColumn: ColumnDef<InpatientTreatmentChartInt
           size="sm"
           className="shadow-none"
           variant="outline"
-          onClick={() => router.push(`/insurances/${row.original.inpatient_treatment_chart}`)}
+          onClick={() => router.push(`/insurances/${row.original.inpatient_treatment_chart_id}`)}
         >
           <MoveRight />
         </Button>
