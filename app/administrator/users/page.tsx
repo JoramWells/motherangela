@@ -26,7 +26,6 @@ function UsersPage() {
   } = usePaginatedSearch({
     fetchQuery: useGetAllUsersQuery,
   });
-  console.log(data);
   return (
     <div>
       <BreadcrumbNav

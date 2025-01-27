@@ -12,10 +12,11 @@ import { Button } from '@/components/ui/button';
 // import InputText from '@/app/_components/forms/InputText'
 // import CustomSelect from '../_components/forms/CustomSelect'
 // import { useGetAllHospitalsQuery } from '@/api/hospital/hospital.api'
-import { useGetAllHospitalsQuery } from '@/api/hospital/hospital.api';
 import InputSelect from '@/components/custom/forms/InputSelect';
 import InputText from '@/components/custom/forms/InputText';
 import FormError from '@/components/custom/login/FormError';
+import { useGetAllHospitalQuery } from '@/api/patients/hospital/hospital.api';
+import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 // import { getServerSession } from 'next-auth'
 
 function LoginPage() {
@@ -68,15 +69,17 @@ function LoginPage() {
     }
   }, [router, session, status]);
 
-  const { data: hospitalsData } = useGetAllHospitalsQuery();
+  const { data: hospitalsData } = usePaginatedSearch({
+    fetchQuery: useGetAllHospitalQuery,
+  });
 
-  const hospitalOptions = useCallback(() => hospitalsData?.map((item: any) => ({
-    id: item?.id,
-    label: item?.hospitalName,
+  const hospitalOptions = useCallback(() => hospitalsData?.map((item) => ({
+    id: item?.hospital_id,
+    label: item?.hospital_name,
   })), [hospitalsData]);
   return (
     <div className="flex flex-col items-center justify-center w-full h-screen overflow-hidden bg-slate-50">
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <Image
           src="/img/logo1.svg"
           alt="img"
@@ -85,7 +88,7 @@ function LoginPage() {
           style={{ width: '60px', height: 'auto' }}
           // quality={100}
         />
-      </div>
+      </div> */}
 
       <form
         className="flex flex-col w-1/4 p-4
