@@ -66,32 +66,47 @@ function PatientDetailsPage({ params }:{params:Promise<{id: string}>}) {
         <div className="border-l h-[50vh]" />
         {/*  */}
         <div
-          className="p-4 bg-white rounded-lg w-1/4 relative h-[100px]"
+          className="p-2 bg-white rounded-lg w-1/4 relative "
         >
-          <p>Recent Appointment</p>
-          <p>
-            {appointmentData?.consultation_types_group?.consultation_type_group_description}
+          <p
+            className="text-zinc-700 text-[14px]"
+          >
+            Recent Appointment
           </p>
-          <p>{moment(appointmentData?.appointment_date).format('ll')}</p>
           <div
-            className="flex items-center space-x-1"
+            className="flex flex-row justify-between items-center"
           >
-            <p>Status</p>
-            <Badge>{appointmentData?.appointment_status}</Badge>
+            <p
+              className="text-[14px] font-semibold"
+            >
+              {appointmentData?.consultation_types_group?.consultation_type_group_description}
+            </p>
+            <Badge
+              className="shadow-none bg-zinc-50 text-zinc-700 hover:bg-zinc-100"
+            >
+              {appointmentData?.appointment_status}
+            </Badge>
           </div>
-          <Link
-            href={`/patients/${data?.patient_id}/appointments`}
-            className="text-[12px] text-cyan-500 hover:underline"
+
+          <p className="text-[12px] text-slate-500">{moment(appointmentData?.appointment_date).format('ll')}</p>
+
+          <div
+            className="flex flex-row justify-between items-center"
           >
-            View All Appointments
-          </Link>
-          <Button
-            className="shadow-none absolute bottom-4 right-4"
-            size="sm"
-            onClick={() => router.push(`/patients/${data?.patient_id}/appointments/add`)}
-          >
-            Book Now
-          </Button>
+            <Link
+              href={`/patients/${data?.patient_id}/appointments`}
+              className="text-[12px] text-cyan-500 hover:underline"
+            >
+              View All Appointments
+            </Link>
+            <Button
+              className="shadow-none  bottom-4 right-4"
+              size="sm"
+              onClick={() => router.push(`/patients/${data?.patient_id}/appointments/add`)}
+            >
+              Book Now
+            </Button>
+          </div>
         </div>
 
         {/*  */}
