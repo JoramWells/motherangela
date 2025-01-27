@@ -3,7 +3,7 @@
 import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import {
-  type FormEvent, useCallback, useEffect, useState,
+  type FormEvent, Suspense, useCallback, useEffect, useState,
 } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
@@ -171,4 +171,10 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default function WrappedLoginPage() {
+  return (
+    <Suspense>
+      <LoginPage />
+    </Suspense>
+  );
+}
