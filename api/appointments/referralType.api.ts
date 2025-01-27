@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { PaginatedResponse, ReferralTypeInterface } from 'motherangela';
+import { PaginatedResponse, ReferralTypesInterface } from 'motherangela';
 
 export const referralTypeApi = createApi({
   reducerPath: 'referralTypeApi',
@@ -8,7 +8,7 @@ export const referralTypeApi = createApi({
   }),
   endpoints: (builder) => ({
     getAllReferralTypes: builder.query<
-      PaginatedResponse<ReferralTypeInterface>,
+      PaginatedResponse<ReferralTypesInterface>,
       { page: number; pageSize: number; searchQuery: string }
     >({
       query: (params) => {
@@ -30,10 +30,10 @@ export const referralTypeApi = createApi({
         body: newWard,
       }),
     }),
-    getReferralType: builder.query<ReferralTypeInterface, string>({
+    getReferralType: builder.query<ReferralTypesInterface, string>({
       query: (id) => `detail/${id}`,
     }),
-    getReferralTypesByPatientID: builder.query<PaginatedResponse<ReferralTypeInterface>,
+    getReferralTypesByPatientID: builder.query<PaginatedResponse<ReferralTypesInterface>,
       {id?: string, page: number; pageSize: number; searchQuery: string }
 
     >({
