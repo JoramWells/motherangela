@@ -16,7 +16,7 @@ COPY package.json package-lock.json ./
 RUN npm cache clean --force
 RUN npm cache clear --force
 
-RUN npm install --no-frozen-lockfile
+RUN npm install --no-frozen-lockfile --legacy-peer-deps
 
 COPY . .
 
