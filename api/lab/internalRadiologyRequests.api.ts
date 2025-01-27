@@ -1,15 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { InternalRadiologyRequestInterface, PaginatedResponse } from 'motherangela';
+import { InternalLabRequestInterface, PaginatedResponse, ProcedureInterface } from 'motherangela';
 
 export const internalRadiologyRequestsApi = createApi({
   reducerPath: 'internalRadiologyRequestsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/Radiology-service/internal-radiology-requests`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/lab-service/internal-radiology-requests`,
 
   }),
   endpoints: (builder) => ({
     getAllInternalRadiologyRequests: builder.query<
-      PaginatedResponse<InternalRadiologyRequestInterface>,
+      PaginatedResponse<InternalLabRequestInterface>,
       { page: number; pageSize: number; searchQuery: string }
     >({
       query: (params) => {
@@ -25,7 +25,7 @@ export const internalRadiologyRequestsApi = createApi({
       },
     }),
     getAllInternalRadiologyRequestsByAppointmentID: builder.query<
-      PaginatedResponse<InternalRadiologyRequestInterface>,
+      PaginatedResponse<InternalLabRequestInterface>,
       {id?:string, page: number; pageSize: number; searchQuery: string }
     >({
       query: (params) => {
@@ -43,7 +43,7 @@ export const internalRadiologyRequestsApi = createApi({
       },
     }),
     getAllRecentInternalRadiologyRequests: builder.query<
-      PaginatedResponse<InternalRadiologyRequestInterface>,
+      PaginatedResponse<InternalLabRequestInterface>,
       { page: number; pageSize: number; searchQuery: string }
     >({
       query: (params) => {
@@ -58,6 +58,20 @@ export const internalRadiologyRequestsApi = createApi({
         return 'requests';
       },
     }),
+    searchRadiologyProcedure: builder.query<ProcedureInterface[],
+              { searchQuery: string }
+
+            >({
+              query: (params) => {
+                if (params) {
+                  const { searchQuery } = params;
+                  let queryString = '';
+                  queryString += `searchQuery=${searchQuery}`;
+                  return `/search/?${queryString}`;
+                }
+                return 'search';
+              },
+            }),
     addInternalRadiologyRequest: builder.mutation({
       query: (newWard) => ({
         url: 'add',
@@ -65,7 +79,7 @@ export const internalRadiologyRequestsApi = createApi({
         body: newWard,
       }),
     }),
-    getInternalRadiologyRequest: builder.query<InternalRadiologyRequestInterface, string>({
+    getInternalRadiologyRequest: builder.query<InternalLabRequestInterface, string>({
       query: (id) => `detail/${id}`,
     }),
     updateInternalRadiologyRequest: builder.mutation({
@@ -97,6 +111,6 @@ export const {
   useGetAllInternalRadiologyRequestsQuery, useAddInternalRadiologyRequestMutation,
   useGetInternalRadiologyRequestQuery, useUpdateInternalRadiologyRequestMutation,
   useDeleteInternalRadiologyRequestMutation, useGetAllRecentInternalRadiologyRequestsQuery,
-  useUpdateInternalRadiologyRequestCollectSampleMutation,
+  useUpdateInternalRadiologyRequestCollectSampleMutation, useSearchRadiologyProcedureQuery,
   useGetAllInternalRadiologyRequestsByAppointmentIDQuery,
 } = internalRadiologyRequestsApi;

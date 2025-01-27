@@ -66,7 +66,7 @@ export default function Home() {
           },
           {
             id: useId(),
-            link: '/internal-lab-requests',
+            link: '/lab-requests',
             label: 'Laboratory',
             url: '/assets/img/lab.png',
             description: 'Lorem Ipsum dolet Mwat!!',

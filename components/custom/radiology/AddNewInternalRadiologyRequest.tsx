@@ -2,18 +2,18 @@ import React, { useCallback, useState } from 'react';
 import moment from 'moment';
 import { Loader2 } from 'lucide-react';
 import SearchInputDropDown, { SelectInputProps } from '../forms/SearchInputDropDown';
-import { useSearchProcedureQuery } from '@/api/lab/procedure/procedureDetails.api';
 import InputText from '../forms/InputText';
 import InputSelect from '../forms/InputSelect';
 import { useAddInternalLabRequestMutation } from '@/api/lab/internalLabRequests.api';
 import { Button } from '@/components/ui/button';
+import { useSearchRadiologyProcedureQuery } from '@/api/lab/internalRadiologyRequests.api';
 
 function AddNewInternalRadiologyRequest({ appointment_id, patient_id }:{
     appointment_id: string, patient_id: string
 }) {
   const [search, setSearch] = useState<SelectInputProps>({ id: '', label: '' });
 
-  const { data } = useSearchProcedureQuery(
+  const { data } = useSearchRadiologyProcedureQuery(
     {
       searchQuery: search?.label as string,
     },

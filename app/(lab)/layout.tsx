@@ -2,7 +2,7 @@
 
 import {
   ArrowRightLeft,
-  FlaskRound, LayoutDashboardIcon, TestTubeDiagonal,
+  FlaskRound, LayoutDashboardIcon, Radiation, TestTubeDiagonal,
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
 import { Provider } from 'react-redux';
@@ -38,9 +38,15 @@ const DL = [
   },
   {
     id: '5',
-    label: 'Internal Requests',
-    link: '/internal-lab-requests',
+    label: 'Lab Requests',
+    link: '/lab-requests',
     icon: <ArrowRightLeft size={17} />,
+  },
+  {
+    id: '6',
+    label: 'Radiology Requests',
+    link: '/radiology-requests',
+    icon: <Radiation size={17} />,
   },
 ];
 
