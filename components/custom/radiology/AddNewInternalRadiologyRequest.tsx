@@ -5,16 +5,14 @@ import SearchInputDropDown, { SelectInputProps } from '../forms/SearchInputDropD
 import { useSearchProcedureQuery } from '@/api/lab/procedure/procedureDetails.api';
 import InputText from '../forms/InputText';
 import InputSelect from '../forms/InputSelect';
-import { Button } from '@/components/ui/button';
 import { useAddInternalLabRequestMutation } from '@/api/lab/internalLabRequests.api';
+import { Button } from '@/components/ui/button';
 
-export interface InterfaceInternalLabRequest {
-appointment_id: string
-patient_id: string
-}
-
-function AddInternalLabRequest({ appointment_id, patient_id }: InterfaceInternalLabRequest) {
+function AddNewInternalRadiologyRequest({ appointment_id, patient_id }:{
+    appointment_id: string, patient_id: string
+}) {
   const [search, setSearch] = useState<SelectInputProps>({ id: '', label: '' });
+
   const { data } = useSearchProcedureQuery(
     {
       searchQuery: search?.label as string,
@@ -45,6 +43,7 @@ function AddInternalLabRequest({ appointment_id, patient_id }: InterfaceInternal
   const [addInternalLabRequest, { isLoading }] = useAddInternalLabRequestMutation();
 
   const handleSave = async () => addInternalLabRequest(inputValues);
+
   return (
     <div
       className="min-h-[250px] flex flex-col space-y-2"
@@ -98,4 +97,4 @@ function AddInternalLabRequest({ appointment_id, patient_id }: InterfaceInternal
   );
 }
 
-export default AddInternalLabRequest;
+export default AddNewInternalRadiologyRequest;

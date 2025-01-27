@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import CustomDialog from '@/components/custom/CustomDialog';
 import NewPrescription from '@/components/custom/medicine/NewPrescription';
 import InternalLabRequest from '@/components/custom/lab/InternalLabRequest';
+import InternalRadiologyRequest from '@/components/custom/radiology/InternalRadiologyRequest';
 
 const listItems = [
   {
@@ -128,8 +129,15 @@ function DoctorPage({ params }:{params:Promise<{id: string}>}) {
                 />
 
                 )}
+
+            {tabValue === 'Radiology'
+                && (
+                <InternalRadiologyRequest
+                  appointment_id={id}
+                  patient_id={patient_id!}
+                />
+                )}
           </div>
-          <div>footer</div>
 
         </div>
 
