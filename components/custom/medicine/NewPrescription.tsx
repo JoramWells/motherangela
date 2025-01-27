@@ -5,20 +5,13 @@
 import React, { useCallback, useState } from 'react';
 import { TriangleAlert } from 'lucide-react';
 import moment from 'moment';
-import { useSearchPatientQuery } from '@/api/patients/patients.api';
 import { useSearchMedicineQuery } from '@/api/medication/medicine.api';
 import SearchInputDropDown, { SelectInputProps } from '@/components/custom/forms/SearchInputDropDown';
 import InputText from '@/components/custom/forms/InputText';
 import { Button } from '@/components/ui/button';
 
 function NewPrescription() {
-  const [search, setSearch] = useState<SelectInputProps>({ id: '', label: '' });
   const [searchMedicine, setSearchMedicine] = useState<SelectInputProps>({ id: '', label: '' });
-  const { data } = useSearchPatientQuery({
-    searchQuery: search?.label as string,
-  }, {
-    skip: !search?.label || search?.label?.length as number < 0,
-  });
 
   // useSearch({ search, setSearch });
 
@@ -31,20 +24,13 @@ function NewPrescription() {
 
     },
   );
-  const searchOptions = useCallback(
-    () => data?.map((item) => ({
-      id: item?.patient_id as unknown as string,
-      label: `${item?.first_name} ${item.middle_name}`,
-    })),
-    [data],
-  );
 
   const searchMedicineOptions = useCallback(() => medicineData?.map((item) => ({
     id: item.medication_id,
     label: item.medication_name,
   })), [medicineData]);
 
-  const [measuringUnit, setMeasuringUnit] = useState('');
+  // const [measuringUnit, setMeasuringUnit] = useState('');
   const [quantity, setQuantity] = useState('');
   const [frq, setFRQ] = useState('');
   const [number_of_days, setNumberOfDays] = useState('');
@@ -58,6 +44,8 @@ function NewPrescription() {
     medication_id: searchMedicine,
     quantity,
   };
+
+  console.log(inputValues);
 
   return (
     <div
