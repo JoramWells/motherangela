@@ -1,0 +1,73 @@
+services:
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    image: motherangela-client
+    # container_name: huruma-frontendv2
+    # volumes:
+    #   - ./:/usr/src/app
+    #   - /usr/src/app/node_modules
+    #   - /usr/src/app/.next
+
+    # deploy:
+    #   # mode: replicated
+    #   # replicas: 5
+    #   # placement:
+    #   #   max_replicas_per_node: 1
+    #   # update_config:
+    #   #   parallelism: 2
+    #   #   delay: 10s
+    #   # restart_policy:
+    #   #   condition: on-failure    
+    #   resources:
+    #     limits:
+    #       cpus: '0.50'
+    #       # memory: 1000M
+
+    ports:
+      - "3000:3000"
+      
+    networks:
+      - motherangela
+
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./nginx/nginx.prod.conf:/etc/nginx/conf.d/default.conf
+      # - ./nginx/ssl:/etc/nginx/ssl
+      - ./ssl/otzplus.crt:/etc/ssl/otzplus.crt
+      - ./ssl/otzplus.key:/etc/ssl/otzplus.key
+      - ./ssl/www_otzplus_xyz.crt:/etc/ssl/www_otzplus_xyz.crt
+      - ./ssl/www_otzplus_xyz_chain.crt:/etc/ssl/www_otzplus_xyz_chain.crt
+    ports:
+      - 8085:8085
+      - 445:445
+    # deploy:
+    #   mode: replicated
+    #   replicas: 2
+    #   placement:
+    #     max_replicas_per_node: 1
+    #   update_config:
+    #     parallelism: 2
+    #     delay: 10s
+    #   restart_policy:
+    #     condition: on-failure    
+    #   resources:
+    #     limits:
+    #       cpus: '0.05'
+    #       # memory: 700M
+    #     reservations:
+    #       cpus: '0.05'
+    #       # memory: 700M 
+
+    depends_on:
+      - frontend
+
+    networks:
+      - motherangela      
+
+networks:
+ motherangela:
+  driver: bridge
