@@ -11,12 +11,12 @@ WORKDIR /app
 
 RUN npm i -g pnpm
 
-COPY package.json pnpm-lock.yaml ./
+COPY package.json package-lock.json ./
 
 RUN npm cache clean --force
 RUN npm cache clear --force
 
-RUN pnpm install --no-frozen-lockfile
+RUN npm install --no-frozen-lockfile
 
 COPY . .
 
