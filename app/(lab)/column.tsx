@@ -478,7 +478,7 @@ export const procedureDetailsColumns: ColumnDef<ProcedureInterface>[] = [
       <p
         className="text-[12px] text-zinc-500"
       >
-        {row.original?.procedure_category?.category_name}
+        {row.original?.procedure_name}
       </p>
     ),
   },
