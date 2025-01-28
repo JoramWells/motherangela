@@ -4,7 +4,7 @@ import { PaginatedResponse, UserInterface } from 'motherangela';
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/root-server/users`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/patient-service/users`,
 
   }),
   endpoints: (builder) => ({
@@ -32,12 +32,19 @@ export const userApi = createApi({
         body: newUser,
       }),
     }),
-    getUser: builder.query({
+    getUser: builder.query<UserInterface, string>({
       query: (id) => `detail/${id}`,
     }),
     updateUser: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `update${id}`,
+        method: 'PUT',
+        body: patch,
+      }),
+    }),
+    updateUserPassword: builder.mutation({
+      query: ({ id, ...patch }) => ({
+        url: `update-password/${id}`,
         method: 'PUT',
         body: patch,
       }),
@@ -53,4 +60,6 @@ export const userApi = createApi({
   }),
 });
 
-export const { useGetAllUsersQuery, useAddUserMutation, useGetUserQuery } = userApi;
+export const {
+  useGetAllUsersQuery, useAddUserMutation, useGetUserQuery, useUpdateUserPasswordMutation,
+} = userApi;
