@@ -30,7 +30,7 @@ services:
       - "3000:3000"
       
     networks:
-      - motherangela
+      - huruma
 
   nginx:
     image: nginx:alpine
@@ -66,8 +66,8 @@ services:
       - frontend
 
     networks:
-      - motherangela      
+      - huruma      
 
 networks:
- motherangela:
+ huruma:
   driver: bridge
