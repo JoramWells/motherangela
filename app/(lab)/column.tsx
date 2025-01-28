@@ -3,6 +3,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import moment from 'moment';
 import {
   AdmissionInterface, AppointmentInterface, InternalLabRequestInterface,
+  ProcedureInterface,
 } from 'motherangela';
 import { useRouter } from 'next/navigation';
 import { MoveRight } from 'lucide-react';
@@ -454,5 +455,47 @@ export const internalLabRequestDetailColumns: ColumnDef<InternalLabRequestInterf
         </div>
       );
     },
+  },
+];
+
+//
+export const procedureDetailsColumns: ColumnDef<ProcedureInterface>[] = [
+  {
+    accessorKey: 'procedure_name',
+    header: 'Procedure Name',
+    cell: ({ row }) => (
+      <p
+        className="text-[12px]"
+      >
+        {row.original?.procedure_name}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'procedure_category.category_name',
+    header: 'Category',
+    cell: ({ row }) => (
+      <p
+        className="text-[12px] text-zinc-500"
+      >
+        {row.original?.procedure_category?.category_name}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'procedure_cost',
+    header: 'Cost',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-zinc-500">
+        {formatCurrency(row.original.procedure_cost)}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'procedure_cost_corporate',
+    header: 'Cost Corporate',
+    cell: ({ row }) => (
+      <div className="lowercase text-[12px] text-zinc-500">{formatCurrency(row.original?.procedure_cost_corporate)}</div>
+    ),
   },
 ];

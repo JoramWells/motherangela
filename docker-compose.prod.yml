@@ -37,10 +37,10 @@ services:
     volumes:
       - ./nginx/nginx.prod.conf:/etc/nginx/conf.d/default.conf
       # - ./nginx/ssl:/etc/nginx/ssl
-      - ./ssl/otzplus.crt:/etc/ssl/otzplus.crt
-      - ./ssl/otzplus.key:/etc/ssl/otzplus.key
-      - ./ssl/www_otzplus_xyz.crt:/etc/ssl/www_otzplus_xyz.crt
-      - ./ssl/www_otzplus_xyz_chain.crt:/etc/ssl/www_otzplus_xyz_chain.crt
+      - /home/anaya/Desktop/motherangela/ssl/otzplus.crt:/etc/ssl/otzplus.crt
+      - /home/anaya/Desktop/motherangela/ssl/otzplus.key:/etc/ssl/otzplus.key
+      - /home/anaya/Desktop/motherangela/ssl/www_otzplus_xyz.crt:/etc/ssl/www_otzplus_xyz.crt
+      - /home/anaya/Desktop/motherangela/ssl/www_otzplus_xyz_chain.crt:/etc/ssl/www_otzplus_xyz_chain.crt
     ports:
       - 8085:8085
       - 445:445

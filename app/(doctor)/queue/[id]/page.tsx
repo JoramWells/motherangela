@@ -10,6 +10,7 @@ import CustomDialog from '@/components/custom/CustomDialog';
 import NewPrescription from '@/components/custom/medicine/NewPrescription';
 import InternalLabRequest from '@/components/custom/lab/InternalLabRequest';
 import InternalRadiologyRequest from '@/components/custom/radiology/InternalRadiologyRequest';
+import ProceduresPerformed from '@/components/custom/procedures/PoceduresPerformed';
 
 const listItems = [
   {
@@ -36,7 +37,7 @@ function DoctorPage({ params }:{params:Promise<{id: string}>}) {
     cell_phone, dob, first_name, in_patient_file_no, middle_name, out_patient_file_no,
   } = patientData || {};
 
-  const [tabValue, setTabValue] = useState('');
+  const [tabValue, setTabValue] = useState('Pharmacy');
 
   return (
     <div>
@@ -73,14 +74,19 @@ function DoctorPage({ params }:{params:Promise<{id: string}>}) {
           </div>
           <div className="pt-2">
             <div className="p-1 bg-white flex flex-row space-x-2 rounded-lg ">
-              {[{ id: 1, label: 'Pharmacy' }, {
-                id: 2,
-                label: 'Lab',
-              },
-              {
-                id: 3,
-                label: 'Radiology',
-              },
+              {[{ id: 1, label: 'Pharmacy' },
+                {
+                  id: 4,
+                  label: 'Procedure(s)',
+                },
+                {
+                  id: 2,
+                  label: 'Lab',
+                },
+                {
+                  id: 3,
+                  label: 'Radiology',
+                },
               ].map((item) => (
                 <Button
                   key={item.id}
@@ -133,6 +139,15 @@ function DoctorPage({ params }:{params:Promise<{id: string}>}) {
             {tabValue === 'Radiology'
                 && (
                 <InternalRadiologyRequest
+                  appointment_id={id}
+                  patient_id={patient_id!}
+                />
+                )}
+
+            {/*  */}
+            {tabValue === 'Procedure(s)'
+                && (
+                <ProceduresPerformed
                   appointment_id={id}
                   patient_id={patient_id!}
                 />

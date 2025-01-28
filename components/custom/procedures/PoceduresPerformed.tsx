@@ -4,10 +4,10 @@ import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '../table/TableContainer';
 import { internalLabRequestDetailColumns } from '@/app/(lab)/column';
 import CustomDialog from '../CustomDialog';
-import AddNewInternalRadiologyRequest from './AddNewInternalRadiologyRequest';
 import { useGetAllInternalRadiologyRequestsByAppointmentIDQuery } from '@/api/lab/internalRadiologyRequests.api';
+import AddNewProcedure from './AddNewProcedure';
 
-function InternalLabRequest({ appointment_id, patient_id }:{appointment_id:string,
+function ProceduresPerformed({ appointment_id, patient_id }:{appointment_id:string,
   patient_id: string}) {
   const {
     data, total, search, setSearch,
@@ -39,14 +39,14 @@ function InternalLabRequest({ appointment_id, patient_id }:{appointment_id:strin
         >
           <div className="flex flex-col items-center justify-center space-y-2">
             <p className="text-[16px] text-zinc-500">
-              No Internal Lab Request !!
+              No Procedures Performed!!
             </p>
             <ArchiveX className="text-zinc-500" />
             <CustomDialog
               label="NEW"
-              description="Add New Lab Request"
+              description="Add New Procedure"
             >
-              <AddNewInternalRadiologyRequest
+              <AddNewProcedure
                 appointment_id={appointment_id}
                 patient_id={patient_id!}
               />
@@ -59,4 +59,4 @@ function InternalLabRequest({ appointment_id, patient_id }:{appointment_id:strin
   );
 }
 
-export default InternalLabRequest;
+export default ProceduresPerformed;
