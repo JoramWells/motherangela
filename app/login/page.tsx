@@ -23,7 +23,7 @@ function LoginPage() {
 
   const [firstName, setFirstName] = useState('');
   const [password, setPassword] = useState('');
-  const [hospitalID, setHospitalID] = useState<string | undefined>();
+  const [hospitalID, setHospitalID] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | undefined>();
 
@@ -73,9 +73,11 @@ function LoginPage() {
   });
 
   const hospitalOptions = useCallback(() => hospitalsData?.map((item) => ({
-    id: item?.hospital_id as unknown as string,
+    id: item?.hospital_id.toString(),
     label: item?.hospital_name,
   })), [hospitalsData]);
+
+  console.log(hospitalOptions());
   return (
     <div className="flex flex-col items-center justify-center w-full h-screen overflow-hidden bg-slate-50">
       {/* <div className="mb-4">
