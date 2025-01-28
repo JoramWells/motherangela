@@ -10,6 +10,7 @@ import { Sidebar } from '@/components/custom/Sidebar/Sidebar';
 import SidebarListItemsComponent from '@/components/custom/Sidebar/SidebarListItemsComponent';
 import { store } from '@/lib/store';
 import '../globals.css';
+import { UserProvider } from '@/context/UserContext';
 
 const DL = [
   {
@@ -51,18 +52,20 @@ const DL = [
 ];
 
 const layout = ({ children }:{children: ReactNode}) => (
-  <Provider store={store}>
-    <div className="flex flex-row">
-      <Sidebar>
-        <SidebarListItemsComponent dataList={DL} />
-      </Sidebar>
-      <div className="flex flex-col flex-1 h-screen overflow-y-auto bg-slate-50">
-        {/* <Navbar /> */}
+  <UserProvider>
+    <Provider store={store}>
+      <div className="flex flex-row">
+        <Sidebar>
+          <SidebarListItemsComponent dataList={DL} />
+        </Sidebar>
+        <div className="flex flex-col flex-1 h-screen overflow-y-auto bg-slate-50">
+          {/* <Navbar /> */}
 
-        {children}
+          {children}
+        </div>
       </div>
-    </div>
-  </Provider>
+    </Provider>
+  </UserProvider>
 );
 
 export default layout;
