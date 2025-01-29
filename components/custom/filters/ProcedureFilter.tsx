@@ -4,31 +4,45 @@ import { pageNumber } from '@/utils/number';
 import SelectDropdownFilter, { DataItem } from '../forms/SelectDropdownFilter';
 
 interface ProcedureFilterInputProps {
-  insurance: string | null
+  serviceType: string | null
+  category: string | null
   total: number
   pageSize: number
-  setInsurance: Dispatch<SetStateAction<string>>
+  setServiceType: Dispatch<SetStateAction<string>>
+  setCategory: Dispatch<SetStateAction<string>>
   setPageSize: Dispatch<SetStateAction<number>>
-  insuranceOptions: DataItem[]
+  serviceTypeOptions: DataItem[]
+  categoryOptions: DataItem[]
 }
 
 function ProcedureFilter({
-  insurance,
-  setInsurance,
+  category,
+  categoryOptions,
+  setCategory,
+  serviceType,
+  setServiceType,
   pageSize,
   setPageSize,
   total,
-  insuranceOptions,
+  serviceTypeOptions,
 }: ProcedureFilterInputProps) {
   return (
     <div className="flex flex-row space-x-2 items-center">
       <SelectDropdownFilter
-        label="Insurance"
-        onChange={setInsurance}
-        paramValue="insurance"
-        value={insurance as string}
-        data={insuranceOptions}
-        placeholder="Insurance"
+        label="Service Type"
+        onChange={setServiceType}
+        paramValue="serviceType"
+        value={serviceType as string}
+        data={serviceTypeOptions}
+        placeholder="Service Type"
+      />
+      <SelectDropdownFilter
+        label="Category"
+        onChange={setCategory}
+        paramValue="category"
+        value={category as string}
+        data={categoryOptions}
+        placeholder="Category"
       />
       <SelectDropdownFilter
         label={`Page No :- ${pageNumber(total as number, 10)}`}

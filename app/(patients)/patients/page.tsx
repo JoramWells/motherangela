@@ -8,6 +8,7 @@ import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
 import { Button } from '@/components/ui/button';
+import { useUserContext } from '@/context/UserContext';
 
 const listItems = [
   {
@@ -28,6 +29,8 @@ function Patients() {
   } = usePaginatedSearch({ fetchQuery: useGetPatientsQuery });
   // console.log(patientsData);
   const router = useRouter();
+  const { user } = useUserContext();
+  console.log(user);
   return (
     <>
       <BreadcrumbNav

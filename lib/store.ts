@@ -52,6 +52,8 @@ import { resultStatusApi } from '@/api/lab/resultStatus.api';
 import { hospitalApi } from '@/api/patients/hospital/hospital.api';
 import { userApi } from '@/api/users/users.api';
 import { internalRadiologyRequestsApi } from '@/api/lab/internalRadiologyRequests.api';
+import { serviceTypeApi } from '@/api/services/serviceType.api';
+import { procedureCategoryApi } from '@/api/lab/procedure/procedureCategory.api';
 
 export const store = configureStore({
   reducer: {
@@ -107,10 +109,12 @@ export const store = configureStore({
     [personalAccountChargeApi.reducerPath]: personalAccountChargeApi.reducer,
     [personalChargesPaymentApi.reducerPath]: personalChargesPaymentApi.reducer,
     [procedureApi.reducerPath]: procedureApi.reducer,
+    [procedureCategoryApi.reducerPath]: procedureCategoryApi.reducer,
     [referralTypeApi.reducerPath]: referralTypeApi.reducer,
     [internalRadiologyRequestsApi.reducerPath]: internalRadiologyRequestsApi.reducer,
     [resultStatusApi.reducerPath]: resultStatusApi.reducer,
     [specimenTypeApi.reducerPath]: specimenTypeApi.reducer,
+    [serviceTypeApi.reducerPath]: serviceTypeApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
 
   },
@@ -161,6 +165,7 @@ export const store = configureStore({
     .concat(personalAccountChargeApi.middleware)
     .concat(personalChargesPaymentApi.middleware)
     .concat(procedureApi.middleware)
+    .concat(procedureCategoryApi.middleware)
     .concat(consultationTypeApi.middleware)
     .concat(consultationTypeGroupApi.middleware)
     .concat(consultationTypeSubGroupApi.middleware)
@@ -169,6 +174,7 @@ export const store = configureStore({
     .concat(referralTypeApi.middleware)
     .concat(resultStatusApi.middleware)
     .concat(specimenTypeApi.middleware)
+    .concat(serviceTypeApi.middleware)
     .concat(userApi.middleware),
 
 });

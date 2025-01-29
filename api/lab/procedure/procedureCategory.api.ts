@@ -1,14 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { PaginatedResponse, ProcedureInterface } from 'motherangela';
 
-export const procedureApi = createApi({
-  reducerPath: 'procedureApi',
+export const procedureCategoryApi = createApi({
+  reducerPath: 'procedureCategoryApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/lab-service/procedure-details`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/lab-service/procedure-category`,
 
   }),
   endpoints: (builder) => ({
-    getAllProcedures: builder.query<
+    getAllProcedureCategories: builder.query<
           PaginatedResponse<ProcedureInterface>,
           { page: number; pageSize: number; searchQuery: string, serviceType?:string }
         >({
@@ -27,17 +27,17 @@ export const procedureApi = createApi({
             return 'fetchAll';
           },
         }),
-    addProcedure: builder.mutation({
+    addProcedureCategory: builder.mutation({
       query: (newUser) => ({
         url: 'add',
         method: 'POST',
         body: newUser,
       }),
     }),
-    getProcedure: builder.query({
+    getProcedureCategory: builder.query({
       query: (id) => `/${id}`,
     }),
-    searchProcedure: builder.query<ProcedureInterface[],
+    searchProcedureCategory: builder.query<ProcedureInterface[],
           { searchQuery: string }
 
         >({
@@ -70,6 +70,6 @@ export const procedureApi = createApi({
 });
 
 export const {
-  useGetAllProceduresQuery, useAddProcedureMutation,
-  useGetProcedureQuery, useSearchProcedureQuery,
-} = procedureApi;
+  useGetAllProcedureCategoriesQuery, useAddProcedureCategoryMutation,
+  useGetProcedureCategoryQuery, useSearchProcedureCategoryQuery,
+} = procedureCategoryApi;

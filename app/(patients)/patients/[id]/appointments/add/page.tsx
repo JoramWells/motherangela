@@ -18,6 +18,7 @@ import { useGetAllCompaniesQuery } from '@/api/insurance/company.api';
 import { useGetAllReferralTypesQuery } from '@/api/appointments/referralType.api';
 import PatientSideProfile from '@/components/custom/patient/PatientSideProfile';
 import { useAddAppointmentMutation } from '@/api/appointments/appointments.api';
+import { useUserContext } from '@/context/UserContext';
 
 function AddAppointmentPage({ params }:{params:Promise<{id:string}>}) {
   const { id } = use(params);
@@ -134,9 +135,11 @@ function AddAppointmentPage({ params }:{params:Promise<{id:string}>}) {
       setSelectedAccountType(filteredAccountType[0]?.label?.toLowerCase() ?? '');
     }
   }, [accountTypeOptions?.length, accountType]);
+  const { user } = useUserContext();
 
   const inputValues = {
     account_type_id: accountType,
+    doctor_id: user?.user_id,
     consultation_type,
     company_id,
     referral_type_id: referralType,

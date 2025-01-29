@@ -77,7 +77,7 @@ function SelectDropdownFilter({
             ) : (
               <>
                 {data.map((item) => (
-                  <SelectItem key={useId()} value={item.id}>
+                  <SelectItem key={item.id} value={item.id}>
                     {item.label}
                   </SelectItem>
                 ))}

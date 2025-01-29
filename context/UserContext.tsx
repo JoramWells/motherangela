@@ -3,7 +3,7 @@ import { UserInterface } from 'motherangela';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import {
-  createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState,
+  createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState,
 } from 'react';
 
 export interface UserContextInterface{
@@ -47,3 +47,5 @@ export function UserProvider({ children }:{children: ReactNode}) {
     </UserContext.Provider>
   );
 }
+
+export const useUserContext = () => useContext(UserContext);
