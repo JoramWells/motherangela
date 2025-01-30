@@ -4,6 +4,7 @@ import {
   Bed,
   LayoutDashboardIcon,
   NotebookPen,
+  Syringe,
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
 import { Provider } from 'react-redux';
@@ -19,6 +20,12 @@ const DL = [
     label: 'Dashboard',
     link: '/inpatient-dashboard',
     icon: <LayoutDashboardIcon size={17} />,
+  },
+  {
+    id: '2',
+    label: 'Anaesthetic Records',
+    link: '/anaesthetic-records',
+    icon: <Syringe size={17} />,
   },
   {
     id: '6',

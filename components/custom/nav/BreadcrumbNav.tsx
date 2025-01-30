@@ -7,6 +7,8 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import { useUserContext } from '@/context/UserContext';
+import UserAccount from '../user/UserAccount';
 
 export interface BreadCrumbInterface{
     listItems: Array<{
@@ -17,27 +19,35 @@ export interface BreadCrumbInterface{
 }
 
 export default function BreadcrumbNav({ listItems }:BreadCrumbInterface) {
+  const { user } = useUserContext();
   return (
-    <Breadcrumb
-      className="bg-white p-3 border-b border-slate-200 "
+    <div
+      className="flex justify-between items-center bg-white p-1.5 border-b"
     >
-      <BreadcrumbList className="text-[12px]">
-        {listItems && listItems.map((item, index) => (
-          <Fragment key={item.id}>
-            <BreadcrumbItem>
-              <BreadcrumbLink
-                href={item.link}
-                className={`capitalize text-[12px] ${
-                  index === listItems.length - 1 && 'text-cyan-500'
-                } `}
-              >
-                {item.label}
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            {index !== listItems.length - 1 && <BreadcrumbSeparator />}
-          </Fragment>
-        ))}
-      </BreadcrumbList>
-    </Breadcrumb>
+      <Breadcrumb
+        className=""
+      >
+        <BreadcrumbList className="text-[12px]">
+          {listItems && listItems.map((item, index) => (
+            <Fragment key={item.id}>
+              <BreadcrumbItem>
+                <BreadcrumbLink
+                  href={item.link}
+                  className={`capitalize text-[12px] ${
+                    index === listItems.length - 1 && 'text-cyan-500'
+                  } `}
+                >
+                  {item.label}
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              {index !== listItems.length - 1 && <BreadcrumbSeparator />}
+            </Fragment>
+          ))}
+        </BreadcrumbList>
+      </Breadcrumb>
+      <UserAccount
+        user={user!}
+      />
+    </div>
   );
 }
