@@ -1,7 +1,10 @@
 'use client';
 
 import {
-  LayoutDashboardIcon, UserCheck, Users,
+  Baby,
+  BookUser,
+  LayoutDashboardIcon, ShieldCheck, Stethoscope, TriangleAlert,
+  Users2,
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
 import { Provider } from 'react-redux';
@@ -28,13 +31,37 @@ const DL = [
     id: '3',
     label: 'Patients',
     link: '/patients',
-    icon: <Users size={17} />,
+    icon: <BookUser size={17} />,
   },
   {
     id: '4',
-    label: 'Departmental Status',
+    label: 'Clinics',
     link: '/users/otz',
-    icon: <UserCheck size={17} />,
+    icon: <Stethoscope size={17} />,
+  },
+  {
+    id: '5',
+    label: 'Cervical Cancer',
+    link: '/users/otz',
+    icon: <ShieldCheck size={17} />,
+  },
+  {
+    id: '6',
+    label: 'Child Health',
+    link: '/child-health',
+    icon: <Baby size={17} />,
+  },
+  {
+    id: '7',
+    label: 'Family Planning',
+    link: '/users/otz',
+    icon: <Users2 size={17} />,
+  },
+  {
+    id: '9',
+    label: 'SGBV',
+    link: '/users/otz',
+    icon: <TriangleAlert size={17} />,
   },
 ];
 

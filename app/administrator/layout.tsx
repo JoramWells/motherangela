@@ -43,7 +43,7 @@ const DL = [
   {
     id: '3',
     label: 'Pharmacy',
-    link: '/pharmacy',
+    link: '/administrator/pharmacy',
     icon: <Check size={17} />,
   },
 ];

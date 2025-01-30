@@ -55,6 +55,7 @@ import { internalRadiologyRequestsApi } from '@/api/lab/internalRadiologyRequest
 import { serviceTypeApi } from '@/api/services/serviceType.api';
 import { procedureCategoryApi } from '@/api/lab/procedure/procedureCategory.api';
 import { patientAccountApi } from '@/api/accounts/patient/patientAccount.api';
+import { procedureItemResultsApi } from '@/api/lab/procedure/procedureItemResults.api';
 
 export const store = configureStore({
   reducer: {
@@ -112,6 +113,7 @@ export const store = configureStore({
     [personalChargesPaymentApi.reducerPath]: personalChargesPaymentApi.reducer,
     [procedureApi.reducerPath]: procedureApi.reducer,
     [procedureCategoryApi.reducerPath]: procedureCategoryApi.reducer,
+    [procedureItemResultsApi.reducerPath]: procedureItemResultsApi.reducer,
     [referralTypeApi.reducerPath]: referralTypeApi.reducer,
     [internalRadiologyRequestsApi.reducerPath]: internalRadiologyRequestsApi.reducer,
     [resultStatusApi.reducerPath]: resultStatusApi.reducer,
@@ -169,6 +171,7 @@ export const store = configureStore({
     .concat(personalChargesPaymentApi.middleware)
     .concat(procedureApi.middleware)
     .concat(procedureCategoryApi.middleware)
+    .concat(procedureItemResultsApi.middleware)
     .concat(consultationTypeApi.middleware)
     .concat(consultationTypeGroupApi.middleware)
     .concat(consultationTypeSubGroupApi.middleware)

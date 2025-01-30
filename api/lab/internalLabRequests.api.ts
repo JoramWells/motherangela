@@ -10,14 +10,17 @@ export const internalLabRequestsApi = createApi({
   endpoints: (builder) => ({
     getAllInternalLabRequests: builder.query<
       PaginatedResponse<InternalLabRequestInterface>,
-      { page: number; pageSize: number; searchQuery: string }
+      { page: number; pageSize: number; searchQuery: string, date?:string }
     >({
       query: (params) => {
         if (params) {
-          const { page, pageSize, searchQuery } = params;
+          const {
+            page, pageSize, searchQuery, date,
+          } = params;
           let queryString = '';
           queryString += `page=${page}`;
           queryString += `&pageSize=${pageSize}`;
+          queryString += `&date=${date}`;
           queryString += `&searchQuery=${searchQuery}`;
           return `/fetchAll/?${queryString}`;
         }
@@ -44,14 +47,17 @@ export const internalLabRequestsApi = createApi({
     }),
     getAllRecentInternalLabRequests: builder.query<
       PaginatedResponse<InternalLabRequestInterface>,
-      { page: number; pageSize: number; searchQuery: string }
+      { page: number; pageSize: number; searchQuery: string, date?:string }
     >({
       query: (params) => {
         if (params) {
-          const { page, pageSize, searchQuery } = params;
+          const {
+            page, pageSize, searchQuery, date,
+          } = params;
           let queryString = '';
           queryString += `page=${page}`;
           queryString += `&pageSize=${pageSize}`;
+          queryString += `&date=${date}`;
           queryString += `&searchQuery=${searchQuery}`;
           return `/requests/?${queryString}`;
         }

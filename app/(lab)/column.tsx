@@ -4,6 +4,7 @@ import moment from 'moment';
 import {
   AdmissionInterface, AppointmentInterface, InternalLabRequestInterface,
   ProcedureInterface,
+  ProcedureItemResultsInterface,
 } from 'motherangela';
 import { useRouter } from 'next/navigation';
 import { MoveRight } from 'lucide-react';
@@ -498,4 +499,63 @@ export const procedureDetailsColumns: ColumnDef<ProcedureInterface>[] = [
       <div className="lowercase text-[12px] text-zinc-500">{formatCurrency(row.original?.procedure_cost_corporate)}</div>
     ),
   },
+];
+
+//
+export const procedureItemResultsColumn: ColumnDef<ProcedureItemResultsInterface>[] = [
+  {
+    accessorKey: 'first_name',
+    header: 'Name',
+    cell: ({ row }) => (
+      <div className="flex-row flex space-x-2 items-center">
+        <Avatar
+          name={`${row.original?.internal_lab_request?.patient_detail?.first_name} ${row.original?.internal_lab_request?.patient_detail?.middle_name}`}
+        />
+        <Link href={`/patients/${row.original.internal_lab_request?.patient_id}`} className="capitalize text-[12px] text-cyan-500 hover:underline ">
+          {row.original?.internal_lab_request?.patient_detail?.first_name}
+          {' '}
+          {row.original?.internal_lab_request?.patient_detail?.middle_name}
+        </Link>
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'procedure_name',
+    header: 'Procedure Name',
+    cell: ({ row }) => (
+      <p
+        className="text-[12px]"
+      >
+        {row.original?.procedure_item?.procedure_item_description}
+      </p>
+    ),
+  },
+  // {
+  //   accessorKey: 'procedure_category.category_name',
+  //   header: 'Category',
+  //   cell: ({ row }) => (
+  //     <p
+  //       className="text-[12px] text-zinc-500"
+  //     >
+  //       {row.original?.procedure_category?.category_name}
+  //     </p>
+  //   ),
+  // },
+  // {
+  //   accessorKey: 'procedure_cost',
+  //   header: 'Cost',
+  //   cell: ({ row }) => (
+  //     <p className="text-[12px] text-zinc-500">
+  //       {formatCurrency(row.original.procedure_cost)}
+  //     </p>
+  //   ),
+  // },
+  // {
+  //   accessorKey: 'procedure_cost_corporate',
+  //   header: 'Cost Corporate',
+  //   cell: ({ row }) => (
+  //     <div className="lowercase text-[12px] text-zinc-500">
+  // {formatCurrency(row.original?.procedure_cost_corporate)}</div>
+  //   ),
+  // },
 ];

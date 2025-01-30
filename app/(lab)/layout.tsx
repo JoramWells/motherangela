@@ -38,6 +38,12 @@ const DL = [
     icon: <FlaskRound size={17} />,
   },
   {
+    id: '7',
+    label: 'Procedure Results',
+    link: '/procedure-results',
+    icon: <FlaskRound size={17} />,
+  },
+  {
     id: '5',
     label: 'Lab Requests',
     link: '/lab-requests',

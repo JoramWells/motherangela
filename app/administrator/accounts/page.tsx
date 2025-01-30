@@ -15,7 +15,7 @@ const listItems = [
   },
   {
     id: '2',
-    label: 'Service Cost Mapping',
+    label: 'Account Details',
     link: '',
   },
 ];
@@ -24,7 +24,6 @@ function InsurancePage() {
   const {
     data, total, search, setSearch,
   } = usePaginatedSearch({ fetchQuery: useGetAllAccountingAccountDetailsQuery });
-  console.log(data);
 
   return (
     <>

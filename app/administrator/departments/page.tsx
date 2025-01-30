@@ -15,7 +15,7 @@ const listItems = [
   },
   {
     id: '2',
-    label: 'Medicine Insurance Mapping',
+    label: 'Departments',
     link: '',
   },
 ];

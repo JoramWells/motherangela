@@ -18,7 +18,7 @@ const listItems = [
   },
   {
     id: '2',
-    label: 'In Patient',
+    label: 'Pharmacy',
     link: '',
   },
 ];
