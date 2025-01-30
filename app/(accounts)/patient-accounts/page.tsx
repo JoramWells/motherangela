@@ -30,7 +30,6 @@ function PersonalAccountPage() {
     fetchQuery: useGetAllPatientAccountsQuery,
     status: cleared || '',
   });
-  console.log(data);
   return (
     <div>
       <BreadcrumbNav
@@ -38,7 +37,7 @@ function PersonalAccountPage() {
       />
       <div className="p-2">
         <TableContainer
-          title="Personal Account Charges"
+          title="Patient Account"
           columns={patientAccountColumns}
           data={data ?? []}
           total={total as number}

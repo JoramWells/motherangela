@@ -3,7 +3,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
 import {
   AccountDetailsInterface,
-  AccountingAssetsInterface, AccountingDepartmentInterface, AccountingDocumentsInterface,
+  AccountingAssetsInterface, AccountingDocumentsInterface,
   InvoicePaymentInterface,
   PatientAccountsInterface,
   PersonalChargesPaymentsInterface,
@@ -275,46 +275,6 @@ export const accountingDocumentsColumns: ColumnDef<AccountingDocumentsInterface>
       <Link
         className="text-[12px]"
         href={`/maternity/${row.original.document_id}`}
-      >
-        View
-      </Link>
-    ),
-  },
-];
-
-//
-export const accountingDepartmentsColumns: ColumnDef<AccountingDepartmentInterface>[] = [
-
-  {
-    accessorKey: 'department_name',
-    header: 'Name',
-    cell: ({ row }) => {
-      const med_name = row.original.department_name;
-      return (
-
-        <p className="capitalize text-[12px]">
-          { med_name.length > 20 ? `${med_name.substring(0, 20)}...` : med_name}
-        </p>
-      );
-    },
-  },
-  {
-    accessorKey: 'hospital_store',
-    header: 'Store',
-    cell: ({ row }) => (
-      <div className="text-[12px] text-slate-500 ">
-        {row.original?.hospital_store?.hospital_store_description ?? 'N/A'}
-      </div>
-    ),
-  },
-
-  {
-    accessorKey: 'action',
-    header: 'Action',
-    cell: ({ row }) => (
-      <Link
-        className="text-[12px]"
-        href={`/maternity/${row.original.department_id}`}
       >
         View
       </Link>

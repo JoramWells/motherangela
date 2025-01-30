@@ -2,10 +2,10 @@
 
 import React, { Suspense } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { accountingDepartmentsColumns } from '../column';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
 import { useGetAllAccountingDepartmentsQuery } from '@/api/accounts/accountingDepartment.api';
+import { accountingDepartmentsColumns } from './column';
 
 const listItems = [
   {
@@ -20,7 +20,7 @@ const listItems = [
   },
 ];
 
-function MedicineMapping() {
+function DepartmentPage() {
   const {
     data, total, search, setSearch,
   } = usePaginatedSearch({ fetchQuery: useGetAllAccountingDepartmentsQuery });
@@ -45,10 +45,10 @@ function MedicineMapping() {
   );
 }
 
-export default function WrappedMedicineMapping() {
+export default function WrappedDepartmentPage() {
   return (
     <Suspense>
-      <MedicineMapping />
+      <DepartmentPage />
     </Suspense>
   );
 }

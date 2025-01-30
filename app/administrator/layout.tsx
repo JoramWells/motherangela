@@ -1,8 +1,8 @@
 'use client';
 
 import {
-  ArrowRightLeft,
   Check,
+  House,
   LayoutDashboardIcon,
   PiggyBank,
   Users,
@@ -23,6 +23,12 @@ const DL = [
     icon: <LayoutDashboardIcon size={17} />,
   },
   {
+    id: '7',
+    label: 'Departments',
+    link: '/administrator/departments',
+    icon: <House size={17} />,
+  },
+  {
     id: '2',
     label: 'Users',
     link: '/administrator/users',
@@ -39,18 +45,6 @@ const DL = [
     label: 'Pharmacy',
     link: '/pharmacy',
     icon: <Check size={17} />,
-  },
-  {
-    id: '4',
-    label: 'Medicine Stock Take',
-    link: '/medicine-stock-take',
-    icon: <Users size={17} />,
-  },
-  {
-    id: '5',
-    label: 'Discharged',
-    link: '/discharged',
-    icon: <ArrowRightLeft size={17} />,
   },
 ];
 

@@ -4,7 +4,6 @@ import {
   BookA,
   BookCopy,
   DollarSign,
-  House,
   LayoutDashboardIcon,
   PiggyBank,
   Wallet,
@@ -36,12 +35,6 @@ const DL = [
     label: 'Assets',
     link: '/assets',
     icon: <BookA size={17} />,
-  },
-  {
-    id: '5',
-    label: 'Departments',
-    link: '/departments',
-    icon: <House size={17} />,
   },
   {
     id: '6',
