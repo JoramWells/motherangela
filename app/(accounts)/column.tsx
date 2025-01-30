@@ -1,9 +1,11 @@
+/* eslint-disable no-nested-ternary */
 import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
 import {
   AccountDetailsInterface,
   AccountingAssetsInterface, AccountingDepartmentInterface, AccountingDocumentsInterface,
   InvoicePaymentInterface,
+  PatientAccountsInterface,
   PersonalChargesPaymentsInterface,
 } from 'motherangela';
 import moment from 'moment';
@@ -89,11 +91,35 @@ export const accountingAssetsColumns: ColumnDef<AccountingAssetsInterface>[] = [
   {
     accessorKey: 'accounting_asset_status?.asset_status_description',
     header: 'Status',
-    cell: ({ row }) => (
-      <div className="text-[12px] text-slate-500">
-        <p>{row.original.accounting_asset_status?.asset_status_description}</p>
-      </div>
-    ),
+    cell: ({ row }) => {
+      const { asset_status_description: status } = row.original.accounting_asset_status || {};
+      return (
+        status === 'GOOD CONDITION'
+          ? (
+            <Badge
+              className="text-emerald-500 bg-white hover:bg-white border-emerald-200"
+              variant="outline"
+            >
+              {status}
+            </Badge>
+          ) : status === 'REPAIRABLE'
+            ? (
+              <Badge
+                className="text-orange-500 bg-white hover:bg-white border-orange-200"
+                variant="outline"
+              >
+                {status}
+              </Badge>
+            ) : (
+              <Badge
+                className="text-red-500 bg-white hover:bg-white border-red-200"
+                variant="outline"
+              >
+                {status}
+              </Badge>
+            )
+      );
+    },
   },
   {
     accessorKey: 'date_of_last_physical_check',
@@ -498,6 +524,108 @@ export const personalAccountColumns: ColumnDef<PersonalChargesPaymentsInterface>
           className="shadow-none"
           variant="outline"
           onClick={() => router.push(`/visits/${row.original.charge_payment_id}?patient_id=${row.original.patient_id_personal_charge_payments}`)}
+        >
+          <MoveRight />
+        </Button>
+      );
+    },
+  },
+];
+
+//
+
+export const patientAccountColumns: ColumnDef<PatientAccountsInterface>[] = [
+  // {
+  //   id: "select",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={
+  //         table.getIsAllPageRowsSelected() ||
+  //         (table.getIsSomePageRowsSelected() && "indeterminate")
+  //       }
+  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+  //       aria-label="Select all"
+  //     />
+  //   ),
+  //   cell: ({ row }) => (
+  //     <Checkbox
+  //       checked={row.getIsSelected()}
+  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
+  //       aria-label="Select row"
+  //     />
+  //   ),
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
+  {
+    accessorKey: 'patient_detail.first_name',
+    header: 'Personal Account Name',
+    cell: ({ row }) => {
+      const first_name = row.original?.patient_detail?.first_name;
+      const middle_name = row.original?.patient_detail?.middle_name;
+      return (
+        <div className="flex-row flex space-x-2 items-center">
+          <Avatar
+            name={`${first_name} ${middle_name}`}
+          />
+          <Link href={`/patients/${row.original?.patient_id}`} className="capitalize text-[12px] text-cyan-500 hover:underline ">
+            {first_name}
+            {' '}
+            {middle_name}
+          </Link>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: 'account_type.account_type_description',
+    header: 'Account Type',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {row.original?.account_type?.account_type_description ?? 'N/A'}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'accounting_account_detail.account_name',
+    header: 'Account Name',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {row.original.accounting_account_detail?.account_name ?? 'N/A'}
+      </p>
+    ),
+  },
+  // {
+  //   accessorKey: 'date_of_payment',
+  //   header: 'Date',
+  //   cell: ({ row }) => (
+  //     <div className="text-[12px] text-slate-500">
+  //       <p>{moment(row.original?.date_of_payment).format('ll')}</p>
+  //       {/* <p>{row.original.appointment_time}</p> */}
+  //     </div>
+  //   ),
+  // },
+  // {
+  //   accessorKey: 'amount',
+  //   header: 'Charge Amount',
+  //   cell: ({ row }) => (
+  //     <div className="text-[12px] text-slate-500 ">
+  //       {formatCurrency(row.original?.amount) ?? 0}
+  //     </div>
+  //   ),
+  // },
+
+  {
+    accessorKey: 'action',
+    header: 'Details',
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <Button
+          size="sm"
+          className="shadow-none"
+          variant="outline"
+          onClick={() => router.push(`/visits/${row.original.patient_account_id}?patient_id=${row.original.patient_id}`)}
         >
           <MoveRight />
         </Button>

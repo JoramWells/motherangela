@@ -4,6 +4,7 @@ import {
   ArrowRightLeft,
   Check,
   LayoutDashboardIcon,
+  PiggyBank,
   Users,
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
@@ -12,6 +13,7 @@ import { Sidebar } from '@/components/custom/Sidebar/Sidebar';
 import SidebarListItemsComponent from '@/components/custom/Sidebar/SidebarListItemsComponent';
 import { store } from '@/lib/store';
 import '../globals.css';
+import { UserProvider } from '@/context/UserContext';
 
 const DL = [
   {
@@ -25,6 +27,12 @@ const DL = [
     label: 'Users',
     link: '/administrator/users',
     icon: <Users size={17} />,
+  },
+  {
+    id: '6',
+    label: 'Accounts',
+    link: '/administrator/accounts',
+    icon: <PiggyBank size={17} />,
   },
   {
     id: '3',
@@ -47,20 +55,20 @@ const DL = [
 ];
 
 const layout = ({ children }: { children: ReactNode }) => (
-  // <UserProvider>
-  <Provider store={store}>
-    <div className="flex flex-row">
-      <Sidebar>
-        <SidebarListItemsComponent dataList={DL} />
-      </Sidebar>
-      <div className="flex flex-col flex-1 h-screen overflow-y-auto bg-slate-50">
-        {/* <Navbar /> */}
+  <UserProvider>
+    <Provider store={store}>
+      <div className="flex flex-row">
+        <Sidebar>
+          <SidebarListItemsComponent dataList={DL} />
+        </Sidebar>
+        <div className="flex flex-col flex-1 h-screen overflow-y-auto bg-slate-50">
+          {/* <Navbar /> */}
 
-        {children}
+          {children}
+        </div>
       </div>
-    </div>
-  </Provider>
-  // {/* </UserProvider> */}
+    </Provider>
+  </UserProvider>
 );
 
 export default layout;

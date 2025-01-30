@@ -32,12 +32,6 @@ const DL = [
   //   icon: <HeartHandshake size={17} />
   // },
   {
-    id: '3',
-    label: 'Accounts',
-    link: '/accounts',
-    icon: <PiggyBank size={17} />,
-  },
-  {
     id: '4',
     label: 'Assets',
     link: '/assets',
@@ -66,6 +60,12 @@ const DL = [
     label: 'Personal Account',
     link: '/personal-account-charges',
     icon: <Wallet size={17} />,
+  },
+  {
+    id: '11',
+    label: 'Patient Account',
+    link: '/patient-accounts',
+    icon: <PiggyBank size={17} />,
   },
 ];
 

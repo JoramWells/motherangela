@@ -24,7 +24,7 @@ export default function Home() {
             },
             {
               id: useId(),
-              link: '/accounts',
+              link: '/assets',
               label: 'Accounts',
               url: '/assets/img/cash.png',
               description: 'Lorem ipsum dolet Mwat!!',

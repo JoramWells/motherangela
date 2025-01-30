@@ -54,10 +54,12 @@ import { userApi } from '@/api/users/users.api';
 import { internalRadiologyRequestsApi } from '@/api/lab/internalRadiologyRequests.api';
 import { serviceTypeApi } from '@/api/services/serviceType.api';
 import { procedureCategoryApi } from '@/api/lab/procedure/procedureCategory.api';
+import { patientAccountApi } from '@/api/accounts/patient/patientAccount.api';
 
 export const store = configureStore({
   reducer: {
     [patientsApi.reducerPath]: patientsApi.reducer,
+    [patientAccountApi.reducerPath]: patientAccountApi.reducer,
     [appointmentApi.reducerPath]: appointmentApi.reducer,
     [accountingAccountDetailsApi.reducerPath]: accountingAccountDetailsApi.reducer,
     [accountTypeApi.reducerPath]: accountTypeApi.reducer,
@@ -123,6 +125,7 @@ export const store = configureStore({
     serializableCheck: false,
   })
     .concat(patientsApi.middleware)
+    .concat(patientAccountApi.middleware)
     .concat(appointmentApi.middleware)
     .concat(accountingAccountDetailsApi.middleware)
     .concat(accountingAssetApi.middleware)

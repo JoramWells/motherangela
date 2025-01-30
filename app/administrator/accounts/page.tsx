@@ -2,10 +2,10 @@
 
 import React, { Suspense } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { accountsColumns } from '../column';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
 import { useGetAllAccountingAccountDetailsQuery } from '@/api/accounts/accountingAccountDetails.api';
+import { accountsColumns } from './column';
 
 const listItems = [
   {
