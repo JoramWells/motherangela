@@ -72,6 +72,14 @@ export default function Home() {
             },
             {
               id: useId(),
+              link: '/maternity',
+              label: 'Maternity',
+              url: '/assets/img/maternity.png',
+              description: 'Lorem Ipsum dolet Mwat!!',
+
+            },
+            {
+              id: useId(),
               link: '/patients',
               label: 'Patients',
               url: '/assets/img/patient.png',
