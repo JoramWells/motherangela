@@ -1,11 +1,12 @@
 'use client';
 
 import {
+  Baby,
   Bed,
-  Landmark,
+  HeartHandshake,
   LayoutDashboardIcon,
   NotebookPen,
-  User,
+  Users,
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
 import { Provider } from 'react-redux';
@@ -35,16 +36,28 @@ const DL = [
     icon: <Bed size={17} />,
   },
   {
-    id: '3',
-    label: 'Employee Records',
-    link: '/employee-records',
-    icon: <User size={17} />,
+    id: '2',
+    label: 'Maternity',
+    link: '/maternity',
+    icon: <HeartHandshake size={17} />,
   },
+  // {
+  //   id: "3",
+  //   label: "Checklist",
+  //   link: "/checklist",
+  //   icon: <Check size={17} />,
+  // },
   {
     id: '4',
-    label: 'Loan Records',
-    link: '/loan-records',
-    icon: <Landmark size={17} />,
+    label: 'Antenatal Profiles',
+    link: '/antenatal',
+    icon: <Users size={17} />,
+  },
+  {
+    id: '5',
+    label: 'Deliveries',
+    link: '/deliveries',
+    icon: <Baby size={17} />,
   },
 ];
 

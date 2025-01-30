@@ -1,7 +1,7 @@
 'use client';
 
 import {
-  Bed, LayoutDashboardIcon, UserCheck, Users,
+  LayoutDashboardIcon, UserCheck, Users,
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
 import { Provider } from 'react-redux';
@@ -35,12 +35,6 @@ const DL = [
     label: 'Departmental Status',
     link: '/users/otz',
     icon: <UserCheck size={17} />,
-  },
-  {
-    id: '8',
-    label: 'In-patient (Admitted)',
-    link: '/in-patient',
-    icon: <Bed size={17} />,
   },
 ];
 

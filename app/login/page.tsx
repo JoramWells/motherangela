@@ -77,7 +77,6 @@ function LoginPage() {
     label: item?.hospital_name,
   })), [hospitalsData]);
 
-  console.log(hospitalOptions());
   return (
     <div className="flex flex-col items-center justify-center w-full h-screen overflow-hidden bg-slate-50">
       {/* <div className="mb-4">

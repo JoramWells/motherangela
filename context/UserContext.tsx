@@ -30,11 +30,13 @@ export function UserProvider({ children }:{children: ReactNode}) {
     if (status === 'unauthenticated') {
       router.push('/login');
     }
+  }, [status, router]);
 
+  useEffect(() => {
     if (session !== null) {
-      setUser(session.user as UserInterface);
+      setUser(session?.user as UserInterface);
     }
-  }, [status, router, session]);
+  }, [session]);
 
   return (
     <UserContext.Provider
