@@ -3,9 +3,8 @@
 import React, { Suspense, useState } from 'react';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
-import { patientAccountColumns, personalAccountColumns } from '../column';
+import { patientAccountColumns } from '../column';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { useGetAllPersonalChargePaymentsQuery } from '@/api/accounts/charges/personalChargesPayment.api';
 import PersonalAccountFilter from '@/components/custom/filters/PersonalAccountFilter';
 import { useGetAllPatientAccountsQuery } from '@/api/accounts/patient/patientAccount.api';
 
