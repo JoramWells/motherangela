@@ -1,6 +1,26 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { PaginatedResponse, PatientInterface } from 'motherangela';
 
+export type SelectedPatientTypes = Pick<
+  PatientInterface,
+  | 'first_name'
+  | 'middle_name'
+  // | 'cell_phone'
+  | 'company_id'
+  | 'dob'
+  | 'hospital_id'
+  | 'last_name'
+  | 'nhif_no'
+  | 'patient_gender'
+  | 'id_number'
+  | 'residence'
+  | 'residence_id'
+  | 'next_of_kin'
+  | 'next_of_kin_name'
+  | 'nxt_of_kin_cell_phone'
+  | 'email'
+>;
+
 export const patientsApi = createApi({
   reducerPath: 'patientsApi',
   baseQuery: fetchBaseQuery({
@@ -23,7 +43,7 @@ export const patientsApi = createApi({
         return 'fetchAll';
       },
     }),
-    addPatient: builder.mutation<PatientInterface, PatientInterface>({
+    addPatient: builder.mutation<PatientInterface, SelectedPatientTypes>({
       query: (newUser) => ({
         url: 'add',
         method: 'POST',

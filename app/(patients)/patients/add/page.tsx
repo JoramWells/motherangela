@@ -11,13 +11,13 @@ import { Loader2 } from 'lucide-react';
 import PersonalDetail from '@/components/custom/patient/StepperForm/PersonalDetail';
 import NextOfKin from '@/components/custom/patient/StepperForm/NextOfKin';
 import { Button } from '@/components/ui/button';
-import { useAddPatientMutation } from '@/api/patients/patients.api';
+import { SelectedPatientTypes, useAddPatientMutation } from '@/api/patients/patients.api';
 import { useAddPersonalAccountChargeMutation } from '@/api/accounts/charges/personalAccountCharges.api';
 import Stepper from '@/components/custom/nav/stepper/Stepper';
 import PaymentDetail from '@/components/custom/patient/StepperForm/PaymentDetail';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import { useUserContext } from '@/context/UserContext';
-import { useAddAppointmentMutation } from '@/api/appointments/appointments.api';
+import { SelectedAppointmentInterface, useAddAppointmentMutation } from '@/api/appointments/appointments.api';
 
 const listItems = [
   {
@@ -93,13 +93,10 @@ function AddPatient() {
   const consultation_type = 'CONSULTATION-OPD DAY';
   const service_desc = 'ANNUAL MEDICAL CARD FEE';
 
-  const inputValues = useMemo(() => [
-
-    {
-      account_type_id: accountType,
-      consultation_type: '28',
-      company_id: Number(company),
-      insuranceAccount,
+  // useMemo to memoize the input values
+  const inputValues: SelectedPatientTypes = useMemo(
+    () => ({
+      company_id: company,
       first_name,
       middle_name,
       last_name,
@@ -109,17 +106,29 @@ function AddPatient() {
       patient_gender,
       id_number,
       residence,
-      residence_id: 515,
-      next_of_kin: 5,
+      residence_id: '515',
+      next_of_kin: '5',
+      next_of_kin_name,
+      nxt_of_kin_cell_phone: next_of_kin_cell_phone,
+      hospital_id: user?.hospital_id as string,
+    }),
+    [
+      company,
+      first_name,
+      middle_name,
+      last_name,
+      dob,
+      email,
+      nhif_no,
+      id_number,
       next_of_kin_name,
       next_of_kin_cell_phone,
-      hospital_id: Number(user?.hospital_id),
-    },
-  ], [accountType, company, insuranceAccount, first_name,
-    middle_name, last_name, dob, email, nhif_no, id_number,
-    next_of_kin_name, next_of_kin_cell_phone, patient_gender,
-    residence, next_of_kin, user,
-  ]);
+      patient_gender,
+      residence,
+      next_of_kin,
+      user,
+    ],
+  );
 
   const [addPatient, {
     isLoading: isLoadingPatient,
@@ -146,18 +155,18 @@ function AddPatient() {
     cost,
   ]);
 
-  const appointmentInputValues = useMemo(() => [
+  const appointmentInputValues: SelectedAppointmentInterface = useMemo(() => (
     {
-      account_type_id: accountType,
-      doctor_id: user?.user_id,
-      consultation_type: 28,
-      company_id: 0,
-      referral_type_id: 2,
-      clinic_id: 1,
-      consultation_group_id: 1,
+      account_type_id: Number(accountType),
+      doctor_id: user?.user_id as string,
+      consultation_type: '28',
+      company_id: '0',
+      referral_type_id: '2',
+      clinic_id: '1',
+      consultation_group_id: '1',
       appointment_date: moment().format('YYYY-MM-DD'),
-    },
-  ], [accountType, user?.user_id, company]);
+    }
+  ), [accountType, user?.user_id, company]);
 
   const [addAppointment, {
     data: saveAppointmentData,
@@ -168,7 +177,7 @@ function AddPatient() {
   useEffect(() => {
     if (savePatientData?.patient_id) {
       setPatientID(savePatientData.patient_id.toString());
-      addAppointment(appointmentInputValues[0]);
+      addAppointment(appointmentInputValues);
     }
   }, [savePatientData]);
 
@@ -180,7 +189,7 @@ function AddPatient() {
   }, [saveAppointmentData, chargesInputValues]);
 
   const handleSubmit = useCallback(() => {
-    addPatient(inputValues[0]);
+    addPatient(inputValues);
   }, [addPatient, inputValues,
   ]);
 
@@ -285,7 +294,6 @@ function AddPatient() {
               disabled={
                 isLoadingAppointment || isLoadingPatient || isLoadingCharges
               }
-
             >
               {(isLoadingAppointment || isLoadingPatient || isLoadingCharges)
               && <Loader2 size={14} className="animate-spin" />}

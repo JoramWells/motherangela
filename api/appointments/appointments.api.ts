@@ -1,6 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { PaginatedResponse, AppointmentInterface } from 'motherangela';
 
+export type SelectedAppointmentInterface = Pick<AppointmentInterface, 'account_type_id' | 'doctor_id' | 'consultation_type' | 'company_id'
+| 'referral_type_id' | 'clinic_id' | 'consultation_group_id' | 'appointment_date'
+>
+
 export const appointmentApi = createApi({
   reducerPath: 'appointmentsApi',
   baseQuery: fetchBaseQuery({
@@ -39,7 +43,7 @@ export const appointmentApi = createApi({
         return 'queue';
       },
     }),
-    addAppointment: builder.mutation<AppointmentInterface, AppointmentInterface>({
+    addAppointment: builder.mutation<AppointmentInterface, SelectedAppointmentInterface>({
       query: (newWard) => ({
         url: 'add',
         method: 'POST',
