@@ -1,4 +1,7 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
+
+'use client';
+
 import { UserInterface } from 'motherangela';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';

@@ -7,6 +7,7 @@ import {
 } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 // import InputText from '@/app/_components/forms/InputText'
 // import CustomSelect from '../_components/forms/CustomSelect'
@@ -79,22 +80,23 @@ function LoginPage() {
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-screen overflow-hidden bg-slate-50">
-      {/* <div className="mb-4">
+      <div className="mb-4">
         <Image
-          src="/img/logo1.svg"
+          src="/assets/img/logo.webp"
           alt="img"
           width={60}
           height={60}
           style={{ width: '60px', height: 'auto' }}
+          className="rounded-lg"
           // quality={100}
         />
-      </div> */}
+      </div>
 
       <form
         className="flex flex-col w-1/4 p-4
         relative
-        rounded-lg gap-y-2 mx-auto ml-auto bg-white border-t-4 border-t-teal-500
-        border border-slate-100
+        rounded-lg gap-y-2 mx-auto ml-auto bg-white
+
         "
         onSubmit={handleSubmit}
       >

@@ -2,7 +2,7 @@
 
 import { CalendarIcon } from 'lucide-react';
 
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import moment from 'moment';
 import { Matcher } from 'react-day-picker';
 // import { cn } from '@/lib/utils';
@@ -19,7 +19,6 @@ export default function CustomCalendar({ date, setDate }:{
     date: Date | string | undefined,
     setDate:Dispatch<SetStateAction<Date|undefined | string>>
 }) {
-  console.log(date);
   return (
 
     <Popover>

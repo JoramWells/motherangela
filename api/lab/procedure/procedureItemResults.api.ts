@@ -35,6 +35,9 @@ export const procedureItemResultsApi = createApi({
     getProcedureItemResult: builder.query({
       query: (id) => `detail/${id}`,
     }),
+    getProcedureItemResultByLabReqID: builder.query({
+      query: (id) => `by-lab-req-id/${id}`,
+    }),
     updateProcedureItemResult: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `update/${id}`,
@@ -56,5 +59,5 @@ export const procedureItemResultsApi = createApi({
 export const {
   useGetAllProcedureItemResultsQuery, useAddProcedureItemResultMutation,
   useGetProcedureItemResultQuery, useUpdateProcedureItemResultMutation,
-  useDeleteProcedureItemResultMutation,
+  useDeleteProcedureItemResultMutation, useGetProcedureItemResultByLabReqIDQuery,
 } = procedureItemResultsApi;

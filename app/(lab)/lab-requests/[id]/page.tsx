@@ -13,6 +13,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import CustomSheet from '@/components/custom/nav/CustomSheet';
 import CollectLabSample from '@/components/custom/lab/CollectLabSample';
+import { useGetProcedureItemResultByLabReqIDQuery } from '@/api/lab/procedure/procedureItemResults.api';
 
 const listItems = [
   {
@@ -42,6 +43,9 @@ function RequestDetailsPage({ params }:{params:Promise<{id: string}>}) {
   const {
     cell_phone, dob, first_name, in_patient_file_no, middle_name, out_patient_file_no,
   } = patientData || {};
+
+  const { data: labReqID } = useGetProcedureItemResultByLabReqIDQuery(id, { skip: !id });
+  console.log(labReqID, 're');
 
   return (
     <div>

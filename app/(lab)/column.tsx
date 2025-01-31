@@ -45,7 +45,7 @@ export const internalLabRequestColumns: ColumnDef<InternalLabRequestInterface>[]
   },
   {
     accessorKey: 'appointment.appointment_date',
-    header: 'DOB',
+    header: 'Appointment Date',
     cell: ({ row }) => (
       <p
         className="text-[12px] text-zinc-500"
@@ -159,7 +159,7 @@ export const recentLabRequestColumn: ColumnDef<InternalLabRequestInterface>[] = 
   },
   {
     accessorKey: 'appointment.appointment_date',
-    header: 'DOB',
+    header: 'Appointment Date',
     cell: ({ row }) => (
       <p
         className="text-[12px] text-zinc-500"
@@ -232,7 +232,7 @@ export const recentLabRequestColumn: ColumnDef<InternalLabRequestInterface>[] = 
           size="sm"
           className="shadow-none"
           variant="outline"
-          onClick={() => router.push(`/internal-lab-requests/${row.original.lab_request_id}?patient_id=${row.original.patient_id}`)}
+          onClick={() => router.push(`/lab-requests/${row.original.lab_request_id}?patient_id=${row.original.patient_id}`)}
         >
           <MoveRight />
         </Button>
@@ -394,7 +394,7 @@ export const internalLabRequestDetailColumns: ColumnDef<InternalLabRequestInterf
   },
   {
     accessorKey: 'appointment.appointment_date',
-    header: 'DOB',
+    header: 'Appointment Date',
     cell: ({ row }) => (
       <p
         className="text-[12px] text-zinc-500"
