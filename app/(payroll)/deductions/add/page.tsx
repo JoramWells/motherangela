@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 
