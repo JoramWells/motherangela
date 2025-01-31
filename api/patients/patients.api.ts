@@ -23,7 +23,7 @@ export const patientsApi = createApi({
         return 'fetchAll';
       },
     }),
-    addPatient: builder.mutation({
+    addPatient: builder.mutation<PatientInterface, PatientInterface>({
       query: (newUser) => ({
         url: 'add',
         method: 'POST',

@@ -7,6 +7,8 @@ import pluginReact from 'eslint-plugin-react';
 import { FlatCompat } from '@eslint/eslintrc';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import pluginReactHooks from 'eslint-plugin-react-hooks';
+
 // import airbnb from 'eslint-config-airbnb'
 
 /** @type {import('eslint').Linter.Config[]} */
@@ -26,7 +28,11 @@ export default [
   // airbnb.configs.flat.recommended
   ...compat.extends('eslint-config-airbnb'),
   { ignores: ['components/ui'] },
+
   {
+    plugins: {
+      'react-hooks': pluginReactHooks
+    },
     rules: {
       'react/react-in-jsx-scope': 0,
       'react/jsx-filename-extension': 0,
@@ -35,7 +41,7 @@ export default [
       'import/no-unresolved': 0,
       camelcase: 0,
       'react/require-default-props': 0,
-      'no-console': 0
+      'no-console': 0,
     },
     settings: {
       'import/resolver': {

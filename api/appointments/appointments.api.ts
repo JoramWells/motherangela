@@ -39,7 +39,7 @@ export const appointmentApi = createApi({
         return 'queue';
       },
     }),
-    addAppointment: builder.mutation({
+    addAppointment: builder.mutation<AppointmentInterface, AppointmentInterface>({
       query: (newWard) => ({
         url: 'add',
         method: 'POST',
