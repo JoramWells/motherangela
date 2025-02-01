@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { PaginatedResponse, AppointmentInterface } from 'motherangela';
 
 export type SelectedAppointmentInterface = Pick<AppointmentInterface, 'account_type_id' | 'doctor_id' | 'consultation_type' | 'company_id'
-| 'referral_type_id' | 'clinic_id' | 'consultation_group_id' | 'appointment_date'
+| 'referral_type_id' | 'clinic_id' | 'consultation_group_id' | 'appointment_date' | 'hospital_id'
 >
 
 export const appointmentApi = createApi({

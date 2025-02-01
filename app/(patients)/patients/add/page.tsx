@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 
 'use client';
@@ -37,19 +38,19 @@ const listItems = [
   },
 ];
 
-const sunrise = moment('6:00 a.m', 'h:mm a');
-const sunset = moment('6:00 p.m', 'h:mm a');
+// const sunrise = moment('6:00 a.m', 'h:mm a');
+// const sunset = moment('6:00 p.m', 'h:mm a');
 
-const isDay = () => {
-  const currentTime = moment();
-  return currentTime.isBetween(sunrise, sunset);
-};
+// const isDay = () => {
+//   const currentTime = moment();
+//   return currentTime.isBetween(sunrise, sunset);
+// };
 
 function AddPatient() {
   const { user } = useUserContext();
   const [accountType, setAccountType] = useState('');
   const [insuranceAccount, setInsuranceAccount] = useState('');
-  const [cost, setCost] = useState(0);
+  // const [cost, setCost] = useState(0);
   const [patientID, setPatientID] = useState('');
   const [appointmentID, setAppointmentID] = useState('');
 
@@ -91,7 +92,7 @@ function AddPatient() {
 
   // OPD DAY || OPD NIGHT
   const consultation_type = 'CONSULTATION-OPD DAY';
-  const service_desc = 'ANNUAL MEDICAL CARD FEE';
+  // const service_desc = 'ANNUAL MEDICAL CARD FEE';
 
   // useMemo to memoize the input values
   const inputValues: SelectedPatientTypes = useMemo(
@@ -139,7 +140,7 @@ function AddPatient() {
 
   const chargesInputValues = useMemo(() => [
     {
-      amount: cost,
+      // amount: cost,
       service_desc: consultation_type,
       date_of_charge: moment(new Date()).format('MM-DD-YYYY'),
       time_of_charge: moment(new Date()).format('hh:mm:ss'),
@@ -152,7 +153,6 @@ function AddPatient() {
     },
   ], [appointmentID, consultation_type,
     patientID, user,
-    cost,
   ]);
 
   const appointmentInputValues: SelectedAppointmentInterface = useMemo(() => (
@@ -165,8 +165,9 @@ function AddPatient() {
       clinic_id: '1',
       consultation_group_id: '1',
       appointment_date: moment().format('YYYY-MM-DD'),
+      hospital_id: user?.hospital_id as string,
     }
-  ), [accountType, user?.user_id, company]);
+  ), [accountType, user, company]);
 
   const [addAppointment, {
     data: saveAppointmentData,

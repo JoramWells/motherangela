@@ -17,7 +17,7 @@ import { useGetAllInsurancesQuery } from '@/api/insurance/insurance.api';
 import { useGetAllCompaniesQuery } from '@/api/insurance/company.api';
 import { useGetAllReferralTypesQuery } from '@/api/appointments/referralType.api';
 import PatientSideProfile from '@/components/custom/patient/PatientSideProfile';
-import { useAddAppointmentMutation } from '@/api/appointments/appointments.api';
+import { SelectedAppointmentInterface, useAddAppointmentMutation } from '@/api/appointments/appointments.api';
 import { useUserContext } from '@/context/UserContext';
 
 function AddAppointmentPage({ params }:{params:Promise<{id:string}>}) {
@@ -137,16 +137,21 @@ function AddAppointmentPage({ params }:{params:Promise<{id:string}>}) {
   }, [accountTypeOptions?.length, accountType]);
   const { user } = useUserContext();
 
-  const inputValues = {
-    account_type_id: accountType,
-    doctor_id: user?.user_id,
-    consultation_type,
-    company_id,
-    referral_type_id: referralType,
-    clinic_id: 1,
-    consultation_group_id: consultation_category,
-    appointment_date: moment().format('YYYY-MM-DD'),
-  };
+  const inputValues: SelectedAppointmentInterface = useMemo(() => (
+    {
+      account_type_id: Number(accountType),
+      doctor_id: user?.user_id as string,
+      consultation_type,
+      company_id,
+      referral_type_id: referralType,
+      clinic_id: '1',
+      consultation_group_id: consultation_category,
+      appointment_date: moment().format('YYYY-MM-DD'),
+      hospital_id: user?.hospital_id as string,
+    }
+  ), [accountType, user, consultation_type, company_id, referralType,
+    consultation_category,
+  ]);
 
   const [addAppointment, { isLoading }] = useAddAppointmentMutation();
 
