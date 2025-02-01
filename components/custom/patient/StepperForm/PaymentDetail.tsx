@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 import {
   Dispatch, SetStateAction, useCallback, useState,
 } from 'react';
@@ -33,8 +31,8 @@ function PaymentDetail({
     fetchQuery: useGetAllAccountTypesQuery,
   });
 
-  const consultationOPDay = { value: '', label: 'CONSULTATION OPD DAY' };
-  const consultationOPDNight = 'CONSULTATION OPD NIGHT';
+  // const consultationOPDay = { value: '', label: 'CONSULTATION OPD DAY' };
+  // const consultationOPDNight = 'CONSULTATION OPD NIGHT';
 
   // const datax = useCallback(()=>{},)
 
