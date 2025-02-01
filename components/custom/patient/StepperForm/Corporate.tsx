@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 import {
-  Dispatch, SetStateAction, useCallback, useEffect, useState,
+  Dispatch, SetStateAction, useCallback, useState,
 } from 'react';
 import InputSelect from '../../forms/InputSelect';
 import InputText from '../../forms/InputText';
 import { useGetAllInsurancesQuery } from '@/api/insurance/insurance.api';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
-import { useGetInsuranceServiceCostMappingQuery } from '@/api/insurance/insuranceServiceCostMapping.api';
 import { useGetAllCompaniesQuery } from '@/api/insurance/company.api';
 
 export interface CorporateInterface{
@@ -31,9 +32,9 @@ function Corporate({
     fetchQuery: useGetAllInsurancesQuery,
   });
 
-  const { data: insuranceServiceCostData } = useGetInsuranceServiceCostMappingQuery(
-    insuranceAccount?.value ? insuranceAccount?.value : 0,
-  );
+  // const { data: insuranceServiceCostData } = useGetInsuranceServiceCostMappingQuery(
+  //   insuranceAccount?.value ? insuranceAccount?.value : 0,
+  // );
 
   const insuranceOptionsCallback = useCallback(() => data?.map((item) => (
     { id: item.insurance_id.toString(), label: item.insurance_name }
@@ -54,10 +55,10 @@ function Corporate({
     [schemeData],
   )();
 
-  useEffect(() => {
-    setCost(insuranceServiceCostData?.cost);
-    if (!cost) { setCost(insuranceServiceCostData?.cost); }
-  }, [setCost, insuranceServiceCostData?.cost, cost]);
+  // useEffect(() => {
+  //   setCost(insuranceServiceCostData?.cost);
+  //   if (!cost) { setCost(insuranceServiceCostData?.cost); }
+  // }, [setCost, insuranceServiceCostData?.cost, cost]);
 
   return (
 
