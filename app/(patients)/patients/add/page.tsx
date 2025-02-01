@@ -49,7 +49,6 @@ function AddPatient() {
   const [accountType, setAccountType] = useState('');
   const [insuranceAccount, setInsuranceAccount] = useState('');
   // const [cost, setCost] = useState(0);
-  const [patientID, setPatientID] = useState('');
 
   const [activeStep, setActiveStep] = useState(1);
   const [first_name, setFirstName] = useState('');
@@ -142,14 +141,11 @@ function AddPatient() {
       date_of_charge: moment(new Date()).format('MM-DD-YYYY'),
       time_of_charge: moment(new Date()).format('hh:mm:ss'),
       status: 0,
-      patient_id: patientID,
       hospital_id: user?.hospital_id,
       quantity: 0,
       reference_account_id: accountType,
     },
-  ], [consultation_type,
-    patientID, user,
-  ]);
+  ], [consultation_type, user, accountType]);
 
   const appointmentInputValues: SelectedAppointmentInterface = useMemo(() => (
     {
@@ -174,7 +170,6 @@ function AddPatient() {
   // get the new patient id
   useEffect(() => {
     if (savePatientData?.patient_id) {
-      setPatientID(savePatientData.patient_id.toString());
       addAppointment({
         ...appointmentInputValues,
         patient_id: savePatientData.patient_id.toString(),
@@ -187,6 +182,7 @@ function AddPatient() {
       addPersonalAccountCharge({
         ...chargesInputValues[0],
         appointment_id: saveAppointmentData?.appointment_id,
+        patient_id_pac: saveAppointmentData.patient_id,
 
       });
     }

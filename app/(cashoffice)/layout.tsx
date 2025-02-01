@@ -1,9 +1,6 @@
 'use client';
 
 import {
-  BookA,
-  BookCopy,
-  DollarSign,
   HandCoins,
   LayoutDashboardIcon,
   PiggyBank,
@@ -25,30 +22,30 @@ const DL = [
     link: '/users/dashboard',
     icon: <LayoutDashboardIcon size={17} />,
   },
+  // // {
+  // //   id: '2',
+  // //   label: 'Caregivers',
+  // //   link: '/users/caregivers',
+  // //   icon: <HeartHandshake size={17} />
+  // // },
   // {
-  //   id: '2',
-  //   label: 'Caregivers',
-  //   link: '/users/caregivers',
-  //   icon: <HeartHandshake size={17} />
+  //   id: '4',
+  //   label: 'Assets',
+  //   link: '/assets',
+  //   icon: <BookA size={17} />,
   // },
-  {
-    id: '4',
-    label: 'Assets',
-    link: '/assets',
-    icon: <BookA size={17} />,
-  },
-  {
-    id: '6',
-    label: 'Documents',
-    link: '/documents',
-    icon: <BookCopy size={17} />,
-  },
-  {
-    id: '9',
-    label: 'Invoice Payments',
-    link: '/invoice-payments',
-    icon: <DollarSign size={17} />,
-  },
+  // {
+  //   id: '6',
+  //   label: 'Documents',
+  //   link: '/documents',
+  //   icon: <BookCopy size={17} />,
+  // },
+  // {
+  //   id: '9',
+  //   label: 'Invoice Payments',
+  //   link: '/invoice-payments',
+  //   icon: <DollarSign size={17} />,
+  // },
   {
     id: '10',
     label: 'Patient Charges',

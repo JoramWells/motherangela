@@ -5,8 +5,8 @@ import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
 import { personalAccountColumns } from '../column';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { useGetAllPersonalChargePaymentsQuery } from '@/api/accounts/charges/personalChargesPayment.api';
 import PersonalAccountFilter from '@/components/custom/filters/PersonalAccountFilter';
+import { useGetAllPersonalAccountChargesQuery } from '@/api/accounts/charges/personalAccountCharges.api';
 
 const listItems = [
   {
@@ -27,11 +27,10 @@ function PersonalAccountPage() {
   const {
     data, total, search, setSearch,
   } = usePaginatedSearch({
-    fetchQuery: useGetAllPersonalChargePaymentsQuery,
+    fetchQuery: useGetAllPersonalAccountChargesQuery,
     status: cleared || '',
   });
 
-  console.log(data);
   return (
     <div>
       <BreadcrumbNav

@@ -48,9 +48,9 @@ export default function Home() {
             },
             {
               id: useId(),
-              link: '/treatment-chart',
-              label: 'Inpatient',
-              url: '/assets/img/hospital.png',
+              link: '/patient-accounts',
+              label: 'Cash Office',
+              url: '/assets/img/office.png',
               description: 'Lorem ipsum dolet Mwat!!',
 
             },
@@ -59,6 +59,14 @@ export default function Home() {
               link: '/notes',
               label: 'Doctors',
               url: '/assets/img/doctor.png',
+              description: 'Lorem ipsum dolet Mwat!!',
+
+            },
+            {
+              id: useId(),
+              link: '/treatment-chart',
+              label: 'Inpatient',
+              url: '/assets/img/hospital.png',
               description: 'Lorem ipsum dolet Mwat!!',
 
             },
@@ -124,11 +132,11 @@ export default function Home() {
                 <Image
                   src={`${item.url}`}
                   alt="img"
-                  width={30}
-                  height={30}
+                  width={45}
+                  height={45}
                   style={{
-                    width: '30px',
-                    height: '30px',
+                    width: '45px',
+                    height: '45px',
                     objectFit: 'contain',
                   }}
                 />
