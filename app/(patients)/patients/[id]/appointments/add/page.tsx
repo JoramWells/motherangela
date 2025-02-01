@@ -27,7 +27,7 @@ function AddAppointmentPage({ params }:{params:Promise<{id:string}>}) {
   });
 
   const {
-    cell_phone, dob, first_name, in_patient_file_no, middle_name, out_patient_file_no,
+    patient_id, cell_phone, dob, first_name, in_patient_file_no, middle_name, out_patient_file_no,
   } = patientData || {};
 
   const listItems = useMemo(() => [
@@ -148,15 +148,16 @@ function AddAppointmentPage({ params }:{params:Promise<{id:string}>}) {
       consultation_group_id: consultation_category,
       appointment_date: moment().format('YYYY-MM-DD'),
       hospital_id: user?.hospital_id as string,
+      patient_id: patient_id as unknown as string,
     }
   ), [accountType, user, consultation_type, company_id, referralType,
-    consultation_category,
+    consultation_category, patient_id,
   ]);
 
   const [addAppointment, { isLoading }] = useAddAppointmentMutation();
 
   const handleSave = useCallback(async () => {
-    await addAppointment({ ...inputValues, ...patientData });
+    await addAppointment(inputValues);
   }, [inputValues, patientData]);
 
   return (

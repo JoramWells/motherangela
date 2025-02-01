@@ -162,6 +162,7 @@ function AddPatient() {
       consultation_group_id: '1',
       appointment_date: moment().format('YYYY-MM-DD'),
       hospital_id: user?.hospital_id as string,
+      patient_id: '',
     }
   ), [accountType, user, company]);
 
@@ -174,7 +175,10 @@ function AddPatient() {
   useEffect(() => {
     if (savePatientData?.patient_id) {
       setPatientID(savePatientData.patient_id.toString());
-      addAppointment(appointmentInputValues);
+      addAppointment({
+        ...appointmentInputValues,
+        patient_id: savePatientData.patient_id.toString(),
+      });
     }
   }, [savePatientData]);
 

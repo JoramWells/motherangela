@@ -16,6 +16,14 @@ export default function Home() {
           {[
             {
               id: useId(),
+              link: '/superadmin/hospitals',
+              label: 'Super Admin',
+              url: '/assets/img/superadmin.png',
+              description: 'Lorem Ipsum dolet Mwat!!',
+
+            },
+            {
+              id: useId(),
               link: '/administrator/pharmacy',
               label: 'Administrator',
               url: '/assets/img/admin.png',
@@ -75,6 +83,14 @@ export default function Home() {
               link: '/maternity',
               label: 'Maternity',
               url: '/assets/img/maternity.png',
+              description: 'Lorem Ipsum dolet Mwat!!',
+
+            },
+            {
+              id: useId(),
+              link: '/patient-monitoring-notes',
+              label: 'Nursing Station',
+              url: '/assets/img/nurse.png',
               description: 'Lorem Ipsum dolet Mwat!!',
 
             },
