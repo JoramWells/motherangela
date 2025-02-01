@@ -203,18 +203,40 @@ function AddPatient() {
         className="p-2"
       >
 
-        <Stepper>
-          {steps.map((step, idx) => (
-            <Button
-              title={step.title}
-              key={step.id}
-              size="sm"
-              className={`${idx + 1 === activeStep ? 'bg-zinc-200' : 'bg-zinc-50'} shadow-none text-zinc-500`}
-            >
-              {step.title}
-            </Button>
-          ))}
-        </Stepper>
+        <div
+          className="w-1/2"
+        >
+          <Stepper>
+            {steps.map((step, idx) => (
+              <>
+                <div
+                  className="flex space-x-2 items-center"
+                >
+                  <Button
+                    title={step.title}
+                    key={step.id}
+                    size="sm"
+                    className={`${idx + 1 === activeStep || activeStep > idx ? 'bg-sky-600 text-white hover:bg-sky-600' : 'bg-zinc-100 text-zinc-500 hover:bg-zinc-100'} shadow-none  rounded-full h-8 w-8`}
+                  >
+                    {idx + 1}
+                  </Button>
+                  <div className="flex-1">
+                    <p
+                      className="text-[14px] text-zinc-700 font-semibold"
+                    >
+                      {step.title}
+                    </p>
+                    <p className="text-[12px] text-slate-500">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+                {idx !== steps.length - 1
+                && <div className={`flex-1 border-b ${activeStep > idx + 1 ? 'border-sky-600' : 'border-zinc-200'}`} />}
+              </>
+            ))}
+          </Stepper>
+        </div>
 
         <div
           className="p-4 rounded-lg bg-white border
