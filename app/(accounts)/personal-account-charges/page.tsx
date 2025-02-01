@@ -30,6 +30,8 @@ function PersonalAccountPage() {
     fetchQuery: useGetAllPersonalChargePaymentsQuery,
     status: cleared || '',
   });
+
+  console.log(data);
   return (
     <div>
       <BreadcrumbNav

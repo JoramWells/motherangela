@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-unused-vars */
-
 'use client';
 
 import {
@@ -9,6 +6,7 @@ import {
 
 import moment from 'moment/moment';
 import { Loader2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import PersonalDetail from '@/components/custom/patient/StepperForm/PersonalDetail';
 import NextOfKin from '@/components/custom/patient/StepperForm/NextOfKin';
 import { Button } from '@/components/ui/button';
@@ -52,7 +50,6 @@ function AddPatient() {
   const [insuranceAccount, setInsuranceAccount] = useState('');
   // const [cost, setCost] = useState(0);
   const [patientID, setPatientID] = useState('');
-  const [appointmentID, setAppointmentID] = useState('');
 
   const [activeStep, setActiveStep] = useState(1);
   const [first_name, setFirstName] = useState('');
@@ -74,7 +71,7 @@ function AddPatient() {
       id: '1', title: 'Personal', description: 'Personal Info', link: '/add-patient/?step=personal',
     },
     {
-      id: '2', title: 'Next of Kin', description: 'NofK Details', link: '/add-patient/?step=kin',
+      id: '2', title: 'Next of Kin', description: 'Next of Kin Details', link: '/add-patient/?step=kin',
     },
     {
       id: '3', title: 'Payment', description: 'Payment Details', link: '/add-patient/?step=payment',
@@ -97,7 +94,7 @@ function AddPatient() {
   // useMemo to memoize the input values
   const inputValues: SelectedPatientTypes = useMemo(
     () => ({
-      company_id: company,
+      company_id: company || '0',
       first_name,
       middle_name,
       last_name,
@@ -108,7 +105,7 @@ function AddPatient() {
       id_number,
       residence,
       residence_id: '515',
-      next_of_kin: '5',
+      next_of_kin,
       next_of_kin_name,
       nxt_of_kin_cell_phone: next_of_kin_cell_phone,
       hospital_id: user?.hospital_id as string,
@@ -148,10 +145,9 @@ function AddPatient() {
       patient_id: patientID,
       hospital_id: user?.hospital_id,
       quantity: 0,
-      appointment_id: appointmentID,
       reference_account_id: accountType,
     },
-  ], [appointmentID, consultation_type,
+  ], [consultation_type,
     patientID, user,
   ]);
 
@@ -184,8 +180,11 @@ function AddPatient() {
 
   useEffect(() => {
     if (saveAppointmentData?.appointment_id) {
-      setAppointmentID(saveAppointmentData?.appointment_id);
-      addPersonalAccountCharge(chargesInputValues[0]);
+      addPersonalAccountCharge({
+        ...chargesInputValues[0],
+        appointment_id: saveAppointmentData?.appointment_id,
+
+      });
     }
   }, [saveAppointmentData, chargesInputValues]);
 
@@ -193,6 +192,13 @@ function AddPatient() {
     addPatient(inputValues);
   }, [addPatient, inputValues,
   ]);
+
+  const router = useRouter();
+  useEffect(() => {
+    if (dataCharges) {
+      router.push('/patients');
+    }
+  }, [dataCharges]);
 
   return (
     <>

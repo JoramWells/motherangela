@@ -22,7 +22,7 @@ export default function BreadcrumbNav({ listItems }:BreadCrumbInterface) {
   const { user } = useUserContext();
   return (
     <div
-      className="flex justify-between items-center bg-white p-1.5 border-b"
+      className="flex justify-between items-center bg-white p-1.5 border-b sticky top-0"
     >
       <Breadcrumb
         className=""

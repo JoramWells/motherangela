@@ -1,6 +1,8 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useCallback } from 'react';
 import InputSelect from '../../forms/InputSelect';
 import InputText from '../../forms/InputText';
+import usePaginatedSearch from '@/hooks/usePaginatedSearch';
+import { useGetAllPeopleRelationsQuery } from '@/api/patients/people-relations.api';
 
 export interface NextOfKinInterface{
     next_of_kin:string
@@ -12,23 +14,23 @@ export interface NextOfKinInterface{
 
 }
 
-const nextOfKinOPtions = [
-  { id: '1', label: 'BROTHER' },
-  { id: '2', label: 'DAUGHTER' },
-  { id: '3', label: 'FATHER' },
-  { id: '4', label: 'FRIEND' },
-  { id: '5', label: 'GUARDIAN' },
-  { id: '6', label: 'MOTHER' },
-  { id: '7', label: 'SELF' },
-  { id: '8', label: 'SISTER' },
-  { id: '9', label: 'SON' },
-  { id: '10', label: 'SPOUSE' },
-];
 // hospital details
 function NextOfKin({
   next_of_kin, setNextOfKin, next_of_kin_name, setNextOfKinName,
   next_of_kin_cell_phone, setNextOfKinCellPhone,
 }:NextOfKinInterface) {
+  const { data } = usePaginatedSearch({
+    fetchQuery: useGetAllPeopleRelationsQuery,
+  });
+
+  const relationOptions = useCallback(
+    () => data?.map((item) => ({
+      id: item.id,
+      label: item.description,
+    })),
+    [data],
+  )();
+
   return (
 
     <div
@@ -36,7 +38,7 @@ function NextOfKin({
     >
       <InputSelect
         label="Relationship"
-        data={nextOfKinOPtions}
+        data={relationOptions}
         value={next_of_kin}
         onChange={setNextOfKin}
         placeholder="Spouse"

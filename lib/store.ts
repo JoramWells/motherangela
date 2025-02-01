@@ -56,11 +56,13 @@ import { serviceTypeApi } from '@/api/services/serviceType.api';
 import { procedureCategoryApi } from '@/api/lab/procedure/procedureCategory.api';
 import { patientAccountApi } from '@/api/accounts/patient/patientAccount.api';
 import { procedureItemResultsApi } from '@/api/lab/procedure/procedureItemResults.api';
+import { peopleRelationsApi } from '@/api/patients/people-relations.api';
 
 export const store = configureStore({
   reducer: {
     [patientsApi.reducerPath]: patientsApi.reducer,
     [patientAccountApi.reducerPath]: patientAccountApi.reducer,
+    [peopleRelationsApi.reducerPath]: peopleRelationsApi.reducer,
     [appointmentApi.reducerPath]: appointmentApi.reducer,
     [accountingAccountDetailsApi.reducerPath]: accountingAccountDetailsApi.reducer,
     [accountTypeApi.reducerPath]: accountTypeApi.reducer,
@@ -128,6 +130,7 @@ export const store = configureStore({
   })
     .concat(patientsApi.middleware)
     .concat(patientAccountApi.middleware)
+    .concat(peopleRelationsApi.middleware)
     .concat(appointmentApi.middleware)
     .concat(accountingAccountDetailsApi.middleware)
     .concat(accountingAssetApi.middleware)
