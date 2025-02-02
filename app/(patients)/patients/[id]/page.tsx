@@ -43,8 +43,6 @@ function PatientDetailsPage({ params }:{params:Promise<{id: string}>}) {
     skip: !id,
   });
 
-  console.log(appointmentData);
-
   const router = useRouter();
 
   return (

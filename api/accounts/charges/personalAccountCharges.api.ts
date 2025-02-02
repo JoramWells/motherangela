@@ -32,7 +32,7 @@ export const personalAccountChargeApi = createApi({
         body: newUser,
       }),
     }),
-    getPersonalAccountCharge: builder.query({
+    getPersonalAccountCharge: builder.query<PersonalAccountChargeInterface, string>({
       query: (id) => `detail/${id}`,
     }),
 

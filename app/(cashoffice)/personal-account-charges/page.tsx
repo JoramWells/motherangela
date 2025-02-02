@@ -16,7 +16,7 @@ const listItems = [
   },
   {
     id: '2',
-    label: 'Personal Account Charge',
+    label: 'Patient Account Charges',
     link: '',
   },
 ];
@@ -31,6 +31,8 @@ function PersonalAccountPage() {
     status: cleared || '',
   });
 
+  console.log(data);
+
   return (
     <div>
       <BreadcrumbNav
@@ -38,7 +40,7 @@ function PersonalAccountPage() {
       />
       <div className="p-2">
         <TableContainer
-          title="Personal Account Charges"
+          title="Patient Account Charges"
           columns={personalAccountColumns}
           data={data ?? []}
           total={total as number}
