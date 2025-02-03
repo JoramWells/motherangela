@@ -287,8 +287,8 @@ export const accountingDocumentsColumns: ColumnDef<AccountingDocumentsInterface>
 export const invoicePaymentsColumns: ColumnDef<InvoicePaymentInterface>[] = [
 
   {
-    accessorKey: 'item_description',
-    header: 'Name',
+    accessorKey: 'service_desc',
+    header: 'Service Description',
     cell: ({ row }) => {
       const med_name = row.original.service_desc;
       return (
@@ -300,8 +300,17 @@ export const invoicePaymentsColumns: ColumnDef<InvoicePaymentInterface>[] = [
     },
   },
   {
+    accessorKey: 'cheque_no',
+    header: 'Cheque No.',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {row.original?.cheque_no ?? 'N/A'}
+      </div>
+    ),
+  },
+  {
     accessorKey: 'insurance_name_invoice_payments',
-    header: 'Invoice Name',
+    header: 'Insurance',
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500 ">
         {row.original?.insurance_name_invoice_payments ?? 'N/A'}
@@ -323,6 +332,15 @@ export const invoicePaymentsColumns: ColumnDef<InvoicePaymentInterface>[] = [
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500 ">
         {formatCurrency(row.original?.amount) ?? 'N/A'}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'cash_payment_mode.cash_payment_mode_description',
+    header: 'Mode',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {row.original?.cash_payment_mode?.cash_payment_mode_description ?? 'N/A'}
       </div>
     ),
   },
@@ -370,7 +388,7 @@ export const invoicePaymentsColumns: ColumnDef<InvoicePaymentInterface>[] = [
   // },
   {
     accessorKey: 'date_of_payment',
-    header: 'Payment',
+    header: 'Payment Date',
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500 ">
         {moment(row.original?.date_of_payment).format('ll')}

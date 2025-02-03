@@ -1,6 +1,8 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useCallback } from 'react';
 import InputText from '../../forms/InputText';
 import InputSelect from '../../forms/InputSelect';
+import usePaginatedSearch from '@/hooks/usePaginatedSearch';
+import { useGetAllResidenceDetailsQuery } from '@/api/patients/residence-details.api';
 
 export interface PersonalDetailInterface {
     first_name: string,
@@ -30,10 +32,14 @@ function PersonalDetail({
   dob, setDOB, email, setEmail, nhif_no, setNHIF, patient_gender, setPatientGender,
   id_number, setID, residence, setResidence,
 }:PersonalDetailInterface) {
-  const residenceOptions = [
-    { id: 'Nanyuki', label: 'Nanyuki' },
-    { id: 'Nairobi', label: 'Nairobi' },
-  ];
+  const { data } = usePaginatedSearch({
+    fetchQuery: useGetAllResidenceDetailsQuery,
+  });
+
+  const residenceOptions = useCallback(() => data?.map((item) => ({
+    id: item.residence_id.toString(),
+    label: item.residence_name,
+  })), [data])();
 
   const genderOptions = [
     { id: '1', label: 'MALE' },

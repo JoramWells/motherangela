@@ -4,10 +4,7 @@ import {
   BookA,
   BookCopy,
   DollarSign,
-  HandCoins,
   LayoutDashboardIcon,
-  PiggyBank,
-  Wallet,
 
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
@@ -48,24 +45,6 @@ const DL = [
     label: 'Invoice Payments',
     link: '/invoice-payments',
     icon: <DollarSign size={17} />,
-  },
-  {
-    id: '10',
-    label: 'Patient Charges',
-    link: '/personal-account-charges',
-    icon: <Wallet size={17} />,
-  },
-  {
-    id: '11',
-    label: 'Patient Payments',
-    link: '/personal-charges-payment',
-    icon: <HandCoins size={17} />,
-  },
-  {
-    id: '12',
-    label: 'Patient Account',
-    link: '/patient-accounts',
-    icon: <PiggyBank size={17} />,
   },
 ];
 

@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { PaginatedResponse, PeopleRelationsInterface } from 'motherangela';
+import { PaginatedResponse, ResidenceDetailsInterface } from 'motherangela';
 
-export const peopleRelationsApi = createApi({
-  reducerPath: 'peopleRelationsApi',
+export const residenceDetailsApi = createApi({
+  reducerPath: 'residenceDetailsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/patient-service/people-relations`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/patient-service/residence-details`,
   }),
   endpoints: (builder) => ({
-    getAllPeopleRelations: builder.query<PaginatedResponse<PeopleRelationsInterface>,
+    getAllResidenceDetails: builder.query<PaginatedResponse<ResidenceDetailsInterface>,
       { page: number; pageSize: number; searchQuery: string }
 
     >({
@@ -24,14 +24,14 @@ export const peopleRelationsApi = createApi({
       },
     }),
 
-    addPeopleRelations: builder.mutation({
+    addResidenceDetails: builder.mutation({
       query: (newMaternity) => ({
         url: 'add',
         method: 'POST',
         body: newMaternity,
       }),
     }),
-    getPeopleRelations: builder.query<PeopleRelationsInterface, string>({
+    getResidenceDetails: builder.query<ResidenceDetailsInterface, string>({
       query: (id) => `/detail/${id}`,
     }),
 
@@ -39,6 +39,6 @@ export const peopleRelationsApi = createApi({
 });
 
 export const {
-  useGetAllPeopleRelationsQuery,
-  useAddPeopleRelationsMutation, useGetPeopleRelationsQuery,
-} = peopleRelationsApi;
+  useGetAllResidenceDetailsQuery,
+  useAddResidenceDetailsMutation, useGetResidenceDetailsQuery,
+} = residenceDetailsApi;
