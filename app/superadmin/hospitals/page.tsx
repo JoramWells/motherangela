@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
@@ -61,4 +61,10 @@ function SuperAdmin() {
   );
 }
 
-export default SuperAdmin;
+export default function WrappedSuperAdmin() {
+  return (
+    <Suspense>
+      <SuperAdmin />
+    </Suspense>
+  );
+}

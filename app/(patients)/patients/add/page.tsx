@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  Suspense,
   useCallback, useEffect, useMemo, useState,
 } from 'react';
 
@@ -338,4 +339,10 @@ function AddPatient() {
   );
 }
 
-export default AddPatient;
+export default function WrappedAddPatient() {
+  return (
+    <Suspense>
+      <AddPatient />
+    </Suspense>
+  );
+}
