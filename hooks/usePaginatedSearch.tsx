@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { PaginatedResponse } from 'motherangela';
 import usePreprocessData from './usePreprocessData';
 import useSearch from './useSearch';
+import { useUserContext } from '@/context/UserContext';
 
 export interface UsePaginatedSearchResponseInterface<T>{
     search: string
@@ -21,10 +22,12 @@ export interface UsePaginatedSearchInterface<T>{
   serviceType?:string
   fetchQuery: ({
     id, page, pageSize, searchQuery, employee_id, patient_id, status, serviceType, date,
+    hospital_id,
   }:{
     id?:string,
     date?:string,
     employee_id?:string,
+    hospital_id?:string,
     patient_id?:string,
     status?:string,
     serviceType?:string,
@@ -42,6 +45,7 @@ const usePaginatedSearch = <T = unknown > (
   const [search, setSearch] = useState('');
   const searchParams = useSearchParams();
   const page = searchParams.get('page');
+  const { user } = useUserContext();
   const { data: profileData } = fetchQuery({
     // id,
     id: id && id,
@@ -53,6 +57,7 @@ const usePaginatedSearch = <T = unknown > (
     status: status ?? '',
     serviceType,
     date,
+    hospital_id: user?.hospital_id,
   });
   const { data, total } = usePreprocessData<T>(profileData);
   useSearch({ search, setSearch });

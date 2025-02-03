@@ -10,16 +10,17 @@ export const personalChargesPaymentApi = createApi({
   endpoints: (builder) => ({
     getAllPersonalChargePayments:
     builder.query<PaginatedResponse<PersonalChargesPaymentsInterface>,
-      { page: number; pageSize: number; searchQuery: string, status?: string }
+      { page: number; pageSize: number; searchQuery: string, status?: string, hospital_id?: string }
 
     >({
       query: (params) => {
         if (params) {
           const {
-            page, pageSize, searchQuery, status,
+            page, pageSize, searchQuery, status, hospital_id,
           } = params;
           let queryString = '';
           queryString += `page=${page}`;
+          queryString += `&hospital_id=${hospital_id}`;
           queryString += `&pageSize=${pageSize}`;
           queryString += `&searchQuery=${searchQuery}`;
           queryString += `&status=${status}`;

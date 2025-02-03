@@ -10,14 +10,17 @@ export const patientAccountApi = createApi({
   endpoints: (builder) => ({
     getAllPatientAccounts:
     builder.query<PaginatedResponse<PatientAccountsInterface>,
-      { page: number; pageSize: number; searchQuery: string }
+      { page: number; pageSize: number; searchQuery: string, hospital_id?: string }
 
     >({
       query: (params) => {
         if (params) {
-          const { page, pageSize, searchQuery } = params;
+          const {
+            page, pageSize, searchQuery, hospital_id,
+          } = params;
           let queryString = '';
           queryString += `page=${page}`;
+          queryString += `&hospital_id=${hospital_id}`;
           queryString += `&pageSize=${pageSize}`;
           queryString += `&searchQuery=${searchQuery}`;
           return `/fetchAll/?${queryString}`;
