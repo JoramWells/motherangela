@@ -127,7 +127,12 @@ export default function Home() {
 
             },
           ].map((item) => (
-            <div className="flex-1 border rounded-lg p-2 h-[100px] flex flex-row space-x-2 items-center" key={item.id}>
+            <div
+              className="flex-1 border rounded-lg p-2 h-[100px] flex flex-row space-x-2 items-center
+            bg-gradient-to-r from-white to-zinc-50
+            "
+              key={item.id}
+            >
               <div className="bg-white p-2 rounded-full ">
                 <Image
                   src={`${item.url}`}

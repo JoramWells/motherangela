@@ -36,10 +36,10 @@ export function UserProvider({ children }:{children: ReactNode}) {
   }, [status, router]);
 
   useEffect(() => {
-    if (session !== null) {
+    if (session?.user !== null) {
       setUser(session?.user as UserInterface);
     }
-  }, [session]);
+  }, [session?.user]);
 
   return (
     <UserContext.Provider
