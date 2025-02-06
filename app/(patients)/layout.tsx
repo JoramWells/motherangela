@@ -18,7 +18,7 @@ const DL = [
   {
     id: '1',
     label: 'Dashboard',
-    link: '/users/dashboard',
+    link: '/p-dashboard',
     icon: <LayoutDashboardIcon size={17} />,
   },
   // {
