@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Avatar from '@/components/custom/Avatar';
 import { Button } from '@/components/ui/button';
-import { obfuscatePhoneNumber } from '@/utils/number';
+import { formatCurrency, obfuscatePhoneNumber } from '@/utils/number';
 
 export const employeeRecordsColumn: ColumnDef<PayrollEmployeeRecordsInterface>[] = [
   {
@@ -156,9 +156,12 @@ export const payrollEmployeeDeductionsColumns: ColumnDef<PayrollEmployeeDeductio
           <Avatar
             name={row.original.payroll_employee_record?.full_name as string}
           />
-          <p className="capitalize text-[12px]">
+          <Link
+            className="capitalize text-[12px] text-cyan-500 hover:underline "
+            href="/"
+          >
             {nameArr ? `${nameArr[0]} ${nameArr[1]?.charAt(1)}.` : 'No name'}
-          </p>
+          </Link>
         </div>
       );
     },
@@ -399,21 +402,32 @@ export const employeeEmployeePayCalculationsColumn:
 ColumnDef<PayrollPeriodEmployeePayCalculationsInterface>[] = [
 
   {
-    accessorKey: 'full_name',
-    header: 'Name',
-    cell: ({ row }) => (
-      <div className="flex-row flex space-x-2 items-center">
-        <Avatar name={row.original.payroll_employee_record?.full_name as string} />
-        <p className="capitalize text-[12px]">{row.original.payroll_employee_record?.full_name}</p>
-      </div>
-    ),
+    accessorKey: 'payroll_employee_record.fullname',
+    header: 'Staff Name',
+    cell: ({ row }) => {
+      const { full_name } = row.original.payroll_employee_record || {};
+      const nameArr = full_name?.split(' ');
+      return (
+        <div className="flex-row flex space-x-2 items-center">
+          <Avatar
+            name={row.original.payroll_employee_record?.full_name as string}
+          />
+          <Link
+            className="capitalize text-[12px] text-cyan-500 hover:underline "
+            href="/"
+          >
+            {nameArr ? `${nameArr[0]} ${nameArr[1]?.charAt(1)}.` : 'No name'}
+          </Link>
+        </div>
+      );
+    },
   },
   {
     accessorKey: 'basic_pay',
     header: 'Basic Pay',
     cell: ({ row }) => (
       <div className="text-[12px] text-slate-500">
-        <p>{row.original.basic_pay}</p>
+        <p>{formatCurrency(Number(row.original.basic_pay))}</p>
       </div>
     ),
   },
@@ -435,15 +449,25 @@ ColumnDef<PayrollPeriodEmployeePayCalculationsInterface>[] = [
       </div>
     ),
   },
-
   {
     accessorKey: 'bank_account_number',
     header: 'Bank A/C',
-    cell: ({ row }) => (
-      <p className="text-[12px] text-slate-500">
-        {row.original.bank_account_number}
-      </p>
-    ),
+    cell: ({ row }) => {
+      const { bank_account_number } = row.original || {};
+      const [visible, setVisible] = useState(false);
+      const toggleVisibility = () => setVisible((prev) => !prev);
+      return (
+        <div className="text-zinc-500 flex flex-row items-center space-x-2">
+          <p
+            className="text-[12px]"
+          >
+            {bank_account_number
+      && visible ? bank_account_number : obfuscatePhoneNumber(bank_account_number!)}
+          </p>
+          <EyeOff size={14} onClick={toggleVisibility} />
+        </div>
+      );
+    },
   },
   {
     accessorKey: 'action',

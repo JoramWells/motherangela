@@ -4,7 +4,6 @@ import {
   HandCoins,
   Landmark,
   LayoutDashboardIcon,
-  PiggyBank,
   User,
 } from 'lucide-react';
 import React, { ReactNode } from 'react';
@@ -21,12 +20,6 @@ const DL = [
     label: 'Dashboard',
     link: '/users/dashboard',
     icon: <LayoutDashboardIcon size={17} />,
-  },
-  {
-    id: '5',
-    label: 'Benefits',
-    link: '/benefits',
-    icon: <PiggyBank size={17} />,
   },
   {
     id: '3',
