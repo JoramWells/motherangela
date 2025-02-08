@@ -2,6 +2,7 @@
 
 import {
   Check,
+  FlaskRound,
   House,
   LayoutDashboardIcon,
   PiggyBank,
@@ -45,6 +46,12 @@ const DL = [
     label: 'Pharmacy',
     link: '/administrator/pharmacy',
     icon: <Check size={17} />,
+  },
+  {
+    id: '4',
+    label: 'Procedures',
+    link: '/administrator/procedures',
+    icon: <FlaskRound size={17} />,
   },
 ];
 

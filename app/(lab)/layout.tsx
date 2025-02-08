@@ -32,12 +32,6 @@ const DL = [
     icon: <TestTubeDiagonal size={17} />,
   },
   {
-    id: '4',
-    label: 'Procedures',
-    link: '/procedures',
-    icon: <FlaskRound size={17} />,
-  },
-  {
     id: '7',
     label: 'Procedure Results',
     link: '/procedure-results',

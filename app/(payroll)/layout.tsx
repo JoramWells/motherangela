@@ -4,7 +4,6 @@ import {
   HandCoins,
   Landmark,
   LayoutDashboardIcon,
-  NotebookPen,
   PiggyBank,
   User,
 } from 'lucide-react';
@@ -30,10 +29,10 @@ const DL = [
     icon: <PiggyBank size={17} />,
   },
   {
-    id: '6',
-    label: 'Deductions',
-    link: '/deductions',
-    icon: <NotebookPen size={17} />,
+    id: '3',
+    label: 'Employee Records',
+    link: '/employee-records',
+    icon: <User size={17} />,
   },
   {
     id: '2',
@@ -41,12 +40,7 @@ const DL = [
     link: '/payroll',
     icon: <HandCoins size={17} />,
   },
-  {
-    id: '3',
-    label: 'Employee Records',
-    link: '/employee-records',
-    icon: <User size={17} />,
-  },
+
   {
     id: '4',
     label: 'Loan Records',

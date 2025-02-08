@@ -20,7 +20,10 @@ export const columns: ColumnDef<PatientInterface>[] = [
         <Avatar
           name={`${row.original.first_name} ${row.original.middle_name}`}
         />
-        <Link href={`/patients/${row.original.patient_id}`} className="capitalize text-[12px] text-cyan-500 hover:underline ">
+        <Link
+          href={`/patients/${row.original.patient_id}`}
+          className="capitalize text-[12px] text-cyan-500 hover:underline "
+        >
           {row.original.first_name}
           {' '}
           {row.original.middle_name?.charAt(1)}

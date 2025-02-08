@@ -8,22 +8,34 @@ import {
   PayrollPeriodEmployeePayCalculationsInterface, PayrollPeriodsInterface,
 } from 'motherangela';
 import moment from 'moment';
-import { MoveRight } from 'lucide-react';
+import { EyeOff, MoveRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import Avatar from '@/components/custom/Avatar';
 import { Button } from '@/components/ui/button';
+import { obfuscatePhoneNumber } from '@/utils/number';
 
 export const employeeRecordsColumn: ColumnDef<PayrollEmployeeRecordsInterface>[] = [
-
   {
     accessorKey: 'full_name',
-    header: 'Name',
-    cell: ({ row }) => (
-      <div className="flex-row flex space-x-2 items-center">
-        <Avatar name={row.original.full_name as string} />
-        <p className="capitalize text-[12px]">{row.original.full_name}</p>
-      </div>
-    ),
+    header: 'Staff Name',
+    cell: ({ row }) => {
+      const { full_name } = row.original || {};
+      const nameArr = full_name?.split(' ');
+      return (
+        <div className="flex-row flex space-x-2 items-center">
+          <Avatar
+            name={row.original.full_name as string}
+          />
+          <Link
+            className="capitalize text-[12px] text-cyan-500 hover:underline "
+            href="/"
+          >
+            {nameArr ? `${nameArr[0]} ${nameArr[1]?.charAt(1)}.` : 'No name'}
+          </Link>
+        </div>
+      );
+    },
   },
   {
     accessorKey: 'job_number',
@@ -54,25 +66,41 @@ export const employeeRecordsColumn: ColumnDef<PayrollEmployeeRecordsInterface>[]
     ),
   },
   {
-    accessorKey: 'cellphone',
+    accessorKey: 'cell_phone',
     header: 'Phone',
-    cell: ({ row }) => (
-      <p className="text-[12px] text-slate-500">
-        {row.original.cellphone}
-      </p>
-    ),
+    cell: ({ row }) => {
+      const { cellphone } = row.original || {};
+      const [visible, setVisible] = useState(false);
+      const toggleVisibility = () => setVisible((prev) => !prev);
+      return (
+        <div className="text-zinc-500 flex flex-row items-center space-x-2">
+          <p
+            className="text-[12px]"
+          >
+            {cellphone
+      && visible ? cellphone : obfuscatePhoneNumber(cellphone!)}
+          </p>
+          <EyeOff size={14} onClick={toggleVisibility} />
+        </div>
+      );
+    },
   },
   {
-    accessorKey: 'action',
-    header: 'Action',
-    cell: ({ row }) => (
-      <Link
-        className="text-[12px]"
-        href={`/maternity/${row.original.employee_id}`}
-      >
-        View
-      </Link>
-    ),
+    accessorKey: 'Action',
+    header: 'View',
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <Button
+          size="sm"
+          variant="outline"
+          className="shadow-none"
+          onClick={() => router.push(`/deductions/${row.original.employee_id}`)}
+        >
+          <MoveRight />
+        </Button>
+      );
+    },
   },
 ];
 
@@ -120,16 +148,20 @@ export const payrollEmployeeDeductionsColumns: ColumnDef<PayrollEmployeeDeductio
   {
     accessorKey: 'payroll_employee_record.fullname',
     header: 'Name',
-    cell: ({ row }) => (
-      <div className="flex-row flex space-x-2 items-center">
-        <Avatar
-          name={row.original.payroll_employee_record?.full_name as string}
-        />
-        <p className="capitalize text-[12px]">
-          {row.original.payroll_employee_record?.full_name}
-        </p>
-      </div>
-    ),
+    cell: ({ row }) => {
+      const { full_name } = row.original.payroll_employee_record || {};
+      const nameArr = full_name?.split(' ');
+      return (
+        <div className="flex-row flex space-x-2 items-center">
+          <Avatar
+            name={row.original.payroll_employee_record?.full_name as string}
+          />
+          <p className="capitalize text-[12px]">
+            {nameArr ? `${nameArr[0]} ${nameArr[1]?.charAt(1)}.` : 'No name'}
+          </p>
+        </div>
+      );
+    },
   },
   {
     accessorKey: 'payroll_deduction.deduction_description',

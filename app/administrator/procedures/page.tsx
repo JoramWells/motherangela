@@ -4,8 +4,8 @@ import React, { Suspense } from 'react';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
-import { procedureDetailsColumns } from '../column';
 import { useGetAllProceduresQuery } from '@/api/lab/procedure/procedureDetails.api';
+import { procedureDetailsColumns } from './column';
 
 const listItems = [
   {
