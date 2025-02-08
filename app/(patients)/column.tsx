@@ -23,26 +23,29 @@ export const columns: ColumnDef<PatientInterface>[] = [
         <Link href={`/patients/${row.original.patient_id}`} className="capitalize text-[12px] text-cyan-500 hover:underline ">
           {row.original.first_name}
           {' '}
-          {row.original.middle_name?.charAt(1)}.
+          {row.original.middle_name?.charAt(1)}
+          .
         </Link>
       </div>
     ),
   },
   {
-accessorKey:'patient_gender',
-header:'Gender',
-cell:({row})=> <div
-className='text-[12px] text-zinc-500 uppercase'
->
-  {row.original.patient_gender === '1' ? 'Male': 'Female'}
-</div>
+    accessorKey: 'patient_gender',
+    header: 'Gender',
+    cell: ({ row }) => (
+      <div
+        className="text-[12px] text-zinc-500 uppercase"
+      >
+        {row.original.patient_gender === '1' ? 'Male' : 'Female'}
+      </div>
+    ),
   },
   {
     accessorKey: 'dob',
     header: 'DOB',
     cell: ({ row }) => (
       <p
-      className='text-[12px] text-slate-500'
+        className="text-[12px] text-slate-500"
       >
         {row.original?.dob}
       </p>
@@ -52,23 +55,21 @@ className='text-[12px] text-zinc-500 uppercase'
     accessorKey: 'cell_phone',
     header: 'Phone',
     cell: ({ row }) => {
-      const {cell_phone} = row.original || {}
-          const [visible, setVisible] = useState(false)
-      const toggleVisibility = () => {
-        return setVisible(prev => !prev)
-      }
-      return(
-      <div className="text-zinc-500 flex flex-row items-center space-x-2">
-        <p
-        className='text-[12px]'
-        >
-          {cell_phone
-      && visible ? cell_phone : obfuscatePhoneNumber(cell_phone)
-      }
-        </p>
-        <EyeOff size={14} onClick={toggleVisibility} />
-      </div>
-    )},
+      const { cell_phone } = row.original || {};
+      const [visible, setVisible] = useState(false);
+      const toggleVisibility = () => setVisible((prev) => !prev);
+      return (
+        <div className="text-zinc-500 flex flex-row items-center space-x-2">
+          <p
+            className="text-[12px]"
+          >
+            {cell_phone
+      && visible ? cell_phone : obfuscatePhoneNumber(cell_phone)}
+          </p>
+          <EyeOff size={14} onClick={toggleVisibility} />
+        </div>
+      );
+    },
   },
   {
     accessorKey: 'action',

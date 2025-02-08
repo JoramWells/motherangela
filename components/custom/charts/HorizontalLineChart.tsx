@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useMemo } from 'react';
 import {
   Bar, BarChart, LabelList, XAxis, YAxis,
@@ -31,8 +30,8 @@ import { Skeleton } from '@/components/ui/skeleton';
 //   }
 // } satisfies ChartConfig
 
-const colorSet = [1, 2, 3, 4, 5];
-let colorIndex = 0;
+// const colorSet = [1, 2, 3, 4, 5];
+// const colorIndex = 0;
 
 export interface HorizontalLineChartParams {
   line: string
@@ -40,12 +39,7 @@ export interface HorizontalLineChartParams {
   label?: string
 }
 
-const getNextColor = () => {
-  const nextColor = colorSet[colorIndex % colorSet.length];
-  colorIndex++;
-  return '  #d6d6c2';
-};
-
+const getNextColor = () => '  #d6d6c2';
 interface HorizontalLineChartInputProps {
   data: HorizontalLineChartParams[]
   isLoading?: boolean
@@ -81,7 +75,7 @@ function HorizontalLineChart({
     (item) => item[label] !== null,
   ), [label, tempData])();
 
-  const transformData = () => fData?.reduce((acc: any[], { line, count }) => {
+  const transformData = () => fData?.reduce((acc: unknown[], { line, count }) => {
     const formattedLine = line.split(' ')[0]?.toLowerCase();
     const colorVar = `var(--color-${formattedLine})`;
 

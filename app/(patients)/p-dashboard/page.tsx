@@ -1,12 +1,10 @@
 'use client';
 
-import React, { useCallback } from 'react';
-import { useGetPatientAgeGroupQuery } from '@/api/patients/patients.api';
-import HorizontalLineChart from '@/components/custom/charts/HorizontalLineChart';
+import React from 'react';
 
 function PatientDashboard() {
-  const { data } = useGetPatientAgeGroupQuery();
-  console.log(data);
+  // const { data } = useGetPatientAgeGroupQuery();
+  // console.log(data);
   // const preprocessedData = useCallback(
   //   () => ([
   //     { ageGroup: 'Children', count: Number(data[0]?.children) },
