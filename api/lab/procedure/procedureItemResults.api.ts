@@ -25,6 +25,26 @@ export const procedureItemResultsApi = createApi({
                 return 'fetchAll';
               },
             }),
+    getAllProcedureItemResultsByAppointmentID: builder.query<
+              PaginatedResponse<ProcedureItemResultsInterface &{
+                count?:number
+              } >,
+              {id?: string, page: number; pageSize: number; searchQuery: string }
+            >({
+              query: (params) => {
+                if (params) {
+                  const {
+                    id, page, pageSize, searchQuery,
+                  } = params;
+                  let queryString = '';
+                  queryString += `page=${page}`;
+                  queryString += `&pageSize=${pageSize}`;
+                  queryString += `&searchQuery=${searchQuery}`;
+                  return `/by-appointment-id/${id}/?${queryString}`;
+                }
+                return 'by-appointment-id';
+              },
+            }),
     addProcedureItemResult: builder.mutation({
       query: (newUser) => ({
         url: 'add',
@@ -60,4 +80,5 @@ export const {
   useGetAllProcedureItemResultsQuery, useAddProcedureItemResultMutation,
   useGetProcedureItemResultQuery, useUpdateProcedureItemResultMutation,
   useDeleteProcedureItemResultMutation, useGetProcedureItemResultByLabReqIDQuery,
+  useGetAllProcedureItemResultsByAppointmentIDQuery,
 } = procedureItemResultsApi;

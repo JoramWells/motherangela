@@ -29,7 +29,7 @@ function TableContainer<TData, TValue>({
         <div
           className="flex flex-row space-x-2 items-center"
         >
-          <h2 className=" text-slate-900 font-[600] ">
+          <h2 className=" text-slate-900 font-[600] capitalize ">
             {title}
           </h2>
           <Badge

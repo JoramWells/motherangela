@@ -27,7 +27,6 @@ function ProcedureDetails() {
   const {
     data, search, setSearch, total,
   } = usePaginatedSearch({ fetchQuery: useGetAllProcedureItemResultsQuery });
-  console.log(data);
   // console.log(data);
   // const router = useRouter();
   // const [pageSize, setPageSize] = useState(1);

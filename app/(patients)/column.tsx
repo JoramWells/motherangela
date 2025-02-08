@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import moment from 'moment';
 import { AdmissionInterface, AppointmentInterface, PatientInterface } from 'motherangela';
 import { useRouter } from 'next/navigation';
-import { MoveRight } from 'lucide-react';
+import { EyeOff, MoveRight } from 'lucide-react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import Avatar from '@/components/custom/Avatar';
 import { Button } from '@/components/ui/button';
+import { obfuscatePhoneNumber } from '@/utils/number';
 
 export const columns: ColumnDef<PatientInterface>[] = [
 
@@ -15,23 +16,34 @@ export const columns: ColumnDef<PatientInterface>[] = [
     accessorKey: 'first_name',
     header: 'Name',
     cell: ({ row }) => (
-      <div className="flex-row flex space-x-2 items-center">
+      <div className="flex-row flex space-x-2 items-center text-[12px]">
         <Avatar
           name={`${row.original.first_name} ${row.original.middle_name}`}
         />
         <Link href={`/patients/${row.original.patient_id}`} className="capitalize text-[12px] text-cyan-500 hover:underline ">
           {row.original.first_name}
           {' '}
-          {row.original.middle_name}
+          {row.original.middle_name?.charAt(1)}.
         </Link>
       </div>
     ),
   },
   {
+accessorKey:'patient_gender',
+header:'Gender',
+cell:({row})=> <div
+className='text-[12px] text-zinc-500 uppercase'
+>
+  {row.original.patient_gender === '1' ? 'Male': 'Female'}
+</div>
+  },
+  {
     accessorKey: 'dob',
     header: 'DOB',
     cell: ({ row }) => (
-      <p>
+      <p
+      className='text-[12px] text-slate-500'
+      >
         {row.original?.dob}
       </p>
     ),
@@ -39,9 +51,24 @@ export const columns: ColumnDef<PatientInterface>[] = [
   {
     accessorKey: 'cell_phone',
     header: 'Phone',
-    cell: ({ row }) => (
-      <div className="lowercase">{row.original?.cell_phone}</div>
-    ),
+    cell: ({ row }) => {
+      const {cell_phone} = row.original || {}
+          const [visible, setVisible] = useState(false)
+      const toggleVisibility = () => {
+        return setVisible(prev => !prev)
+      }
+      return(
+      <div className="text-zinc-500 flex flex-row items-center space-x-2">
+        <p
+        className='text-[12px]'
+        >
+          {cell_phone
+      && visible ? cell_phone : obfuscatePhoneNumber(cell_phone)
+      }
+        </p>
+        <EyeOff size={14} onClick={toggleVisibility} />
+      </div>
+    )},
   },
   {
     accessorKey: 'action',
