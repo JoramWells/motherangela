@@ -56,8 +56,17 @@ export const patientsApi = createApi({
     getPatient: builder.query<PatientInterface, string>({
       query: (id) => `detail/${id}`,
     }),
-    getPatientAgeGroup: builder.query<PatientInterface, string>({
+    getPatientAgeGroup: builder.query<{
+      children: string
+      teenagers: string
+      youngAdults: string
+      middleAged: string
+      seniors: string
+    }[], void>({
       query: () => 'count',
+    }),
+    getPatientGenderCount: builder.query<{gender_type: number, count: number}[], void>({
+      query: () => 'gender-count',
     }),
     searchPatient: builder.query<PatientInterface[],
       { searchQuery: string }
@@ -93,5 +102,6 @@ export const patientsApi = createApi({
 
 export const {
   useGetPatientsQuery, useUpdatePatientMutation, useSearchPatientQuery,
+  useGetPatientGenderCountQuery,
   useDeletePatientMutation, useAddPatientMutation, useGetPatientQuery, useGetPatientAgeGroupQuery,
 } = patientsApi;
