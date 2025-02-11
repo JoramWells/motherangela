@@ -2,6 +2,9 @@
 
 import {
   Baby,
+  BookOpenCheck,
+  Dumbbell,
+  Footprints,
   HeartHandshake,
   LayoutDashboardIcon,
   Users,
@@ -22,18 +25,6 @@ const DL = [
     icon: <LayoutDashboardIcon size={17} />,
   },
   {
-    id: '2',
-    label: 'Maternity',
-    link: '/maternity',
-    icon: <HeartHandshake size={17} />,
-  },
-  // {
-  //   id: "3",
-  //   label: "Checklist",
-  //   link: "/checklist",
-  //   icon: <Check size={17} />,
-  // },
-  {
     id: '4',
     label: 'Antenatal Profiles',
     link: '/antenatal',
@@ -44,6 +35,36 @@ const DL = [
     label: 'Deliveries',
     link: '/deliveries',
     icon: <Baby size={17} />,
+  },
+  {
+    id: '3',
+    label: 'Examinations',
+    link: '/examinations',
+    icon: <BookOpenCheck size={17} />,
+  },
+  {
+    id: '2',
+    label: 'Maternity',
+    link: '/maternity',
+    icon: <HeartHandshake size={17} />,
+  },
+  {
+    id: '6',
+    label: 'Physical Examination',
+    link: '/physical-examination',
+    icon: <Dumbbell size={17} />,
+  },
+  {
+    id: '7',
+    label: 'Postnatal Examination',
+    link: '/postnatal-examination',
+    icon: <HeartHandshake size={17} />,
+  },
+  {
+    id: '8',
+    label: 'Visits',
+    link: '/m-visits',
+    icon: <Footprints size={17} />,
   },
 
 ];

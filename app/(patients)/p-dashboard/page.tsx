@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useGetPatientAgeGroupQuery, useGetPatientGenderCountQuery } from '@/api/patients/patients.api';
 import CustomRadial from '@/components/custom/charts/CustomRadial';
 import HorizontalLineChart from '@/components/custom/charts/HorizontalLineChart';
+import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 
 function PatientDashboard() {
   const { data } = useGetPatientGenderCountQuery();
@@ -35,9 +36,24 @@ function PatientDashboard() {
     },
   ];
 
+  const listItems = useMemo(() => [
+    {
+      id: '1',
+      label: 'home',
+      link: '/',
+    },
+    {
+      id: '2',
+      label: 'Dashboard',
+      link: '',
+    },
+  ], []);
+
   return (
     <div>
-
+      <BreadcrumbNav
+        listItems={listItems}
+      />
       <div
         className="p-2 flex space-x-2"
       >
