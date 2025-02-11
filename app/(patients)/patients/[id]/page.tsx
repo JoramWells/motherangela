@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import PatientSideProfile from '@/components/custom/patient/PatientSideProfile';
 import { useGetAppointmentByPatientIDQuery } from '@/api/appointments/appointments.api';
 import { Badge } from '@/components/ui/badge';
+import PaymentChargeCard from '@/components/custom/patient/PaymentChargeCard';
 
 function PatientDetailsPage({ params }:{params:Promise<{id: string}>}) {
   const { id } = use(params);
@@ -126,6 +127,8 @@ function PatientDetailsPage({ params }:{params:Promise<{id: string}>}) {
             Admit
           </Button>
         </div>
+
+        <PaymentChargeCard patient_id={id} />
       </div>
     </div>
   );

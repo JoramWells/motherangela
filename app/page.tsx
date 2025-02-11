@@ -104,7 +104,7 @@ export default function Home() {
             },
             {
               id: useId(),
-              link: '/patients',
+              link: '/p-dashboard',
               label: 'Patients',
               url: '/assets/img/patient.png',
               description: 'Lorem Ipsum dolet Mwat!!',

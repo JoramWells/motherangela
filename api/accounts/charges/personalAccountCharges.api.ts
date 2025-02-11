@@ -40,8 +40,8 @@ export const personalAccountChargeApi = createApi({
     }),
 
     // get personal account charge base on user-id
-    getUserPersonalAccountDetail: builder.query({
-      query: (id) => `/user-personal-account-detail/${id}`,
+    getPersonalAccountChargeByPatientID: builder.query({
+      query: (id) => `/by-patient-id/${id}`,
     }),
     updatePersonalAccountCharge: builder.mutation({
       query: ({ id, ...patch }) => ({
@@ -63,6 +63,6 @@ export const personalAccountChargeApi = createApi({
 
 export const {
   useGetAllPersonalAccountChargesQuery, useAddPersonalAccountChargeMutation,
-  useGetPersonalAccountChargeQuery, useGetUserPersonalAccountDetailQuery,
+  useGetPersonalAccountChargeQuery, useGetPersonalAccountChargeByPatientIDQuery,
   useUpdatePersonalAccountChargeMutation, useDeletePersonalAccountChargeMutation,
 } = personalAccountChargeApi;
