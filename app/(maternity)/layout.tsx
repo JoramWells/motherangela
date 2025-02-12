@@ -37,12 +37,6 @@ const DL = [
     icon: <Baby size={17} />,
   },
   {
-    id: '3',
-    label: 'Examinations',
-    link: '/examinations',
-    icon: <BookOpenCheck size={17} />,
-  },
-  {
     id: '2',
     label: 'Maternity',
     link: '/maternity',
@@ -58,7 +52,7 @@ const DL = [
     id: '7',
     label: 'Postnatal Examination',
     link: '/postnatal-examination',
-    icon: <HeartHandshake size={17} />,
+    icon: <BookOpenCheck size={17} />,
   },
   {
     id: '8',

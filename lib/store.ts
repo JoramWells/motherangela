@@ -60,6 +60,7 @@ import { peopleRelationsApi } from '@/api/patients/people-relations.api';
 import { residenceDetailsApi } from '@/api/patients/residence-details.api';
 import { maternityVisitsApi } from '@/api/maternity/maternity-visits.api';
 import { maternityPostnatalExaminationApi } from '@/api/maternity/maternity-postnatal-examination';
+import { maternityPhysicalExaminationApi } from '@/api/maternity/maternity-physical-examination.api';
 
 export const store = configureStore({
   reducer: {
@@ -89,8 +90,10 @@ export const store = configureStore({
       maternityAntenatalProfileApi.reducer,
     [maternityVisitsApi.reducerPath]: maternityVisitsApi.reducer,
     [maternityPostnatalExaminationApi.reducerPath]: maternityPostnatalExaminationApi.reducer,
-    [companyApi.reducerPath]: companyApi.reducer,
     [maternityDeliveriesApi.reducerPath]: maternityDeliveriesApi.reducer,
+    [maternityPhysicalExaminationApi.reducerPath]: maternityPhysicalExaminationApi.reducer,
+
+    [companyApi.reducerPath]: companyApi.reducer,
     [payrollEmployeeRecordsApi.reducerPath]: payrollEmployeeRecordsApi.reducer,
     [payrollEmployeeBenefitsApi.reducerPath]:
       payrollEmployeeBenefitsApi.reducer,
@@ -156,6 +159,7 @@ export const store = configureStore({
     .concat(maternityDeliveriesApi.middleware)
     .concat(maternityVisitsApi.middleware)
     .concat(maternityPostnatalExaminationApi.middleware)
+    .concat(maternityPhysicalExaminationApi.middleware)
     .concat(payrollEmployeeRecordsApi.middleware)
     .concat(payrollEmployeeBenefitsApi.middleware)
     .concat(medicineApi.middleware)

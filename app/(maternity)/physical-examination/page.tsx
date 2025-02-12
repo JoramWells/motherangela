@@ -3,11 +3,11 @@
 import React, { Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { maternityVisitsColumn } from '../column';
+import { maternityPhysicalExaminationColumn } from '../column';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
 import { Button } from '@/components/ui/button';
-import { useGetAllMaternityPostNatalExaminationsQuery } from '@/api/maternity/maternity-postnatal-examination';
+import { useGetAllMaternityPhysicalExaminationQuery } from '@/api/maternity/maternity-physical-examination.api';
 
 const listItems = [
   {
@@ -17,7 +17,7 @@ const listItems = [
   },
   {
     id: '2',
-    label: 'Maternity Visits',
+    label: 'Physical Examination',
     link: '',
   },
 ];
@@ -25,8 +25,7 @@ const listItems = [
 function MaternityPage() {
   const {
     data, total, search, setSearch,
-  } = usePaginatedSearch({ fetchQuery: useGetAllMaternityPostNatalExaminationsQuery });
-  console.log(data);
+  } = usePaginatedSearch({ fetchQuery: useGetAllMaternityPhysicalExaminationQuery });
   const router = useRouter();
   return (
     <>
@@ -34,9 +33,9 @@ function MaternityPage() {
         listItems={listItems}
       />
       <div className="p-2">
-        {/* <TableContainer
-          title="Maternity Visits"
-          columns={maternityVisitsColumn}
+        <TableContainer
+          title="Physical Examination"
+          columns={maternityPhysicalExaminationColumn}
           data={data ?? []}
           search={search}
           setSearch={setSearch}
@@ -45,12 +44,12 @@ function MaternityPage() {
             <Button
               className="bg-emerald-600 shadow-none hover:bg-emerald-700"
               size="sm"
-              onClick={() => router.push('/m-visits/add')}
+              onClick={() => router.push('/physical-examination/add')}
             >
               NEW
             </Button>
           )}
-        /> */}
+        />
 
       </div>
     </>

@@ -3,6 +3,7 @@ import moment from 'moment';
 import Link from 'next/link';
 import {
   AntenatalProfileInterface, MaternityDeliveryInterface,
+  MaternityPhysicalExaminationInterface,
   MaternityPostNatalExaminationInterface,
   MaternityProfileInterface, MaternityVisitsInterface,
 } from 'motherangela';
@@ -362,6 +363,89 @@ export const maternityPostnatalExaminationColumn:
            className="shadow-none text-sky-600 border-sky-200"
            variant="outline"
            onClick={() => router.push(`/deliveries/${row.original.maternity_post_natal_examination_id}`)}
+         >
+           <MoveRight />
+         </Button>
+       );
+     },
+   },
+ ];
+
+export const maternityPhysicalExaminationColumn:
+ ColumnDef<MaternityPhysicalExaminationInterface>[] = [
+
+   {
+     accessorKey: 'name_of_client',
+     header: 'Name of Client',
+     cell: ({ row }) => (
+       <div className="flex-row flex space-x-2 items-center">
+         <Avatar
+           name={row.original.maternity_profile?.name_of_client as string}
+         />
+         <p className="capitalize text-[12px]">
+           {row.original.maternity_profile?.name_of_client}
+         </p>
+       </div>
+     ),
+   },
+   //  {
+   //    accessorKey: 'urine',
+   //    header: 'Urine',
+   //    cell: ({ row }) => (
+   //      <div className="text-[12px] text-slate-500 ">
+   //        {row.original?.urine ?? 'N/A'}
+   //      </div>
+   //    ),
+   //  },
+   //  {
+   //    accessorKey: 'date_of_visit_1',
+   //    header: 'Date of Visit',
+   //    cell: ({ row }) => (
+   //      <div className="text-[12px] text-slate-500">
+   //        <p>
+   //          {
+   //       row.original.date_of_visit_1
+   //         ? moment(row.original.date_of_visit_1).format('ll')
+   //         : 'Update'
+   //     }
+   //        </p>
+
+   //      </div>
+   //    ),
+   //  },
+
+   {
+     accessorKey: 'bp',
+     header: 'Blood Pressure',
+     cell: ({ row }) => (
+       <p className="text-[12px] text-slate-500">{row.original.bp}</p>
+     ),
+   },
+   {
+     accessorKey: 'vaginal_examination',
+     header: 'Vaginal Exam',
+     cell: ({ row }) => (
+       <p className="text-[12px] text-slate-500">{row.original.vaginal_examination}</p>
+     ),
+   },
+   {
+     accessorKey: 'cvs',
+     header: 'CVS',
+     cell: ({ row }) => (
+       <p className="text-[12px] text-slate-500">{row.original.cvs}</p>
+     ),
+   },
+   {
+     accessorKey: 'action',
+     header: 'Details',
+     cell: ({ row }) => {
+       const router = useRouter();
+       return (
+         <Button
+           size="sm"
+           className="shadow-none text-sky-600 border-sky-200"
+           variant="outline"
+           onClick={() => router.push(`/physical-examination/${row.original.maternity_physical_examination_id}`)}
          >
            <MoveRight />
          </Button>
