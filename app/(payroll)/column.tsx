@@ -231,7 +231,7 @@ export const payrollColumns: ColumnDef<PayrollPeriodsInterface>[] = [
       <div className="flex-row flex space-x-2 items-center">
         <Link
           className="capitalize text-[12px] text-cyan-500 hover:underline"
-          href={`/payroll/${row.original.payroll_id}`}
+          href={`/payroll/${row.original.payroll_id}/payments`}
         >
           {row.original.payroll_description}
         </Link>
@@ -295,7 +295,7 @@ export const payrollColumns: ColumnDef<PayrollPeriodsInterface>[] = [
           size="sm"
           className="shadow-none text-sky-600 border-sky-200"
           variant="outline"
-          onClick={() => router.push(`/payroll/${row.original.payroll_id}`)}
+          onClick={() => router.push(`/payroll/${row.original.payroll_id}/payments`)}
         >
           <MoveRight />
         </Button>
@@ -419,7 +419,7 @@ ColumnDef<PayrollPeriodEmployeePayCalculationsInterface>[] = [
           />
           <Link
             className="capitalize text-[12px] text-cyan-500 hover:underline "
-            href="/"
+            href={`/payroll/payments/${row.original.payroll_period_employee_pay_calculation_id}/pay?payroll_id=${row.original.payroll_id}&employee_id=${row.original.employee_id}`}
           >
             {nameArr ? `${nameArr[0]} ${nameArr[1]?.charAt(1)}.` : 'No name'}
           </Link>
@@ -484,7 +484,7 @@ ColumnDef<PayrollPeriodEmployeePayCalculationsInterface>[] = [
           size="sm"
           variant="outline"
           className="shadow-none"
-          onClick={() => router.push(`/payroll/${row.original.payroll_period_employee_pay_calculation_id}/pay?payroll_id=${row.original.payroll_id}&employee_id=${row.original.employee_id}`)}
+          onClick={() => router.push(`/payroll/payments/${row.original.payroll_period_employee_pay_calculation_id}/pay?payroll_id=${row.original.payroll_id}&employee_id=${row.original.employee_id}`)}
         >
           <MoveRight />
         </Button>

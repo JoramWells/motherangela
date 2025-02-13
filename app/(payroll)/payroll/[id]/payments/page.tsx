@@ -3,7 +3,7 @@
 import React, { use, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { employeeEmployeePayCalculationsColumn } from '../../column';
+import { employeeEmployeePayCalculationsColumn } from '../../../column';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
 import { Button } from '@/components/ui/button';

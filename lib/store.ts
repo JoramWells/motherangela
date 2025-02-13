@@ -63,6 +63,10 @@ import { maternityPostnatalExaminationApi } from '@/api/maternity/maternity-post
 import { maternityPhysicalExaminationApi } from '@/api/maternity/maternity-physical-examination.api';
 import { payrollEmployeeCategoryApi } from '@/api/payroll/payrollEmployeeCategory.api';
 import { payrollPayPeriodApi } from '@/api/payroll/payrollPayPeriods.api';
+import { payrollEmployeeNHIFFileApi } from '@/api/payroll/payrollEmployeeNHIFFile.api';
+import { payrollEmployeeNSSFFileApi } from '@/api/payroll/payrollEmployeeNSSFFile.api';
+import { payrollEmployeePensionApi } from '@/api/payroll/payrollEmployeePension.api';
+import { payrollEmployeeTaxFileApi } from '@/api/payroll/payrollEmployeeTaxFile.api';
 
 export const store = configureStore({
   reducer: {
@@ -118,6 +122,10 @@ export const store = configureStore({
     [payrollEmployeePayCalculationsApi.reducerPath]: payrollEmployeePayCalculationsApi.reducer,
     [payrollEmployeeCategoryApi.reducerPath]: payrollEmployeeCategoryApi.reducer,
     [payrollPayPeriodApi.reducerPath]: payrollPayPeriodApi.reducer,
+    [payrollEmployeeNHIFFileApi.reducerPath]: payrollEmployeeNHIFFileApi.reducer,
+    [payrollEmployeeNSSFFileApi.reducerPath]: payrollEmployeeNSSFFileApi.reducer,
+    [payrollEmployeePensionApi.reducerPath]: payrollEmployeePensionApi.reducer,
+    [payrollEmployeeTaxFileApi.reducerPath]: payrollEmployeeTaxFileApi.reducer,
     [inpatientTreatmentChartApi.reducerPath]: inpatientTreatmentChartApi.reducer,
     [inpatientDoctorVisitsApi.reducerPath]: inpatientDoctorVisitsApi.reducer,
     [inpatientNurseVisitsApi.reducerPath]: inpatientNurseVisitsApi.reducer,
@@ -183,6 +191,10 @@ export const store = configureStore({
     .concat(payrollEmployeePayrollDeductionsApi.middleware)
     .concat(payrollEmployeeCategoryApi.middleware)
     .concat(payrollPayPeriodApi.middleware)
+    .concat(payrollEmployeeNHIFFileApi.middleware)
+    .concat(payrollEmployeeNSSFFileApi.middleware)
+    .concat(payrollEmployeePensionApi.middleware)
+    .concat(payrollEmployeeTaxFileApi.middleware)
     .concat(inpatientTreatmentChartApi.middleware)
     .concat(inpatientDoctorVisitsApi.middleware)
     .concat(inpatientNurseVisitsApi.middleware)

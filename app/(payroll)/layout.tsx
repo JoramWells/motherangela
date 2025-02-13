@@ -4,10 +4,13 @@ import {
   HandCoins,
   Landmark,
   LayoutDashboardIcon,
+  TicketMinus,
+  TicketPlus,
   User,
 } from 'lucide-react';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 import { Provider } from 'react-redux';
+import { useParams, usePathname } from 'next/navigation';
 import { Sidebar } from '@/components/custom/Sidebar/Sidebar';
 import SidebarListItemsComponent from '@/components/custom/Sidebar/SidebarListItemsComponent';
 import { store } from '@/lib/store';
@@ -42,21 +45,99 @@ const DL = [
   },
 ];
 
-const layout = ({ children }: { children: ReactNode }) => (
-  <UserProvider>
-    <Provider store={store}>
-      <div className="flex flex-row">
-        <Sidebar>
-          <SidebarListItemsComponent dataList={DL} />
-        </Sidebar>
-        <div className="flex flex-col flex-1 h-screen overflow-y-auto bg-slate-50">
-          {/* <Navbar /> */}
+const layout = ({ children }: { children: ReactNode }) => {
+  const params = useParams();
+  const { id } = params;
+  const pathname = usePathname();
 
-          {children}
+  const DL2 = useMemo(() => [
+    {
+      id: '1',
+      label: 'Dashboard',
+      link: '/users/dashboard',
+      icon: <LayoutDashboardIcon size={17} />,
+    },
+    {
+      id: '2',
+      label: 'Payments',
+      link: `/payroll/${id}/payments`,
+      icon: <HandCoins size={17} />,
+    },
+    {
+      id: '3',
+      label: 'Benefits',
+      link: `/payroll/${id}/benefits`,
+      icon: <TicketPlus size={17} />,
+    },
+
+    {
+      id: '4',
+      label: 'deductions',
+      link: `/payroll/${id}/deductions`,
+      icon: <TicketMinus size={17} />,
+    },
+    {
+      id: '5',
+      label: 'NHIF',
+      link: `/payroll/${id}/nhif`,
+      icon: <div
+        className="font-bold text-[12px] "
+      >
+        NH
+      </div>,
+    },
+    {
+      id: '6',
+      label: 'NSSF',
+      link: `/payroll/${id}/nssf`,
+      icon: <div
+        className="font-bold text-[12px] "
+      >
+        NS
+      </div>,
+    },
+
+  ], [id]);
+
+  if (pathname === `/payroll/${id}`
+|| pathname === `/payroll/${id}/benefits`
+|| pathname === `/payroll/${id}/deductions`
+|| pathname === `/payroll/${id}/payments`
+
+  ) {
+    return (
+      <UserProvider>
+        <Provider store={store}>
+          <div className="flex flex-row">
+            <Sidebar>
+              <SidebarListItemsComponent dataList={DL2} />
+            </Sidebar>
+            <div className="flex flex-col flex-1 h-screen overflow-y-auto bg-slate-50">
+              {/* <Navbar /> */}
+
+              {children}
+            </div>
+          </div>
+        </Provider>
+      </UserProvider>
+    );
+  }
+  return (
+    <UserProvider>
+      <Provider store={store}>
+        <div className="flex flex-row">
+          <Sidebar>
+            <SidebarListItemsComponent dataList={DL} />
+          </Sidebar>
+          <div className="flex flex-col flex-1 h-screen overflow-y-auto bg-slate-50">
+            {/* <Navbar /> */}
+
+            {children}
+          </div>
         </div>
-      </div>
-    </Provider>
-  </UserProvider>
-);
+      </Provider>
+    </UserProvider>
+  );
+};
 
 export default layout;
