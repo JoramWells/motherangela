@@ -9,11 +9,12 @@ import TableContainer from '@/components/custom/table/TableContainer';
 import { Button } from '@/components/ui/button';
 import { useGetPayrollPeriodQuery } from '@/api/payroll/payrollPeriods';
 import { useGetAllPayrollEmployeePayCalculationByPayrollIDQuery } from '@/api/payroll/payrollEmployeePayCalculations.api';
+import { Skeleton } from '@/components/ui/skeleton';
 
 function PayrollDetails({ params }:{params:Promise<{id:string}>}) {
   const router = useRouter();
   const { id } = use(params);
-  const { data: periodData } = useGetPayrollPeriodQuery(id);
+  const { data: periodData, isLoading: isLoadingPeriod } = useGetPayrollPeriodQuery(id);
 
   const {
     data: payData, total: totalPay, search: searchPay, setSearch: setSearchPay,
@@ -30,16 +31,16 @@ function PayrollDetails({ params }:{params:Promise<{id:string}>}) {
       },
       {
         id: '2',
-        label: 'Payroll Records',
+        label: 'Payrolls',
         link: '/payroll',
       },
       {
         id: '3',
-        label: `${periodData?.payroll_description}`,
+        label: isLoadingPeriod ? <Skeleton className="p-2 w-[80px]" /> as unknown as string : `${periodData?.payroll_description}`,
         link: '',
       },
     ],
-    [periodData],
+    [periodData, isLoadingPeriod],
   );
 
   return (

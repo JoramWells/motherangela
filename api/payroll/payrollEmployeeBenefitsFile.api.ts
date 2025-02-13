@@ -1,6 +1,12 @@
 /* eslint-disable max-len */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { PaginatedResponse, PayrollEmployeeBenefitsFileInterface } from 'motherangela';
+import { PaginatedResponse, PayrollEmployeeBenefitsFileInterface, PayrollEmployeeRecordsInterface } from 'motherangela';
+
+export interface PayrollEmployeeDistinctBenefitsFileInterface{
+  count: number
+  employee_id: number
+  payroll_employee_record?: PayrollEmployeeRecordsInterface
+}
 
 export const payrollEmployeeBenefitsApi = createApi({
   reducerPath: 'payrollEmployeeBenefitsApi',
@@ -34,10 +40,27 @@ export const payrollEmployeeBenefitsApi = createApi({
     getPayrollEmployeeBenefit: builder.query({
       query: (id) => `detail/${id}`,
     }),
-    getAllPayrollEmployeeBenefitsFileByPayrollID: builder.query<PaginatedResponse<PayrollEmployeeBenefitsFileInterface>,
+    getAllPayrollEmployeeBenefitsFileByPayrollID: builder.query<PaginatedResponse<PayrollEmployeeDistinctBenefitsFileInterface>,
       {id?: string, page: number; pageSize: number; searchQuery: string,
-        employee_id?: string
+       }
 
+    >({
+      query: (params) => {
+        if (params) {
+          const {
+            id, page, pageSize, searchQuery,
+          } = params;
+          let queryString = '';
+          queryString += `page=${page}`;
+          queryString += `&pageSize=${pageSize}`;
+          queryString += `&searchQuery=${searchQuery}`;
+          return `/by-payroll-id/${id}/?${queryString}`;
+        }
+        return 'by-payroll-id';
+      },
+    }),
+    getAllPayrollEmployeeBenefitsFileByEmployeeID: builder.query<PaginatedResponse<PayrollEmployeeBenefitsFileInterface>,
+      {id?: string, employee_id?:string, page: number; pageSize: number; searchQuery: string,
        }
 
     >({
@@ -51,9 +74,9 @@ export const payrollEmployeeBenefitsApi = createApi({
           queryString += `&pageSize=${pageSize}`;
           queryString += `&employee_id=${employee_id}`;
           queryString += `&searchQuery=${searchQuery}`;
-          return `/by-payroll-id/${id}/?${queryString}`;
+          return `/by-employee-id/${id}/?${queryString}`;
         }
-        return 'by-payroll-id';
+        return 'by-employee-id';
       },
     }),
     updatePayrollEmployeeBenefit: builder.mutation({
@@ -77,5 +100,5 @@ export const payrollEmployeeBenefitsApi = createApi({
 export const {
   useGetAllPayrollEmployeeBenefitsQuery, useAddPayrollEmployeeBenefitsMutation,
   useGetPayrollEmployeeBenefitQuery, useGetAllPayrollEmployeeBenefitsFileByPayrollIDQuery,
-  useUpdatePayrollEmployeeBenefitMutation, useDeletePayrollEmployeeBenefitMutation,
+  useUpdatePayrollEmployeeBenefitMutation, useDeletePayrollEmployeeBenefitMutation, useGetAllPayrollEmployeeBenefitsFileByEmployeeIDQuery,
 } = payrollEmployeeBenefitsApi;

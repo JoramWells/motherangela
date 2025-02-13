@@ -1,24 +1,26 @@
 'use client';
 
 import React, { use, useMemo } from 'react';
+import { useGetAllPayrollEmployeeBenefitsFileByEmployeeIDQuery } from '@/api/payroll/payrollEmployeeBenefitsFile.api';
+import { employeeBenefitsDetailColumns } from '@/app/(payroll)/column';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { useGetAllPayrollEmployeeBenefitsFileByPayrollIDQuery } from '@/api/payroll/payrollEmployeeBenefitsFile.api';
-import { employeeBenefitsColumns } from '@/app/(payroll)/column';
-import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
+import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import { useGetPayrollPeriodQuery } from '@/api/payroll/payrollPeriods';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export default function Benefits({ params }:{params:Promise<{id:string}>}) {
-  const { id } = use(params);
+function PayrollDetailsPage({ params }:{params:Promise<{id:string, employeeID: string}>}) {
+  const { id, employeeID } = use(params);
   const { data: periodData, isLoading: isLoadingPeriod } = useGetPayrollPeriodQuery(id);
 
   const {
-    data: profileData, total, search, setSearch,
+    data, total, search, setSearch,
   } = usePaginatedSearch({
-    fetchQuery: useGetAllPayrollEmployeeBenefitsFileByPayrollIDQuery,
+    fetchQuery: useGetAllPayrollEmployeeBenefitsFileByEmployeeIDQuery,
+    employee_id: employeeID,
     id,
   });
+  console.log(data);
 
   const listItems = useMemo(
     () => [
@@ -37,9 +39,13 @@ export default function Benefits({ params }:{params:Promise<{id:string}>}) {
         label: 'Benefits',
         link: '',
       },
-
+      {
+        id: '4',
+        label: data[0]?.payroll_employee_record?.full_name?.split(' ')[0] || '',
+        link: '',
+      },
     ],
-    [],
+    [data],
   );
 
   return (
@@ -51,8 +57,8 @@ export default function Benefits({ params }:{params:Promise<{id:string}>}) {
 
         <TableContainer
           title={isLoadingPeriod ? <Skeleton className="p-3 w-[130px]" /> as unknown as string : ` ${periodData?.payroll_description} Employee Benefits`}
-          columns={employeeBenefitsColumns(id)}
-          data={profileData ?? []}
+          columns={employeeBenefitsDetailColumns}
+          data={data ?? []}
           total={total as number}
           search={search}
           setSearch={setSearch}
@@ -61,3 +67,5 @@ export default function Benefits({ params }:{params:Promise<{id:string}>}) {
     </>
   );
 }
+
+export default PayrollDetailsPage;

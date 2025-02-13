@@ -49,7 +49,7 @@ function AddPayrollPage() {
   });
 
   const payPeriodOptionsData = useCallback(() => payrollPayData?.map((item) => ({
-    id: item.pay_period_id,
+    id: item.pay_period_id.toString(),
     label: item.pay_description,
   })), [payrollPayData])();
 

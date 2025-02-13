@@ -50,7 +50,7 @@ const DL = [
 
 const layout = ({ children }: { children: ReactNode }) => {
   const params = useParams();
-  const { id } = params;
+  const { id, employeeID } = params;
   const pathname = usePathname();
 
   const DL2 = useMemo(() => [
@@ -110,6 +110,7 @@ const layout = ({ children }: { children: ReactNode }) => {
 
   if (pathname === `/payroll/${id}`
 || pathname === `/payroll/${id}/benefits`
+|| pathname === `/payroll/${id}/benefits/${employeeID}`
 || pathname === `/payroll/${id}/deductions`
 || pathname === `/payroll/${id}/payments`
 || pathname === `/payroll/${id}/nhif`

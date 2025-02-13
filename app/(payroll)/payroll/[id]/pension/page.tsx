@@ -17,7 +17,7 @@ const listItems = [
   },
   {
     id: '2',
-    label: 'In Patient',
+    label: 'Pension',
     link: '',
   },
 ];
@@ -41,7 +41,7 @@ export default function Benefits({ params }:{params:Promise<{id: string}>}) {
       />
       <div className="p-2">
         <TableContainer
-          title="Employee NSSF File"
+          title="Pension"
           data={data}
           columns={payrollEmployeePensionColumn}
           total={total as number}
