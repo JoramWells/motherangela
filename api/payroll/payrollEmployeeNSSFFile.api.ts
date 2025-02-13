@@ -36,6 +36,25 @@ export const payrollEmployeeNSSFFileApi = createApi({
     getPayrollEmployeeNSSFFile: builder.query({
       query: (id) => `detail/${id}`,
     }),
+    getPayrollEmployeeNSSFFilesByPayrollID:
+        builder.query<PaginatedResponse<PayrollEmployeeNSSFFileInterface>,
+              {id?: string, page: number; pageSize: number; searchQuery: string }
+
+            >({
+              query: (params) => {
+                if (params) {
+                  const {
+                    id, page, pageSize, searchQuery,
+                  } = params;
+                  let queryString = '';
+                  queryString += `page=${page}`;
+                  queryString += `&pageSize=${pageSize}`;
+                  queryString += `&searchQuery=${searchQuery}`;
+                  return `/by-payroll-id/${id}/?${queryString}`;
+                }
+                return 'by-payroll-id';
+              },
+            }),
     updatePayrollEmployeeNSSFFile: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `edit/${id}`,
@@ -57,5 +76,5 @@ export const payrollEmployeeNSSFFileApi = createApi({
 export const {
   useGetAllPayrollEmployeeNSSFFilesQuery, useAddPayrollEmployeeNSSFFileMutation,
   useGetPayrollEmployeeNSSFFileQuery, useUpdatePayrollEmployeeNSSFFileMutation,
-  useDeletePayrollEmployeeNSSFFileMutation,
+  useDeletePayrollEmployeeNSSFFileMutation, useGetPayrollEmployeeNSSFFilesByPayrollIDQuery,
 } = payrollEmployeeNSSFFileApi;

@@ -36,6 +36,25 @@ export const payrollEmployeePensionApi = createApi({
     getPayrollEmployeePension: builder.query({
       query: (id) => `detail/${id}`,
     }),
+    getPayrollEmployeePensionByPayrollID:
+            builder.query<PaginatedResponse<PayrollEmployeePensionInterface>,
+                  {id?: string, page: number; pageSize: number; searchQuery: string }
+
+                >({
+                  query: (params) => {
+                    if (params) {
+                      const {
+                        id, page, pageSize, searchQuery,
+                      } = params;
+                      let queryString = '';
+                      queryString += `page=${page}`;
+                      queryString += `&pageSize=${pageSize}`;
+                      queryString += `&searchQuery=${searchQuery}`;
+                      return `/by-payroll-id/${id}/?${queryString}`;
+                    }
+                    return 'by-payroll-id';
+                  },
+                }),
     updatePayrollEmployeePension: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `edit/${id}`,
@@ -57,5 +76,5 @@ export const payrollEmployeePensionApi = createApi({
 export const {
   useGetAllPayrollEmployeePensionsQuery, useAddPayrollEmployeePensionMutation,
   useGetPayrollEmployeePensionQuery, useUpdatePayrollEmployeePensionMutation,
-  useDeletePayrollEmployeePensionMutation,
+  useDeletePayrollEmployeePensionMutation, useGetPayrollEmployeePensionByPayrollIDQuery,
 } = payrollEmployeePensionApi;

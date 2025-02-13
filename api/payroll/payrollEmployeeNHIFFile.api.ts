@@ -36,6 +36,25 @@ export const payrollEmployeeNHIFFileApi = createApi({
     getPayrollEmployeeNHIFFile: builder.query({
       query: (id) => `detail/${id}`,
     }),
+    getPayrollEmployeeNHIFFilesByPayrollID:
+    builder.query<PaginatedResponse<PayrollEmployeeNHIFFileInterface>,
+          {id?: string, page: number; pageSize: number; searchQuery: string }
+
+        >({
+          query: (params) => {
+            if (params) {
+              const {
+                id, page, pageSize, searchQuery,
+              } = params;
+              let queryString = '';
+              queryString += `page=${page}`;
+              queryString += `&pageSize=${pageSize}`;
+              queryString += `&searchQuery=${searchQuery}`;
+              return `/by-payroll-id/${id}/?${queryString}`;
+            }
+            return 'by-payroll-id';
+          },
+        }),
     updatePayrollEmployeeNHIFFile: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `edit/${id}`,
@@ -57,5 +76,5 @@ export const payrollEmployeeNHIFFileApi = createApi({
 export const {
   useGetAllPayrollEmployeeNHIFFilesQuery, useAddPayrollEmployeeNHIFFileMutation,
   useGetPayrollEmployeeNHIFFileQuery, useUpdatePayrollEmployeeNHIFFileMutation,
-  useDeletePayrollEmployeeNHIFFileMutation,
+  useDeletePayrollEmployeeNHIFFileMutation, useGetPayrollEmployeeNHIFFilesByPayrollIDQuery,
 } = payrollEmployeeNHIFFileApi;

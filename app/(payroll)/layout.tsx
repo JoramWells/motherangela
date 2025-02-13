@@ -1,6 +1,9 @@
+/* eslint-disable react/jsx-closing-tag-location */
+
 'use client';
 
 import {
+  ClockAlert,
   HandCoins,
   Landmark,
   LayoutDashboardIcon,
@@ -96,6 +99,12 @@ const layout = ({ children }: { children: ReactNode }) => {
         NS
       </div>,
     },
+    {
+      id: '7',
+      label: 'Pension',
+      link: `/payroll/${id}/pension`,
+      icon: <ClockAlert size={17} />,
+    },
 
   ], [id]);
 
@@ -103,6 +112,9 @@ const layout = ({ children }: { children: ReactNode }) => {
 || pathname === `/payroll/${id}/benefits`
 || pathname === `/payroll/${id}/deductions`
 || pathname === `/payroll/${id}/payments`
+|| pathname === `/payroll/${id}/nhif`
+|| pathname === `/payroll/${id}/nssf`
+|| pathname === `/payroll/${id}/pension`
 
   ) {
     return (

@@ -4,6 +4,9 @@ import {
   PayrollEmployeeBenefitsFileInterface, PayrollEmployeeDeductionInterface,
   PayrollEmployeeLoanRecordsInterface, PayrollEmployeeMonthlyDeductionFileInterface,
   PayrollEmployeeMonthlyDeductionInterface,
+  PayrollEmployeeNHIFFileInterface,
+  PayrollEmployeeNSSFFileInterface,
+  PayrollEmployeePensionInterface,
   PayrollEmployeeRecordsInterface,
   PayrollPeriodEmployeePayCalculationsInterface, PayrollPeriodsInterface,
 } from 'motherangela';
@@ -526,5 +529,199 @@ PayrollEmployeeMonthlyDeductionFileInterface>[] = [
         View
       </Link>
     ),
+  },
+];
+
+//
+export const payrollEmployeeNHIFColumn:
+ColumnDef<PayrollEmployeeNHIFFileInterface>[] = [
+
+  {
+    accessorKey: 'payroll_employee_record.fullname',
+    header: 'Staff Name',
+    cell: ({ row }) => {
+      const { full_name } = row.original.payroll_employee_record || {};
+      const nameArr = full_name?.split(' ');
+      return (
+        <div className="flex-row flex space-x-2 items-center">
+          <Avatar
+            name={row.original.payroll_employee_record?.full_name as string}
+          />
+          <Link
+            className="capitalize text-[12px] text-cyan-500 hover:underline "
+            href={`/payroll/payments/${row.original.employee_nhif_file_id}/pay?payroll_id=${row.original.payroll_id}&employee_id=${row.original.employee_id}`}
+          >
+            {nameArr ? `${nameArr[0]} ${nameArr[1]?.charAt(1)}.` : 'No name'}
+          </Link>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: 'employee_share',
+    header: 'Employee Share',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {formatCurrency(row.original.employee_share) ?? 'No Advance'}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'gross_pay',
+    header: 'Gross Pay',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {formatCurrency(Number(row.original?.gross_pay)) ?? 'N/A'}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'action',
+    header: 'Action',
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <Button
+          size="sm"
+          variant="outline"
+          className="shadow-none"
+          onClick={() => router.push(`/payroll/payments/${row.original.employee_nhif_file_id}/pay?payroll_id=${row.original.payroll_id}&employee_id=${row.original.employee_id}`)}
+        >
+          <MoveRight />
+        </Button>
+      );
+    },
+  },
+];
+
+//
+export const payrollEmployeeNSSFFileColumn:
+ColumnDef<PayrollEmployeeNSSFFileInterface>[] = [
+
+  {
+    accessorKey: 'payroll_employee_record.fullname',
+    header: 'Staff Name',
+    cell: ({ row }) => {
+      const { full_name } = row.original.payroll_employee_record || {};
+      const nameArr = full_name?.split(' ');
+      return (
+        <div className="flex-row flex space-x-2 items-center">
+          <Avatar
+            name={row.original.payroll_employee_record?.full_name as string}
+          />
+          <Link
+            className="capitalize text-[12px] text-cyan-500 hover:underline "
+            href={`/payroll/payments/${row.original.employee_nssf_file_id}/pay?payroll_id=${row.original.payroll_id}&employee_id=${row.original.employee_id}`}
+          >
+            {nameArr ? `${nameArr[0]} ${nameArr[1]?.charAt(1)}.` : 'No name'}
+          </Link>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: 'employee_share',
+    header: 'Employee Share',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {formatCurrency(row.original.employee_share) ?? 'No Advance'}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'gross_pay',
+    header: 'Gross Pay',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {formatCurrency(Number(row.original?.gross_pay)) ?? 'N/A'}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'action',
+    header: 'Action',
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <Button
+          size="sm"
+          variant="outline"
+          className="shadow-none"
+          onClick={() => router.push(`/payroll/payments/${row.original.employee_nssf_file_id}/pay?payroll_id=${row.original.payroll_id}&employee_id=${row.original.employee_id}`)}
+        >
+          <MoveRight />
+        </Button>
+      );
+    },
+  },
+];
+
+export const payrollEmployeePensionColumn:
+ColumnDef<PayrollEmployeePensionInterface>[] = [
+
+  {
+    accessorKey: 'payroll_employee_record.fullname',
+    header: 'Staff Name',
+    cell: ({ row }) => {
+      const { full_name } = row.original.payroll_employee_record || {};
+      const nameArr = full_name?.split(' ');
+      return (
+        <div className="flex-row flex space-x-2 items-center">
+          <Avatar
+            name={row.original.payroll_employee_record?.full_name as string}
+          />
+          <Link
+            className="capitalize text-[12px] text-cyan-500 hover:underline "
+            href={`/payroll/payments/${row.original.employee_pension_id}/pay?payroll_id=${row.original.payroll_id}&employee_id=${row.original.employee_id}`}
+          >
+            {nameArr ? `${nameArr[0]} ${nameArr[1]?.charAt(1)}.` : 'No name'}
+          </Link>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: 'employer_share',
+    header: 'Employer Share',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {formatCurrency(row.original.employer_share) ?? 'No Advance'}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'employee_share',
+    header: 'Employee Share',
+    cell: ({ row }) => (
+      <p className="text-[12px] text-slate-500">
+        {formatCurrency(row.original.employee_share) ?? 'No Advance'}
+      </p>
+    ),
+  },
+  {
+    accessorKey: 'gross_pay',
+    header: 'Gross Pay',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {formatCurrency(Number(row.original?.basic_pay)) ?? 'N/A'}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'action',
+    header: 'Action',
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <Button
+          size="sm"
+          variant="outline"
+          className="shadow-none"
+          onClick={() => router.push(`/payroll/payments/${row.original.employee_pension_id}/pay?payroll_id=${row.original.payroll_id}&employee_id=${row.original.employee_id}`)}
+        >
+          <MoveRight />
+        </Button>
+      );
+    },
   },
 ];
