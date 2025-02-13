@@ -61,6 +61,8 @@ import { residenceDetailsApi } from '@/api/patients/residence-details.api';
 import { maternityVisitsApi } from '@/api/maternity/maternity-visits.api';
 import { maternityPostnatalExaminationApi } from '@/api/maternity/maternity-postnatal-examination';
 import { maternityPhysicalExaminationApi } from '@/api/maternity/maternity-physical-examination.api';
+import { payrollEmployeeCategoryApi } from '@/api/payroll/payrollEmployeeCategory.api';
+import { payrollPayPeriodApi } from '@/api/payroll/payrollPayPeriods.api';
 
 export const store = configureStore({
   reducer: {
@@ -114,6 +116,8 @@ export const store = configureStore({
     [payrollMonthlyDeductionsApi.reducerPath]: payrollMonthlyDeductionsApi.reducer,
     [payrollEmployeeLoanRecordsApi.reducerPath]: payrollEmployeeLoanRecordsApi.reducer,
     [payrollEmployeePayCalculationsApi.reducerPath]: payrollEmployeePayCalculationsApi.reducer,
+    [payrollEmployeeCategoryApi.reducerPath]: payrollEmployeeCategoryApi.reducer,
+    [payrollPayPeriodApi.reducerPath]: payrollPayPeriodApi.reducer,
     [inpatientTreatmentChartApi.reducerPath]: inpatientTreatmentChartApi.reducer,
     [inpatientDoctorVisitsApi.reducerPath]: inpatientDoctorVisitsApi.reducer,
     [inpatientNurseVisitsApi.reducerPath]: inpatientNurseVisitsApi.reducer,
@@ -177,6 +181,8 @@ export const store = configureStore({
     .concat(payrollEmployeePayCalculationsApi.middleware)
     .concat(payrollEmployeeMonthlyDeductionsFileApi.middleware)
     .concat(payrollEmployeePayrollDeductionsApi.middleware)
+    .concat(payrollEmployeeCategoryApi.middleware)
+    .concat(payrollPayPeriodApi.middleware)
     .concat(inpatientTreatmentChartApi.middleware)
     .concat(inpatientDoctorVisitsApi.middleware)
     .concat(inpatientNurseVisitsApi.middleware)

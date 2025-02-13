@@ -286,16 +286,21 @@ export const payrollColumns: ColumnDef<PayrollPeriodsInterface>[] = [
     ),
   },
   {
-    accessorKey: 'Action',
-    header: 'Action',
-    cell: ({ row }) => (
-      <Link
-        className="text-[12px]"
-        href={`/payroll/${row.original.payroll_id}`}
-      >
-        View
-      </Link>
-    ),
+    accessorKey: 'action',
+    header: 'Details',
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <Button
+          size="sm"
+          className="shadow-none text-sky-600 border-sky-200"
+          variant="outline"
+          onClick={() => router.push(`/payroll/${row.original.payroll_id}`)}
+        >
+          <MoveRight />
+        </Button>
+      );
+    },
   },
 ];
 

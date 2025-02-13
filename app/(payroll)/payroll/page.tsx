@@ -1,6 +1,7 @@
 'use client';
 
 import React, { Suspense } from 'react';
+import { useRouter } from 'next/navigation';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
 // import { maternityAntenatalProfileColumns } from "../column";
 import { useGetAllPayrollPeriodsQuery } from '@/api/payroll/payrollPeriods';
@@ -26,6 +27,8 @@ function PayrollPage() {
   const {
     data, total, search, setSearch,
   } = usePaginatedSearch({ fetchQuery: useGetAllPayrollPeriodsQuery });
+  const router = useRouter();
+  console.log(data);
   return (
     <>
       <BreadcrumbNav
@@ -44,6 +47,7 @@ function PayrollPage() {
             <Button
               size="sm"
               className="shadow-none bg-emerald-600 hover:bg-emerald-700"
+              onClick={() => router.push('/payroll/add')}
             >
               NEW
             </Button>
