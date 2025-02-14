@@ -1,6 +1,8 @@
 'use client';
 
-import React, { useCallback, useMemo, useState } from 'react';
+import React, {
+  Suspense, useCallback, useMemo, useState,
+} from 'react';
 import moment from 'moment';
 import { Loader2 } from 'lucide-react';
 import InputSelect from '@/components/custom/forms/InputSelect';
@@ -171,4 +173,10 @@ function AddPayrollPage() {
   );
 }
 
-export default AddPayrollPage;
+export default function WrappedAddPayrollPage() {
+  return (
+    <Suspense>
+      <AddPayrollPage />
+    </Suspense>
+  );
+}
