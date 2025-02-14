@@ -112,6 +112,7 @@ const layout = ({ children }: { children: ReactNode }) => {
 || pathname === `/payroll/${id}/benefits`
 || pathname === `/payroll/${id}/benefits/${employeeID}`
 || pathname === `/payroll/${id}/deductions`
+|| pathname === `/payroll/${id}/deductions/${employeeID}`
 || pathname === `/payroll/${id}/payments`
 || pathname === `/payroll/${id}/nhif`
 || pathname === `/payroll/${id}/nssf`

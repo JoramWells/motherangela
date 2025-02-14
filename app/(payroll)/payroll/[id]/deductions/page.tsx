@@ -1,13 +1,13 @@
 'use client';
 
-import React, { Suspense } from 'react';
+import React, { use } from 'react';
 import { useRouter } from 'next/navigation';
 import BreadcrumbNav from '@/components/custom/nav/BreadcrumbNav';
-import { useGetAllPayrollEmployeeDeductionsQuery } from '@/api/payroll/payrollEmployeeDeductions';
 import { Button } from '@/components/ui/button';
 import usePaginatedSearch from '@/hooks/usePaginatedSearch';
 import TableContainer from '@/components/custom/table/TableContainer';
 import { payrollEmployeeDeductionsColumns } from '@/app/(payroll)/column';
+import { useGetAllPayrollEmployeeMonthlyDeductionFileByPayrollIDQuery } from '@/api/payroll/payrollEmployeeMonthlyDeducationsFile.api';
 
 const listItems = [
   {
@@ -22,12 +22,19 @@ const listItems = [
   },
 ];
 
-function Deduction() {
+export default function Deduction({ params }:{params:Promise<{id:string}>}) {
   const router = useRouter();
+  const { id } = use(params);
 
   const {
     data, total, search, setSearch,
-  } = usePaginatedSearch({ fetchQuery: useGetAllPayrollEmployeeDeductionsQuery });
+  } = usePaginatedSearch({
+    fetchQuery:
+    useGetAllPayrollEmployeeMonthlyDeductionFileByPayrollIDQuery,
+    id,
+  });
+
+  console.log(data);
 
   return (
     <>
@@ -37,7 +44,7 @@ function Deduction() {
       <div className="p-2">
         <TableContainer
           title="Payroll Deductions"
-          columns={payrollEmployeeDeductionsColumns}
+          columns={payrollEmployeeDeductionsColumns(id)}
           data={data ?? []}
           total={total as number}
           search={search}
@@ -55,13 +62,5 @@ function Deduction() {
 
       </div>
     </>
-  );
-}
-
-export default function WrappedDeduction() {
-  return (
-    <Suspense>
-      <Deduction />
-    </Suspense>
   );
 }

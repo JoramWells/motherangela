@@ -20,6 +20,7 @@ import Avatar from '@/components/custom/Avatar';
 import { Button } from '@/components/ui/button';
 import { formatCurrency, obfuscatePhoneNumber } from '@/utils/number';
 import { PayrollEmployeeDistinctBenefitsFileInterface } from '@/api/payroll/payrollEmployeeBenefitsFile.api';
+import { PayrollEmployeeMonthlyDistinctDeductionFileInterface } from '@/api/payroll/payrollEmployeeMonthlyDeducationsFile.api';
 
 export const employeeRecordsColumn: ColumnDef<PayrollEmployeeRecordsInterface>[] = [
   {
@@ -208,7 +209,60 @@ export const employeeBenefitsDetailColumns: ColumnDef<PayrollEmployeeBenefitsFil
 ];
 
 //
-export const payrollEmployeeDeductionsColumns: ColumnDef<PayrollEmployeeDeductionInterface>[] = [
+export const payrollEmployeeDeductionsColumns = (payroll_id: string):
+ ColumnDef<PayrollEmployeeMonthlyDistinctDeductionFileInterface>[] => [
+  {
+    accessorKey: 'payroll_employee_record.fullname',
+    header: 'Name',
+    cell: ({ row }) => {
+      const { full_name } = row.original.payroll_employee_record || {};
+      const nameArr = full_name?.split(' ');
+      return (
+        <div className="flex-row flex space-x-2 items-center">
+          <Avatar
+            name={row.original.payroll_employee_record?.full_name as string}
+          />
+          <Link
+            className="capitalize text-[12px] text-cyan-500 hover:underline "
+            href="/"
+          >
+            {nameArr ? `${nameArr[0]} ${nameArr[1]?.charAt(1)}.` : 'No name'}
+          </Link>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: 'count',
+    header: 'Deductions',
+    cell: ({ row }) => (
+      <div className="text-[12px] text-slate-500 ">
+        {row.original?.count ?? 'N/A'}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'Action',
+    header: 'View',
+    cell: ({ row }) => {
+      const router = useRouter();
+      return (
+        <Button
+          size="sm"
+          variant="outline"
+          className="shadow-none"
+          onClick={() => router.push(`/payroll/${payroll_id}/deductions/${row.original.employee_id}`)}
+        >
+          <MoveRight />
+        </Button>
+      );
+    },
+  },
+];
+
+//
+export const payrollEmployeeDeductionsDetailColumns:
+ColumnDef<PayrollEmployeeDeductionInterface>[] = [
   {
     accessorKey: 'payroll_employee_record.fullname',
     header: 'Name',
@@ -581,14 +635,26 @@ PayrollEmployeeMonthlyDeductionFileInterface>[] = [
   },
   {
     accessorKey: 'Action',
-    header: 'Action',
-    cell: ({ row }) => (
-      <Link
-        className="text-[12px]"
-        href={`/maternity/${row.original.monthly_deduction_file_id}`}
+    header: 'View',
+    cell: () => (
+      <div
+        className="flex space-x-2"
       >
-        View
-      </Link>
+        <Button
+          size="sm"
+          variant="outline"
+          className="shadow-none text-blue-500"
+        >
+          <Edit size={14} />
+        </Button>
+        <Button
+          size="sm"
+          variant="outline"
+          className="shadow-none text-red-500"
+        >
+          <Trash2 size={14} />
+        </Button>
+      </div>
     ),
   },
 ];

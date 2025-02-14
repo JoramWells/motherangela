@@ -17,7 +17,7 @@ const listItems = [
   },
   {
     id: '2',
-    label: 'In Patient',
+    label: 'NHIF',
     link: '',
   },
 ];
@@ -33,7 +33,6 @@ export default function Benefits({ params }:{params:Promise<{id: string}>}) {
   });
 
   //
-  console.log(data);
   return (
     <>
       <BreadcrumbNav

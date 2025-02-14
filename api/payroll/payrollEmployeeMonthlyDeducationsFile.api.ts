@@ -1,6 +1,12 @@
 /* eslint-disable max-len */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { PaginatedResponse, PayrollEmployeeMonthlyDeductionFileInterface } from 'motherangela';
+import { PaginatedResponse, PayrollEmployeeMonthlyDeductionFileInterface, PayrollEmployeeRecordsInterface } from 'motherangela';
+
+export interface PayrollEmployeeMonthlyDistinctDeductionFileInterface{
+  count: number
+  employee_id: number
+  payroll_employee_record?: PayrollEmployeeRecordsInterface
+}
 
 export const payrollEmployeeMonthlyDeductionsFileApi = createApi({
   reducerPath: 'payrollEmployeeMonthlyDeductionsFileApi',
@@ -34,9 +40,8 @@ export const payrollEmployeeMonthlyDeductionsFileApi = createApi({
     getPayrollEmployeeMonthlyDeductionFiles: builder.query({
       query: (id) => `detail/${id}`,
     }),
-    getAllPayrollEmployeeMonthlyDeductionFileByPayrollID: builder.query<PaginatedResponse<PayrollEmployeeMonthlyDeductionFileInterface>,
+    getAllPayrollEmployeeMonthlyDeductionFileByPayrollID: builder.query<PaginatedResponse<PayrollEmployeeMonthlyDistinctDeductionFileInterface>,
       {id?: string, page: number; pageSize: number; searchQuery: string,
-        employee_id?: string
 
        }
 
@@ -44,18 +49,37 @@ export const payrollEmployeeMonthlyDeductionsFileApi = createApi({
       query: (params) => {
         if (params) {
           const {
-            id, page, pageSize, searchQuery, employee_id,
+            id, page, pageSize, searchQuery,
           } = params;
           let queryString = '';
           queryString += `page=${page}`;
           queryString += `&pageSize=${pageSize}`;
-          queryString += `&employee_id=${employee_id}`;
           queryString += `&searchQuery=${searchQuery}`;
           return `/by-payroll-id/${id}/?${queryString}`;
         }
         return 'by-payroll-id';
       },
     }),
+    getAllPayrollEmployeeMonthlyDeductionFileByEmployeeID: builder.query<PaginatedResponse<PayrollEmployeeMonthlyDeductionFileInterface>,
+          {id?: string, employee_id?:string, page: number; pageSize: number; searchQuery: string,
+           }
+
+        >({
+          query: (params) => {
+            if (params) {
+              const {
+                id, page, pageSize, searchQuery, employee_id,
+              } = params;
+              let queryString = '';
+              queryString += `page=${page}`;
+              queryString += `&pageSize=${pageSize}`;
+              queryString += `&employee_id=${employee_id}`;
+              queryString += `&searchQuery=${searchQuery}`;
+              return `/by-employee-id/${id}/?${queryString}`;
+            }
+            return 'by-employee-id';
+          },
+        }),
     updatePayrollEmployeeMonthlyDeductionFiles: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `update${id}`,
@@ -78,4 +102,5 @@ export const {
   useGetAllPayrollEmployeeMonthlyDeductionFilesQuery, useAddPayrollEmployeeMonthlyDeductionFilesMutation,
   useGetPayrollEmployeeMonthlyDeductionFilesQuery, useGetAllPayrollEmployeeMonthlyDeductionFileByPayrollIDQuery,
   useUpdatePayrollEmployeeMonthlyDeductionFilesMutation, useDeletePayrollEmployeeMonthlyDeductionFilesMutation,
+  useGetAllPayrollEmployeeMonthlyDeductionFileByEmployeeIDQuery,
 } = payrollEmployeeMonthlyDeductionsFileApi;
