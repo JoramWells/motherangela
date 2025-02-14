@@ -21,6 +21,12 @@ const DL = [
     icon: <LayoutDashboardIcon size={17} />,
   },
   {
+    id: '2',
+    label: 'App Modules',
+    link: 'app-modules',
+    icon: <House size={17} />,
+  },
+  {
     id: '7',
     label: 'Hospitals',
     link: 'hospitals',

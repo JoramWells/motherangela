@@ -67,9 +67,11 @@ import { payrollEmployeeNHIFFileApi } from '@/api/payroll/payrollEmployeeNHIFFil
 import { payrollEmployeeNSSFFileApi } from '@/api/payroll/payrollEmployeeNSSFFile.api';
 import { payrollEmployeePensionApi } from '@/api/payroll/payrollEmployeePension.api';
 import { payrollEmployeeTaxFileApi } from '@/api/payroll/payrollEmployeeTaxFile.api';
+import { appModulesApi } from '@/api/app-modules/appModule.api';
 
 export const store = configureStore({
   reducer: {
+    [appModulesApi.reducerPath]: appModulesApi.reducer,
     [patientsApi.reducerPath]: patientsApi.reducer,
     [patientAccountApi.reducerPath]: patientAccountApi.reducer,
     [peopleRelationsApi.reducerPath]: peopleRelationsApi.reducer,
@@ -149,6 +151,7 @@ export const store = configureStore({
     immutableCheck: false,
     serializableCheck: false,
   })
+    .concat(appModulesApi.middleware)
     .concat(patientsApi.middleware)
     .concat(patientAccountApi.middleware)
     .concat(peopleRelationsApi.middleware)
