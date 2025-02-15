@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { type AppModuleInterface } from 'motherangela';
 import { Button } from '@/components/ui/button';
 // import { columns } from './columns'
@@ -27,8 +27,8 @@ const dataList2 = [
   },
   {
     id: '2',
-    label: 'Patients',
-    link: '/',
+    label: 'App Modules',
+    link: '',
   },
 ];
 
@@ -39,22 +39,10 @@ function AppModulesPage() {
   } = usePaginatedSearch({
     fetchQuery: useGetAllAppModulesQuery,
   });
-  console.log(data);
   return (
     <div>
-      <div className="relative">
-        <BreadcrumbNav listItems={dataList2} />
+      <BreadcrumbNav listItems={dataList2} />
 
-        <Button
-          className="absolute right-2 top-2"
-          size="sm"
-          onClick={() => {
-            router.push('/administrator/app-modules/add');
-          }}
-        >
-          Add
-        </Button>
-      </div>
       <div className="p-2">
         <div className="bg-white rounded-lg p-4">
           <TableContainer
@@ -66,6 +54,17 @@ function AppModulesPage() {
             search={search}
             setSearch={setSearch}
             // debounceSearch={debounceSearch}
+            rightLabel={(
+              <Button
+                className="shadow-none bg-emerald-600 hover:bg-emerald-700"
+                size="sm"
+                onClick={() => {
+                  router.push('/superadmin/app-modules/add');
+                }}
+              >
+                Add
+              </Button>
+      )}
           />
         </div>
       </div>
@@ -73,4 +72,10 @@ function AppModulesPage() {
   );
 }
 
-export default AppModulesPage;
+export default function WrappedAppModulesPage() {
+  return (
+    <Suspense>
+      <AppModulesPage />
+    </Suspense>
+  );
+}

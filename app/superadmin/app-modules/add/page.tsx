@@ -4,6 +4,7 @@
 
 import React, { type FormEvent, useState } from 'react';
 import axios from 'axios';
+import { Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import InputText from '@/components/custom/forms/InputText';
 import { Textarea } from '@/components/ui/textarea';
@@ -17,7 +18,7 @@ function AddApp() {
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
   const [description, setDescription] = useState('');
-
+  const [isLoadingArticleSave, setIsLoadingArticleSave] = useState(false);
   //
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,13 +34,13 @@ function AddApp() {
 
     formData.append('hospitalID', user?.hospital_id as string);
 
-    // setIsLoadingArticleSave(true)
+    setIsLoadingArticleSave(true);
     await axios.post(URL, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
-    // setIsLoadingArticleSave(false);
+    setIsLoadingArticleSave(false);
   };
   return (
     <div className="p-2">
@@ -71,9 +72,18 @@ function AddApp() {
           onChange={setFile}
           // value={file}
         />
-        <Button size="sm" type="submit">
-          Save
-        </Button>
+        <div
+          className="flex justify-end"
+        >
+          <Button
+            size="sm"
+            type="submit"
+            className="bg-emerald-600 hover:bg-emerald-700 shadow-none"
+          >
+            {isLoadingArticleSave && <Loader2 className="animate-spin mr-2" size={14} />}
+            Save
+          </Button>
+        </div>
       </form>
     </div>
   );

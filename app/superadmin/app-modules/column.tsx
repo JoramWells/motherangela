@@ -24,7 +24,7 @@ export const columns: Array<ColumnDef<AppModuleInterface>> = [
         // fill
         // objectFit='contain'
         // priority
-        className="rounded-full"
+        className=""
         src={`${process.env.NEXT_PUBLIC_API_URL}/api/root-server/${row.original.img}`}
         style={{
           width: '25px',
@@ -75,7 +75,7 @@ export const columns: Array<ColumnDef<AppModuleInterface>> = [
           size="sm"
           variant="outline"
           onClick={() => {
-            router.push(`/administrator/app-modules/${row.original.id}`);
+            router.push(`/superadmin/app-modules/${row.original.id}`);
           }}
           className="hover:bg-blue-200 hover:text-blue-200 p-2 shadow-none  rounded-full flex items-center justify-center"
         >
