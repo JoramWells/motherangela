@@ -6,7 +6,9 @@
 // import "../../globals.css";
 // import Link from 'next/link'
 import { ChevronRight, ChevronDown } from 'lucide-react';
-import { ReactNode, useMemo, useState } from 'react';
+import {
+  ReactNode, useEffect, useMemo, useState,
+} from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -40,6 +42,18 @@ export function SidebarCollapseButton({
     return pathname.includes(link);
   }, [pathname, link]);
 
+  const [isLinkActive, setIsLinkActive] = useState(false);
+
+  useEffect(() => {
+    const arr: string[] = [];
+    if (itemList && itemList?.length > 0) {
+      itemList.map((item) => arr.push(item.link));
+    }
+    setIsLinkActive(arr.includes(pathname));
+  }, [itemList, pathname]);
+
+  // console.log(isL)
+
   const onToggle = () => {
     setVisible((prev) => !prev);
   };
@@ -50,7 +64,7 @@ export function SidebarCollapseButton({
         onClick={onToggle}
         className={`flex items-center text-[12px]  pl-2 pr-4 justify-between text-[#F3FAFF]/[.8]  text-sm rounded-none w-full bg-transparent shadow-none
         overflow-y-auto hover:bg-sky-900 transition delay-150 ease-in-out hover:text-[#F3FAFF] ${
-          isActive && 'bg-gradient-to-r from-sky-700 to-sky-950 text-white border-l-4 rounded-l-sm'
+         (isLinkActive || isActive) && 'bg-gradient-to-r from-sky-700 to-sky-950 text-white border-l-4 rounded-l-sm'
         }
         `}
       >
@@ -65,7 +79,6 @@ export function SidebarCollapseButton({
             >
               {label}
               {' '}
-              {isActive}
             </p>
           ) : (
             <Link

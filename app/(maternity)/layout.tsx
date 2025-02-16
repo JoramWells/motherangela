@@ -3,7 +3,6 @@
 import {
   Baby,
   BookOpenCheck,
-  Dumbbell,
   Footprints,
   HeartHandshake,
   LayoutDashboardIcon,
@@ -12,12 +11,12 @@ import {
 import React, { ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import { Sidebar } from '@/components/custom/Sidebar/Sidebar';
-import SidebarListItemsComponent from '@/components/custom/Sidebar/SidebarListItemsComponent';
+import SidebarListItemsComponent, { SidebarListItemsProps } from '@/components/custom/Sidebar/SidebarListItemsComponent';
 import { store } from '@/lib/store';
 import '../globals.css';
 import { UserProvider } from '@/context/UserContext';
 
-const DL = [
+const DL: SidebarListItemsProps[] = [
   {
     id: '1',
     label: 'Dashboard',
@@ -43,16 +42,22 @@ const DL = [
     icon: <HeartHandshake size={17} />,
   },
   {
-    id: '6',
-    label: 'Physical Examination',
-    link: '/physical-examination',
-    icon: <Dumbbell size={17} />,
-  },
-  {
     id: '7',
-    label: 'Postnatal Examination',
-    link: '/postnatal-examination',
+    label: 'Examinations',
+    // link: '/postnatal-examination',
     icon: <BookOpenCheck size={17} />,
+    itemList: [
+      {
+        id: '1',
+        label: 'Physical Examination',
+        link: '/physical-examination',
+      },
+      {
+        id: '2',
+        label: 'Postnatal Examination',
+        link: '/postnatal-examination',
+      },
+    ],
   },
   {
     id: '8',

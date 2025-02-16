@@ -15,7 +15,7 @@ interface ItemListProps {
 export interface SidebarListItemsProps {
   id: string;
   label: string;
-  link: string;
+  link?: string;
   icon: ReactNode;
   itemList?: ItemListProps[];
 }

@@ -27,11 +27,10 @@ export function SidebarSubButton({
   const isActive = useMemo(() => link === pathname, [link, pathname]);
   return (
     <div
-      className={`flex h-10 items-center pl-4
-    text-slate-500 text-md
+      className={`flex h-8 items-center
+    text-md
     text-md ml-6 rounded-md
-    ${isActive && 'bg-sky-50'}
-    ${isActive && 'text-sky-500'}
+    ${isActive ? 'text-white' : 'text-slate-500'}
     `}
     >
       <Link href={link} className="text-[12px]">
